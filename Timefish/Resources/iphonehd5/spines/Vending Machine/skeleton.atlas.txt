@@ -1,0 +1,181 @@
+
+skeleton.png
+size: 1024,1024
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+back
+  rotate: false
+  xy: 2, 5
+  size: 506, 506
+  orig: 506, 506
+  offset: 0, 0
+  index: -1
+ball_B
+  rotate: false
+  xy: 513, 733
+  size: 124, 124
+  orig: 124, 124
+  offset: 0, 0
+  index: -1
+ball_R
+  rotate: false
+  xy: 736, 898
+  size: 124, 124
+  orig: 124, 124
+  offset: 0, 0
+  index: -1
+ball_Y
+  rotate: false
+  xy: 513, 607
+  size: 124, 124
+  orig: 124, 124
+  offset: 0, 0
+  index: -1
+bell
+  rotate: false
+  xy: 513, 859
+  size: 221, 163
+  orig: 221, 163
+  offset: 0, 0
+  index: -1
+body
+  rotate: false
+  xy: 2, 513
+  size: 509, 509
+  orig: 509, 509
+  offset: 0, 0
+  index: -1
+butten
+  rotate: false
+  xy: 697, 801
+  size: 32, 56
+  orig: 32, 56
+  offset: 0, 0
+  index: -1
+exit
+  rotate: true
+  xy: 639, 665
+  size: 192, 56
+  orig: 192, 56
+  offset: 0, 0
+  index: -1
+explo/1
+  rotate: false
+  xy: 925, 835
+  size: 22, 40
+  orig: 22, 40
+  offset: 0, 0
+  index: -1
+explo/2
+  rotate: false
+  xy: 697, 700
+  size: 25, 45
+  orig: 25, 45
+  offset: 0, 0
+  index: -1
+explo/3
+  rotate: true
+  xy: 1016, 1011
+  size: 11, 6
+  orig: 11, 6
+  offset: 0, 0
+  index: -1
+explo/4
+  rotate: false
+  xy: 962, 926
+  size: 39, 11
+  orig: 39, 11
+  offset: 0, 0
+  index: -1
+explo/5
+  rotate: false
+  xy: 608, 553
+  size: 22, 52
+  orig: 22, 52
+  offset: 0, 0
+  index: -1
+explo/6
+  rotate: false
+  xy: 869, 877
+  size: 77, 43
+  orig: 77, 43
+  offset: 0, 0
+  index: -1
+explo/a1
+  rotate: true
+  xy: 962, 939
+  size: 83, 52
+  orig: 83, 52
+  offset: 0, 0
+  index: -1
+explo/a2
+  rotate: true
+  xy: 736, 827
+  size: 69, 78
+  orig: 69, 78
+  offset: 0, 0
+  index: -1
+explo/a3
+  rotate: true
+  xy: 816, 825
+  size: 71, 51
+  orig: 71, 51
+  offset: 0, 0
+  index: -1
+explo/a4
+  rotate: false
+  xy: 639, 601
+  size: 51, 62
+  orig: 51, 62
+  offset: 0, 0
+  index: -1
+explo/a5
+  rotate: false
+  xy: 697, 680
+  size: 17, 18
+  orig: 17, 18
+  offset: 0, 0
+  index: -1
+explo/a6
+  rotate: false
+  xy: 608, 530
+  size: 22, 21
+  orig: 22, 21
+  offset: 0, 0
+  index: -1
+explo/b1
+  rotate: false
+  xy: 513, 529
+  size: 93, 76
+  orig: 93, 76
+  offset: 0, 0
+  index: -1
+explo/b2
+  rotate: false
+  xy: 869, 830
+  size: 54, 45
+  orig: 54, 45
+  offset: 0, 0
+  index: -1
+explo/c1
+  rotate: true
+  xy: 513, 520
+  size: 7, 54
+  orig: 7, 54
+  offset: 0, 0
+  index: -1
+gear
+  rotate: false
+  xy: 862, 922
+  size: 98, 100
+  orig: 98, 100
+  offset: 0, 0
+  index: -1
+hammer
+  rotate: true
+  xy: 697, 747
+  size: 52, 36
+  orig: 52, 36
+  offset: 0, 0
+  index: -1
