@@ -9,11 +9,11 @@ Tutorial_Boost_02|코인 부스트|Coin Boost|金币增益|コインブースタ
 Tutorial_Boost_03|스코어 부스트|Score Boost|分数增益|スコアブースター
 Tutorial_Boost_04|슬로우 부스트|Slow Boost|慢速增益|スローブースター
 Tutorial_Boost_05|실드 부스트|Shield Boost|防御增益|シールドブースター
-Tutorial_Boost_Script_01|프리쉬가 빠른 속도로 시계를 한바퀴 질주합니다.|Freesh swims a fast lap of clock.|鱼已高速围绕时钟转一圈|フリッシュが急速で1回疾走します
-Tutorial_Boost_Script_02|장애물들이 모두 ‘코인’으로 변합니다.|All objects turn into 'Coins'.|将障碍物全部变成“金币”|障害物がコインに代わります
-Tutorial_Boost_Script_03|획득되는 점수가 6배가 됩니다.|Acquiring score becomes sextuple (x6).|获得分数变为6倍|スコアが6倍になります
-Tutorial_Boost_Script_04|타이몬의 속도가 느려집니다.|Timon's speed becomes decreased.|泰门速度下降|タイモンのスピードが遅くなります
-Tutorial_Boost_Script_05|방어막이 생겨나 한 번의 충돌을 견뎌냅니다.|A shield creates to protect from a clash.|生成防御膜体抗一次冲突|一回の衝突から耐えます
+Tutorial_Boost_Script_01|프리쉬가 빠른 속도로 시계를 한바퀴 질주합니다.|Freesh sprints one lap of the clock.|鱼已高速围绕时钟转一圈|フリッシュが急速で1回疾走します
+Tutorial_Boost_Script_02|장애물들이 모두 ‘코인’으로 변합니다.|All obstacles turn into coins.|将障碍物全部变成“金币”|障害物がコインに代わります
+Tutorial_Boost_Script_03|획득되는 점수가 6배가 됩니다.|6x score multiplier.|获得分数变为6倍|スコアが6倍になります
+Tutorial_Boost_Script_04|타이몬의 속도가 느려집니다.|Decreases Timon's speed.|泰门速度下降|タイモンのスピードが遅くなります
+Tutorial_Boost_Script_05|방어막이 생겨나 한 번의 충돌을 견뎌냅니다.|Forms a shield which can withstand one collision.|生成防御膜体抗一次冲突|一回の衝突から耐えます
 AchievementName01|북극해 횡단|Crossing the Arctic Ocean|穿越北极海|北極海横断
 AchievementName02|남극해 횡단|Crossing the Antarctic Ocean|穿越南极海|南極海横断
 AchievementName03|인도양 횡단|Crossing the Indian Ocean|穿越印度洋|インド洋横断
@@ -33,7 +33,7 @@ AchievementName16|홍해에서|The Red Sea|在红海|紅海で
 AchievementName17|황해에서|The Yellow Sea|在黄海|黄海で
 AchievementName18|청해에서|The Blue Sea|在青海|青海で
 AchievementName19|뿌리 깊은 나무|Deep-rooted|深根树|根深い木
-AchievementName20|배고파 죽다|Die of hunger|饿死|腹減って死にそう
+AchievementName20|배고파 죽다|Starve to death|饿死|腹減って死にそう
 AchievementName21|점프점프|Jump Jump|跳跃|ジャンプジャンプ
 AchievementName22|죽음 따위|No fear of death|死亡算什么|死なんか
 AchievementName23|더욱 더 높이|Excelsior|更上一层楼|もっと高く
@@ -45,36 +45,36 @@ AchievementName28|999|999|999|999
 AchievementName29|멋쟁이|Stylish Freesh|帅哥|おしゃれ
 AchievementName30|패션리더|Fashionista|潮人|ファッションリーダー
 AchievementName31|골라먹는 재미|Pick Whatever You Want|吃货乐趣|選べる楽しみ
-AchievementDesc01|최고 점수 2,000점 달성|Reaches best score: 2,000|达成最高分2,000分|最高スコア2,000点達成
-AchievementDesc02|최고 점수 5,000점 달성|Reaches best score: 5,000|达成最高分5,000分|最高スコア5,000点達成
-AchievementDesc03|최고 점수 10,000점 달성|Reaches best score: 10,000|达成最高分10,000分|最高スコア10,000点達成
-AchievementDesc04|최고 점수 20,000점 달성|Reaches best score: 20,000|达成最高分20,000分|最高スコア20,000点達成
-AchievementDesc05|최고 점수 30,000점 달성|Reaches best score: 30,000|达成最高分30,000分|最高スコア30,000点達成
-AchievementDesc06|최고 점수 50,000점 달성|Reaches best score: 50,000|达成最高分50,000分|最高スコア50,000点達成
-AchievementDesc07|크레딧 화면에 무언가 있을지도.|Something consealed in credit screen..|信用界面中或许会有什么|クレジット画面に何か。。
+AchievementDesc01|최고 점수 2,000점 달성|Attain 2,000 score|达成最高分2,000分|最高スコア2,000点達成
+AchievementDesc02|최고 점수 5,000점 달성|Attain 5,000 score|达成最高分5,000分|最高スコア5,000点達成
+AchievementDesc03|최고 점수 10,000점 달성|Attain 10,000 score|达成最高分10,000分|最高スコア10,000点達成
+AchievementDesc04|최고 점수 20,000점 달성|Attain 20,000 score|达成最高分20,000分|最高スコア20,000点達成
+AchievementDesc05|최고 점수 30,000점 달성|Attain 30,000 score|达成最高分30,000分|最高スコア30,000点達成
+AchievementDesc06|최고 점수 50,000점 달성|Attain 50,000 score|达成最高分50,000分|最高スコア50,000点達成
+AchievementDesc07|크레딧 화면에 무언가 있을지도.|Something might be in the credit screen...|信用界面中或许会有什么|クレジット画面に何か。。
 AchievementDesc08|소리 버튼을 누르면...|Press 'Sound Button’, then..|按下声音键…|サウンドボタンを押すと。。
 AchievementDesc09|×6 점수 보너스 상태에서, 5 바퀴 돌기|Swims 5 laps while in x6 bonus mode|在分数奖励×6的状态下，绕5圈|スコア6倍ボーナス状態で5回まわり
 AchievementDesc10|최초 탈출|First Escape|首次逃出|最初脱出
 AchievementDesc11|첫 6 바퀴 완주|Finish the first 6 laps|首次完成6圈|初6回まわり完走
-AchievementDesc12|최고 100,000점 달성|Reaches best score: 100,000|达成最高分100,000分|最高100,000点達成
-AchievementDesc13|누적 1,000,000점 달성|Reaches total score: 1,000,000|达成累计1,000,000分|累積1,000,000点達成
-AchievementDesc14|누적 5,000,000점 달성|Reaches total score: 5,000,000|达成累计5,000,000分|累積5,000,000点達成
-AchievementDesc15|누적 10,000,000점 달성|Reaches total scroe: 10,000,000|达成累计10,000,000分|累積10,000,000点達成
-AchievementDesc16|빨강 타이몬에게 붙잡힘 7회|Get caught by Red Timon: 7 times|被红色泰门抓住7次|レッドタイモンに捕まれる 7回
-AchievementDesc17|노랑 타이몬에게 붙잡힘 14회|Get caught by Yellow Timon: 14 times|被黄色泰门抓住14次|イエロータイモンに捕まれる 14回
-AchievementDesc18|파랑 타이몬에게 붙잡힘 21회|Get caught by Blue Timon: 21 times|被蓝色泰门抓住21次|ブルータイモンに捕まれる 21回
-AchievementDesc19|첫 바퀴에서 죽음 10회|Dead at first lap: 10 times|第一圈死亡10次|一回りで死ぬ 10回
-AchievementDesc20|캡슐을 안 먹어서 죽음 100회|Dead by not taking a capsule: 100 times|没有吃胶囊死亡100次|カプセル食わず死ぬ 100回
-AchievementDesc21|점프하면서 죽음 100회|Dead while jumping: 100 times|跳跃时死亡100次|ジャップしながら死ぬ 100回
-AchievementDesc22|누적 1,000번 죽음|Dead 1,000 times in total|累计1,000次死亡|累積1,000回死ぬ
-AchievementDesc23|신기록 5번 작성|Accomplishes new record: 5 times|达成5次新纪录|新記録5回達成
-AchievementDesc24|게임 5번 실행|Launches this game: 5 times|进行5次游戏|ゲーム5回実行
-AchievementDesc25|업적 5개 달성|Accomplishes: 5 Achievements|达成5个业绩|業績五つ達成
-AchievementDesc26|업적 15개 달성|Accomplishes: 15 Achievements|达成15个业绩|業績15個達成
-AchievementDesc27|업적 26개 달성|Accomplishes: 26 Achievements|达成26个业绩|業績26個達成
-AchievementDesc28|999 코인 획득|Acquires: 999 Coins|获得999金币|999コインゲット
-AchievementDesc29|프리쉬 코스튬 10개 획득|Acquires: 10 Freesh Costumes|获得10个鱼皮肤|フリッシュコスチューム 10個ゲット
-AchievementDesc30|프리쉬 코스튬 30개 획득|Acquires: 30 Freesh Costumes|获得30个鱼皮肤|フリッシュコスチューム 30個ゲット
+AchievementDesc12|최고 100,000점 달성|Attain 100,000 points|达成最高分100,000分|最高100,000点達成
+AchievementDesc13|누적 1,000,000점 달성|Earn 1,000,000 points|达成累计1,000,000分|累積1,000,000点達成
+AchievementDesc14|누적 5,000,000점 달성|Earn 5,000,000 points|达成累计5,000,000分|累積5,000,000点達成
+AchievementDesc15|누적 10,000,000점 달성|Earn 10,000,000 points|达成累计10,000,000分|累積10,000,000点達成
+AchievementDesc16|빨강 타이몬에게 붙잡힘 7회|Get caught by Red Timon 7 times|被红色泰门抓住7次|レッドタイモンに捕まれる 7回
+AchievementDesc17|노랑 타이몬에게 붙잡힘 14회|Get caught by Yellow Timon 14 times|被黄色泰门抓住14次|イエロータイモンに捕まれる 14回
+AchievementDesc18|파랑 타이몬에게 붙잡힘 21회|Get caught by Blue Timon 21 times|被蓝色泰门抓住21次|ブルータイモンに捕まれる 21回
+AchievementDesc19|첫 바퀴에서 죽음 10회|Die 10 times in first lap|第一圈死亡10次|一回りで死ぬ 10回
+AchievementDesc20|캡슐을 안 먹어서 죽음 100회|Die 100 times from not eating capsule|没有吃胶囊死亡100次|カプセル食わず死ぬ 100回
+AchievementDesc21|점프하면서 죽음 100회|Die 100 times while jumping|跳跃时死亡100次|ジャップしながら死ぬ 100回
+AchievementDesc22|누적 1,000번 죽음|Die 1,000 times|累计1,000次死亡|累積1,000回死ぬ
+AchievementDesc23|신기록 5번 작성|Set a new record 5 times|达成5次新纪录|新記録5回達成
+AchievementDesc24|게임 5번 실행|Launch Timefish 5 times|进行5次游戏|ゲーム5回実行
+AchievementDesc25|업적 5개 달성|Earn 5 Achievements|达成5个业绩|業績五つ達成
+AchievementDesc26|업적 15개 달성|Earn 15 Achievements|达成15个业绩|業績15個達成
+AchievementDesc27|업적 26개 달성|Earn 26 Achievements|达成26个业绩|業績26個達成
+AchievementDesc28|999 코인 획득|Acquire 999 coins|获得999金币|999コインゲット
+AchievementDesc29|프리쉬 코스튬 10개 획득|Acquire 10 Freesh Costumes|获得10个鱼皮肤|フリッシュコスチューム 10個ゲット
+AchievementDesc30|프리쉬 코스튬 30개 획득|Acquire 30 Freesh Costumes|获得30个鱼皮肤|フリッシュコスチューム 30個ゲット
 AchievementDesc31|한 판에 캡슐 5개 획득|Acquires: 5 capsules at a time|一轮中获得5颗胶囊|一回でカプセル五つ獲得
 TitleMessage|타이틀 화면으로 설정되었습니다.|Set as title page.|已设为主画面|タイトルに戻ります
 Random_Select|무작위|RANDOM|随机|ランダム
@@ -84,15 +84,15 @@ snapback_02|레드 스냅백|RED SNAPBACK|红色棒球帽|レッドキャップ
 snapback_03|데님 스냅백|DENIM SNAPBACK|牛仔棒球帽|デニムキャップ
 snapback_04|아메리칸 스냅백|AMERICAN SNAPBACK|美式棒球帽|アメリカンキャップ
 snapback_05|화이트 스냅백|WHITE SNAPBACK|白色棒球帽|ホワイトキャップ
-snapback_06|해골 스냅백|SWAG SNAPBACK|骷髅棒球帽|骸骨キャップ
+snapback_06|해골 스냅백|SKULL SNAPBACK|骷髅棒球帽|骸骨キャップ
 snapback_07|아리조나 스냅백|ACE SNAPBACK|亚利桑亚棒球帽|キャップA
 snapback_08|카모플라쥬 스냅백|CAMO SNAPBACK|迷彩棒球帽|カムフラキャップ
 snapback_09|스타 스냅백|STAR SNAPBACK|星星棒球帽|星キャップキャップ
 snapback_10|아티스트 스냅백|GREENICH SNAPBACK|艺术棒球帽|アーティストキャップ
 job_01|제독|CAPTAIN|提督|キャプテン
-job_02|공사감독관|SAFETY HAT|工头|安全帽
+job_02|공사감독관|HARD HAT|工头|安全帽
 job_03|소방관|FIRE FIGHTER|消防官|消防士
-job_04|군인|ARMY|军人|軍帽
+job_04|군인|SOLDIER|军人|軍帽
 job_05|간호사|NURSE|护士|ナース
 job_06|근위병|ROYAL GUARD|近卫兵|近衛兵
 job_07|외과의|SURGEON|外科医生|ドクター
@@ -142,7 +142,7 @@ special_03|투명어|HOLLOW FISH|透明鱼|透明
 Button_Select|선택|CHANGE|选择|選択
 Skin_New|신규!|NEW!|新品！|ニュー!
 Skin_TryAgain|다시 뽑아보세요!|DRAW AGAIN|再抽一次！|もう一回
-PopupHidden|히든 코스튬이 오픈 되었습니다!|Hidden costume got revealed!|隐藏皮肤开启！|隠しコスチュームがオープンされたよ
+PopupHidden|히든 코스튬이 오픈 되었습니다!|Hidden costume revealed!|隐藏皮肤开启！|隠しコスチュームがオープンされたよ
 FreeGift|{0}시간 {00}분 후 \n무료선물 획득|{0}H {00}M \nAFTER FREE GIFT|{0}时{00}分后\n获得免费礼物|{0}時 {00}分後に\nプレゼントゲット
 ResultScore|Score|Score|分数|スコア
 ResultBest|Best|Best|最佳|ベスト
@@ -157,12 +157,12 @@ ResultVideo2|획득완료|RECEIVED|获得完毕|獲得完了
 ResultVideoReward|{0} 코인|{0} COINS|{0}金币|{0}コイン
 ResultRemoveAD|광고 제거|REMOVE ADS|已去广告|広告除去
 ResultAD|광고제거 완료|ADS REMOVED|已去广告|広告除去完了
-ResultReward|+{0}코인 획득|ACQUIRED {0}COINS|获得+{0}金币|{0}コイン獲得
+ResultReward|+{0}코인 획득|ACQUIRED {0} COINS|获得+{0}金币|{0}コイン獲得
 ResultPurchaseBtn|구매|PURCHASE|购买|購入
 ResultShareBtn|공유|SHARE|分享|シェア
 ResultRateBtn|평가|RATE|评价|レビュー
 ResultLikeBtn|좋아요|LIKE|赞|いいよ
-ResultLikeNotice|타임피쉬 페이스북 페이지 ‘좋아요’하고 \n히든피쉬 받아가세요!|LIKE US AND GET \nHIDDEN FISH SKIN!|为时间鱼脸书点赞 \n获得限量鱼！|Facebookの ページで’いいよ’押して、\n隠しフィッシュをもらおう
+ResultLikeNotice|타임피쉬 페이스북 페이지 ‘좋아요’하고 \n히든피쉬 받아가세요!|LIKE US ON FACEBOOK\nTO EARN HIDDEN FISH!|为时间鱼脸书点赞 \n获得限量鱼！|Facebookの ページで’いいよ’押して、\n隠しフィッシュをもらおう
 ResultArtwork|보기|LOOK|查看|チェック
 ResultTryBtn|체험하기|TRY|TRY|試す
 ResultTry|지금 구매하고 \n{0}코인 보너스 받기!|PURCHASE AND GET\nBONUS {0} COINS NOW!|现在购买获得\n{0}金币奖励！|今購入して{0}ボーナス\nコインゲットしよう！
@@ -199,9 +199,9 @@ CreditPPL9|배민기|MINKI BAE|MINKI BAE|MINKI BAE
 CreditPPL10|고경석|KYOUNGSEOK KO|KYOUNGSEOK KO|KYOUNGSEOK KO
 CreditNanali|NANALI STUDIOS|NANALI STUDIOS|NANALI STUDIOS|NANALI STUDIOS
 CreditNanaliLab|NANALI LAB|NANALI LAB|NANALI LAB|NANALI LAB
-CreditCopyRight|(C)2015 Nanali All Rights Reserved|(C)2015 Nanali All Rights Reserved|(C)2015 Nanali All Rights Reserved|2015ⓒ Nanali All Rights Reserved​​
-PushNoti1|선물 상자가 도착했습니다!|You received a gift box!|有新的宝箱礼物！|プレゼントが届いたよ
-PushNoti2|선물 받아가세요!|A gift for you!|请收取礼物！|プレゼント受け取る
+CreditCopyRight|(C)2015 Nanali All Rights Reserved|(C)2015 Nanali All Rights Reserved|(C)2015 Nanali All Rights Reserved|2015ⓒ Nanali All Rights Reserved
+PushNoti1|선물 상자가 도착했습니다!|A gift has arrived!|有新的宝箱礼物！|プレゼントが届いたよ
+PushNoti2|선물 받아가세요!|Claim your free gift!|请收取礼物！|プレゼント受け取る
 PushNoti3|선물 싫으세요? ):-(|You don't like a free gift?|不喜欢礼物吗? ):-(|気に入らないの？
 PushNoti4|프리쉬의 자유를 위해 달려야 해요! 포기하지 마세요!|Swim for Freesh! Don't give up!|为了鱼儿的自由前进！不要放弃喔！|フリッシュの自由のために走らなきゃ！諦めないで！
 PushNoti5|당신은 좀 꾸물댈 수 있겠죠. 하지만 시간은 게으름 피우는 일이 없다는 걸 명심해요.|You may delay, but time will not. -Benjamin Franklin|就算你偷懒时间还是会一样走|ぐずぐずしてもいいです。でも時は待ってくれないよ。
@@ -210,15 +210,15 @@ PushNoti7|안녕.|Adios..|再见|さよなら
 Share1|내 최고기록은 {0}임. #타임피쉬|My best score is {0}. #Timefish|我的最高纪录是{0}.#时间鱼|私のベストスコアは {0}だよ。＃タイムフィッシュ
 Share2|내 프리쉬야! #타임피쉬|Hey, this is my Freesh! #Timefish|我的鱼儿！#时间鱼|私のフリッシュだよ。＃タイムフィッシュ
 PurchaseUI1|취소됨|Cancelled|已取消|キャンセル
-PurchaseUI2|프리쉬 스킨 구매가 \n취소되었습니다.|Purchasing Freesh costume got cancelled.|已取消购买鱼皮肤|購買がキャンセルされたよ
-PurchaseUI3|확인|OK|确认|確認
+PurchaseUI2|프리쉬 스킨 구매가 \n취소되었습니다.|Freesh Costume purchase cancelled.|已取消购买鱼皮肤|購買がキャンセルされたよ
+PurchaseUI3|확인|Ok|确认|確認
 RestoreUI1|구매내역 복원 완료|Restored|购买内容复原完毕|購買内訳復元完了
 RestoreUI2|구매한 내역이 \n모두 복원되었습니다.|Your purchases have been restored.|购买的内容已全部复原|購買した内訳が全て復元できたよ
 RestoreUI3|확인|OK|确认|確認
 Share3|멋진 포스터를 얻고싶어? #타임피쉬|Check this cool wallpaper obtained from #timefish|想要获得帅气海报吗？ #时间鱼|素敵なポスターを貰いたい？ #タイムフィッシュ
-PurchaseUI4|구매한 내역이 없습니다.|Please purchase the item first.|无购买内容|ご購入履歴がございません
-PurchaseUI5|설정에서 ‘앱내결제’를 \n허용해주세요.|You don't allow to make purchases. |请在设定中勾选“应用内支付”选项|選定でIn-App Purchaseの許可して下さい
-PurchaseUI6|구매 요청이 취소되었습니다.|Payment request is canceled.|购买申请已取消|購入要請がキャンセルされました
+PurchaseUI4|구매한 내역이 없습니다.|No purchased items.|无购买内容|ご購入履歴がございません
+PurchaseUI5|설정에서 ‘앱내결제’를 \n허용해주세요.|Enable 'in-app purchases' in Settings.|请在设定中勾选“应用内支付”选项|選定でIn-App Purchaseの許可して下さい
+PurchaseUI6|구매 요청이 취소되었습니다.|Payment request cancelled.|购买申请已取消|購入要請がキャンセルされました
 PurchaseUI7|영수증 검증에 실패하였습니다.|Receipt Validation Failed.|发票验证失败|レシート検証が失敗しました
 Package01|육해공 패키지|Military Package|陆海空礼包|陸海空パッケージ
 Package02|패러디 패키지|Parody Package|模仿品礼包|ものまねパッケージ
