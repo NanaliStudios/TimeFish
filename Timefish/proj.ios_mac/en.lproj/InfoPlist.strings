@@ -1,0 +1,11 @@
+/* 
+  InfoPlist.strings
+  Timefish
+
+  Created by midchow on 2015. 8. 9..
+
+*/
+
+"CFBundleDisplayName" = "Timefish";
+
+"CFBundleName" = "Timefish";

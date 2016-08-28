@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "PlayScene::setFreeshSkin():PlayScene.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "_sharedUserInfo">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "UserInfo::convertOldSkinInfoTo203(int):UserInfo.h">
+         <PersistentStrings>
+            <PersistentString
+               value = "_skinInfo3">
+            </PersistentString>
+            <PersistentString
+               value = "_skinInfo2">
+            </PersistentString>
+            <PersistentString
+               value = "skinInfo2">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[StoreKitDelegateBridge productsRequest:didReceiveResponse:]:StoreKitX_ios.mm">
+         <PersistentStrings>
+            <PersistentString
+               value = "s_pStoreKitX-&gt;itemList">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "UILayer::processFinishRestore(float):UILayer.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "this-&gt;freeshSelection">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "UserInfo::saveUserDataVersion201():UserInfo.cpp">
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>
