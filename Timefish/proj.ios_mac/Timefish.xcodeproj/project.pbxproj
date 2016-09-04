@@ -109,8 +109,6 @@
 		E9B83B031B5B655500746949 /* FreeGiftLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E9B83B011B5B655500746949 /* FreeGiftLayer.cpp */; };
 		E9B83B061B5B669900746949 /* FreeshMakerLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E9B83B041B5B669900746949 /* FreeshMakerLayer.cpp */; };
 		E9B83B091B5B795B00746949 /* ResultUIButtonLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E9B83B071B5B795B00746949 /* ResultUIButtonLayer.cpp */; };
-		E9B935AB1BABFB8000D17906 /* Everyplay.bundle in Resources */ = {isa = PBXBuildFile; fileRef = E9B935A91BABFB8000D17906 /* Everyplay.bundle */; };
-		E9B935AC1BABFB8000D17906 /* Everyplay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9B935AA1BABFB8000D17906 /* Everyplay.framework */; };
 		E9B9EE301B6935E500F1EB1F /* IdleFreeshLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E9B9EE2E1B6935E500F1EB1F /* IdleFreeshLayer.cpp */; };
 		E9B9EE331B69423300F1EB1F /* SkeletonHolder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E9B9EE311B69423300F1EB1F /* SkeletonHolder.cpp */; };
 		E9B9EE381B69AE1600F1EB1F /* TutorialLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E9B9EE361B69AE1600F1EB1F /* TutorialLayer.cpp */; };
@@ -164,6 +162,8 @@
 		E9F10C841D73079F00210773 /* Chartboost.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9F10C831D73079F00210773 /* Chartboost.framework */; };
 		E9F10C861D7307C600210773 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9F10C851D7307C600210773 /* Foundation.framework */; };
 		E9F10C891D73098000210773 /* libFlurry_7.6.6.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E9F10C881D73098000210773 /* libFlurry_7.6.6.a */; settings = {ASSET_TAGS = (); }; };
+		E9F9025C1D7BD19B009C6EBE /* Everyplay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9F9025B1D7BD19B009C6EBE /* Everyplay.framework */; };
+		E9F9025E1D7BD1B2009C6EBE /* Everyplay.bundle in Resources */ = {isa = PBXBuildFile; fileRef = E9F9025D1D7BD1B2009C6EBE /* Everyplay.bundle */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -351,8 +351,6 @@
 		E9B83B051B5B669900746949 /* FreeshMakerLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FreeshMakerLayer.h; sourceTree = "<group>"; };
 		E9B83B071B5B795B00746949 /* ResultUIButtonLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ResultUIButtonLayer.cpp; sourceTree = "<group>"; };
 		E9B83B081B5B795B00746949 /* ResultUIButtonLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResultUIButtonLayer.h; sourceTree = "<group>"; };
-		E9B935A91BABFB8000D17906 /* Everyplay.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Everyplay.bundle; sourceTree = "<group>"; };
-		E9B935AA1BABFB8000D17906 /* Everyplay.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Everyplay.framework; sourceTree = "<group>"; };
 		E9B9EE2E1B6935E500F1EB1F /* IdleFreeshLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IdleFreeshLayer.cpp; sourceTree = "<group>"; };
 		E9B9EE2F1B6935E500F1EB1F /* IdleFreeshLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IdleFreeshLayer.h; sourceTree = "<group>"; };
 		E9B9EE311B69423300F1EB1F /* SkeletonHolder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SkeletonHolder.cpp; sourceTree = "<group>"; };
@@ -426,6 +424,8 @@
 		E9F10C851D7307C600210773 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		E9F10C871D73098000210773 /* Flurry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flurry.h; sourceTree = SOURCE_ROOT; };
 		E9F10C881D73098000210773 /* libFlurry_7.6.6.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurry_7.6.6.a; sourceTree = SOURCE_ROOT; };
+		E9F9025B1D7BD19B009C6EBE /* Everyplay.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Everyplay.framework; sourceTree = "<group>"; };
+		E9F9025D1D7BD1B2009C6EBE /* Everyplay.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Everyplay.bundle; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -433,6 +433,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E9F9025C1D7BD19B009C6EBE /* Everyplay.framework in Frameworks */,
 				E993BF2D1D730D1700193460 /* libiconv.tbd in Frameworks */,
 				E993BF2B1D730C6A00193460 /* CoreMotion.framework in Frameworks */,
 				E993BF291D730C2800193460 /* Security.framework in Frameworks */,
@@ -479,7 +480,6 @@
 				E92AD4AB1D6F463500AC03B4 /* Accelerate.framework in Frameworks */,
 				E9F10C891D73098000210773 /* libFlurry_7.6.6.a in Frameworks */,
 				E9BAFD6F1B6F71A100ADCBAC /* libFuseSDK.a in Frameworks */,
-				E9B935AC1BABFB8000D17906 /* Everyplay.framework in Frameworks */,
 				E9B6C6761BB278D500EE106A /* Tapjoy.framework in Frameworks */,
 				E96B863F1A7ABFF800BD633E /* libcocos2d iOS.a in Frameworks */,
 				D44C620C132DFF330009C878 /* OpenAL.framework in Frameworks */,
@@ -503,6 +503,7 @@
 		080E96DDFE201D6D7F000001 /* ios */ = {
 			isa = PBXGroup;
 			children = (
+				E9F9025D1D7BD1B2009C6EBE /* Everyplay.bundle */,
 				E9F10C871D73098000210773 /* Flurry.h */,
 				E9F10C881D73098000210773 /* libFlurry_7.6.6.a */,
 				5087E77117EB970100C73F5D /* Icons */,
@@ -540,8 +541,6 @@
 			isa = PBXGroup;
 			children = (
 				E9B6C6711BB278D500EE106A /* Tapjoy.embeddedframework */,
-				E9B935A91BABFB8000D17906 /* Everyplay.bundle */,
-				E9B935AA1BABFB8000D17906 /* Everyplay.framework */,
 				E93107371B76FCE0004B823C /* InfoPlist.strings */,
 				E9BAFD6C1B6F71A000ADCBAC /* FuseSDK.h */,
 				E9BAFD6D1B6F71A100ADCBAC /* FuseSDKDefinitions.h */,
@@ -560,6 +559,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E9F9025B1D7BD19B009C6EBE /* Everyplay.framework */,
 				E92AD4AA1D6F463500AC03B4 /* Accelerate.framework */,
 				E993BF081D730B0300193460 /* Accounts.framework */,
 				E9F10C671D7305B900210773 /* AdColony.framework */,
@@ -1033,7 +1033,7 @@
 				50EF629817ECD46A001EB2F8 /* Icon-80.png in Resources */,
 				E9BC55C21A8200660010FF58 /* Icon.png in Resources */,
 				5087E78417EB970100C73F5D /* Icon-57.png in Resources */,
-				E9B935AB1BABFB8000D17906 /* Everyplay.bundle in Resources */,
+				E9F9025E1D7BD1B2009C6EBE /* Everyplay.bundle in Resources */,
 				5087E77E17EB970100C73F5D /* Default.png in Resources */,
 				E97F82191A8BE1E70066240A /* Default-1024h@2x.png in Resources */,
 				521A8E6419F0C34300D177D7 /* Default-667h@2x.png in Resources */,
@@ -1175,6 +1175,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COMPRESS_PNG_FILES = NO;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -1219,6 +1220,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COMPRESS_PNG_FILES = NO;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
