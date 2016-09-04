@@ -106,6 +106,14 @@ void PageViewlayer::initMainLayer()
 
         //
         menuItem->setLabelChild(icon);
+
+        //
+        // NOTE: AchievementType27 카운팅이 잘못되는 버그가 있어서 여기서 체크해준다.
+        //
+        if (UserInfo::getInstance()->getDoneAchievementNumbers() >=
+            UserInfo::getInstance()->getAchievementPassBase(AchievementType27)) {
+            UserInfo::getInstance()->setAchievementInfoWithType(AchievementType27);
+        }
     }
 }
 

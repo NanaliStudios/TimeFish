@@ -281,7 +281,7 @@ typedef enum
     AchievementType30 = 1 << 29,
     AchievementType31 = 1 << 30,
     //
-    AchievementTypeMax = 1 << 27,
+    AchievementTypeMax = 1 << 30,
 } AchievementType;
 
 typedef enum {
