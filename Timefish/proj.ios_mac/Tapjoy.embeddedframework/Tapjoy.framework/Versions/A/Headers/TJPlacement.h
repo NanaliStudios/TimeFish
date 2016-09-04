@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+#define TJC_DEPRECATION_WARNING(VERSION) __attribute__((deprecated("Go to dev.tapjoy.com for instructions on how to fix this warning")))
 
 typedef enum TJCActionRequestTypeEnum {
 	TJActionRequestInAppPurchase = 1,
@@ -130,6 +131,36 @@ typedef enum TJCActionRequestTypeEnum {
 @end
 
 /**
+ * Delegate used to recieve video events from TJPlacement
+ */
+@protocol TJPlacementVideoDelegate <NSObject>
+
+@optional
+
+/**
+ * Called when a placement video starts playing.
+ *
+ * @return n/a
+ */
+- (void)videoDidStart:(TJPlacement*)placement;
+
+/**
+ * Called when a placement video has completed playing.
+ *
+ * @return n/a
+ */
+- (void)videoDidComplete:(TJPlacement*)placement;
+
+/**
+ * Called when a placement video related error occurs.
+ *
+ * @param errorMsg Error message.
+ * @return n/a
+ */
+- (void)videoDidFail:(TJPlacement*)placement error:(NSString*)errorMsg;
+@end
+
+/**
   The Tapjoy placement-Based Framework allows one to identify key placements within their application during development,
   and then reconfigure them on the dashboard as desired to help maximize monetization and engagement, without the need to update or resubmit the application.
   
@@ -152,6 +183,8 @@ typedef enum TJCActionRequestTypeEnum {
 
 /** The TJPlacementDelegate used to handle responses that are received upon sending this placement*/
 @property (nonatomic, weak) id<TJPlacementDelegate> delegate;
+
+@property (nonatomic, weak) id<TJPlacementVideoDelegate> videoDelegate;	/*!< The delegate that implements the TJPlacementVideoDelegate protocol */
 
 /** The name of the placement */
 @property (nonatomic, copy) NSString *placementName;
@@ -181,9 +214,21 @@ typedef enum TJCActionRequestTypeEnum {
 
 /**
  * Shows the content that was received from the server after sending this placement
- * @param viewController The ViewController to show the content in
  * @return n/a
  */
 - (void)showContentWithViewController:(UIViewController*)viewController;
+
+/**
+ * Dismiss the content
+ * @return n/a
+ */
++ (void)dismissContent;
+
+/** Mediation params(used by mediation adapters only) */
+@property (nonatomic, copy) NSString *mediationAgent;
+@property (nonatomic, copy) NSString *mediationId;
++ (id)placementWithName:(NSString*)placementName mediationAgent:(NSString*)mediationAgent mediationId:(NSString*)mediationId delegate:(id<TJPlacementDelegate>)delegate;
+
+@property (nonatomic, copy) NSString *adapterVersion;
 
 @end

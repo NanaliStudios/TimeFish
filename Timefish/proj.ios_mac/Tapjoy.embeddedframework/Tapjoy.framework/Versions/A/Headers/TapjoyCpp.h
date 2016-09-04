@@ -16,16 +16,17 @@
 #if defined(ANDROID)
 #include <jni.h>
 #endif
+#if defined(__APPLE__) && defined(__OBJC__)
+#import <UIKit/UIKit.h>
+#endif
 
 namespace tapjoy {
 
   class TJConnectListener;
-  class TJOffersListener;
   class TJGetCurrencyBalanceListener;
   class TJSpendCurrencyListener;
   class TJAwardCurrencyListener;
   class TJEarnedCurrencyListener;
-  class TJViewListener;
   class TJVideoListener;
   class TJPlacementListener;
 
@@ -96,32 +97,6 @@ namespace tapjoy {
     static bool connect(const char* sdkKey, TJConnectListener* listener = NULL);
 
     /**
-     * @deprecated Deprecated since version 11.0.0. Tapjoy Offerwall should now be configured through {@link TJPlacement}
-     * @brief Show available offers to the user. Data is returned to the callback
-     *        {@link TJOffersListener}
-     *
-     * @param listener
-     *        The class implementing the TapjoyOffersListener callback.
-     */
-    static void showOffers(TJOffersListener* listener);
-
-    /**
-     * @deprecated Deprecated since version 11.0.0. Tapjoy Offerwall should now be configured through {@link TJPlacement}
-     * @brief Show available offers using a currencyID and currency selector flag. This
-     *        should only be used if the application supports multiple currencies and
-     *        is NON-MANAGED by Tapjoy. Data is returned to the callback
-     *        {@link TJOffersListener}.
-     *
-     * @param currencyID
-     *        ID of the currency to display.
-     * @param enableCurrencySelector
-     *        whether to display the currency selector to toggle currency.
-     * @param listener
-     *        the class implementing the TapjoyOffersListener callback.
-     */
-    static void showOffersWithCurrencyID(const char* currencyID, bool enableCurrencySelector, TJOffersListener* listener);
-
-    /**
      * @brief Gets the virtual currency data from the server for this device. The data
      *        will be returned in a callback to onCurrencyBalanceResponse() to the
      *        class implementing the listener.
@@ -164,15 +139,17 @@ namespace tapjoy {
     static void setEarnedCurrencyListener(TJEarnedCurrencyListener* listener);
 
     /**
+     * @deprecated Deprecated since version 11.4.0
      * @brief ONLY USE FOR NON-MANAGED (by TAPJOY) CURRENCY.<br>
-     *        Sets the multiplier for the virtual currency displayed in Offers, Banner
-     *        Ads, etc. The default is 1.0
+     *        Sets the multiplier for the virtual currency displayed in placements.<br>
+     *        The default is 1.0
      *
      * @param multiplier
      */
     static void setCurrencyMultiplier(float multiplier);
 
     /**
+     * @deprecated Deprecated since version 11.4.0
      * @brief Gets the multiplier for the virtual currency display.
      *
      * @return Currency multiplier.
@@ -216,7 +193,8 @@ namespace tapjoy {
      *        this purchase, can be null
      */
     static void trackPurchaseInGooglePlayStore(const char* skuDetails, const char* purchaseData, const char* dataSignature, const char* campaignId);
-#else // iOS
+#endif
+#if defined(__APPLE__)
     /**
      * @brief Tracks a purchase from the Apple App Store.
      *
@@ -339,12 +317,25 @@ namespace tapjoy {
     static void setUserCohortVariable(int variableIndex, const char* value);
 
     /**
-     * @brief Set to receive callbacks when Tapjoy views open and close
-     *
-     * @param listener
-     *        onOffersResponse to receive open/close callbacks
+     * @brief Removes all tags from the user.
      */
-    static void setTapjoyViewListener(TJViewListener* listener);
+    static void clearUserTags();
+
+    /**
+     * @brief Adds the given tag to the user if it is not already present.
+     *
+     * @param tag
+     *        the tag to be added
+     */
+    static void addUserTag(const char* tag);
+
+    /**
+     * @brief Removes the given tag from the user if it is present.
+     *
+     * @param tag
+     *        the tag to be removed
+     */
+    static void removeUserTag(const char* tag);
 
     /**
      * @brief Sets the video listener. Use this to receive callbacks for on video
@@ -414,16 +405,6 @@ namespace tapjoy {
     virtual void onConnectFailure() {}
   };
 
-  class TJViewListener {
-  public:
-    virtual ~TJViewListener() {}
-
-    virtual void onViewWillClose(int viewType) {}
-    virtual void onViewDidClose(int viewType) {}
-    virtual void onViewWillOpen(int viewType) {}
-    virtual void onViewDidOpen(int viewType) {}
-  };
-
   class TJAwardCurrencyListener {
   public:
     virtual ~TJAwardCurrencyListener() {}
@@ -445,14 +426,6 @@ namespace tapjoy {
 
     virtual void onGetCurrencyBalanceResponse(const char* currencyName, int balance) {}
     virtual void onGetCurrencyBalanceResponseFailure(const char* error) {}
-  };
-
-  class TJOffersListener {
-  public:
-    virtual ~TJOffersListener() {}
-
-    virtual void onOffersResponse() {}
-    virtual void onOffersResponseFailure(const char* error) {}
   };
 
   class TJSpendCurrencyListener {
@@ -503,6 +476,10 @@ namespace tapjoy {
     static bool isContentAvailable(TJPlacementHandle placementHandle);
     static void requestContent(TJPlacementHandle placementHandle);
     static void showContent(TJPlacementHandle placementHandle);
+#if defined(__APPLE__) && defined(__OBJC__)
+    static void showContentWithViewController(TJPlacementHandle placementHandle, UIViewController* viewController);
+#endif
+    static void dismissContent();
   };
 
 }

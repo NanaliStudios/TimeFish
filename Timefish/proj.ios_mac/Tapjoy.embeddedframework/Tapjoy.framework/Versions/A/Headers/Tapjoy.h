@@ -21,11 +21,11 @@
 #define TJC_HIGHEST_UNSUPPORTED_SYSTEM_VERISON	@"4.3.5"
 
 typedef void (^currencyCompletion)(NSDictionary *parameters, NSError *error);
+typedef void (^networkCompletion)(BOOL success, NSError *error);
 
 @interface TJCAdView : UIView <UIWebViewDelegate>
 @end
 
-@class TJCOffersManager;
 @class TJCCurrencyManager;
 @class TJCVideoManager;
 @class TJCViewHandler;
@@ -62,16 +62,13 @@ typedef void (^currencyCompletion)(NSDictionary *parameters, NSError *error);
 @property (nonatomic, copy) NSString *analyticsApiKey;
 @property (nonatomic, copy) NSString *managedDeviceID;
 
-@property (nonatomic, strong) TJCOffersManager *offersManager;
 @property (nonatomic, strong) TJCCurrencyManager *currencyManager;
 @property (nonatomic, strong) TJCVideoManager *videoManager;
 @property (nonatomic, strong) TJCViewHandler *viewHandler;
 @property (nonatomic, strong) TJCUtil *util;
 @property (nonatomic, strong) TJCLog *log;
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// Spirra (Unified SDK)
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 /**
  * This method is called to initialize the Tapjoy system and notify the server that this device is running your application.
  *
@@ -99,6 +96,11 @@ typedef void (^currencyCompletion)(NSDictionary *parameters, NSError *error);
  * @return n/a
  */
 + (void)connect:(NSString *)sdkKey options:(NSDictionary *)optionsDict;
+
+/**
+ * Helper function to check if SDK is initialized
+ */
++ (BOOL)isConnected;
 
 /**
  *
@@ -132,10 +134,11 @@ typedef void (^currencyCompletion)(NSDictionary *parameters, NSError *error);
 /**
  * This method is called to set LaunchOptions.
  * Call this method in application:didFinishLaunchingWithOptions:
+ * NOTE: From 11.2.2, you don't have to call this method.
  *
  * @param launchOptions the same parameter that passed on application:didFinishLaunchingWithOptions:
  */
-+ (void)setApplicationLaunchingOptions:(NSDictionary *)launchOptions;
++ (void)setApplicationLaunchingOptions:(NSDictionary *)launchOptions TJC_DEPRECATION_WARNING(11.2.2);
 
 /**
  * This method is called to set RemoteNotificationUserInfo.
@@ -178,6 +181,40 @@ typedef void (^currencyCompletion)(NSDictionary *parameters, NSError *error);
  * @return n/a
  */
 + (void)setUserCohortVariable:(int)index value:(NSString *)value;
+
+/**
+ * Returns a string set which contains tags on the user.
+ *
+ * @return set of string
+ */
++ (NSSet*)getUserTags;
+
+/**
+ * Sets tags for the user.
+ *
+ * @param tags the tags to be set
+ *             can have up to 200 tags where each tag can have 200 characters
+ */
++ (void)setUserTags:(NSSet *)tags;
+
+/**
+ * Removes all tags from the user.
+ */
++ (void)clearUserTags;
+
+/**
+ * Adds the given tag to the user if it is not already present.
+ *
+ * @param tag the tag to be added
+ */
++ (void)addUserTag:(NSString *)tag;
+
+/**
+ * Removes the given tag from the user if it is present.
+ *
+ * @param tag the tag to be removed
+ */
++ (void)removeUserTag:(NSString *)tag;
 
 /**
  * This method is called to track the purchase.
@@ -239,34 +276,20 @@ typedef void (^currencyCompletion)(NSDictionary *parameters, NSError *error);
 + (id)sharedTapjoyConnect;
 
 /**
- * Retrieves the Tapjoy app ID.
- * 
- * @return The Tapjoy app ID passed into requestTapjoyConnect
- */
-+ (NSString*)getAppID TJC_DEPRECATION_WARNING(10.0);
-
-/**
  * Assigns a user ID for this user/device. This is used to identify the user in your application
  *
  * @param theUserID The user ID you wish to assign to this device.
  * @return n/a
  */
 + (void)setUserID:(NSString*)theUserID;
-
 /**
- * Gets the user ID assigned to this device.
+ * Assigns a user ID for this user/device. This is used to identify the user in your application
  *
- * @return The Tapjoy user ID.
+ * @param theUserID The user ID you wish to assign to this device.
+ * @param completion The completion block that is invoked after a response is received from the server.
+ * @return n/a
  */
-+ (NSString*)getUserID TJC_DEPRECATION_WARNING(10.0);
-
-/**
- * Retrieves the secret key.
- *
- * @return The Tapjoy secret key for this application.
- */
-+ (NSString*)getSecretKey TJC_DEPRECATION_WARNING(10.0);
-
++ (void)setUserIDWithCompletion:(NSString*)theUserID completion:(networkCompletion)completion;
 /**
  * Sets the currency multiplier for virtual currency to be earned. The default is 1.0.
  *
@@ -275,14 +298,14 @@ typedef void (^currencyCompletion)(NSDictionary *parameters, NSError *error);
  * @param mult The currency multiplier.
  * @return n/a
  */
-+ (void)setCurrencyMultiplier:(float)mult;
++ (void)setCurrencyMultiplier:(float)mult TJC_DEPRECATION_WARNING(11.4.0);
 
 /**
  * Gets the currency multiplier for virtual currency to be earned.
  *
  * @return The currency multiplier value.
  */
-+ (float)getCurrencyMultiplier;
++ (float)getCurrencyMultiplier TJC_DEPRECATION_WARNING(11.4.0);
 
 /**
  * Toggle logging to the console.
@@ -298,13 +321,6 @@ typedef void (^currencyCompletion)(NSDictionary *parameters, NSError *error);
  * @return The Tapjoy SDK version.
  */
 + (NSString*)getVersion;
-
-/**
- * Dismisses both offer wall and fullscreen ads.
- *
- * @return n/a
- */
-+ (void)dismissContent;
 
 @end
 
@@ -345,88 +361,6 @@ typedef void (^currencyCompletion)(NSDictionary *parameters, NSError *error);
 - (void)videoAdError:(NSString*)errorMsg;
 
 @end
-
-
-/**
- * The Tapjoy View Delegate Protocol.
- */
-@protocol TJCViewDelegate <NSObject>
-
-@optional
-
-/**
- * Called when a Tapjoy view will appear.
- *
- * @param viewType The type of view that will appear. Refer to TJCViewTypeEnum for view types.
- * @return n/a
- */
-- (void)viewWillAppearWithType:(int)viewType;
-
-/**
- * Called when a Tapjoy view did appear.
- *
- * @param viewType The type of view that did appear. Refer to TJCViewTypeEnum for view types.
- * @return n/a
- */
-- (void)viewDidAppearWithType:(int)viewType;
-
-/**
- * Called when a Tapjoy view will disappear.
- *
- * @param viewType The type of view that will disappear. Refer to TJCViewTypeEnum for view types.
- * @return n/a
- */
-- (void)viewWillDisappearWithType:(int)viewType;
-
-/**
- * Called when a Tapjoy view did disappear.
- *
- * @param viewType The type of view that did disappear. Refer to TJCViewTypeEnum for view types.
- * @return n/a
- */
-- (void)viewDidDisappearWithType:(int)viewType;
-
-@end
-
-
-@interface Tapjoy (TJCOffersManager)
-
-/**
- * Allocates and initializes a TJCOffersWebView.
- *
- * @return The TJCOffersWebView UIView object.
- */
-+ (UIView*)showOffers TJC_DEPRECATION_WARNING(11.0);
-
-/**
- * Allocates and initializes a TJCOffersWebView.
- *
- * @param vController The UIViewController to set as TJCOffersWebView's parentVController_.
- * @return n/a
- */
-+ (void)showOffersWithViewController:(UIViewController*)vController TJC_DEPRECATION_WARNING(11.0);
-
-/**
- * Allocates and initializes a TJCOffersWebView. This is only used when multiple currencies are enabled.
- *
- * @param currencyID The id of the currency to show in the offer wall.
- * @param isSelectorVisible Specifies whether to display the currency selector in the offer wall.
- * @return The TJCOffersWebView UIView object.
- */
-+ (UIView*)showOffersWithCurrencyID:(NSString*)currencyID withCurrencySelector:(BOOL)isSelectorVisible TJC_DEPRECATION_WARNING(11.0);
-
-/**
- * Allocates and initializes a TJCOffersWebView. This is only used when multiple currencies are enabled.
- *
- * @param vController The UIViewController to set as TJCOffersWebView's parentVController_.
- * @param currencyID The id of the currency to show in the offer wall.
- * @param isSelectorVisible Specifies whether to display the currency selector in the offer wall.
- * @return n/a
- */
-+ (void)showOffersWithCurrencyID:(NSString*)currencyID withViewController:(UIViewController*)vController withCurrencySelector:(BOOL)isSelectorVisible TJC_DEPRECATION_WARNING(11.0);
-
-@end
-
 
 @interface Tapjoy (TJCCurrencyManager)
 
@@ -500,19 +434,6 @@ typedef void (^currencyCompletion)(NSDictionary *parameters, NSError *error);
  * @return n/a
  */
 + (void)setVideoAdDelegate:(id<TJCVideoAdDelegate>)delegate;
-
-@end
-
-
-@interface Tapjoy (TJCViewHandler)
-
-/**
- * Sets the delegate that conforms to the TJCViewDelegate protocol to receive Tapjoy view action callbacks.
- *
- * @param delegate The TJCViewDelegate object.
- * @return n/a
- */
-+ (void)setViewDelegate:(id<TJCViewDelegate>)delegate;
 
 @end
 

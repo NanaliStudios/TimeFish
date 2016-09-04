@@ -29,11 +29,6 @@
 // Error notification for Event Tracking.
 #define TJC_EVENT_TRACKING_RESPONSE_NOTIFICATION_ERROR		@"TJC_EVENT_TRACKING_RESPONSE_NOTIFICATION_ERROR"
 
-// Offers notification is fired after the ad data is loaded.
-#define TJC_OFFERS_RESPONSE_NOTIFICATION					@"TJC_OFFERS_RESPONSE_NOTIFICATION"
-// Error notification for offers.
-#define TJC_OFFERS_RESPONSE_NOTIFICATION_ERROR				@"TJC_OFFERS_RESPONSE_NOTIFICATION_ERROR"
-
 // Notification that a user has just successfully completed an offer and earned currency. This only fires on init/resume.
 #define TJC_CURRENCY_EARNED_NOTIFICATION					@"TJC_CURRENCY_EARNED_NOTIFICATION"
 
@@ -51,18 +46,10 @@
 #define TJC_OPTION_CLEAR_SHARED_URL_CACHE		@"TJC_OPTION_CLEAR_SHARED_URL_CACHE"
 #define TJC_OPTION_COLLECT_MAC_ADDRESS			@"TJC_OPTION_COLLECT_MAC_ADDRESS"
 #define TJC_OPTION_DISABLE_GENERIC_ERROR_ALERT  @"TJC_OPTION_DISABLE_GENERIC_ERROR_ALERT"
+#define TJC_OPTION_MEDIATION_CONFIGS            @"TJC_OPTION_MEDIATION_CONFIGS"
+#define TJC_OPTION_MEDIATION_TIMEOUT            @"TJC_OPTION_MEDIATION_TIMEOUT"
 
-/*!	\enum TJCViewTypeEnum
- *	\brief Enumeration of the different views that are passed back in the TJCViewDelegate protocol methods.
- */
-typedef enum TJCViewTypeEnum
-{
-	TJC_PLACEMENT_CONTENT_VIEW,	/*!< The content view for a placement. */
-	TJC_OFFER_WALL_AD_VIEW,		/*!< The Offer Wall Ad view type. */
-	TJC_OTHER_AD_VIEW,			/*!< Any other type of Tapjoy view. */
-	TJC_AD_VIEW_MAX,
-} TJCViewTypeEnum;
-
+#define TJC_MEDIATION_NETWORK_NAME              @"TJC_MEDIATION_NETWORK_NAME"
 
 /*!  \enum TJCMacAddressOption
  *  \brief Settings for collection of MAC address. Use this with the TJC_OPTION_COLLECT_MAC_ADDRESS option.
