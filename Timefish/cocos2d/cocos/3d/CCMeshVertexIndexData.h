@@ -54,7 +54,7 @@ class MeshVertexData;
  * @js NA
  * @lua NA
  */
-class CC_DLL MeshIndexData : public Ref
+class MeshIndexData : public Ref
 {
 public:
     /** create  */
@@ -99,7 +99,7 @@ protected:
  * the MeshVertexData class.
  * @brief the MeshIndexData contain all of the vertices data which mesh need.
  */
-class CC_DLL MeshVertexData : public Ref
+class MeshVertexData : public Ref
 {
     friend class Sprite3D;
     friend class Mesh;

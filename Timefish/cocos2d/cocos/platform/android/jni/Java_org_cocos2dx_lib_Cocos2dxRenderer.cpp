@@ -3,9 +3,9 @@
 #include "base/CCEventType.h"
 #include "base/CCEventCustom.h"
 #include "base/CCEventDispatcher.h"
-#include "platform/CCApplication.h"
+#include "../CCApplication.h"
 #include "platform/CCFileUtils.h"
-#include "platform/android/jni/JniHelper.h"
+#include "JniHelper.h"
 #include <jni.h>
 
 #include "base/ccUTF8.h"

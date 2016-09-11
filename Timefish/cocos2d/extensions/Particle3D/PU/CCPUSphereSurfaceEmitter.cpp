@@ -38,7 +38,7 @@ PUSphereSurfaceEmitter::PUSphereSurfaceEmitter(void) :
 {
 }
 //-----------------------------------------------------------------------
-float PUSphereSurfaceEmitter::getRadius() const
+const float PUSphereSurfaceEmitter::getRadius(void) const
 {
     return _radius;
 }

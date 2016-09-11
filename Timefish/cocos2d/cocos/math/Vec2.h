@@ -568,7 +568,7 @@ public:
     }
     
     /** Run a math operation function on each point component
-     * absf, floorf, ceilf, roundf
+     * absf, fllorf, ceilf, roundf
      * any function that has the signature: float func(float);
      * For example: let's try to take the floor of x,y
      * p.compOp(floorf);
@@ -662,7 +662,7 @@ public:
      @param D   the endpoint for the second line L2 = (C - D)
      @param S   the range for a hitpoint in L1 (p = A + S*(B - A))
      @param T   the range for a hitpoint in L2 (p = C + T*(D - C))
-     @return    whether these two lines intersects.
+     @returns   whether these two lines interects.
 
      Note that to truly test intersection for segments we have to make
      sure that S & T lie within [0..1] and for rays, make sure S & T > 0
@@ -766,6 +766,6 @@ NS_CC_MATH_END
  @}
  */
 
-#include "math/Vec2.inl"
+#include "Vec2.inl"
 
 #endif // MATH_VEC2_H

@@ -22,4 +22,4 @@
  THE SOFTWARE.
  ****************************************************************************/
 
-#include "editor-support/cocostudio/WidgetCallBackHandlerProtocol.h"
+#include "WidgetCallBackHandlerProtocol.h"

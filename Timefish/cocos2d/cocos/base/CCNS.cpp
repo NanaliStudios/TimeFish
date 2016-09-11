@@ -131,9 +131,9 @@ Rect RectFromString(const std::string& str)
 
         // split the string with ','
         strArray pointInfo;
-        CC_BREAK_IF(!splitWithForm(pointStr, pointInfo));
+        CC_BREAK_IF(!splitWithForm(pointStr.c_str(), pointInfo));
         strArray sizeInfo;
-        CC_BREAK_IF(!splitWithForm(sizeStr, sizeInfo));
+        CC_BREAK_IF(!splitWithForm(sizeStr.c_str(), sizeInfo));
 
         float x = (float) utils::atof(pointInfo[0].c_str());
         float y = (float) utils::atof(pointInfo[1].c_str());

@@ -25,7 +25,7 @@
 #include "platform/CCPlatformConfig.h"
 #if CC_TARGET_PLATFORM == CC_PLATFORM_IOS || CC_TARGET_PLATFORM == CC_PLATFORM_MAC
 
-#include "audio/apple/AudioCache.h"
+#include "AudioCache.h"
 
 #import <Foundation/Foundation.h>
 #import <OpenAL/alc.h>
@@ -102,7 +102,7 @@ void AudioCache::readDataTask()
     AudioBufferList theDataBuffer;
     ExtAudioFileRef extRef = nullptr;
     
-    NSString *fileFullPath = [[NSString alloc] initWithCString:_fileFullPath.c_str() encoding:NSUTF8StringEncoding];
+    NSString *fileFullPath = [[NSString alloc] initWithCString:_fileFullPath.c_str() encoding:[NSString defaultCStringEncoding]];
     auto fileURL = (CFURLRef)[[NSURL alloc] initFileURLWithPath:fileFullPath];
     [fileFullPath release];
 

@@ -26,7 +26,7 @@ THE SOFTWARE.
 #define __CC_PRECOMPILED_SHADERS_H__
 
 #include "platform/CCCommon.h"
-#include "platform/winrt/CCGL.h"
+#include "CCGL.h"
 
 #include <string>
 #include <vector>

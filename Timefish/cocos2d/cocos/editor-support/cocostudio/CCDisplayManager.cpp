@@ -22,11 +22,11 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
 
-#include "editor-support/cocostudio/CCDisplayManager.h"
-#include "editor-support/cocostudio/CCBone.h"
-#include "editor-support/cocostudio/CCArmature.h"
-#include "editor-support/cocostudio/CCUtilMath.h"
-#include "editor-support/cocostudio/CCSkin.h"
+#include "cocostudio/CCDisplayManager.h"
+#include "cocostudio/CCBone.h"
+#include "cocostudio/CCArmature.h"
+#include "cocostudio/CCUtilMath.h"
+#include "cocostudio/CCSkin.h"
 
 #include "2d/CCParticleSystemQuad.h"
 
@@ -383,12 +383,10 @@ bool DisplayManager::containPoint(Vec2 &point)
         Vec2 outPoint;
 
         Sprite *sprite = (Sprite *)_currentDecoDisplay->getDisplay();
-        Sprite *child = (Sprite *)sprite->getChildByTag(0);
-        if(nullptr != child)
-            sprite = child;
+        sprite = (Sprite *)sprite->getChildByTag(0);
 
-        if (nullptr != sprite)
-            ret = CC_SPRITE_CONTAIN_POINT_WITH_RETURN(sprite, point, outPoint);
+        ret = CC_SPRITE_CONTAIN_POINT_WITH_RETURN(sprite, point, outPoint);
+
     }
     break;
 

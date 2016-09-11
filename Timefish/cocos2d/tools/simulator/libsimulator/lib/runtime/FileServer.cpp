@@ -257,7 +257,7 @@ _responseEndThread(false)
     _writePath = FileUtils::getInstance()->getWritablePath();
     
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_MAC)
-#include "Widget_mac.h"
+    std::string getCurAppName(void);
     _writePath += getCurAppName();
     _writePath += "/";
 #endif
@@ -508,7 +508,7 @@ void FileServer::loopResponse()
         char dataBuf[1024] = {0};
         struct ResponseHeaderStruct
         {
-            char startFlag[13]; // needs to store PROTO_START, which is 12+NULL long
+            char startFlag[12];
             unsigned short protoNum;
             unsigned short protoBufLen;
         };

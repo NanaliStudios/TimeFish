@@ -52,9 +52,6 @@ Examples:
 
 int ccNextPOT(int value);
 
-class Sprite;
-class Image;
-
 namespace utils
 {
     /** Capture the entire screen.
@@ -65,16 +62,7 @@ namespace utils
      * base filename ("hello.png" etc.), don't use a relative path containing directory names.("mydir/hello.png" etc.).
      * @since v3.2
      */
-    CC_DLL void  captureScreen(const std::function<void(bool, const std::string&)>& afterCaptured, const std::string& filename);
-
-    /** Capture a specific Node.
-    * @param startNode: specify the snapshot Node. It chould be cocos2d::Scene
-    * @param scale
-    * @returns: return a Image, then can call saveToFile to save the image as "xxx.png or xxx.jpg".
-    * @since v3.11
-    * !!! remark: Caller is responsible for releasing it by calling delete.
-    */
-    CC_DLL Image* captureNode(Node* startNode, float scale = 1.0f);
+    void CC_DLL captureScreen(const std::function<void(bool, const std::string&)>& afterCaptured, const std::string& filename);
     
     /** Find children by name, it will return all child that has the same name.
      * It supports c++ 11 regular expression. It is  a helper function of `Node::enumerateChildren()`.
@@ -85,7 +73,7 @@ namespace utils
      * @return Array of Nodes that matches the name
      * @since v3.2
      */
-    CC_DLL std::vector<Node*>  findChildren(const Node &node, const std::string &name);
+    std::vector<Node*> CC_DLL findChildren(const Node &node, const std::string &name);
     
     /** Same to ::atof, but strip the string, remain 7 numbers after '.' before call atof.
      * Why we need this? Because in android c++_static, atof ( and std::atof ) is unsupported for numbers have long decimal part and contain
@@ -93,76 +81,25 @@ namespace utils
      * @param str The string be to converted to double.
      * @return Returns converted value of a string.
      */
-    CC_DLL double  atof(const char* str);
+    double CC_DLL atof(const char* str);
 
     /** Get current exact time, accurate to nanoseconds.
      * @return Returns the time in seconds since the Epoch.
      */
-    CC_DLL double  gettime();
+    double CC_DLL gettime();
 
     /**
      * Get current time in milliseconds, accurate to nanoseconds
      *
      * @return  Returns the time in milliseconds since the Epoch.
      */
-    CC_DLL long long  getTimeInMilliseconds();
+    long long CC_DLL getTimeInMilliseconds();
 
     /**
      * Calculate unionof bounding box of a node and its children.
      * @return Returns unionof bounding box of a node and its children.
      */
-    CC_DLL Rect getCascadeBoundingBox(Node *node);
-
-    /**
-     * Create a sprite instance from base64 encoded image and adds the texture to the Texture Cache.
-
-     * @return Returns an instance of sprite
-     */
-    CC_DLL Sprite* createSpriteFromBase64Cached(const char* base64String, const char* key);
-
-    /**
-    * Create a sprite instance from base64 encoded image.
-
-    * @return Returns an instance of sprite
-    */
-    CC_DLL Sprite* createSpriteFromBase64(const char* base64String);
-
-
-    /**
-     * Find a child by name recursively
-
-     * @return  Returns found node or nullptr
-     */
-    CC_DLL Node*  findChild(Node* levelRoot, const char* name);
-
-    /**
-     * Find a child by tag recursively
-
-     * @return Returns found node or nullptr
-     */
-   CC_DLL Node*  findChild(Node* levelRoot, int tag);
-
-    /**
-     * Find a child by name recursively
-
-     * @return  Returns found node or nullptr with specified type 'T'
-     */
-    template<typename T> inline
-    T findChild(Node* levelRoot, const char* name)
-    {
-        return dynamic_cast<T>(findChild(levelRoot, name));
-    }
-
-    /**
-     * Find a child by tag recursively
-
-     * @return  Returns found node or nullptr with specified type 'T'
-     */
-    template<typename T> inline
-    T findChild(Node* levelRoot, int tag)
-    {
-        return dynamic_cast<T>(findChild(levelRoot, tag));
-    }
+    Rect CC_DLL getCascadeBoundingBox(Node *node);
 }
 
 NS_CC_END

@@ -36,7 +36,7 @@
 #else
 #include <AL/al.h>
 #endif
-#include "platform/CCPlatformMacros.h"
+#include "CCPlatformMacros.h"
 
 #define QUEUEBUFFER_NUM 5
 #define QUEUEBUFFER_TIME_STEP 0.1f

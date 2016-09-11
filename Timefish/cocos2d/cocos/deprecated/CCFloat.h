@@ -45,7 +45,7 @@ public:
 
     static __Float* create(float v)
     {
-        __Float* pRet = new (std::nothrow) __Float(v);
+        __Float* pRet = new __Float(v);
         if (pRet)
         {
             pRet->autorelease();
@@ -56,7 +56,7 @@ public:
     /* override functions */
     virtual void acceptVisitor(DataVisitor &visitor) { visitor.visit(this); }
     
-    virtual __Float* clone() const override
+    __Float* clone() const
     {
         return __Float::create(_value);
     }

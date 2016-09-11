@@ -21,7 +21,7 @@
  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  THE SOFTWARE.
 ****************************************************************************/
-#include "base/CCNinePatchImageParser.h"
+#include "CCNinePatchImageParser.h"
 #include "platform/CCImage.h"
 #include "base/CCDirector.h"
 

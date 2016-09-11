@@ -68,7 +68,7 @@ PUForceFieldAffector::~PUForceFieldAffector()
 {
 };
 //-----------------------------------------------------------------------
-PUForceField::ForceFieldType PUForceFieldAffector::getForceFieldType() const
+const PUForceField::ForceFieldType PUForceFieldAffector::getForceFieldType(void) const
 {
     return _forceFieldType;
 }

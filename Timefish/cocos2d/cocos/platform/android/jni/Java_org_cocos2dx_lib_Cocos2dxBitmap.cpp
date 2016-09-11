@@ -23,22 +23,48 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
 
-#include "platform/android/jni/JniHelper.h"
+#include "JniHelper.h"
 #include <string.h>
 #include "base/CCDirector.h"
-#include "platform/CCApplication.h"
+#include "../CCApplication.h"
 #include "platform/CCFileUtils.h"
+#include <jni.h>
 #include "base/ccUTF8.h"
-
-static const std::string className = "org/cocos2dx/lib/Cocos2dxBitmap";
 
 using namespace cocos2d;
 
+
 int getFontSizeAccordingHeightJni(int height) {
-    return JniHelper::callStaticIntMethod(className, "getFontSizeAccordingHeight", height);
+    int ret = 0;
+
+    JniMethodInfo t;
+    if (JniHelper::getStaticMethodInfo(t, "org/cocos2dx/lib/Cocos2dxBitmap", "getFontSizeAccordingHeight", "(I)I")) {
+        ret = t.env->CallStaticIntMethod(t.classID, t.methodID, height);
+        t.env->DeleteLocalRef(t.classID);
+    }
+
+    return ret;
 }
 
 std::string getStringWithEllipsisJni(const char* text, float width, float fontSize) {
-    return JniHelper::callStaticStringMethod(className, "getStringWithEllipsis", text, width, fontSize);
+    std::string ret;
+    JniMethodInfo t;
+
+    if (JniHelper::getStaticMethodInfo(t, "org/cocos2dx/lib/Cocos2dxBitmap", "getStringWithEllipsis", "(Ljava/lang/String;FF)Ljava/lang/String;")) {
+        jstring stringArg1;
+
+        if (!text) {
+            stringArg1 = t.env->NewStringUTF("");
+        } else {
+            stringArg1 = t.env->NewStringUTF(text);
+        }
+
+        jstring retFromJava = (jstring)t.env->CallStaticObjectMethod(t.classID, t.methodID, stringArg1, width, fontSize);
+        ret = cocos2d::StringUtils::getStringUTFCharsJNI(t.env, retFromJava);
+        
+        t.env->DeleteLocalRef(stringArg1);
+        t.env->DeleteLocalRef(t.classID);
+    }
+    return ret;
 }
 

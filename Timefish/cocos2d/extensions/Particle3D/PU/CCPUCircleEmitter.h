@@ -45,22 +45,22 @@ public:
 
     /** 
     */
-    float getRadius() const;
+    const float getRadius(void) const;
     void setRadius(const float radius);
 
     /** 
     */
-    float getCircleAngle() const;
+    const float getCircleAngle(void) const;
     void setCircleAngle(const float circleAngle);
 
     /** 
     */
-    float getStep() const;
+    const float getStep(void) const;
     void setStep(const float step);
 
     /** 
     */
-    bool isRandom() const;
+    const bool isRandom(void) const;
     void setRandom(const bool random);
 
     /* 

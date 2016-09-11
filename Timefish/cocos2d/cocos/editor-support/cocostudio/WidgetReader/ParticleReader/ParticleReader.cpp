@@ -22,13 +22,10 @@
  THE SOFTWARE.
  ****************************************************************************/
 
-#include "editor-support/cocostudio/WidgetReader/ParticleReader/ParticleReader.h"
+#include "ParticleReader.h"
 
-#include "base/ccTypes.h"
-#include "2d/CCParticleSystemQuad.h"
-#include "platform/CCFileUtils.h"
-#include "editor-support/cocostudio/CSParseBinary_generated.h"
-#include "editor-support/cocostudio/WidgetReader/NodeReader/NodeReader.h"
+#include "cocostudio/CSParseBinary_generated.h"
+#include "cocostudio/WidgetReader/NodeReader/NodeReader.h"
 
 #include "tinyxml2.h"
 #include "flatbuffers/flatbuffers.h"
@@ -56,7 +53,7 @@ namespace cocostudio
     {
         if (!_instanceParticleReader)
         {
-            _instanceParticleReader = new (std::nothrow) ParticleReader();
+            _instanceParticleReader = new ParticleReader();
         }
         
         return _instanceParticleReader;

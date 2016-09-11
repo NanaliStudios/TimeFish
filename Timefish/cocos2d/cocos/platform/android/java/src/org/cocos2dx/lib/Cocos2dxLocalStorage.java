@@ -56,7 +56,7 @@ public class Cocos2dxLocalStorage {
         return false;
     }
     
-    public static void destroy() {
+    public static void destory() {
         if (mDatabase != null) {
             mDatabase.close();
         }
@@ -89,7 +89,7 @@ public class Cocos2dxLocalStorage {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return ret;
+        return ret == null ? "" : ret;
     }
     
     public static void removeItem(String key) {

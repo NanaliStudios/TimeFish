@@ -28,8 +28,8 @@
 #include <unordered_map>
 
 #include "base/CCRef.h"
-#include "audio/include/AudioEngine.h"
-#include "audio/winrt/AudioCachePlayer.h"
+#include "AudioEngine.h"
+#include "AudioCachePlayer.h"
 
 NS_CC_BEGIN
     namespace experimental{

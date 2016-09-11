@@ -502,7 +502,7 @@ public:
      * @js NA
      * @lua NA
      */
-    virtual __Array* clone() const override;
+    virtual __Array* clone() const;
 
     // ------------------------------------------
     // Iterators

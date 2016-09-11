@@ -22,7 +22,7 @@
  THE SOFTWARE.
  ****************************************************************************/
 
-#include "3d/CCPlane.h"
+#include "CCPlane.h"
 
 NS_CC_BEGIN
 

@@ -7,9 +7,9 @@
 #include "2d/CCActionEase.h"
 
 #include "extensions/ExtensionMacros.h"
-#include "editor-support/cocosbuilder/CCBSequence.h"
-#include "editor-support/cocosbuilder/CCBKeyframe.h"
-#include "editor-support/cocosbuilder/CCBSequenceProperty.h"
+#include "CCBSequence.h"
+#include "CCBKeyframe.h"
+#include "CCBSequenceProperty.h"
 #include "extensions/GUI/CCControlExtension/CCControl.h"
 
 namespace cocosbuilder {
@@ -112,7 +112,7 @@ public:
     cocos2d::Sequence* actionForCallbackChannel(CCBSequenceProperty* channel);
     cocos2d::Sequence* actionForSoundChannel(CCBSequenceProperty* channel);
 
-	// return -1 if timeline not exist
+	// return -1 if timeline not exsit
     int getSequenceId(const char* pSequenceName);
     
     // get timeline duration

@@ -27,7 +27,7 @@
 #include "platform/CCPlatformConfig.h"
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
 
-#include "network/HttpClient.h"
+#include "HttpClient.h"
 
 #include <queue>
 #include <sstream>
@@ -383,7 +383,7 @@ public:
         return header;
     }
     
-    const std::string& getCookieFileName() const
+    const std::string getCookieFileName()
     {
         return _cookieFileName;
     }
@@ -399,7 +399,7 @@ public:
     }
     
 private:
-    void createHttpURLConnection(const std::string& url)
+    void createHttpURLConnection(std::string url)
     {
         JniMethodInfo methodInfo;
         if (JniHelper::getStaticMethodInfo(methodInfo,
@@ -608,7 +608,7 @@ private:
         return len;
     }
 
-    const std::string& getCookieString() const
+    const std::string getCookieString()
     {
         return _responseCookies;
     }
@@ -892,7 +892,7 @@ HttpClient::HttpClient()
 HttpClient::~HttpClient()
 {
     CCLOG("In the destructor of HttpClient!");
-    CC_SAFE_RELEASE(_requestSentinel);
+    CC_SAFE_DELETE(_requestSentinel);
 }
 
 //Lazy create semaphore & mutex & thread

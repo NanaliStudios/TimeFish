@@ -28,8 +28,8 @@ private:
     WAVEFORMATEX      m_waveFormat;
     uint32            m_maxStreamLengthInBytes;
     std::vector<byte> m_data;
-    size_t            m_offset;
-    size_t            m_dataLen;
+    UINT32            m_offset;
+    UINT32            m_dataLen;
     Platform::String^      m_filename;
 
     Platform::Array<byte>^ ReadData(_In_ Platform::String^ filename);
@@ -50,7 +50,7 @@ internal:
         return m_waveFormat;
     }
 
-    size_t GetMaxStreamLengthInBytes()
+    UINT32 GetMaxStreamLengthInBytes()
     {
 		return m_dataLen;
     }

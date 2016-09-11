@@ -289,11 +289,6 @@ LayoutComponent* Widget::getOrCreateLayoutComponent()
 
 void Widget::setContentSize(const cocos2d::Size &contentSize)
 {
-    Size previousSize = ProtectedNode::getContentSize();
-    if(previousSize.equals(contentSize))
-    {
-        return;
-    }
     ProtectedNode::setContentSize(contentSize);
 
     _customSize = contentSize;
@@ -303,7 +298,7 @@ void Widget::setContentSize(const cocos2d::Size &contentSize)
     }
     else if (_ignoreSize)
     {
-        ProtectedNode::setContentSize(getVirtualRendererSize());
+        _contentSize = getVirtualRendererSize();
     }
     if (!_usingLayoutComponent && _running)
     {
@@ -607,14 +602,9 @@ bool Widget::isHighlighted() const
     return _highlight;
 }
 
-void Widget::setHighlighted(bool highlight)
+void Widget::setHighlighted(bool hilight)
 {
-    if (highlight == _highlight)
-    {
-        return;
-    }
-
-    _highlight = highlight;
+    _highlight = hilight;
     if (_bright)
     {
         if (_highlight)
@@ -893,12 +883,6 @@ void Widget::moveEvent()
 void Widget::releaseUpEvent()
 {
     this->retain();
-
-    if (isFocusEnabled())
-    {
-        requestFocus();
-    }
-
     if (_touchEventCallback)
     {
         _touchEventCallback(this, TouchEventType::ENDED);
@@ -961,7 +945,7 @@ bool Widget::hitTest(const Vec2 &pt, const Camera* camera, Vec3 *p) const
 bool Widget::isClippingParentContainsPoint(const Vec2 &pt)
 {
     _affectByClipping = false;
-    Node* parent = getParent();
+    Widget* parent = getWidgetParent();
     Widget* clippingParent = nullptr;
     while (parent)
     {
@@ -975,7 +959,7 @@ bool Widget::isClippingParentContainsPoint(const Vec2 &pt)
                 break;
             }
         }
-        parent = parent->getParent();
+        parent = parent->getWidgetParent();
     }
 
     if (!_affectByClipping)
@@ -1242,8 +1226,6 @@ void Widget::copyProperties(Widget *widget)
     setFlippedY(widget->isFlippedY());
     setColor(widget->getColor());
     setOpacity(widget->getOpacity());
-    setCascadeColorEnabled(widget->isCascadeColorEnabled());
-    setCascadeOpacityEnabled(widget->isCascadeOpacityEnabled());
     _touchEventCallback = widget->_touchEventCallback;
     _touchEventListener = widget->_touchEventListener;
     _touchEventSelector = widget->_touchEventSelector;
@@ -1462,7 +1444,7 @@ void Widget::onFocusChange(Widget* widgetLostFocus, Widget* widgetGetFocus)
     }
 }
 
-Widget* Widget::getCurrentFocusedWidget()
+Widget* Widget::getCurrentFocusedWidget()const
 {
     return _focusedWidget;
 }

@@ -65,10 +65,7 @@ public:
     
     /** Create a Value by an integer value. */
     explicit Value(int v);
-
-    /** Create a Value by an unsigned value. */
-    explicit Value(unsigned int v);
-
+    
     /** Create a Value by a float value. */
     explicit Value(float v);
     
@@ -99,7 +96,7 @@ public:
     /** Create a Value by a ValueMapIntKey object. It will use std::move internally. */
     explicit Value(ValueMapIntKey&& v);
 
-    /** Create a Value by another Value object. */
+    /** Create a Value by anthoer Value object. */
     Value(const Value& other);
     /** Create a Value by a Value object. It will use std::move internally. */
     Value(Value&& other);
@@ -116,8 +113,6 @@ public:
     Value& operator= (unsigned char v);
     /** Assignment operator, assign from integer to Value. */
     Value& operator= (int v);
-    /** Assignment operator, assign from integer to Value. */
-    Value& operator= (unsigned int v);
     /** Assignment operator, assign from float to Value. */
     Value& operator= (float v);
     /** Assignment operator, assign from double to Value. */
@@ -157,8 +152,6 @@ public:
     unsigned char asByte() const;
     /** Gets as an integer value. Will convert to integer if possible, or will trigger assert error. */
     int asInt() const;
-    /** Gets as an unsigned value. Will convert to unsigned if possible, or will trigger assert error. */
-    unsigned int asUnsignedInt() const;
     /** Gets as a float value. Will convert to float if possible, or will trigger assert error. */
     float asFloat() const;
     /** Gets as a double value. Will convert to double if possible, or will trigger assert error. */
@@ -198,8 +191,6 @@ public:
         BYTE,
         /// wrap integer
         INTEGER,
-        /// wrap unsigned
-        UNSIGNED,
         /// wrap float
         FLOAT,
         /// wrap double
@@ -230,7 +221,6 @@ private:
     {
         unsigned char byteVal;
         int intVal;
-        unsigned int unsignedVal;
         float floatVal;
         double doubleVal;
         bool boolVal;

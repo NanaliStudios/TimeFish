@@ -46,12 +46,12 @@ public:
 
     /** 
     */
-    float getFrequencyMin() const;
+    const float getFrequencyMin(void) const;
     void setFrequencyMin(const float frequencyMin);
 
     /** 
     */
-    float getFrequencyMax() const;
+    const float getFrequencyMax(void) const;
     void setFrequencyMax(const float frequencyMax);
 
     virtual void copyAttributesTo (PUAffector* affector) override;

@@ -62,7 +62,7 @@ public:
 
     /** Returns the scale fraction
     */
-    float getScaleFraction() const;
+    const float getScaleFraction(void) const;
 
     /** Set the scale fraction. This scale fraction value is used to scale different attributes if the 
         event handler is called.

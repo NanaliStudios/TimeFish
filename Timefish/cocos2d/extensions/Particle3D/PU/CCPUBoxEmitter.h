@@ -43,17 +43,17 @@ public:
 
     /** 
     */
-    float getHeight() const;
+    const float getHeight(void) const;
     void setHeight(const float height);
 
     /** 
     */
-    float getWidth() const;
+    const float getWidth(void) const;
     void setWidth(const float width);
 
     /** 
     */
-    float getDepth() const;
+    const float getDepth(void) const;
     void setDepth(const float depth);
 
     virtual CCPUBoxEmitter* clone() override;

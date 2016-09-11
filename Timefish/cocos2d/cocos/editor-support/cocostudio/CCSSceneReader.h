@@ -25,8 +25,8 @@ THE SOFTWARE.
 #ifndef __CCSSCENEREADER_H__
 #define __CCSSCENEREADER_H__
 
-#include "editor-support/cocostudio/DictionaryHelper.h"
-#include "editor-support/cocostudio/CocosStudioExport.h"
+#include "cocostudio/DictionaryHelper.h"
+#include "cocostudio/CocosStudioExport.h"
 
 namespace cocostudio {
 

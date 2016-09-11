@@ -232,7 +232,7 @@ void Animation3DCache::removeUnusedAnimation()
         if (itor->second->getReferenceCount() == 1)
         {
             itor->second->release();
-            itor = _animations.erase(itor);
+            _animations.erase(itor++);
         }
         else
             ++itor;

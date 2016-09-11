@@ -26,7 +26,7 @@ THE SOFTWARE.
 #define __ActionFrameEasing_H__
 
 #include "base/CCRef.h"
-#include "editor-support/cocostudio/CocosStudioExport.h"
+#include "cocostudio/CocosStudioExport.h"
 
 namespace cocostudio {
 

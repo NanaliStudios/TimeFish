@@ -26,9 +26,9 @@ THE SOFTWARE.
 #ifndef __CCANIMATION_H__
 #define __CCANIMATION_H__
 
-#include "editor-support/cocostudio/CCProcessBase.h"
-#include "editor-support/cocostudio/CCTween.h"
-#include "editor-support/cocostudio/CocosStudioExport.h"
+#include "cocostudio/CCProcessBase.h"
+#include "cocostudio/CCTween.h"
+#include "cocostudio/CocosStudioExport.h"
 #include <queue>
 
 namespace cocostudio {
@@ -229,8 +229,8 @@ public:
      *
      * Similar to UserData, but instead of holding a void* it holds an object.
      * The UserObject will be retained once in this method,
-     * and the previous UserObject (if existed) will be release.
-     * The UserObject will be released in Node's destructor.
+     * and the previous UserObject (if existed) will be relese.
+     * The UserObject will be released in Node's destructure.
      *
      * @param userObject    A user assigned Object
      */
@@ -279,11 +279,11 @@ protected:
 
     Armature *_armature;                        //! A weak reference of armature
 
-    std::string _movementID;                //! Current movement's name
+    std::string _movementID;                //! Current movment's name
 
     int _toIndex;                                //! The frame index in MovementData->m_pMovFrameDataArr, it's different from m_iFrameIndex.
 
-    std::vector<Tween*> _tweenList;
+    cocos2d::Vector<Tween*> _tweenList;
 
     bool _ignoreFrameEvent;
     

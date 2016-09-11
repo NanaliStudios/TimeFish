@@ -23,6 +23,7 @@
  ****************************************************************************/
 
 #include "3d/CCMeshSkin.h"
+#include "3d/CCSkeleton3D.h"
 #include "3d/CCBundle3D.h"
 #include "3d/CCSkeleton3D.h"
 

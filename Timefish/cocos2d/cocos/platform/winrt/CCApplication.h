@@ -49,7 +49,7 @@ public:
     int run();
 
     /**
-    @brief    Get current application instance.
+    @brief    Get current applicaiton instance.
     @return Current application instance pointer.
     */
     static Application* getInstance();
@@ -63,11 +63,6 @@ public:
      @brief Get target platform
      */
     virtual Platform getTargetPlatform() override;
-
-    /**
-     @brief Get application version
-     */
-    virtual std::string getVersion() override;
     
     /**
      @brief Open url in default browser

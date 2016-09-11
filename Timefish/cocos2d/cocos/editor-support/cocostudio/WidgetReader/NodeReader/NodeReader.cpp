@@ -22,11 +22,11 @@
  THE SOFTWARE.
  ****************************************************************************/
 
-#include "editor-support/cocostudio/WidgetReader/NodeReader/NodeReader.h"
+#include "NodeReader.h"
 
-#include "editor-support/cocostudio/CSParseBinary_generated.h"
-#include "editor-support/cocostudio/ActionTimeline/CCActionTimeline.h"
-#include "editor-support/cocostudio/CCComExtensionData.h"
+#include "cocostudio/CSParseBinary_generated.h"
+#include "cocostudio/ActionTimeline/CCActionTimeline.h"
+#include "cocostudio/CCComExtensionData.h"
 
 #include "tinyxml2.h"
 #include "flatbuffers/flatbuffers.h"
@@ -73,7 +73,7 @@ namespace cocostudio
     {
         if (!_instanceNodeReader)
         {
-            _instanceNodeReader = new (std::nothrow) NodeReader();
+            _instanceNodeReader = new NodeReader();
         }
         
         return _instanceNodeReader;
@@ -512,9 +512,9 @@ namespace cocostudio
         ComExtensionData* extensionData = ComExtensionData::create();
         extensionData->setCustomProperty(customProperty);
         extensionData->setActionTag(actionTag);
-        if (node->getComponent(ComExtensionData::COMPONENT_NAME))
+        if (node->getComponent("ComExtensionData"))
         {
-            node->removeComponent(ComExtensionData::COMPONENT_NAME);
+            node->removeComponent("ComExtensionData");
         }
         node->addComponent(extensionData);
         

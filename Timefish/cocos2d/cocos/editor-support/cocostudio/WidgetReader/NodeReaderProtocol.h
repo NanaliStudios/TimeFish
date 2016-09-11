@@ -25,7 +25,7 @@
 #ifndef __cocos2d_libs__NodeReaderProtocol__
 #define __cocos2d_libs__NodeReaderProtocol__
 
-#include "editor-support/cocostudio/CocosStudioExport.h"
+#include "cocostudio/CocosStudioExport.h"
 
 namespace flatbuffers
 {

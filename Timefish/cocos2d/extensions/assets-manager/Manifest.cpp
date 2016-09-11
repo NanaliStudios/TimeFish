@@ -160,13 +160,16 @@ bool Manifest::versionEquals(const Manifest *b) const
 std::unordered_map<std::string, Manifest::AssetDiff> Manifest::genDiff(const Manifest *b) const
 {
     std::unordered_map<std::string, AssetDiff> diff_map;
-    const std::unordered_map<std::string, Asset> &bAssets = b->getAssets();
+    std::unordered_map<std::string, Asset> bAssets = b->getAssets();
     
+    std::string key;
+    Asset valueA;
+    Asset valueB;
     std::unordered_map<std::string, Asset>::const_iterator valueIt, it;
     for (it = _assets.begin(); it != _assets.end(); ++it)
     {
-        const auto &key = it->first;
-        const auto &valueA = it->second;
+        key = it->first;
+        valueA = it->second;
         
         // Deleted
         valueIt = bAssets.find(key);
@@ -179,7 +182,7 @@ std::unordered_map<std::string, Manifest::AssetDiff> Manifest::genDiff(const Man
         }
         
         // Modified
-        auto &valueB = valueIt->second;
+        valueB = valueIt->second;
         if (valueA.md5 != valueB.md5) {
             AssetDiff diff;
             diff.asset = valueB;
@@ -190,8 +193,8 @@ std::unordered_map<std::string, Manifest::AssetDiff> Manifest::genDiff(const Man
     
     for (it = bAssets.begin(); it != bAssets.end(); ++it)
     {
-        const auto &key = it->first;
-        const auto &valueB = it->second;
+        key = it->first;
+        valueB = it->second;
         
         // Added
         valueIt = _assets.find(key);
@@ -206,7 +209,7 @@ std::unordered_map<std::string, Manifest::AssetDiff> Manifest::genDiff(const Man
     return diff_map;
 }
 
-void Manifest::genResumeAssetsList(DownloadUnits *units) const
+void Manifest::genResumeAssetsList(network::DownloadUnits *units) const
 {
     for (auto it = _assets.begin(); it != _assets.end(); ++it)
     {
@@ -214,10 +217,18 @@ void Manifest::genResumeAssetsList(DownloadUnits *units) const
         
         if (asset.downloadState != DownloadState::SUCCESSED)
         {
-            DownloadUnit unit;
+            network::DownloadUnit unit;
             unit.customId = it->first;
             unit.srcUrl = _packageUrl + asset.path;
             unit.storagePath = _manifestRoot + asset.path;
+            if (asset.downloadState == DownloadState::DOWNLOADING)
+            {
+                unit.resumeDownload = true;
+            }
+            else
+            {
+                unit.resumeDownload = false;
+            }
             units->emplace(unit.customId, unit);
         }
     }
@@ -243,12 +254,7 @@ void Manifest::prependSearchPaths()
 {
     std::vector<std::string> searchPaths = FileUtils::getInstance()->getSearchPaths();
     std::vector<std::string>::iterator iter = searchPaths.begin();
-    bool needChangeSearchPaths = false;
-    if (std::find(searchPaths.begin(), searchPaths.end(), _manifestRoot) == searchPaths.end())
-    {
-        searchPaths.insert(iter, _manifestRoot);
-        needChangeSearchPaths = true;
-    }
+    searchPaths.insert(iter, _manifestRoot);
     
     for (int i = (int)_searchPaths.size()-1; i >= 0; i--)
     {
@@ -258,12 +264,8 @@ void Manifest::prependSearchPaths()
         path = _manifestRoot + path;
         iter = searchPaths.begin();
         searchPaths.insert(iter, path);
-        needChangeSearchPaths = true;
     }
-    if (needChangeSearchPaths)
-    {
-        FileUtils::getInstance()->setSearchPaths(searchPaths);
-    }
+    FileUtils::getInstance()->setSearchPaths(searchPaths);
 }
 
 
@@ -324,7 +326,8 @@ void Manifest::setAssetDownloadState(const std::string &key, const Manifest::Dow
                 {
                     for (rapidjson::Value::MemberIterator itr = assets.MemberBegin(); itr != assets.MemberEnd(); ++itr)
                     {
-                        if (key.compare(itr->name.GetString()) == 0) {
+                        std::string jkey = itr->name.GetString();
+                        if (jkey == key) {
                             rapidjson::Value &entry = itr->value;
                             if (entry.HasMember(KEY_DOWNLOAD_STATE) && entry[KEY_DOWNLOAD_STATE].IsInt())
                             {

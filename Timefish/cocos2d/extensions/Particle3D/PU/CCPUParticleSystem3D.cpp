@@ -448,11 +448,6 @@ void PUParticleSystem3D::forceUpdate( float delta )
 
     prepared();
 
-    Vec3 currentPos = getDerivedPosition();
-    _latestPositionDiff = currentPos - _latestPosition;
-    _latestPosition = currentPos;
-    _latestOrientation = getDerivedOrientation();
-
     if (!_emitters.empty()){
         emitParticles(delta);
         preUpdator(delta);
@@ -460,6 +455,10 @@ void PUParticleSystem3D::forceUpdate( float delta )
         postUpdator(delta);
     }
 
+    Vec3 currentPos = getDerivedPosition();
+    _latestPositionDiff = currentPos - _latestPosition;
+    _latestPosition = currentPos;
+    _latestOrientation = getDerivedOrientation();
     _timeElapsedSinceStart += delta;
 }
 
@@ -731,7 +730,7 @@ void PUParticleSystem3D::emitParticles( float elapsedTime )
 
 }
 
-float PUParticleSystem3D::getDefaultWidth() const
+const float PUParticleSystem3D::getDefaultWidth( void ) const
 {
     return _defaultWidth;
 }
@@ -741,7 +740,7 @@ void PUParticleSystem3D::setDefaultWidth( const float width )
     _defaultWidth = width;
 }
 
-float PUParticleSystem3D::getDefaultHeight() const
+const float PUParticleSystem3D::getDefaultHeight( void ) const
 {
     return _defaultHeight;
 }
@@ -751,7 +750,7 @@ void PUParticleSystem3D::setDefaultHeight( const float height )
     _defaultHeight = height;
 }
 
-float PUParticleSystem3D::getDefaultDepth() const
+const float PUParticleSystem3D::getDefaultDepth( void ) const
 {
     return _defaultDepth;
 }
@@ -1011,7 +1010,7 @@ void PUParticleSystem3D::initParticleForExpiration( PUParticle3D* particle, floa
         it->particleExpired(this, particle);
     }
     ///** Externs are also called to perform expiration activities. If needed, affectors and emitters may be added, but at the moment
-    //	there is no reason for (and we don't want to waste cpu resources).
+    //	there is no reason for (and we don´t want to waste cpu resources).
     //*/
     //if (!mExterns.empty())
     //{

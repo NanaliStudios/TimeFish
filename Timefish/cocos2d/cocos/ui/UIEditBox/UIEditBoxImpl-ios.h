@@ -28,7 +28,7 @@
 
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
 
-#include "ui/UIEditBox/UIEditBoxImpl-common.h"
+#include "UIEditBoxImpl-common.h"
 
 
 
@@ -53,6 +53,9 @@ public:
      * @lua NA
      */
     virtual ~EditBoxImplIOS();
+    virtual void setPosition(const Vec2& pos) override;
+    virtual void setAnchorPoint(const Vec2& anchorPoint) override;
+    virtual void updatePosition(float dt) override;
     
     virtual bool isEditing() override;
     virtual void createNativeControl(const Rect& frame) override;
@@ -67,6 +70,7 @@ public:
     virtual void setNativePlaceHolder(const char* pText) override;
     virtual void setNativeVisible(bool visible) override;
     virtual void updateNativeFrame(const Rect& rect) override;
+    virtual void setNativeContentSize(const Size& size) override;
     virtual const char* getNativeDefaultFontName() override;
     virtual void nativeOpenKeyboard() override;
     virtual void nativeCloseKeyboard() override;
@@ -74,11 +78,14 @@ public:
     //need to remove siri text
     virtual const char* getText(void)override;
 
-    virtual void doAnimationWhenKeyboardMove(float duration, float distance) override;
+    virtual void doAnimationWhenKeyboardMove(float duration, float distance);
 private:
     UIFont*         constructFont(const char* fontName, int fontSize);
+    void			adjustTextFieldPosition();
     
     UIEditBoxImplIOS_objc* _systemControl;
+    Vec2         _position;
+    Vec2         _anchorPoint;
 };
 
 

@@ -102,7 +102,7 @@ bool MotionStreak::initWithFade(float fade, float minSeg, float stroke, const Co
 {
     Node::setPosition(Vec2::ZERO);
     setAnchorPoint(Vec2::ZERO);
-    setIgnoreAnchorPointForPosition(true);
+    ignoreAnchorPointForPosition(true);
     _startingPositionInitialized = false;
 
     _positionR.setZero();

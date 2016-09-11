@@ -80,8 +80,6 @@ public:
 
     virtual void setVisible(bool visible);
 
-    void setBounces(bool bounces);
-
 private:
     UIWebViewWrapper *_uiWebViewWrapper;
     WebView *_webView;

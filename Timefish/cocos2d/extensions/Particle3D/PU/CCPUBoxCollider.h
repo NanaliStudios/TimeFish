@@ -45,7 +45,7 @@ public:
 
     /** Returns the width of the box
     */
-    float getWidth() const;
+    const float getWidth() const;
 
     /** Sets the width of the box
     */
@@ -53,7 +53,7 @@ public:
 
     /** Returns the height of the box
     */
-    float getHeight() const;
+    const float getHeight() const;
 
     /** Sets the height of the box
     */
@@ -61,7 +61,7 @@ public:
 
     /** Returns the depth of the box
     */
-    float getDepth() const;
+    const float getDepth() const;
 
     /** Sets the depth of the box
     */

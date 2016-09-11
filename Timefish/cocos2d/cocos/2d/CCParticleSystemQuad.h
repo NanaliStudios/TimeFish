@@ -118,8 +118,8 @@ public:
     /**
      * @js NA
      * @lua NA
-     */    
-    virtual void updateParticleQuads() override;
+     */
+    virtual void updateQuadWithParticle(tParticle* particle, const Vec2& newPosition) override;
     /**
      * @js NA
      * @lua NA
@@ -161,8 +161,6 @@ CC_CONSTRUCTOR_ACCESS:
      * @lua NA
      */
     virtual bool initWithTotalParticles(int numberOfParticles) override;
-    
-
 
 protected:
     /** initializes the indices for the vertices*/
@@ -184,8 +182,6 @@ protected:
     GLuint              _buffersVBO[2]; //0: vertex  1: indices
 
     QuadCommand _quadCommand;           // quad command
-    
-
 
 private:
     CC_DISALLOW_COPY_AND_ASSIGN(ParticleSystemQuad);

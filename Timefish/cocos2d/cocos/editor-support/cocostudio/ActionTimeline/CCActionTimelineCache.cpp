@@ -22,22 +22,22 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
 
-#include "editor-support/cocostudio/ActionTimeline/CCActionTimelineCache.h"
-#include "editor-support/cocostudio/ActionTimeline/CSLoader.h"
-#include "editor-support/cocostudio/ActionTimeline/CCFrame.h"
-#include "editor-support/cocostudio/ActionTimeline/CCTimeLine.h"
-#include "editor-support/cocostudio/ActionTimeline/CCActionTimeline.h"
+#include "CCActionTimelineCache.h"
+#include "CSLoader.h"
+#include "CCFrame.h"
+#include "CCTimeLine.h"
+#include "CCActionTimeline.h"
 #include "platform/CCFileUtils.h"
 #include "2d/CCSpriteFrameCache.h"
 #include "2d/CCSpriteFrame.h"
 
-#include "editor-support/cocostudio/CSParseBinary_generated.h"
+#include "cocostudio/CSParseBinary_generated.h"
 
 #include "tinyxml2.h"
 #include "flatbuffers/flatbuffers.h"
 #include "flatbuffers/util.h"
 
-#include "editor-support/cocostudio/FlatBuffersSerialize.h"
+#include "cocostudio/FlatBuffersSerialize.h"
 
 #include <fstream>
 
@@ -60,6 +60,7 @@ static const char* Property_ZOrder          = "ZOrder";
 static const char* Property_ActionValue     = "ActionValue";
 static const char* Property_BlendValue      = "BlendFunc";
 
+
 static const char* ACTION           = "action";
 static const char* DURATION         = "duration";
 static const char* TIMELINES        = "timelines";
@@ -75,6 +76,7 @@ static const char* START_FRAME      = "startFrame";
 static const char* X                = "x";
 static const char* Y                = "y";
 static const char* ROTATION         = "rotation";
+static const char* ALPHA            = "alpha";
 static const char* RED              = "red";
 static const char* GREEN            = "green";
 static const char* BLUE             = "blue";
@@ -137,6 +139,7 @@ ActionTimeline* ActionTimelineCache::createAction(const std::string& filename)
     std::string path = filename;
     size_t pos = path.find_last_of('.');
     std::string suffix = path.substr(pos + 1, path.length());
+    CCLOG("suffix = %s", suffix.c_str());
     
     ActionTimelineCache* cache = ActionTimelineCache::getInstance();
     
@@ -158,16 +161,6 @@ ActionTimeline* ActionTimelineCache::createActionFromJson(const std::string& fil
     if (action == nullptr)
     {
         action = loadAnimationActionWithFile(fileName);
-    }
-    return action->clone();
-}
-
-ActionTimeline* ActionTimelineCache::createActionFromContent(const std::string& fileName, const std::string& content)
-{
-    ActionTimeline* action = _animationActions.at(fileName);
-    if (action == nullptr)
-    {
-        action = loadAnimationActionWithContent(fileName, content);
     }
     return action->clone();
 }
@@ -411,23 +404,13 @@ Frame* ActionTimelineCache::loadZOrderFrame(const rapidjson::Value& json)
 
     return frame;
 }
-
+    
 ActionTimeline* ActionTimelineCache::createActionWithFlatBuffersFile(const std::string &fileName)
 {
     ActionTimeline* action = _animationActions.at(fileName);
     if (action == NULL)
     {
         action = loadAnimationActionWithFlatBuffersFile(fileName);
-    }
-    return action->clone();
-}
-
-ActionTimeline* ActionTimelineCache::createActionWithDataBuffer(Data data, const std::string &fileName)
-{
-    ActionTimeline* action = _animationActions.at(fileName);
-    if (action == NULL)
-    {
-        action = loadAnimationWithDataBuffer(data, fileName);
     }
     return action->clone();
 }
@@ -441,7 +424,7 @@ ActionTimeline* ActionTimelineCache::loadAnimationActionWithFlatBuffersFile(cons
     
     std::string path = fileName;
     
-    std::string fullPath = FileUtils::getInstance()->fullPathForFilename(fileName);
+    std::string fullPath = FileUtils::getInstance()->fullPathForFilename(fileName.c_str());
     
     CC_ASSERT(FileUtils::getInstance()->isFileExist(fullPath));
     
@@ -452,7 +435,7 @@ ActionTimeline* ActionTimelineCache::loadAnimationActionWithFlatBuffersFile(cons
     return action;
 }
 
-ActionTimeline* ActionTimelineCache::loadAnimationWithDataBuffer(const cocos2d::Data& data, const std::string& fileName)
+ActionTimeline* ActionTimelineCache::loadAnimationWithDataBuffer(const cocos2d::Data data, const std::string fileName)
 {
     // if already exists an action with filename, then return this action
     ActionTimeline* action = _animationActions.at(fileName);
@@ -461,7 +444,7 @@ ActionTimeline* ActionTimelineCache::loadAnimationWithDataBuffer(const cocos2d::
 
     std::string path = fileName;
 
-    std::string fullPath = FileUtils::getInstance()->fullPathForFilename(fileName);
+    std::string fullPath = FileUtils::getInstance()->fullPathForFilename(fileName.c_str());
 
     CC_ASSERT(FileUtils::getInstance()->isFileExist(fullPath));
 
@@ -471,7 +454,7 @@ ActionTimeline* ActionTimelineCache::loadAnimationWithDataBuffer(const cocos2d::
     return action;
 }
 
-ActionTimeline* ActionTimelineCache::createActionWithDataBuffer(const cocos2d::Data& data)
+inline ActionTimeline* ActionTimelineCache::createActionWithDataBuffer(const cocos2d::Data data)
 {
     auto csparsebinary = GetCSParseBinary(data.getBytes());
 
@@ -495,23 +478,17 @@ ActionTimeline* ActionTimelineCache::createActionWithDataBuffer(const cocos2d::D
         action->addAnimationInfo(info);
     }
 
-    auto timeLines = nodeAction->timeLines();
-    int timelineLength = timeLines->size();
-    std::multimap<std::string,timeline::Timeline*> properTimelineMap;// order the timelines depends property name
+    auto timelines = nodeAction->timeLines();
+    int timelineLength = timelines->size();
     for (int i = 0; i < timelineLength; i++)
     {
-        auto timelineFlatBuf = timeLines->Get(i);
+        auto timelineFlatBuf = timelines->Get(i);
         Timeline* timeline = loadTimelineWithFlatBuffers(timelineFlatBuf);
+        
         if (timeline)
-        {
-            properTimelineMap.insert(std::make_pair(timelineFlatBuf->property()->c_str(), timeline));
-        }
+            action->addTimeline(timeline);
     }
 
-    for (const auto& properTimelinePair : properTimelineMap)
-    {
-        action->addTimeline(properTimelinePair.second);
-    }
     return action;
 }
 
@@ -524,6 +501,7 @@ Timeline* ActionTimelineCache::loadTimelineWithFlatBuffers(const flatbuffers::Ti
     if(property == "")
         return nullptr;
     
+    CCLOG("property = %s", property.c_str());
     
     if(property != "")
     {
@@ -991,22 +969,17 @@ ActionTimeline* ActionTimelineCache::createActionWithFlatBuffersForSimulator(con
 
     auto timeLines = nodeAction->timeLines();
     int timelineLength = timeLines->size();
-    std::multimap<std::string, cocostudio::timeline::Timeline*> properTimelineMap;// order the timelines depends property name
     for (int i = 0; i < timelineLength; i++)
     {
         auto timelineFlatBuf = timeLines->Get(i);
         Timeline* timeline = loadTimelineWithFlatBuffers(timelineFlatBuf);
+        
         if (timeline)
-        {
-            properTimelineMap.insert(std::make_pair(timelineFlatBuf->property()->c_str(), timeline));
-        }
+            action->addTimeline(timeline);
     }
-
-    for (const auto& properTimelinePair : properTimelineMap)
-    {
-        action->addTimeline(properTimelinePair.second);
-    }
+    
     fbs->deleteFlatBufferBuilder();
+    
     return action;
 }
 

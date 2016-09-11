@@ -108,11 +108,11 @@ Color4B::Color4B(GLubyte _r, GLubyte _g, GLubyte _b, GLubyte _a)
 , a(_a)
 {}
 
-Color4B::Color4B(const Color3B& color, GLubyte _a)
+Color4B::Color4B(const Color3B& color)
 : r(color.r)
 , g(color.g)
 , b(color.b)
-, a(_a)
+, a(255)
 {}
 
 Color4B::Color4B(const Color4F& color)
@@ -170,11 +170,11 @@ Color4F::Color4F(float _r, float _g, float _b, float _a)
 , a(_a)
 {}
 
-Color4F::Color4F(const Color3B& color, float _a)
+Color4F::Color4F(const Color3B& color)
 : r(color.r / 255.0f)
 , g(color.g / 255.0f)
 , b(color.b / 255.0f)
-, a(_a)
+, a(1.0f)
 {}
 
 Color4F::Color4F(const Color4B& color)

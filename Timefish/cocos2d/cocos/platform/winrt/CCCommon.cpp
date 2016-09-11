@@ -24,8 +24,7 @@ THE SOFTWARE.
 ****************************************************************************/
 #include "platform/CCCommon.h"
 #include "platform/CCStdC.h"
-#include "platform/winrt/CCGLViewImpl-winrt.h"
-#include "platform/winrt/CCWinRTUtils.h"
+#include "CCWinRTUtils.h"
 
 #if defined(VLD_DEBUG_MEMORY)
 #include <vld.h>
@@ -37,8 +36,8 @@ NS_CC_BEGIN
 void MessageBox(const char * pszMsg, const char * pszTitle)
 {
     // Create the message dialog and set its content
-    Platform::String^ message = PlatformStringFromString(pszMsg);
-    Platform::String^ title = PlatformStringFromString(pszTitle);
+    Platform::String^ message = ref new Platform::String(CCUtf8ToUnicode(pszMsg, -1).c_str());
+    Platform::String^ title = ref new Platform::String(CCUtf8ToUnicode(pszTitle, -1).c_str());
     GLViewImpl::sharedOpenGLView()->ShowMessageBox(title, message);
 }
 

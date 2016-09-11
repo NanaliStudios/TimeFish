@@ -36,8 +36,8 @@
 #else
 #include <AL/al.h>
 #endif
-#include "platform/CCPlatformMacros.h"
-#include "audio/win32/AudioCache.h"
+#include "CCPlatformMacros.h"
+#include "AudioCache.h"
 
 NS_CC_BEGIN
 namespace experimental{

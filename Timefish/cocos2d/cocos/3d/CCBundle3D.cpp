@@ -28,7 +28,7 @@ THE SOFTWARE.
 #include "base/ccMacros.h"
 #include "platform/CCFileUtils.h"
 #include "renderer/CCGLProgram.h"
-#include "3d/CCBundleReader.h"
+#include "CCBundleReader.h"
 #include "base/CCData.h"
 #include "json/document.h"
 
@@ -162,12 +162,12 @@ void Bundle3D::clear()
 {
     if (_isBinary)
     {
-        _binaryBuffer.clear();
+        CC_SAFE_DELETE(_binaryBuffer);
         CC_SAFE_DELETE_ARRAY(_references);
     }
     else
     {
-        _jsonBuffer.clear();
+        CC_SAFE_DELETE_ARRAY(_jsonBuffer);
     }
 }
 
@@ -213,7 +213,7 @@ bool Bundle3D::loadObj(MeshDatas& meshdatas, MaterialDatas& materialdatas, NodeD
     if (mtl_basepath)
         mtlPath = mtl_basepath;
     else
-        mtlPath = fullPath.substr(0, fullPath.find_last_of("\\/") + 1);
+        mtlPath = fullPath.substr(0, fullPath.find_last_of("\\/") + 1).c_str();
     
     std::vector<tinyobj::shape_t> shapes;
     std::vector<tinyobj::material_t> materials;
@@ -1038,12 +1038,17 @@ bool Bundle3D::loadJson(const std::string& path)
 {
     clear();
 
-    _jsonBuffer = FileUtils::getInstance()->getStringFromFile(path);
+    Data data = FileUtils::getInstance()->getDataFromFile(path);
+    ssize_t size = data.getSize();
 
-    if (_jsonReader.ParseInsitu<0>((char*)_jsonBuffer.c_str()).HasParseError())
+    // json need null-terminated string.
+    _jsonBuffer = new char[size + 1];
+    memcpy(_jsonBuffer, data.getBytes(), size);
+    _jsonBuffer[size] = '\0';
+    if (_jsonReader.ParseInsitu<0>(_jsonBuffer).HasParseError())
     {
         clear();
-        CCLOG("Parse json failed in Bundle3D::loadJson function");
+        CCASSERT(false, "Parse json failed");
         return false;
     }
 
@@ -1062,9 +1067,10 @@ bool Bundle3D::loadBinary(const std::string& path)
     clear();
     
     // get file data
-    _binaryBuffer.clear();
-    _binaryBuffer = FileUtils::getInstance()->getDataFromFile(path);
-    if (_binaryBuffer.isNull())
+    CC_SAFE_DELETE(_binaryBuffer);
+    _binaryBuffer = new (std::nothrow) Data();
+    *_binaryBuffer = FileUtils::getInstance()->getDataFromFile(path);
+    if (_binaryBuffer->isNull())
     {
         clear();
         CCLOG("warning: Failed to read file: %s", path.c_str());
@@ -1072,7 +1078,7 @@ bool Bundle3D::loadBinary(const std::string& path)
     }
     
     // Initialise bundle reader
-    _binaryReader.init( (char*)_binaryBuffer.getBytes(),  _binaryBuffer.getSize() );
+    _binaryReader.init( (char*)_binaryBuffer->getBytes(),  _binaryBuffer->getSize() );
     
     // Read identifier info
     char identifier[] = { 'C', '3', 'B', '\0'};
@@ -1125,7 +1131,7 @@ bool Bundle3D::loadBinary(const std::string& path)
 bool Bundle3D::loadMeshDataJson_0_1(MeshDatas& meshdatas)
 {
     const rapidjson::Value& mesh_data_array = _jsonReader[MESH];
-    MeshData* meshdata= new (std::nothrow) MeshData();
+    MeshData* meshdata= new   MeshData();
     const rapidjson::Value& mesh_data_val = mesh_data_array[(rapidjson::SizeType)0];
 
     const rapidjson::Value& mesh_data_body_array = mesh_data_val[DEFAULTPART];
@@ -1173,7 +1179,7 @@ bool Bundle3D::loadMeshDataJson_0_1(MeshDatas& meshdatas)
 
 bool Bundle3D::loadMeshDataJson_0_2(MeshDatas& meshdatas)
 {
-    MeshData* meshdata= new (std::nothrow) MeshData();
+    MeshData* meshdata= new   MeshData();
     const rapidjson::Value& mesh_array = _jsonReader[MESH];
     const rapidjson::Value& mesh_array_0 = mesh_array[(rapidjson::SizeType)0];
 
@@ -1255,7 +1261,7 @@ bool Bundle3D::loadSkinDataJson(SkinData* skindata)
         skindata->inverseBindPoseMatrices.push_back(mat_bind_pos);
     }
 
-    // set root bone information
+    // set root bone infomation
     const rapidjson::Value& skin_data_1 = skin_data_array[1];
 
     // parent and child relationship map
@@ -1809,7 +1815,7 @@ NodeData* Bundle3D::parseNodesRecursivelyBinary(bool& skeleton, bool singleSprit
     bool skeleton_;
     if (_binaryReader.read(&skeleton_, 1, 1) != 1)
     {
-        CCLOG("warning: Failed to read is skeleton");
+        CCLOG("warning: Failed to read is sleleton");
         return nullptr;
     }
     if (skeleton_)
@@ -2096,14 +2102,6 @@ unsigned int Bundle3D::parseGLProgramAttribute(const std::string& str)
     {
         return GLProgram::VERTEX_ATTRIB_BLEND_INDEX;
     }
-    else if (str == "VERTEX_ATTRIB_TANGENT")
-    {
-        return GLProgram::VERTEX_ATTRIB_TANGENT;
-    }
-    else if (str == "VERTEX_ATTRIB_BINORMAL")
-    {
-        return GLProgram::VERTEX_ATTRIB_BINORMAL;
-    }
     else
     {
         CCASSERT(false, "Wrong Attribute type");
@@ -2193,6 +2191,8 @@ Bundle3D::Bundle3D()
 : _modelPath(""),
 _path(""),
 _version(""),
+_jsonBuffer(nullptr),
+_binaryBuffer(nullptr),
 _referenceCount(0),
 _references(nullptr),
 _isBinary(false)

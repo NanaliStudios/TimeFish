@@ -157,7 +157,6 @@ public:
     //call glclear to clear frame buffer object
     void clearFBO();
     void applyFBO();
-    void restoreFBO();
     void setClearColor(const Color4F& color) { _clearColor = color;}
     void setClearDepth(float depth) { _clearDepth = depth; }
     void setClearStencil(int8_t stencil) { _clearStencil = stencil; }
@@ -181,7 +180,6 @@ CC_CONSTRUCTOR_ACCESS:
 private:
     //openGL content for FrameBuffer
     GLuint _fbo;
-    GLuint _previousFBO;
     //dirty flag for fbo binding
     bool _fboBindingDirty;
     //

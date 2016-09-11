@@ -40,7 +40,7 @@ public:
     static PUSphereSurfaceEmitter* create();
     /** 
     */
-    float getRadius() const;
+    const float getRadius(void) const;
     void setRadius(const float radius);
 
     /** 

@@ -273,19 +273,19 @@ public:
     /**
      * default particle width
      */
-    float getDefaultWidth() const;
+    const float getDefaultWidth(void) const;
     void setDefaultWidth(const float width);
 
     /** 
      * default particle height
      */
-    float getDefaultHeight() const;
+    const float getDefaultHeight(void) const;
     void setDefaultHeight(const float height);
 
     /** 
      * default particle depth
      */
-    float getDefaultDepth() const;
+    const float getDefaultDepth(void) const;
     void setDefaultDepth(const float depth);
 
     Vec3 getDerivedPosition();
@@ -303,7 +303,7 @@ public:
     void setMaxVelocity(float maxVelocity);
 
     void setMaterialName(const std::string &name) { _matName = name; };
-    const std::string& getMaterialName() const { return _matName; };
+    const std::string getMaterialName() const { return _matName; };
 
     /** Forces emission of particles.
      * @remarks The number of requested particles are the exact number that are emitted. No down-scalling is applied.
@@ -353,8 +353,6 @@ public:
     virtual PUParticleSystem3D* clone();
     virtual void copyAttributesTo(PUParticleSystem3D* system);
 
-    bool initSystem(const std::string &filePath);
-
 CC_CONSTRUCTOR_ACCESS:
     PUParticleSystem3D();
     virtual ~PUParticleSystem3D();
@@ -381,6 +379,7 @@ protected:
     
     inline bool isExpired(PUParticle3D* particle, float timeElapsed);
 
+    bool initSystem(const std::string &filePath);
     static void convertToUnixStylePath(std::string &path);
 
 protected:

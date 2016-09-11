@@ -48,7 +48,7 @@ public:
 
     /** Get the indication whether pre- and postprocessing must be done.
     */
-    bool getPrePost() const {return _prePost;};
+    const bool getPrePost(void) const {return _prePost;};
 
     /** Set the indication whether pre- and postprocessing must be done.
     */

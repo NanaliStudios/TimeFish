@@ -62,7 +62,6 @@ enum {
     TMXLayerAttribBase64 = 1 << 1,
     TMXLayerAttribGzip = 1 << 2,
     TMXLayerAttribZlib = 1 << 3,
-    TMXLayerAttribCSV = 1 << 4,
 };
 
 enum {
@@ -140,8 +139,6 @@ public:
     std::string     _sourceImage;
     //! size in pixels of the image
     Size            _imageSize;
-    std::string     _originSourceImage;
-
 public:
     /**
      * @js ctor
@@ -282,7 +279,6 @@ public:
     inline void setCurrentString(const std::string& currentString){ _currentString = currentString; }
     inline const std::string& getTMXFileName() const { return _TMXFileName; }
     inline void setTMXFileName(const std::string& fileName){ _TMXFileName = fileName; }
-    inline const std::string& getExternalTilesetFileName() const { return _externalTilesetFilename; }
 
 protected:
     void internalInit(const std::string& tmxFileName, const std::string& resourcePath);
@@ -322,7 +318,6 @@ protected:
     ValueMapIntKey _tileProperties;
     int _currentFirstGID;
     bool _recordFirstGID;
-    std::string _externalTilesetFilename;
 };
 
 // end of tilemap_parallax_nodes group

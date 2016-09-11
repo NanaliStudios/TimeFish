@@ -80,9 +80,9 @@ public:
 
     /** 
         */
-    PUComparisionOperator getComparePositionX() const {return _comparePositionX;};
-    PUComparisionOperator getComparePositionY() const {return _comparePositionY;};
-    PUComparisionOperator getComparePositionZ() const {return _comparePositionZ;};
+    const PUComparisionOperator getComparePositionX(void) const {return _comparePositionX;};
+    const PUComparisionOperator getComparePositionY(void) const {return _comparePositionY;};
+    const PUComparisionOperator getComparePositionZ(void) const {return _comparePositionZ;};
 
     virtual void copyAttributesTo (PUObserver* observer) override;
 

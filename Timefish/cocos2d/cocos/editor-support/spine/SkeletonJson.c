@@ -31,7 +31,7 @@
 
 #include <spine/SkeletonJson.h>
 #include <stdio.h>
-#include "editor-support/spine/Json.h"
+#include "Json.h"
 #include <spine/extension.h>
 #include <spine/AtlasAttachmentLoader.h>
 

@@ -16,15 +16,12 @@
 * See the License for the specific language governing permissions and limitations under the License.
 */
 
-#include "base/ccMacros.h"
 #include "platform/CCPlatformConfig.h"
-#include "platform/CCFileUtils.h"
-
 
 #if CC_TARGET_PLATFORM == CC_PLATFORM_WINRT
 
-#include "platform/winrt/CCWinRTUtils.h"
-#include "audio/winrt/AudioSourceReader.h"
+#include "CCWinRTUtils.h"
+#include "AudioSourceReader.h"
 
 using namespace cocos2d;
 using namespace cocos2d::experimental;
@@ -100,10 +97,9 @@ bool WAVReader::initialize(const std::string& filePath)
         flushChunks();
 
         _streamer = ref new MediaStreamer;
-
-        _streamer->Initialize(StringUtf8ToWideChar(_filePath).c_str(), true);
+        _streamer->Initialize(std::wstring(_filePath.begin(), _filePath.end()).c_str(), true);
         _wfx = _streamer->GetOutputWaveFormatEx();
-        size_t dataSize = _streamer->GetMaxStreamLengthInBytes();
+        UINT32 dataSize = _streamer->GetMaxStreamLengthInBytes();
 
         if (dataSize <= 0)
             break;
@@ -146,7 +142,7 @@ bool WAVReader::consumeChunk(AudioDataChunk& chunk)
 void WAVReader::produceChunk()
 {
     _rwMutex.lock();
-    size_t chunkSize = _audioSize;
+    int chunkSize = _audioSize;
 
     do {
         if (!_isStreaming && _chnkQ.size() || _chnkQ.size() >= QUEUEBUFFER_NUM) {
@@ -167,10 +163,10 @@ void WAVReader::produceChunk()
             break;
         }
 
-        unsigned int retSize = 0;
+        UINT retSize = 0;
         AudioDataChunk chunk = { 0 };
         chunk._data = std::make_shared<PCMBuffer>(chunkSize);
-        _streamer->ReadChunk(chunk._data->data(), static_cast<unsigned int>(_bytesRead), static_cast<unsigned int>(chunkSize), &retSize);
+        _streamer->ReadChunk(chunk._data->data(), _bytesRead, chunkSize, &retSize);
         _bytesRead += retSize;
         chunk._dataSize = retSize;
         chunk._seqNo = ((float)_bytesRead / _audioSize) * ((float)_audioSize / CHUNK_SIZE_MAX);
@@ -208,7 +204,7 @@ bool MP3Reader::initialize(const std::string& filePath)
         ComPtr<IMFSourceReader> pReader;
         ComPtr<IMFMediaType> ppDecomprsdAudioType;
 
-        if (FAILED(hr = MFCreateSourceReaderFromURL(StringUtf8ToWideChar(_filePath).c_str(), NULL, &pReader))) {
+        if (FAILED(hr = MFCreateSourceReaderFromURL(std::wstring(_filePath.begin(), _filePath.end()).c_str(), NULL, &pReader))) {
             break;
         }
         
@@ -259,7 +255,7 @@ bool MP3Reader::consumeChunk(AudioDataChunk& chunk)
 void MP3Reader::produceChunk()
 {
     _rwMutex.lock();
-    size_t chunkSize = _audioSize;
+    int chunkSize = _audioSize;
 
     do {
         if (!_isStreaming && _chnkQ.size() || _chnkQ.size() >= QUEUEBUFFER_NUM) {
@@ -430,7 +426,7 @@ void MP3Reader::chunkify(PCMBuffer& buffer)
     if (buffer.size() && _chnkQ.size() < QUEUEBUFFER_NUM)
     {
         AudioDataChunk chunk = { 0 };
-        size_t chunkSize = buffer.size();
+        int chunkSize = buffer.size();
         chunk._data = std::make_shared<PCMBuffer>(buffer);
         _bytesRead += chunkSize;
         chunk._dataSize = chunkSize;
@@ -459,14 +455,14 @@ bool MP3Reader::appendToMappedWavFile(PCMBuffer& buffer)
             break;
         }
 
-        ret = (TRUE == WriteFile(file.Get(), buffer.data(), static_cast<DWORD>(buffer.size()), nullptr, nullptr));
+        ret = (TRUE == WriteFile(file.Get(), buffer.data(), buffer.size(), nullptr, nullptr));
     } while (false);
     _rwMutex.unlock();
 
     return ret;
 }
 
-void MP3Reader::readFromMappedWavFile(BYTE *data, size_t offset, size_t size, UINT *pRetSize)
+void MP3Reader::readFromMappedWavFile(BYTE *data, size_t offset, int size, UINT *pRetSize)
 {
     do {
         auto file = openFile(_mappedWavFile);
@@ -483,11 +479,11 @@ void MP3Reader::readFromMappedWavFile(BYTE *data, size_t offset, size_t size, UI
             }
         }
 
-        ReadFile(file.Get(), data, static_cast<DWORD>(size), (LPDWORD)pRetSize, nullptr);
+        ReadFile(file.Get(), data, size, (LPDWORD)pRetSize, nullptr);
     } while (false);
 }
 
-Wrappers::FileHandle MP3Reader::openFile(const std::string& filePath, bool append)
+Wrappers::FileHandle MP3Reader::openFile(const std::string& path, bool append)
 {
     CREATEFILE2_EXTENDED_PARAMETERS extParams = { 0 };
     extParams.dwFileAttributes = FILE_ATTRIBUTE_NORMAL;
@@ -499,7 +495,7 @@ Wrappers::FileHandle MP3Reader::openFile(const std::string& filePath, bool appen
 
     DWORD access = append ? GENERIC_WRITE : GENERIC_READ;
     DWORD creation = append ? OPEN_ALWAYS : OPEN_EXISTING;
-    return Microsoft::WRL::Wrappers::FileHandle(CreateFile2(StringUtf8ToWideChar(filePath).c_str(), access, FILE_SHARE_READ, creation, &extParams));
+    return Microsoft::WRL::Wrappers::FileHandle(CreateFile2(std::wstring(path.begin(), path.end()).c_str(), access, FILE_SHARE_READ, creation, &extParams));
 }
 
 
@@ -581,7 +577,7 @@ bool OGGReader::consumeChunk(AudioDataChunk& chunk)
 void OGGReader::produceChunk()
 {
     _rwMutex.lock();
-    size_t chunkSize = _audioSize;
+    int chunkSize = _audioSize;
 
     do {
         if (!_isStreaming && _chnkQ.size() || _chnkQ.size() >= QUEUEBUFFER_NUM) {
@@ -615,7 +611,7 @@ void OGGReader::produceChunk()
         {
             long br = 0;
             int current_section = 0;
-            if ((br = ov_read(_vorbisFd.get(), (char*)chunk._data->data() + retSize, static_cast<int>(chunkSize) - retSize, 0, 2, 1, &current_section)) == 0) {
+            if ((br = ov_read(_vorbisFd.get(), (char*)chunk._data->data() + retSize, chunkSize - retSize, 0, 2, 1, &current_section)) == 0) {
                 break;
             }
             retSize += br;

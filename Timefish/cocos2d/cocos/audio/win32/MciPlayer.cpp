@@ -1,4 +1,4 @@
-#include "audio/win32/MciPlayer.h"
+#include "MciPlayer.h"
 #include <tchar.h>
 #include "platform/CCFileUtils.h"
 
@@ -143,7 +143,7 @@ void MciPlayer::Resume()
 {
     if (strExt == ".mid")
     {
-        // midi not support MCI_RESUME, should get the position and use MCI_FROM
+        // midi not supprt MCI_RESUME, should get the position and use MCI_FROM
         MCI_STATUS_PARMS mciStatusParms;
         MCI_PLAY_PARMS   mciPlayParms;  
         mciStatusParms.dwItem = MCI_STATUS_POSITION;   

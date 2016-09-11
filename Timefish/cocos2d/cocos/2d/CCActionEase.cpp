@@ -1,7 +1,7 @@
 /****************************************************************************
 Copyright (c) 2008-2009 Jason Booth
 Copyright (c) 2010-2012 cocos2d-x.org
-Copyright (c) 2013-2016 Chukong Technologies Inc.
+Copyright (c) 2013-2014 Chukong Technologies Inc.
 
  http://www.cocos2d-x.org
 
@@ -47,10 +47,6 @@ NS_CC_BEGIN
 bool ActionEase::initWithAction(ActionInterval *action)
 {
     CCASSERT(action != nullptr, "action couldn't be nullptr!");
-    if (action == nullptr)
-    {
-        return false;
-    }
 
     if (ActionInterval::initWithDuration(action->getDuration()))
     {
@@ -70,22 +66,13 @@ ActionEase::~ActionEase(void)
 
 void ActionEase::startWithTarget(Node *target)
 {
-    if (target && _inner)
-    {
-        ActionInterval::startWithTarget(target);
-        _inner->startWithTarget(_target);
-    }
-    else
-    {
-        log("ActionEase::startWithTarget error: target or _inner is nullptr!");
-    }
+    ActionInterval::startWithTarget(target);
+    _inner->startWithTarget(_target);
 }
 
 void ActionEase::stop(void)
 {
-    if (_inner)
-        _inner->stop();
-    
+    _inner->stop();
     ActionInterval::stop();
 }
 
@@ -106,14 +93,19 @@ ActionInterval* ActionEase::getInnerAction()
 EaseRateAction* EaseRateAction::create(ActionInterval* action, float rate)
 {
     EaseRateAction *easeRateAction = new (std::nothrow) EaseRateAction();
-    if (easeRateAction && easeRateAction->initWithAction(action, rate))
+    if (easeRateAction)
     {
-        easeRateAction->autorelease();
-        return easeRateAction;
+        if (easeRateAction->initWithAction(action, rate))
+        {
+            easeRateAction->autorelease();
+        }
+        else
+        {
+            CC_SAFE_RELEASE_NULL(easeRateAction);
+        }
     }
     
-    delete easeRateAction;
-    return nullptr;
+    return easeRateAction;
 }
 
 bool EaseRateAction::initWithAction(ActionInterval *action, float rate)
@@ -138,23 +130,28 @@ EaseRateAction::~EaseRateAction()
 EaseIn* EaseIn::create(ActionInterval *action, float rate)
 {
     EaseIn *easeIn = new (std::nothrow) EaseIn();
-    if (easeIn && easeIn->initWithAction(action, rate))
+    if (easeIn)
     {
-        easeIn->autorelease();
-        return easeIn;
+        if (easeIn->initWithAction(action, rate))
+        {
+            easeIn->autorelease();
+        }
+        else
+        {
+            CC_SAFE_RELEASE_NULL(easeIn);
+        }
     }
 
-    delete easeIn;
-    return nullptr;
+    return easeIn;
 }
 
 EaseIn* EaseIn::clone() const
 {
     // no copy constructor
-    if (_inner)
-        return EaseIn::create(_inner->clone(), _rate);
-    
-    return nullptr;
+    auto a = new (std::nothrow) EaseIn();
+    a->initWithAction(_inner->clone(), _rate);
+    a->autorelease();
+    return a;
 }
 
 void EaseIn::update(float time)
@@ -173,23 +170,28 @@ EaseIn* EaseIn::reverse() const
 EaseOut* EaseOut::create(ActionInterval *action, float rate)
 {
     EaseOut *easeOut = new (std::nothrow) EaseOut();
-    if (easeOut && easeOut->initWithAction(action, rate))
+    if (easeOut)
     {
-        easeOut->autorelease();
-        return easeOut;
+        if (easeOut->initWithAction(action, rate))
+        {
+            easeOut->autorelease();
+        }
+        else
+        {
+            CC_SAFE_RELEASE_NULL(easeOut);
+        }
     }
 
-    delete easeOut;
-    return nullptr;
+    return easeOut;
 }
 
 EaseOut* EaseOut::clone() const
 {
     // no copy constructor
-    if (_inner)
-        return EaseOut::create(_inner->clone(), _rate);
-    
-    return nullptr;
+    auto a = new (std::nothrow) EaseOut();
+    a->initWithAction(_inner->clone(), _rate);
+    a->autorelease();
+    return a;
 }
 
 void EaseOut::update(float time)
@@ -208,23 +210,28 @@ EaseOut* EaseOut::reverse() const
 EaseInOut* EaseInOut::create(ActionInterval *action, float rate)
 {
     EaseInOut *easeInOut = new (std::nothrow) EaseInOut();
-    if (easeInOut && easeInOut->initWithAction(action, rate))
+    if (easeInOut)
     {
-        easeInOut->autorelease();
-        return easeInOut;
+        if (easeInOut->initWithAction(action, rate))
+        {
+            easeInOut->autorelease();
+        }
+        else
+        {
+            CC_SAFE_RELEASE_NULL(easeInOut);
+        }
     }
 
-    delete easeInOut;
-    return nullptr;
+    return easeInOut;
 }
 
 EaseInOut* EaseInOut::clone() const
 {
     // no copy constructor
-    if (_inner)
-        return EaseInOut::create(_inner->clone(), _rate);
-    
-    return nullptr;
+    auto a = new (std::nothrow) EaseInOut();
+    a->initWithAction(_inner->clone(), _rate);
+    a->autorelease();
+    return a;
 }
 
 void EaseInOut::update(float time)
@@ -244,23 +251,28 @@ EaseInOut* EaseInOut::reverse() const
 EaseExponentialIn* EaseExponentialIn::create(ActionInterval* action)
 {
     EaseExponentialIn *ret = new (std::nothrow) EaseExponentialIn();
-    if (ret && ret->initWithAction(action))
+    if (ret)
     {
-        ret->autorelease();
-        return ret;
+        if (ret->initWithAction(action))
+        {
+            ret->autorelease();
+        }
+        else
+        {
+            CC_SAFE_RELEASE_NULL(ret);
+        }
     }
 
-    delete ret;
-    return nullptr;
+    return ret;
 }
 
 EaseExponentialIn* EaseExponentialIn::clone() const
 {
     // no copy constructor
-    if (_inner)
-        return EaseExponentialIn::create(_inner->clone());
-    
-    return nullptr;
+    auto a = new (std::nothrow) EaseExponentialIn();
+    a->initWithAction(_inner->clone());
+    a->autorelease();
+    return a;
 }
 
 void EaseExponentialIn::update(float time)
@@ -279,23 +291,28 @@ ActionEase * EaseExponentialIn::reverse() const
 EaseExponentialOut* EaseExponentialOut::create(ActionInterval* action)
 {
     EaseExponentialOut *ret = new (std::nothrow) EaseExponentialOut();
-    if (ret && ret->initWithAction(action))
+    if (ret)
     {
-        ret->autorelease();
-        return ret;
+        if (ret->initWithAction(action))
+        {
+            ret->autorelease();
+        }
+        else
+        {
+            CC_SAFE_RELEASE_NULL(ret);
+        }
     }
 
-    delete ret;
-    return nullptr;
+    return ret;
 }
 
 EaseExponentialOut* EaseExponentialOut::clone() const
 {
     // no copy constructor
-    if (_inner)
-        EaseExponentialOut::create(_inner->clone());
-    
-    return nullptr;
+    auto a = new (std::nothrow) EaseExponentialOut();
+    a->initWithAction(_inner->clone());
+    a->autorelease();
+    return a;
 }
 
 void EaseExponentialOut::update(float time)
@@ -315,23 +332,28 @@ ActionEase* EaseExponentialOut::reverse() const
 EaseExponentialInOut* EaseExponentialInOut::create(ActionInterval *action)
 {
     EaseExponentialInOut *ret = new (std::nothrow) EaseExponentialInOut();
-    if (ret && ret->initWithAction(action))
+    if (ret)
     {
-        ret->autorelease();
-        return ret;
+        if (ret->initWithAction(action))
+        {
+            ret->autorelease();
+        }
+        else
+        {
+            CC_SAFE_RELEASE_NULL(ret);
+        }
     }
 
-    delete ret;
-    return nullptr;
+    return ret;
 }
 
 EaseExponentialInOut* EaseExponentialInOut::clone() const
 {
     // no copy constructor
-    if (_inner)
-        return EaseExponentialInOut::create(_inner->clone());
-    
-    return nullptr;
+    auto a = new (std::nothrow) EaseExponentialInOut();
+    a->initWithAction(_inner->clone());
+    a->autorelease();
+    return a;
 }
 
 void EaseExponentialInOut::update(float time)
@@ -351,23 +373,28 @@ EaseExponentialInOut* EaseExponentialInOut::reverse() const
 EaseSineIn* EaseSineIn::create(ActionInterval* action)
 {
     EaseSineIn *ret = new (std::nothrow) EaseSineIn();
-    if (ret && ret->initWithAction(action))
+    if (ret)
     {
-        ret->autorelease();
-        return ret;
+        if (ret->initWithAction(action))
+        {
+            ret->autorelease();
+        }
+        else
+        {
+            CC_SAFE_RELEASE_NULL(ret);
+        }
     }
 
-    delete ret;
-    return nullptr;
+    return ret;
 }
 
 EaseSineIn* EaseSineIn::clone() const
 {
     // no copy constructor
-    if (_inner)
-        return EaseSineIn::create(_inner->clone());
-    
-    return nullptr;
+    auto a = new (std::nothrow) EaseSineIn();
+    a->initWithAction(_inner->clone());
+    a->autorelease();
+    return a;
 }
 
 void EaseSineIn::update(float time)
@@ -387,23 +414,28 @@ ActionEase* EaseSineIn::reverse() const
 EaseSineOut* EaseSineOut::create(ActionInterval* action)
 {
     EaseSineOut *ret = new (std::nothrow) EaseSineOut();
-    if (ret && ret->initWithAction(action))
+    if (ret)
     {
-        ret->autorelease();
-        return ret;
+        if (ret->initWithAction(action))
+        {
+            ret->autorelease();
+        }
+        else
+        {
+            CC_SAFE_RELEASE_NULL(ret);
+        }
     }
 
-    delete ret;
-    return nullptr;
+    return ret;
 }
 
 EaseSineOut* EaseSineOut::clone() const
 {
     // no copy constructor
-    if (_inner)
-        return EaseSineOut::create(_inner->clone());
-    
-    return nullptr;
+    auto a = new (std::nothrow) EaseSineOut();
+    a->initWithAction(_inner->clone());
+    a->autorelease();
+    return a;
 }
 
 void EaseSineOut::update(float time)
@@ -423,23 +455,28 @@ ActionEase* EaseSineOut::reverse(void) const
 EaseSineInOut* EaseSineInOut::create(ActionInterval* action)
 {
     EaseSineInOut *ret = new (std::nothrow) EaseSineInOut();
-    if (ret && ret->initWithAction(action))
+    if (ret)
     {
-        ret->autorelease();
-        return ret;
+        if (ret->initWithAction(action))
+        {
+            ret->autorelease();
+        }
+        else
+        {
+            CC_SAFE_RELEASE_NULL(ret);
+        }
     }
 
-    delete ret;
-    return nullptr;
+    return ret;
 }
 
 EaseSineInOut* EaseSineInOut::clone() const
 {
     // no copy constructor
-    if (_inner)
-        return EaseSineInOut::create(_inner->clone());
-    
-    return nullptr;
+    auto a = new (std::nothrow) EaseSineInOut();
+    a->initWithAction(_inner->clone());
+    a->autorelease();
+    return a;
 }
 
 void EaseSineInOut::update(float time)
@@ -479,23 +516,28 @@ EaseElasticIn* EaseElasticIn::create(ActionInterval *action)
 EaseElasticIn* EaseElasticIn::create(ActionInterval *action, float period/* = 0.3f*/)
 {
     EaseElasticIn *ret = new (std::nothrow) EaseElasticIn();
-    if (ret && ret->initWithAction(action, period))
+    if (ret)
     {
-        ret->autorelease();
-        return ret;
+        if (ret->initWithAction(action, period))
+        {
+            ret->autorelease();
+        }
+        else
+        {
+            CC_SAFE_RELEASE_NULL(ret);
+        }
     }
 
-    delete ret;
-    return nullptr;
+    return ret;
 }
 
 EaseElasticIn* EaseElasticIn::clone() const
 {
     // no copy constructor
-    if (_inner)
-        return EaseElasticIn::create(_inner->clone(), _period);
-    
-    return nullptr;
+    auto a = new (std::nothrow) EaseElasticIn();
+    a->initWithAction(_inner->clone(), _period);
+    a->autorelease();
+    return a;
 }
 
 void EaseElasticIn::update(float time)
@@ -520,23 +562,28 @@ EaseElasticOut* EaseElasticOut::create(ActionInterval *action)
 EaseElasticOut* EaseElasticOut::create(ActionInterval *action, float period/* = 0.3f*/)
 {
     EaseElasticOut *ret = new (std::nothrow) EaseElasticOut();
-    if (ret && ret->initWithAction(action, period))
+    if (ret)
     {
-        ret->autorelease();
-        return ret;
+        if (ret->initWithAction(action, period))
+        {
+            ret->autorelease();
+        }
+        else
+        {
+            CC_SAFE_RELEASE_NULL(ret);
+        }
     }
 
-    delete ret;
-    return nullptr;
+    return ret;
 }
 
 EaseElasticOut* EaseElasticOut::clone() const
 {
     // no copy constructor
-    if (_inner)
-        return EaseElasticOut::create(_inner->clone(), _period);
-    
-    return nullptr;
+    auto a = new (std::nothrow) EaseElasticOut();
+    a->initWithAction(_inner->clone(), _period);
+    a->autorelease();
+    return a;
 }
 
 void EaseElasticOut::update(float time)
@@ -561,23 +608,28 @@ EaseElasticInOut* EaseElasticInOut::create(ActionInterval *action)
 EaseElasticInOut* EaseElasticInOut::create(ActionInterval *action, float period/* = 0.3f*/)
 {
     EaseElasticInOut *ret = new (std::nothrow) EaseElasticInOut();
-    if (ret && ret->initWithAction(action, period))
+    if (ret)
     {
-        ret->autorelease();
-        return ret;
+        if (ret->initWithAction(action, period))
+        {
+            ret->autorelease();
+        }
+        else
+        {
+            CC_SAFE_RELEASE_NULL(ret);
+        }
     }
-    
-    delete ret;
-    return nullptr;
+
+    return ret;
 }
 
 EaseElasticInOut* EaseElasticInOut::clone() const
 {
     // no copy constructor
-    if (_inner)
-        return EaseElasticInOut::create(_inner->clone(), _period);
-    
-    return nullptr;
+    auto a = new (std::nothrow) EaseElasticInOut();
+    a->initWithAction(_inner->clone(), _period);
+    a->autorelease();
+    return a;
 }
 
 void EaseElasticInOut::update(float time)
@@ -601,23 +653,28 @@ EaseElasticInOut* EaseElasticInOut::reverse() const
 EaseBounceIn* EaseBounceIn::create(ActionInterval* action)
 {
     EaseBounceIn *ret = new (std::nothrow) EaseBounceIn();
-    if (ret && ret->initWithAction(action))
+    if (ret)
     {
-        ret->autorelease();
-        return ret;
+        if (ret->initWithAction(action))
+        {
+            ret->autorelease();
+        }
+        else
+        {
+            CC_SAFE_RELEASE_NULL(ret);
+        }
     }
 
-    delete ret;
-    return nullptr;
+    return ret;
 }
 
 EaseBounceIn* EaseBounceIn::clone() const
 {
     // no copy constructor
-    if (_inner)
-        return EaseBounceIn::create(_inner->clone());
-    
-    return nullptr;
+    auto a = new (std::nothrow) EaseBounceIn();
+    a->initWithAction(_inner->clone());
+    a->autorelease();
+    return a;
 }
 
 void EaseBounceIn::update(float time)
@@ -637,23 +694,28 @@ EaseBounce* EaseBounceIn::reverse() const
 EaseBounceOut* EaseBounceOut::create(ActionInterval* action)
 {
     EaseBounceOut *ret = new (std::nothrow) EaseBounceOut();
-    if (ret && ret->initWithAction(action))
+    if (ret)
     {
-        ret->autorelease();
-        return ret;
+        if (ret->initWithAction(action))
+        {
+            ret->autorelease();
+        }
+        else
+        {
+            CC_SAFE_RELEASE_NULL(ret);
+        }
     }
 
-    delete ret;
-    return nullptr;
+    return ret;
 }
 
 EaseBounceOut* EaseBounceOut::clone() const
 {
     // no copy constructor
-    if (_inner)
-        return EaseBounceOut::create(_inner->clone());
-    
-    return nullptr;
+    auto a = new (std::nothrow) EaseBounceOut();
+    a->initWithAction(_inner->clone());
+    a->autorelease();
+    return a;
 }
 
 void EaseBounceOut::update(float time)
@@ -673,23 +735,28 @@ EaseBounce* EaseBounceOut::reverse() const
 EaseBounceInOut* EaseBounceInOut::create(ActionInterval* action)
 {
     EaseBounceInOut *ret = new (std::nothrow) EaseBounceInOut();
-    if (ret && ret->initWithAction(action))
+    if (ret)
     {
-        ret->autorelease();
-        return ret;
+        if (ret->initWithAction(action))
+        {
+            ret->autorelease();
+        }
+        else
+        {
+            CC_SAFE_RELEASE_NULL(ret);
+        }
     }
 
-    delete ret;
-    return nullptr;
+    return ret;
 }
 
 EaseBounceInOut* EaseBounceInOut::clone() const
 {
     // no copy constructor
-    if (_inner)
-        return EaseBounceInOut::create(_inner->clone());
-    
-    return nullptr;
+    auto a = new (std::nothrow) EaseBounceInOut();
+    a->initWithAction(_inner->clone());
+    a->autorelease();
+    return a;
 }
 
 void EaseBounceInOut::update(float time)
@@ -709,22 +776,28 @@ EaseBounceInOut* EaseBounceInOut::reverse() const
 EaseBackIn* EaseBackIn::create(ActionInterval *action)
 {
     EaseBackIn *ret = new (std::nothrow) EaseBackIn();
-    if (ret && ret->initWithAction(action))
+    if (ret)
     {
-        ret->autorelease();
-        return ret;
+        if (ret->initWithAction(action))
+        {
+            ret->autorelease();
+        }
+        else
+        {
+            CC_SAFE_RELEASE_NULL(ret);
+        }
     }
 
-    delete ret;
-    return nullptr;
+    return ret;
 }
 
 EaseBackIn* EaseBackIn::clone() const
 {
-    if (_inner)
-        return EaseBackIn::create(_inner->clone());
-
-    return nullptr;
+	// no copy constructor	
+	auto a = new (std::nothrow) EaseBackIn();
+	a->initWithAction(_inner->clone());
+	a->autorelease();
+	return a;
 }
 
 void EaseBackIn::update(float time)
@@ -744,22 +817,28 @@ ActionEase* EaseBackIn::reverse() const
 EaseBackOut* EaseBackOut::create(ActionInterval* action)
 {
     EaseBackOut *ret = new (std::nothrow) EaseBackOut();
-    if (ret && ret->initWithAction(action))
+    if (ret)
     {
-        ret->autorelease();
-        return ret;
+        if (ret->initWithAction(action))
+        {
+            ret->autorelease();
+        }
+        else
+        {
+            CC_SAFE_RELEASE_NULL(ret);
+        }
     }
 
-    delete ret;
-    return nullptr;
+    return ret;
 }
 
 EaseBackOut* EaseBackOut::clone() const
 {
-    if (_inner)
-        return EaseBackOut::create(_inner->clone());
-
-    return nullptr;
+	// no copy constructor	
+	auto a = new (std::nothrow) EaseBackOut();
+	a->initWithAction(_inner->clone());
+	a->autorelease();
+	return a;
 }
 
 void EaseBackOut::update(float time)
@@ -779,22 +858,28 @@ ActionEase* EaseBackOut::reverse() const
 EaseBackInOut* EaseBackInOut::create(ActionInterval* action)
 {
     EaseBackInOut *ret = new (std::nothrow) EaseBackInOut();
-    if (ret && ret->initWithAction(action))
+    if (ret)
     {
-        ret->autorelease();
-        return ret;
+        if (ret->initWithAction(action))
+        {
+            ret->autorelease();
+        }
+        else
+        {
+            CC_SAFE_RELEASE_NULL(ret);
+        }
     }
 
-    delete ret;
-    return nullptr;
+    return ret;
 }
 
 EaseBackInOut* EaseBackInOut::clone() const
 {
-    if (_inner)
-        return EaseBackInOut::create(_inner->clone());
-
-    return nullptr;
+	// no copy constructor
+	auto a = new (std::nothrow) EaseBackInOut();
+	a->initWithAction(_inner->clone());
+	a->autorelease();
+	return a;
 }
 
 void EaseBackInOut::update(float time)
@@ -807,17 +892,25 @@ EaseBackInOut* EaseBackInOut::reverse() const
     return EaseBackInOut::create(_inner->reverse());
 }
 
+
+
+
 EaseBezierAction* EaseBezierAction::create(cocos2d::ActionInterval* action)
 {
-    EaseBezierAction *ret = new (std::nothrow) EaseBezierAction();
-    if (ret && ret->initWithAction(action))
-    {
-        ret->autorelease();
-        return ret;
-    }
-    
-    delete ret;
-    return nullptr;
+	EaseBezierAction *ret = new (std::nothrow) EaseBezierAction();
+	if (ret)
+	{  
+		if (ret->initWithAction(action))
+		{
+			ret->autorelease();
+		}
+		else
+		{
+			CC_SAFE_RELEASE_NULL(ret);
+		}
+	}
+
+	return ret; 
 }
 
 void EaseBezierAction::setBezierParamer( float p0, float p1, float p2, float p3)
@@ -831,22 +924,16 @@ void EaseBezierAction::setBezierParamer( float p0, float p1, float p2, float p3)
 EaseBezierAction* EaseBezierAction::clone() const
 {
     // no copy constructor
-    if (_inner)
-    {
-        auto ret = EaseBezierAction::create(_inner->clone());
-        if (ret)
-        {
-            ret->setBezierParamer(_p0,_p1,_p2,_p3);
-        }
-        return ret;
-    }
-    
-    return nullptr;
+    auto a = new (std::nothrow) EaseBezierAction();
+    a->initWithAction(_inner->clone());
+    a->setBezierParamer(_p0,_p1,_p2,_p3);
+    a->autorelease();
+    return a;
 }
 
 void EaseBezierAction::update(float time)
 {
-    _inner->update(tweenfunc::bezieratFunction(_p0,_p1,_p2,_p3,time));
+	_inner->update(tweenfunc::bezieratFunction(_p0,_p1,_p2,_p3,time));
 }
 
 EaseBezierAction* EaseBezierAction::reverse() const
@@ -863,28 +950,33 @@ EaseBezierAction* EaseBezierAction::reverse() const
 EaseQuadraticActionIn* EaseQuadraticActionIn::create(ActionInterval* action)
 {
     EaseQuadraticActionIn *ret = new (std::nothrow) EaseQuadraticActionIn();
-    if (ret && ret->initWithAction(action))
+    if (ret)
     {
-        ret->autorelease();
-        return ret;
+        if (ret->initWithAction(action))
+        {
+            ret->autorelease();
+        }
+        else
+        {
+            CC_SAFE_RELEASE_NULL(ret);
+        }
     }
 
-    delete ret;
-    return nullptr;
+    return ret;
 }
 
 EaseQuadraticActionIn* EaseQuadraticActionIn::clone() const
 {
     // no copy constructor
-    if (_inner)
-        return EaseQuadraticActionIn::create(_inner->clone());
-    
-    return nullptr;
+    auto a = new (std::nothrow) EaseQuadraticActionIn();
+    a->initWithAction(_inner->clone());
+    a->autorelease();
+    return a;
 }
 
 void EaseQuadraticActionIn::update(float time)
 {
-    _inner->update(tweenfunc::quadraticIn(time));
+	_inner->update(tweenfunc::quadraticIn(time));
 }
 
 EaseQuadraticActionIn* EaseQuadraticActionIn::reverse() const
@@ -899,27 +991,32 @@ EaseQuadraticActionIn* EaseQuadraticActionIn::reverse() const
 EaseQuadraticActionOut* EaseQuadraticActionOut::create(ActionInterval* action)
 {
     EaseQuadraticActionOut *ret = new (std::nothrow) EaseQuadraticActionOut();
-    if (ret && ret->initWithAction(action))
+    if (ret)
     {
-        ret->autorelease();
-        return ret;
+        if (ret->initWithAction(action))
+        {
+            ret->autorelease();
+        }
+        else
+        {
+            CC_SAFE_RELEASE_NULL(ret);
+        }
     }
 
-    delete ret;
-    return nullptr;
+    return ret;
 }
 
 EaseQuadraticActionOut* EaseQuadraticActionOut::clone() const
 {
     // no copy constructor
-    if (_inner)
-        return EaseQuadraticActionOut::create(_inner->clone());
-    
-    return nullptr;
+    auto a = new (std::nothrow) EaseQuadraticActionOut();
+    a->initWithAction(_inner->clone());
+    a->autorelease();
+    return a;
 }
 
 void EaseQuadraticActionOut::update(float time)
-{
+{	
     _inner->update(tweenfunc::quadraticOut(time));
 }
 
@@ -935,23 +1032,28 @@ EaseQuadraticActionOut* EaseQuadraticActionOut::reverse() const
 EaseQuadraticActionInOut* EaseQuadraticActionInOut::create(ActionInterval* action)
 {
     EaseQuadraticActionInOut *ret = new (std::nothrow) EaseQuadraticActionInOut();
-    if (ret && ret->initWithAction(action))
+    if (ret)
     {
-        ret->autorelease();
-        return ret;
+        if (ret->initWithAction(action))
+        {
+            ret->autorelease();
+        }
+        else
+        {
+            CC_SAFE_RELEASE_NULL(ret);
+        }
     }
 
-    delete ret;
-    return nullptr;
+    return ret;
 }
 
 EaseQuadraticActionInOut* EaseQuadraticActionInOut::clone() const
 {
     // no copy constructor
-    if (_inner)
-        return EaseQuadraticActionInOut::create(_inner->clone());
-    
-    return nullptr;
+    auto a = new (std::nothrow) EaseQuadraticActionInOut();
+    a->initWithAction(_inner->clone());
+    a->autorelease();
+    return a;
 }
 
 void EaseQuadraticActionInOut::update(float time)
@@ -971,23 +1073,28 @@ EaseQuadraticActionInOut* EaseQuadraticActionInOut::reverse() const
 EaseQuarticActionIn* EaseQuarticActionIn::create(ActionInterval* action)
 {
     EaseQuarticActionIn *ret = new (std::nothrow) EaseQuarticActionIn();
-    if (ret && ret->initWithAction(action))
+    if (ret)
     {
-        ret->autorelease();
-        return ret;
+        if (ret->initWithAction(action))
+        {
+            ret->autorelease();
+    	}
+        else
+        {
+            CC_SAFE_RELEASE_NULL(ret);
+        }
     }
 
-    delete ret;
-    return nullptr;
+    return ret;
 }
 
 EaseQuarticActionIn* EaseQuarticActionIn::clone() const
 {
     // no copy constructor
-    if (_inner)
-        return EaseQuarticActionIn::create(_inner->clone());
-    
-    return nullptr;
+    auto a = new (std::nothrow) EaseQuarticActionIn();
+    a->initWithAction(_inner->clone());
+    a->autorelease();
+    return a;
 }
 
 void EaseQuarticActionIn::update(float time)
@@ -1007,23 +1114,28 @@ EaseQuarticActionIn* EaseQuarticActionIn::reverse() const
 EaseQuarticActionOut* EaseQuarticActionOut::create(ActionInterval* action)
 {
     EaseQuarticActionOut *ret = new (std::nothrow) EaseQuarticActionOut();
-    if (ret && ret->initWithAction(action))
+    if (ret)
     {
-        ret->autorelease();
-        return ret;
+        if (ret->initWithAction(action))
+        {
+            ret->autorelease();
+        }
+        else
+        {
+            CC_SAFE_RELEASE_NULL(ret);
+    	}
     }
 
-    delete ret;
-    return nullptr;
+    return ret;
 }
 
 EaseQuarticActionOut* EaseQuarticActionOut::clone() const
 {
     // no copy constructor
-    if (_inner)
-        return EaseQuarticActionOut::create(_inner->clone());
-    
-    return nullptr;
+    auto a = new (std::nothrow) EaseQuarticActionOut();
+    a->initWithAction(_inner->clone());
+    a->autorelease();
+    return a;
 }
 
 void EaseQuarticActionOut::update(float time)
@@ -1043,23 +1155,28 @@ EaseQuarticActionOut* EaseQuarticActionOut::reverse() const
 EaseQuarticActionInOut* EaseQuarticActionInOut::create(ActionInterval* action)
 {
     EaseQuarticActionInOut *ret = new (std::nothrow) EaseQuarticActionInOut();
-    if (ret && ret->initWithAction(action))
+    if (ret)
     {
-        ret->autorelease();
-        return ret;
+        if (ret->initWithAction(action))
+        {
+            ret->autorelease();
+        }
+        else
+        {
+            CC_SAFE_RELEASE_NULL(ret);
+        }
     }
 
-    delete ret;
-    return nullptr;
+    return ret;
 }
 
 EaseQuarticActionInOut* EaseQuarticActionInOut::clone() const
 {
     // no copy constructor
-    if (_inner)
-        return EaseQuarticActionInOut::create(_inner->clone());
-    
-    return nullptr;
+    auto a = new (std::nothrow) EaseQuarticActionInOut();
+    a->initWithAction(_inner->clone());
+    a->autorelease();
+    return a;
 }
 
 void EaseQuarticActionInOut::update(float time)
@@ -1079,23 +1196,28 @@ EaseQuarticActionInOut* EaseQuarticActionInOut::reverse() const
 EaseQuinticActionIn* EaseQuinticActionIn::create(ActionInterval* action)
 {
     EaseQuinticActionIn *ret = new (std::nothrow) EaseQuinticActionIn();
-    if (ret && ret->initWithAction(action))
+    if (ret)
     {
-        ret->autorelease();
-        return ret;
+        if (ret->initWithAction(action))
+        {
+            ret->autorelease();
+        }
+        else
+        {
+            CC_SAFE_RELEASE_NULL(ret);
+        }
     }
 
-    delete ret;
-    return nullptr;
+    return ret;
 }
 
 EaseQuinticActionIn* EaseQuinticActionIn::clone() const
 {
     // no copy constructor
-    if (_inner)
-        return EaseQuinticActionIn::create(_inner->clone());
-    
-    return nullptr;
+    auto a = new (std::nothrow) EaseQuinticActionIn();
+    a->initWithAction(_inner->clone());
+    a->autorelease();
+    return a;
 }
 
 void EaseQuinticActionIn::update(float time)
@@ -1115,23 +1237,28 @@ EaseQuinticActionIn* EaseQuinticActionIn::reverse() const
 EaseQuinticActionOut* EaseQuinticActionOut::create(ActionInterval* action)
 {
     EaseQuinticActionOut *ret = new (std::nothrow) EaseQuinticActionOut();
-    if (ret && ret->initWithAction(action))
+    if (ret)
     {
-        ret->autorelease();
-        return ret;
+        if (ret->initWithAction(action))
+        {
+            ret->autorelease();
+        }
+        else
+        {
+            CC_SAFE_RELEASE_NULL(ret);
+        }
     }
 
-    delete ret;
-    return nullptr;
+    return ret;
 }
 
 EaseQuinticActionOut* EaseQuinticActionOut::clone() const
 {
     // no copy constructor
-    if (_inner)
-        return EaseQuinticActionOut::create(_inner->clone());
-    
-    return nullptr;
+    auto a = new (std::nothrow) EaseQuinticActionOut();
+    a->initWithAction(_inner->clone());
+    a->autorelease();
+    return a;
 }
 
 void EaseQuinticActionOut::update(float time)
@@ -1151,23 +1278,28 @@ EaseQuinticActionOut* EaseQuinticActionOut::reverse() const
 EaseQuinticActionInOut* EaseQuinticActionInOut::create(ActionInterval* action)
 {
     EaseQuinticActionInOut *ret = new (std::nothrow) EaseQuinticActionInOut();
-    if (ret && ret->initWithAction(action))
+    if (ret)
     {
-        ret->autorelease();
-        return ret;
+        if (ret->initWithAction(action))
+        {
+            ret->autorelease();
+        }
+        else
+        {
+            CC_SAFE_RELEASE_NULL(ret);
+        }
     }
 
-    delete ret;
-    return nullptr;
+    return ret;
 }
 
 EaseQuinticActionInOut* EaseQuinticActionInOut::clone() const
 {
     // no copy constructor
-    if (_inner)
-        return EaseQuinticActionInOut::create(_inner->clone());
-    
-    return nullptr;
+    auto a = new (std::nothrow) EaseQuinticActionInOut();
+    a->initWithAction(_inner->clone());
+    a->autorelease();
+    return a;
 }
 
 void EaseQuinticActionInOut::update(float time)
@@ -1187,23 +1319,28 @@ EaseQuinticActionInOut* EaseQuinticActionInOut::reverse() const
 EaseCircleActionIn* EaseCircleActionIn::create(ActionInterval* action)
 {
     EaseCircleActionIn *ret = new (std::nothrow) EaseCircleActionIn();
-    if (ret && ret->initWithAction(action))
+    if (ret)
     {
-        ret->autorelease();
-        return ret;
+        if (ret->initWithAction(action))
+        {
+            ret->autorelease();
+        }
+        else
+        {
+            CC_SAFE_RELEASE_NULL(ret);
+        }
     }
 
-    delete ret;
-    return nullptr;
+    return ret; 
 }
 
 EaseCircleActionIn* EaseCircleActionIn::clone() const
 {
     // no copy constructor
-    if (_inner)
-        return EaseCircleActionIn::create(_inner->clone());
-    
-    return nullptr;
+    auto a = new (std::nothrow) EaseCircleActionIn();
+    a->initWithAction(_inner->clone());
+    a->autorelease();
+    return a;
 }
 
 void EaseCircleActionIn::update(float time)
@@ -1223,23 +1360,28 @@ EaseCircleActionIn* EaseCircleActionIn::reverse() const
 EaseCircleActionOut* EaseCircleActionOut::create(ActionInterval* action)
 {
     EaseCircleActionOut *ret = new (std::nothrow) EaseCircleActionOut();
-    if (ret && ret->initWithAction(action))
+    if (ret)
     {
-        ret->autorelease();
-        return ret;
+        if (ret->initWithAction(action))
+        {
+            ret->autorelease();
+        }
+        else
+        {
+            CC_SAFE_RELEASE_NULL(ret);
+        }
     }
 
-    delete ret;
-    return nullptr;
+	return ret;
 }
 
 EaseCircleActionOut* EaseCircleActionOut::clone() const
 {
     // no copy constructor
-    if (_inner)
-        return EaseCircleActionOut::create(_inner->clone());
-    
-    return nullptr;
+    auto a = new (std::nothrow) EaseCircleActionOut();
+    a->initWithAction(_inner->clone());
+    a->autorelease();
+    return a;
 }
 
 void EaseCircleActionOut::update(float time)
@@ -1258,24 +1400,29 @@ EaseCircleActionOut* EaseCircleActionOut::reverse() const
 
 EaseCircleActionInOut* EaseCircleActionInOut::create(ActionInterval* action)
 {
-    EaseCircleActionInOut *ret = new (std::nothrow) EaseCircleActionInOut();
-    if (ret && ret->initWithAction(action))
-    {
-        ret->autorelease();
-        return ret;
-    }
-    
-    delete ret;
-    return nullptr;
+	EaseCircleActionInOut *ret = new (std::nothrow) EaseCircleActionInOut();
+	if (ret)
+	{
+		if (ret->initWithAction(action))
+		{
+			ret->autorelease();
+		}
+		else
+		{
+			CC_SAFE_RELEASE_NULL(ret);
+		}
+	}
+
+	return ret; 
 }
 
 EaseCircleActionInOut* EaseCircleActionInOut::clone() const
 {
     // no copy constructor
-    if (_inner)
-        return EaseCircleActionInOut::create(_inner->clone());
-    
-    return nullptr;
+    auto a = new (std::nothrow) EaseCircleActionInOut();
+    a->initWithAction(_inner->clone());
+    a->autorelease();
+    return a;
 }
 
 void EaseCircleActionInOut::update(float time)
@@ -1295,23 +1442,28 @@ EaseCircleActionInOut* EaseCircleActionInOut::reverse() const
 EaseCubicActionIn* EaseCubicActionIn::create(ActionInterval* action)
 {
     EaseCubicActionIn *ret = new (std::nothrow) EaseCubicActionIn();
-    if (ret && ret->initWithAction(action))
+    if (ret)
     {
-        ret->autorelease();
-        return ret;
+        if (ret->initWithAction(action))
+        {
+            ret->autorelease();
+        }
+        else
+        {
+            CC_SAFE_RELEASE_NULL(ret);
+        }
     }
 
-    delete ret;
-    return nullptr;
+    return ret;
 }
 
 EaseCubicActionIn* EaseCubicActionIn::clone() const
 {
-    // no copy constructor
-    if (_inner)
-        return EaseCubicActionIn::create(_inner->clone());
-    
-    return nullptr;
+	// no copy constructor
+	auto a = new (std::nothrow) EaseCubicActionIn();
+	a->initWithAction(_inner->clone());
+	a->autorelease();
+	return a;
 }
 
 void EaseCubicActionIn::update(float time)
@@ -1331,23 +1483,28 @@ EaseCubicActionIn* EaseCubicActionIn::reverse() const
 EaseCubicActionOut* EaseCubicActionOut::create(ActionInterval* action)
 {
     EaseCubicActionOut *ret = new (std::nothrow) EaseCubicActionOut();
-    if (ret && ret->initWithAction(action))
+    if (ret)
     {
-        ret->autorelease();
-        return ret;
+        if (ret->initWithAction(action))
+        {
+            ret->autorelease();
+        }
+        else
+        {
+            CC_SAFE_RELEASE_NULL(ret);
+        }
     }
 
-    delete ret;
-    return nullptr;
+    return ret;
 }
 
 EaseCubicActionOut* EaseCubicActionOut::clone() const
 {
     // no copy constructor
-    if (_inner)
-        return EaseCubicActionOut::create(_inner->clone());
-    
-    return nullptr;
+    auto a = new (std::nothrow) EaseCubicActionOut();
+    a->initWithAction(_inner->clone());
+    a->autorelease();
+    return a;
 }
 
 void EaseCubicActionOut::update(float time)
@@ -1367,23 +1524,28 @@ EaseCubicActionOut* EaseCubicActionOut::reverse() const
 EaseCubicActionInOut* EaseCubicActionInOut::create(ActionInterval* action)
 {
     EaseCubicActionInOut *ret = new (std::nothrow) EaseCubicActionInOut();
-    if (ret && ret->initWithAction(action))
+    if (ret)
     {
-        ret->autorelease();
-        return ret;
+    	if (ret->initWithAction(action))
+    	{
+    		ret->autorelease();
+    	}
+    	else
+    	{
+    		CC_SAFE_RELEASE_NULL(ret);
+    	}
     }
 
-    delete ret;
-    return nullptr;
+    return ret;
 }
 
 EaseCubicActionInOut* EaseCubicActionInOut::clone() const
 {
     // no copy constructor
-    if (_inner)
-        return EaseCubicActionInOut::create(_inner->clone());
-    
-    return nullptr;
+    auto a = new (std::nothrow) EaseCubicActionInOut();
+    a->initWithAction(_inner->clone());
+    a->autorelease();
+    return a;
 }
 
 void EaseCubicActionInOut::update(float time)
@@ -1393,10 +1555,7 @@ void EaseCubicActionInOut::update(float time)
 
 EaseCubicActionInOut* EaseCubicActionInOut::reverse() const
 {
-    if (_inner)
-        return EaseCubicActionInOut::create(_inner->reverse());
-    
-    return nullptr;
+    return EaseCubicActionInOut::create(_inner->reverse());
 }
 
 NS_CC_END

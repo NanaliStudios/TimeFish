@@ -9,9 +9,8 @@
 
 #include <string>
 #include "json/document.h"
-#include "SimulatorExport.h"
 
-class CC_LIBSIM_DLL RuntimeProtocol
+class RuntimeProtocol
 {
 public:
     virtual void end();

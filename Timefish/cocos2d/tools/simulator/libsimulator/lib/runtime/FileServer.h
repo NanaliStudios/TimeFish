@@ -32,7 +32,6 @@ THE SOFTWARE.
 #include "json/writer.h"
 #include "Protos.pb.h"
 #include <string>
-#include "SimulatorExport.h"
 
 // header files for socket
 #ifdef _WIN32
@@ -54,7 +53,7 @@ THE SOFTWARE.
 #include <unistd.h>
 #endif
 
-class CC_LIBSIM_DLL FileServer
+class FileServer
 {
     static FileServer *s_sharedFileServer;
 public:

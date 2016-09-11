@@ -274,9 +274,9 @@ public:
     void insert(const K& key, V object)
     {
         CCASSERT(object != nullptr, "Object is nullptr!");
-        object->retain();
         erase(key);
         _data.insert(std::make_pair(key, object));
+        object->retain();
     }
     
     /** 
@@ -308,6 +308,7 @@ public:
             _data.erase(iter);
             return 1;
         }
+        
         return 0;
     }
     
@@ -346,7 +347,7 @@ public:
     {
         if (!_data.empty())
         {
-            ssize_t randIdx = RandomHelper::random_int<int>(0, static_cast<int>(_data.size()) - 1);
+            ssize_t randIdx = rand() % _data.size();
             const_iterator randIter = _data.begin();
             std::advance(randIter , randIdx);
             return randIter->second;

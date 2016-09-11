@@ -61,7 +61,7 @@ public:
 
     /** 
     */
-    PUComparisionOperator getCompare() const {return _compare;};
+    const PUComparisionOperator getCompare(void) const {return _compare;};
     void setCompare(PUComparisionOperator op){_compare = op;};
 
     /** 

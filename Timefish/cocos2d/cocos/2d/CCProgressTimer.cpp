@@ -54,14 +54,17 @@ ProgressTimer::ProgressTimer()
 ProgressTimer* ProgressTimer::create(Sprite* sp)
 {
     ProgressTimer *progressTimer = new (std::nothrow) ProgressTimer();
-    if (progressTimer && progressTimer->initWithSprite(sp))
+    if (progressTimer->initWithSprite(sp))
     {
         progressTimer->autorelease();
-        return progressTimer;
     }
-    
-    delete progressTimer;
-    return nullptr;
+    else
+    {
+        delete progressTimer;
+        progressTimer = nullptr;
+    }        
+
+    return progressTimer;
 }
 
 bool ProgressTimer::initWithSprite(Sprite* sp)
@@ -101,16 +104,6 @@ void ProgressTimer::setSprite(Sprite *sprite)
 {
     if (_sprite != sprite)
     {
-#if CC_ENABLE_GC_FOR_NATIVE_OBJECTS
-        auto sEngine = ScriptEngineManager::getInstance()->getScriptEngine();
-        if (sEngine)
-        {
-            if (_sprite)
-                sEngine->releaseScriptObject(this, _sprite);
-            if (sprite)
-                sEngine->retainScriptObject(this, sprite);
-        }
-#endif // CC_ENABLE_GC_FOR_NATIVE_OBJECTS
         CC_SAFE_RETAIN(sprite);
         CC_SAFE_RELEASE(_sprite);
         _sprite = sprite;

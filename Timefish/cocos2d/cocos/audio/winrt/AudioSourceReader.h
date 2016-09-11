@@ -16,7 +16,6 @@
 * See the License for the specific language governing permissions and limitations under the License.
 */
 
-#include "base/ccMacros.h"
 #include "platform/CCPlatformConfig.h"
 
 #if CC_TARGET_PLATFORM == CC_PLATFORM_WINRT
@@ -30,16 +29,16 @@
 #include <mfreadwrite.h>
 #include <queue>
 #include <mutex>
-#include "audio/winrt/MediaStreamer.h"
+#include "MediaStreamer.h"
 #include "ogg/ogg.h"
 #include "vorbis/vorbisfile.h"
 
 NS_CC_BEGIN
 namespace experimental{
 
-const size_t PCMDATA_CACHEMAXSIZE = 2621440;
-const size_t QUEUEBUFFER_NUM = 4;
-const size_t CHUNK_SIZE_MAX = PCMDATA_CACHEMAXSIZE / QUEUEBUFFER_NUM;
+const UINT PCMDATA_CACHEMAXSIZE = 2621440;
+const UINT QUEUEBUFFER_NUM = 4;
+const UINT CHUNK_SIZE_MAX = PCMDATA_CACHEMAXSIZE / QUEUEBUFFER_NUM;
 
 typedef std::vector<BYTE> PCMBuffer;
 
@@ -127,7 +126,7 @@ class MP3Reader : public AudioSourceReader
      HRESULT readAudioData(IMFSourceReader* pReader);
      void chunkify(PCMBuffer& buffer);
      bool appendToMappedWavFile(PCMBuffer& buffer);
-     void readFromMappedWavFile(BYTE *data, size_t offset, size_t size, UINT *pRetSize);
+     void readFromMappedWavFile(BYTE *data, size_t offset, int size, UINT *pRetSize);
      Microsoft::WRL::Wrappers::FileHandle openFile(const std::string& path, bool append = false);
 
  private:

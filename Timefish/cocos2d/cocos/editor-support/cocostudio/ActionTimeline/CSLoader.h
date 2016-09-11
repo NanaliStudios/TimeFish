@@ -25,12 +25,10 @@
 #ifndef __cocos2d_libs__CSLoader__
 #define __cocos2d_libs__CSLoader__
 
-#include "editor-support/cocostudio/DictionaryHelper.h"
-#include "editor-support/cocostudio/CocosStudioExport.h"
-
+#include "cocostudio/DictionaryHelper.h"
+#include "cocostudio/CocosStudioExport.h"
+#include "cocos2d.h"
 #include "base/ObjectFactory.h"
-#include "base/CCData.h"
-#include "ui/UIWidget.h"
 
 namespace flatbuffers
 {
@@ -81,13 +79,11 @@ public:
     
     static cocos2d::Node* createNode(const std::string& filename);
     static cocos2d::Node* createNode(const std::string& filename, const ccNodeLoadCallback& callback);
-    static cocos2d::Node* createNode(const Data& data);
-    static cocos2d::Node* createNode(const Data& data, const ccNodeLoadCallback &callback);
-    static cocos2d::Node* createNodeWithVisibleSize(const std::string& filename);
-    static cocos2d::Node* createNodeWithVisibleSize(const std::string& filename, const ccNodeLoadCallback& callback);
+    static cocos2d::Node* createNode(const Data data);
+    static cocos2d::Node* createNode(const Data data, const ccNodeLoadCallback &callback);
 
     static cocostudio::timeline::ActionTimeline* createTimeline(const std::string& filename);
-    static cocostudio::timeline::ActionTimeline* createTimeline(const Data& data, const std::string& filename);
+    static cocostudio::timeline::ActionTimeline* createTimeline(const Data data, const std::string& filename);
 
     /*
     static cocostudio::timeline::ActionTimelineNode* createActionTimelineNode(const std::string& filename);

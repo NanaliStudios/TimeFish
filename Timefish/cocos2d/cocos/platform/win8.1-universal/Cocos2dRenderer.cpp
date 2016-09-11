@@ -18,8 +18,9 @@
 
 #include "Cocos2dRenderer.h"
 #include "AppDelegate.h"
-#include "platform/winrt/CCGLViewImpl-winrt.h"
-#include "platform/CCApplication.h"
+#include "CCGLViewImpl-winrt.h"
+#include "CCApplication.h"
+#include "cocos2d.h"
 #include "renderer/CCTextureCache.h"
 
 // These are used by the shader compilation methods.
@@ -55,7 +56,7 @@ void Cocos2dRenderer::Resume()
     auto director = cocos2d::Director::getInstance();
     auto glview = director->getOpenGLView();
 
-    if (!glview)
+    if (!glview) 
     {
         GLViewImpl* glview = GLViewImpl::create("Test Cpp");
         glview->setDispatcher(m_dispatcher.Get());
@@ -150,3 +151,6 @@ void Cocos2dRenderer::QueueKeyboardEvent(WinRTKeyboardEventType type, Windows::U
 {
 	GLViewImpl::sharedOpenGLView()->QueueWinRTKeyboardEvent(type, args);
 }
+
+
+

@@ -71,10 +71,7 @@ public:
     /**
      * Destroys the async task pool.
      */
-    static void destroyInstance();
-    
-    /** @deprecated Use method destroyInstance() instead. */
-    CC_DEPRECATED_ATTRIBUTE static void destoryInstance() { return destroyInstance(); }
+    static void destoryInstance();
     
     /**
      * Stop tasks.

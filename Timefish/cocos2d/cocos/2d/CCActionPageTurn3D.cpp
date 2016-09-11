@@ -1,7 +1,7 @@
 /****************************************************************************
 Copyright (c) 2009      Sindesso Pty Ltd http://www.sindesso.com/
 Copyright (c) 2010-2012 cocos2d-x.org
-CopyRight (c) 2013-2016 Chukong Technologies Inc.
+CopyRight (c) 2013-2014 Chukong Technologies Inc.
  
 http://www.cocos2d-x.org
 
@@ -33,30 +33,34 @@ PageTurn3D* PageTurn3D::create(float duration, const Size& gridSize)
 {
     PageTurn3D *action = new (std::nothrow) PageTurn3D();
 
-    if (action && action->initWithDuration(duration, gridSize))
+    if (action)
     {
-        action->autorelease();
-        return action;
+        if (action->initWithDuration(duration, gridSize))
+        {
+            action->autorelease();
+        }
+        else
+        {
+            CC_SAFE_RELEASE_NULL(action);
+        }
     }
 
-    delete action;
-    return nullptr;
+    return action;
 }
 
 PageTurn3D *PageTurn3D::clone() const
 {
-    // no copy constructor
-    return PageTurn3D::create(_duration, _gridSize);
+    // no copy constructor    
+    auto a = new (std::nothrow) PageTurn3D();
+    a->initWithDuration(_duration, _gridSize);
+    a->autorelease();
+    return a;
 }
 
 GridBase* PageTurn3D::getGrid()
 {
     auto result = Grid3D::create(_gridSize, _gridNodeTarget->getGridRect());
-    if (result)
-    {
-        result->setNeedDepthTestForBlit(true);
-    }
-    
+    result->setNeedDepthTestForBlit(true);
     return result;
 }
 

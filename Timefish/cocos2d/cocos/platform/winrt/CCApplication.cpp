@@ -34,9 +34,7 @@ using namespace Windows::Foundation;
 #include "base/CCDirector.h"
 #include <algorithm>
 #include "platform/CCFileUtils.h"
-#include "platform/winrt/CCWinRTUtils.h"
-#include "platform/CCApplication.h"
-#include "tinyxml2/tinyxml2.h"
+#include "CCWinRTUtils.h"
 
 /**
 @brief    This function change the PVRFrame show/hide setting in register.
@@ -118,12 +116,12 @@ const char * Application::getCurrentLanguageCode()
         result = GetUserPreferredUILanguages(MUI_LANGUAGE_NAME, &numLanguages, pwszLanguagesBuffer, &cchLanguagesBuffer);
         if (result) {
 
-            code = StringWideCharToUtf8(pwszLanguagesBuffer);
+            code = CCUnicodeToUtf8(pwszLanguagesBuffer);
         }
 
         if (pwszLanguagesBuffer)
         {
-            delete [] pwszLanguagesBuffer;
+            delete pwszLanguagesBuffer;
         }
     }
 
@@ -224,25 +222,6 @@ Application::Platform  Application::getTargetPlatform()
     {
         return Platform::OS_WINRT;
     }
-}
-
-std::string  Application::getVersion()
-{
-    std::string r("");
-    std::string s = FileUtils::getInstance()->getStringFromFile("WMAppManifest.xml");
-    if (!s.empty()) {
-        tinyxml2::XMLDocument doc;
-        if (!doc.Parse(s.c_str())) {
-            tinyxml2::XMLElement *app = doc.RootElement()->FirstChildElement("App");
-            if (app) {
-                const char* version = app->Attribute("Version");
-                if (version) {
-                    r = version;
-                }
-            }
-        }
-    }
-    return r;
 }
 
 bool Application::openURL(const std::string &url)

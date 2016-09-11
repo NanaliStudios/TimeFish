@@ -216,7 +216,7 @@ const PUTriangle& MeshInfo::getTriangle (size_t triangleIndex)
 }
 
 //-----------------------------------------------------------------------
-size_t MeshInfo::getRandomTriangleIndex()
+const size_t MeshInfo::getRandomTriangleIndex (void)
 {
     size_t index;
     if (mDistribution == MSD_HOMOGENEOUS || mDistribution == MSD_HETEROGENEOUS_1)
@@ -538,7 +538,7 @@ void PUMeshSurfaceEmitter::setMeshName(const std::string& meshName, bool doBuild
     }
 }
 //-----------------------------------------------------------------------
-MeshInfo::MeshSurfaceDistribution PUMeshSurfaceEmitter::getDistribution() const
+const MeshInfo::MeshSurfaceDistribution PUMeshSurfaceEmitter::getDistribution (void) const
 {
     return _distribution;
 }

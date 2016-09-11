@@ -125,7 +125,7 @@ bool getSteerTarget(dtNavMeshQuery* navQuery, const float* startPos, const float
     const float minTargetDist,
     const dtPolyRef* path, const int pathSize,
     float* steerPos, unsigned char& steerPosFlag, dtPolyRef& steerPosRef,
-    float* outPoints = nullptr, int* outPointCount = nullptr);
+    float* outPoints = 0, int* outPointCount = 0);
 /** @} */
 
 NS_CC_END

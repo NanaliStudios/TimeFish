@@ -33,7 +33,7 @@
 #include <string>
 #include <thread>
 #import <OpenAL/al.h>
-#include "platform/CCPlatformMacros.h"
+#include "CCPlatformMacros.h"
 
 NS_CC_BEGIN
 namespace experimental{

@@ -25,9 +25,9 @@ THE SOFTWARE.
 #ifndef __CCCOLLIDERDETECTOR_H__
 #define __CCCOLLIDERDETECTOR_H__
 
-#include "editor-support/cocostudio/CCArmatureDefine.h"
-#include "editor-support/cocostudio/CCDatas.h"
-#include "editor-support/cocostudio/CocosStudioExport.h"
+#include "cocostudio/CCArmatureDefine.h"
+#include "cocostudio/CCDatas.h"
+#include "cocostudio/CocosStudioExport.h"
 
 #ifndef PT_RATIO
 #define PT_RATIO 32
@@ -35,7 +35,7 @@ THE SOFTWARE.
 
 
 #if ENABLE_PHYSICS_CHIPMUNK_DETECT
-#include "chipmunk/chipmunk.h"
+#include "chipmunk.h"
 #elif ENABLE_PHYSICS_BOX2D_DETECT
 #include "Box2D/Box2D.h"
 #endif

@@ -25,7 +25,6 @@
 #ifndef __CCBUNDLE3D_H__
 #define __CCBUNDLE3D_H__
 
-#include "base/CCData.h"
 #include "3d/CCBundle3DData.h"
 #include "3d/CCBundleReader.h"
 #include "json/document.h"
@@ -38,6 +37,7 @@ NS_CC_BEGIN
  */
 
 class Animation3D;
+class Data;
 
 /**
  * @brief Defines a bundle file that contains a collection of assets. Mesh, Material, MeshSkin, Animation
@@ -177,11 +177,11 @@ protected:
     std::string _version;// the c3b or c3t version
     
     // for json reading
-    std::string _jsonBuffer;
+    char* _jsonBuffer;
     rapidjson::Document _jsonReader;
 
     // for binary reading
-    Data _binaryBuffer;
+    Data* _binaryBuffer;
     BundleReader _binaryReader;
     unsigned int _referenceCount;
     Reference* _references;

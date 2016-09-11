@@ -104,7 +104,9 @@ static inline Tex2F __t(const Vec2 &v)
 
 // implementation of DrawNode
 
-DrawNode::DrawNode(int lineWidth)
+static const int DEFAULT_LINE_WIDTH = 2;
+
+DrawNode::DrawNode()
 : _vao(0)
 , _vbo(0)
 , _vaoGLPoint(0)
@@ -123,8 +125,7 @@ DrawNode::DrawNode(int lineWidth)
 , _dirty(false)
 , _dirtyGLPoint(false)
 , _dirtyGLLine(false)
-, _lineWidth(lineWidth)
-, _defaultLineWidth(lineWidth)
+, _lineWidth(DEFAULT_LINE_WIDTH)
 {
     _blendFunc = BlendFunc::ALPHA_PREMULTIPLIED;
 }
@@ -155,9 +156,9 @@ DrawNode::~DrawNode()
     }
 }
 
-DrawNode* DrawNode::create(int defaultLineWidth)
+DrawNode* DrawNode::create()
 {
-    DrawNode* ret = new (std::nothrow) DrawNode(defaultLineWidth);
+    DrawNode* ret = new (std::nothrow) DrawNode();
     if (ret && ret->init())
     {
         ret->autorelease();
@@ -326,7 +327,9 @@ void DrawNode::draw(Renderer *renderer, const Mat4 &transform, uint32_t flags)
 
 void DrawNode::onDraw(const Mat4 &transform, uint32_t flags)
 {
-    getGLProgramState()->apply(transform);
+    auto glProgram = getGLProgram();
+    glProgram->use();
+    glProgram->setUniformsForBuiltins(transform);
     
     GL::blendFunc(_blendFunc.src, _blendFunc.dst);
 
@@ -395,7 +398,6 @@ void DrawNode::onDrawGLLine(const Mat4 &transform, uint32_t flags)
         // texcood
         glVertexAttribPointer(GLProgram::VERTEX_ATTRIB_TEX_COORD, 2, GL_FLOAT, GL_FALSE, sizeof(V2F_C4B_T2F), (GLvoid *)offsetof(V2F_C4B_T2F, texCoords));
     }
-
     glLineWidth(_lineWidth);
     glDrawArrays(GL_LINES, 0, _bufferCountGLLine);
     
@@ -405,8 +407,8 @@ void DrawNode::onDrawGLLine(const Mat4 &transform, uint32_t flags)
     }
     
     glBindBuffer(GL_ARRAY_BUFFER, 0);
+    
     CC_INCREMENT_GL_DRAWN_BATCHES_AND_VERTICES(1,_bufferCountGLLine);
-
     CHECK_GL_ERROR_DEBUG();
 }
 
@@ -926,7 +928,7 @@ void DrawNode::clear()
     _dirtyGLLine = true;
     _bufferCountGLPoint = 0;
     _dirtyGLPoint = true;
-    _lineWidth = _defaultLineWidth;
+    _lineWidth = DEFAULT_LINE_WIDTH;
 }
 
 const BlendFunc& DrawNode::getBlendFunc() const
@@ -942,11 +944,6 @@ void DrawNode::setBlendFunc(const BlendFunc &blendFunc)
 void DrawNode::setLineWidth(int lineWidth)
 {
     _lineWidth = lineWidth;
-}
-
-float DrawNode::getLineWidth()
-{
-    return this->_lineWidth;
 }
 
 NS_CC_END

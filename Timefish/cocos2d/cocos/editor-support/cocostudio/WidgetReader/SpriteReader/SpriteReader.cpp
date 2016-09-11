@@ -22,16 +22,11 @@
  THE SOFTWARE.
  ****************************************************************************/
 
-#include "editor-support/cocostudio/WidgetReader/SpriteReader/SpriteReader.h"
+#include "SpriteReader.h"
 
-#include "2d/CCSprite.h"
-#include "2d/CCSpriteFrameCache.h"
-#include "platform/CCFileUtils.h"
-
-#include "editor-support/cocostudio/CSParseBinary_generated.h"
-#include "editor-support/cocostudio/FlatBuffersSerialize.h"
-#include "editor-support/cocostudio/WidgetReader/NodeReader/NodeReader.h"
-
+#include "cocostudio/CSParseBinary_generated.h"
+#include "cocostudio/FlatBuffersSerialize.h"
+#include "cocostudio/WidgetReader/NodeReader/NodeReader.h"
 
 #include "tinyxml2.h"
 #include "flatbuffers/flatbuffers.h"
@@ -59,7 +54,7 @@ namespace cocostudio
     {
         if (!_instanceSpriteReader)
         {
-            _instanceSpriteReader = new (std::nothrow) SpriteReader();
+            _instanceSpriteReader = new SpriteReader();
         }
         
         return _instanceSpriteReader;
@@ -233,6 +228,12 @@ namespace cocostudio
             default:
                 break;
         }
+        //if (!fileExist)
+        //{
+        //    auto label = Label::create();
+        //    label->setString(__String::createWithFormat("%s missed", errorFilePath.c_str())->getCString());
+        //    sprite->addChild(label);
+        //}
         
         auto f_blendFunc = options->blendFunc();
         if (f_blendFunc)

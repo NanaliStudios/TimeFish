@@ -26,7 +26,6 @@ THE SOFTWARE.
 #include "ui/UIScale9Sprite.h"
 #include "ui/UIHelper.h"
 #include "2d/CCSprite.h"
-#include "editor-support/cocostudio/CocosStudioExtension.h"
 
 NS_CC_BEGIN
 
@@ -40,7 +39,6 @@ ImageView::ImageView():
 _scale9Enabled(false),
 _prevIgnoreSize(true),
 _capInsets(Rect::ZERO),
-_textureFile(""),
 _imageRenderer(nullptr),
 _imageTexType(TextureResType::LOCAL),
 _imageTextureSize(_contentSize),
@@ -112,7 +110,7 @@ bool ImageView::init(const std::string &imageFileName, TextureResType texType)
 void ImageView::initRenderer()
 {
     _imageRenderer = Scale9Sprite::create();
-    _imageRenderer->setRenderingType(Scale9Sprite::RenderingType::SIMPLE);
+    _imageRenderer->setScale9Enabled(false);
     
     addProtectedChild(_imageRenderer, IMAGE_RENDERER_Z, -1);
 }
@@ -123,7 +121,6 @@ void ImageView::loadTexture(const std::string& fileName, TextureResType texType)
     {
         return;
     }
-    _textureFile = fileName;
     _imageTexType = texType;
     switch (_imageTexType)
     {
@@ -136,10 +133,7 @@ void ImageView::loadTexture(const std::string& fileName, TextureResType texType)
         default:
             break;
     }
-    //FIXME: https://github.com/cocos2d/cocos2d-x/issues/12249
-    if (!_ignoreSize && _customSize.equals(Size::ZERO)) {
-        _customSize = _imageRenderer->getContentSize();
-    }
+
     this->setupTexture();
 }
 
@@ -188,11 +182,7 @@ void ImageView::setScale9Enabled(bool able)
     
     
     _scale9Enabled = able;
-    if (_scale9Enabled) {
-        _imageRenderer->setRenderingType(Scale9Sprite::RenderingType::SLICE);
-    }else{
-        _imageRenderer->setRenderingType(Scale9Sprite::RenderingType::SIMPLE);
-    }
+    _imageRenderer->setScale9Enabled(_scale9Enabled);
     
     if (_scale9Enabled)
     {
@@ -264,8 +254,34 @@ Node* ImageView::getVirtualRenderer()
 
 void ImageView::imageTextureScaleChangedWithSize()
 {
-    _imageRenderer->setPreferredSize(_contentSize);
-    
+    if (_ignoreSize)
+    {
+        if (!_scale9Enabled)
+        {
+            _imageRenderer->setScale(1.0f);
+        }
+    }
+    else
+    {
+        if (_scale9Enabled)
+        {
+            _imageRenderer->setPreferredSize(_contentSize);
+            _imageRenderer->setScale(1.0f);
+        }
+        else
+        {
+            Size textureSize = _imageTextureSize;
+            if (textureSize.width <= 0.0f || textureSize.height <= 0.0f)
+            {
+                _imageRenderer->setScale(1.0f);
+                return;
+            }
+            float scaleX = _contentSize.width / textureSize.width;
+            float scaleY = _contentSize.height / textureSize.height;
+            _imageRenderer->setScaleX(scaleX);
+            _imageRenderer->setScaleY(scaleY);
+        }
+    }
     _imageRenderer->setPosition(_contentSize.width / 2.0f, _contentSize.height / 2.0f);
 }
 
@@ -293,26 +309,6 @@ void ImageView::copySpecialProperties(Widget *widget)
         }
         setCapInsets(imageView->_capInsets);
     }
-}
-
-ResourceData ImageView::getRenderFile()
-{
-    ResourceData rData;
-    rData.type = (int)_imageTexType;
-    rData.file = _textureFile;
-    return rData;
-}
-    
-void ImageView::setGLProgram(GLProgram* glProgram)
-{
-    Widget::setGLProgram(glProgram);
-    _imageRenderer->setGLProgram(glProgram);
-}
-    
-void ImageView::setGLProgramState(cocos2d::GLProgramState* glProgramState)
-{
-    Widget::setGLProgramState(glProgramState);
-    _imageRenderer->setGLProgramState(glProgramState);
 }
 
 }

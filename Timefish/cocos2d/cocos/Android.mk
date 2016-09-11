@@ -107,7 +107,6 @@ math/Vec2.cpp \
 math/Vec3.cpp \
 math/Vec4.cpp \
 base/CCNinePatchImageParser.cpp \
-base/CCStencilStateManager.cpp \
 base/CCAsyncTaskPool.cpp \
 base/CCAutoreleasePool.cpp \
 base/CCConfiguration.cpp \
@@ -190,10 +189,6 @@ renderer/CCVertexIndexData.cpp \
 renderer/ccGLStateCache.cpp \
 renderer/CCFrameBuffer.cpp \
 renderer/ccShaders.cpp \
-vr/CCVRDistortion.cpp \
-vr/CCVRDistortionMesh.cpp \
-vr/CCVRGenericRenderer.cpp \
-vr/CCVRGenericHeadTracker.cpp \
 deprecated/CCArray.cpp \
 deprecated/CCDeprecated.cpp \
 deprecated/CCDictionary.cpp \
@@ -237,6 +232,8 @@ navmesh/CCNavMeshUtils.cpp \
 LOCAL_EXPORT_C_INCLUDES := $(LOCAL_PATH) \
                     $(LOCAL_PATH)/. \
                     $(LOCAL_PATH)/.. \
+                    $(LOCAL_PATH)/platform \
+                    $(LOCAL_PATH)/base \
                     $(LOCAL_PATH)/../external \
                     $(LOCAL_PATH)/../external/tinyxml2 \
                     $(LOCAL_PATH)/../external/unzip \
@@ -249,6 +246,7 @@ LOCAL_EXPORT_C_INCLUDES := $(LOCAL_PATH) \
                     $(LOCAL_PATH)/../external/clipper
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH) \
+                    $(LOCAL_PATH)/platform \
                     $(LOCAL_PATH)/../external \
                     $(LOCAL_PATH)/../external/tinyxml2 \
                     $(LOCAL_PATH)/../external/unzip \
@@ -281,9 +279,9 @@ LOCAL_WHOLE_STATIC_LIBRARIES := cocos2dxandroid_static
 # define the macro to compile through support/zip_support/ioapi.c
 LOCAL_CFLAGS   :=  -DUSE_FILE32API
 LOCAL_CFLAGS   +=  -fexceptions
-LOCAL_CPPFLAGS := -Wno-deprecated-declarations
+LOCAL_CPPFLAGS := -Wno-deprecated-declarations -Wno-extern-c-compat
 LOCAL_EXPORT_CFLAGS   := -DUSE_FILE32API
-LOCAL_EXPORT_CPPFLAGS := -Wno-deprecated-declarations
+LOCAL_EXPORT_CPPFLAGS := -Wno-deprecated-declarations -Wno-extern-c-compat
 
 include $(BUILD_STATIC_LIBRARY)
 
@@ -322,6 +320,6 @@ $(call import-module,extensions)
 $(call import-module,Box2D)
 $(call import-module,bullet)
 $(call import-module,recast)
-# $(call import-module,curl/prebuilt/android)
+$(call import-module,curl/prebuilt/android)
 $(call import-module,websockets/prebuilt/android)
 $(call import-module,flatbuffers)

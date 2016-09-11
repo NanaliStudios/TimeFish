@@ -23,7 +23,7 @@
 #ifndef __AUDIO_CACHE_PLAYER_H_
 #define __AUDIO_CACHE_PLAYER_H_
 
-#include "audio/winrt/AudioSourceReader.h"
+#include "AudioSourceReader.h"
 
 NS_CC_BEGIN
 namespace experimental{

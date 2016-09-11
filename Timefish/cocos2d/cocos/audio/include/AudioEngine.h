@@ -23,6 +23,7 @@
  ****************************************************************************/
 
 #include "platform/CCPlatformConfig.h"
+#if CC_TARGET_PLATFORM == CC_PLATFORM_WINRT || CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID || CC_TARGET_PLATFORM == CC_PLATFORM_IOS || CC_TARGET_PLATFORM == CC_PLATFORM_MAC || CC_TARGET_PLATFORM == CC_PLATFORM_WIN32
 
 #ifndef __AUDIO_ENGINE_H_
 #define __AUDIO_ENGINE_H_
@@ -33,7 +34,7 @@
 #include <unordered_map>
 
 #include "platform/CCPlatformMacros.h"
-#include "audio/include/Export.h"
+#include "Export.h"
 
 #ifdef ERROR
 #undef ERROR
@@ -65,7 +66,7 @@ public:
     double minDelay;
     
     /**
-     * Default constructor
+     * Defautl constructor
      *
      * @lua new
      */
@@ -110,7 +111,6 @@ public:
      * Release objects relating to AudioEngine.
      *
      * @warning It must be called before the application exit.
-     * @lua endToLua
      */
     static void end();
     
@@ -360,3 +360,4 @@ NS_CC_END
 /// @}
 
 #endif // __AUDIO_ENGINE_H_
+#endif

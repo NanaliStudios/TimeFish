@@ -24,10 +24,10 @@ THE SOFTWARE.
 
 #include "2d/CCSpriteFrameCache.h"
 
-#include "editor-support/cocostudio/CCArmatureDataManager.h"
-#include "editor-support/cocostudio/CCTransformHelp.h"
-#include "editor-support/cocostudio/CCDataReaderHelper.h"
-#include "editor-support/cocostudio/CCSpriteFrameCacheHelper.h"
+#include "cocostudio/CCArmatureDataManager.h"
+#include "cocostudio/CCTransformHelp.h"
+#include "cocostudio/CCDataReaderHelper.h"
+#include "cocostudio/CCSpriteFrameCacheHelper.h"
 
 using namespace cocos2d;
 
@@ -96,17 +96,17 @@ void ArmatureDataManager::removeArmatureFileInfo(const std::string& configFilePa
     {
         for (std::string str : data->armatures)
         {
-            removeArmatureData(str);
+            removeArmatureData(str.c_str());
         }
 
         for (std::string str : data->animations)
         {
-            removeAnimationData(str);
+            removeAnimationData(str.c_str());
         }
 
         for (std::string str : data->textures)
         {
-            removeTextureData(str);
+            removeTextureData(str.c_str());
         }
 
         for (std::string str : data->plistFiles)
@@ -250,7 +250,7 @@ const cocos2d::Map<std::string, TextureData*>& ArmatureDataManager::getTextureDa
     return _textureDatas;
 }
 
-void ArmatureDataManager::addRelativeData(const std::string& configFilePath)
+void CCArmatureDataManager::addRelativeData(const std::string& configFilePath)
 {
     if (_relativeDatas.find(configFilePath) == _relativeDatas.end())
     {
@@ -258,7 +258,7 @@ void ArmatureDataManager::addRelativeData(const std::string& configFilePath)
     }
 }
 
-RelativeData *ArmatureDataManager::getRelativeData(const std::string& configFilePath)
+RelativeData *CCArmatureDataManager::getRelativeData(const std::string&  configFilePath)
 {
     return &_relativeDatas[configFilePath];
 }

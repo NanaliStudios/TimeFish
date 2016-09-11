@@ -23,7 +23,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
 
-#include "platform/apple/CCLock-apple.h"
+#include "CCLock-apple.h"
 
 NS_CC_BEGIN
 

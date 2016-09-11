@@ -211,10 +211,8 @@ void ConsoleCommand::onSendCommand(int fd, const std::string &args)
             } else if(strcmp(strcmd.c_str(), "shutdownapp") == 0)
             {
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
-#include <windows.h>
-                auto glview = dynamic_cast<GLViewImpl*> (Director::getInstance()->getOpenGLView());
-                HWND hWnd = glview->getWin32Window();
-                ::SendMessage(hWnd, WM_CLOSE, NULL, NULL);
+                extern void shutDownApp();
+                shutDownApp();
 #else
                 exit(0);
 #endif

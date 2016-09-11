@@ -25,8 +25,9 @@ THE SOFTWARE.
 #ifndef __BONENODEREADER_H_
 #define __BONENODEREADER_H_
 
-#include "editor-support/cocostudio/WidgetReader/NodeReaderProtocol.h"
-#include "editor-support/cocostudio/WidgetReader/NodeReaderDefine.h"
+#include "cocos2d.h"
+#include "cocostudio/WidgetReader/NodeReaderProtocol.h"
+#include "cocostudio/WidgetReader/NodeReaderDefine.h"
 
 class BoneNodeReader : public cocos2d::Ref, public cocostudio::NodeReaderProtocol
 {

@@ -104,7 +104,7 @@ void PUAffectorTranslator::translate(PUScriptCompiler* compiler, PUAbstractNode 
             }
             else if (prop->name == token[TOKEN_POSITION])
             {
-                // Property: position
+                // Property: positon
                 if (passValidateProperty(compiler, prop, token[TOKEN_POSITION], VAL_VECTOR3))
                 {
                     Vec3 val;

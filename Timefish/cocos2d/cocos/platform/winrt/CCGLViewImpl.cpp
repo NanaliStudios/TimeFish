@@ -26,13 +26,13 @@ THE SOFTWARE.
 #include "platform/CCPlatformConfig.h"
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_WINRT)
 
-#include "platform/winrt/CCGLViewImpl.h"
+#include "CCGLViewImpl.h"
 #include "base/ccMacros.h"
 #include "base/CCDirector.h"
 #include "base/CCTouch.h"
 #include "base/CCIMEDispatcher.h"
-#include "platform/winrt/CCApplication.h"
-#include "platform/winrt/CCWinRTUtils.h"
+#include "CCApplication.h"
+#include "CCWinRTUtils.h"
 
 #if (_MSC_VER >= 1800)
 #include <d3d11_2.h>
@@ -57,7 +57,7 @@ NS_CC_BEGIN
 static GLViewImpl* s_pEglView = NULL;
 
 //////////////////////////////////////////////////////////////////////////
-// implement GLView
+// impliment GLView
 //////////////////////////////////////////////////////////////////////////
 
 // Initialize the DirectX resources required to run.

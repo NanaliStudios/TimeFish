@@ -26,9 +26,9 @@
 #define __cocos2d_libs__CCObjectExtensionData__
 
 #include <string>
-#include "editor-support/cocostudio/CCComBase.h"
+#include "CCComBase.h"
 #include "2d/CCComponent.h"
-#include "editor-support/cocostudio/CocosStudioExport.h"
+#include "cocostudio/CocosStudioExport.h"
 
 namespace cocostudio
 {
@@ -44,8 +44,6 @@ namespace cocostudio
     {
         DECLARE_CLASS_COMPONENT_INFO
     public:
-        const static std::string COMPONENT_NAME;
-
         /**
         * @js NA
         * @lua NA
@@ -73,7 +71,7 @@ namespace cocostudio
         virtual std::string getCustomProperty() const { return _customProperty; };
         
         virtual void setActionTag(int actionTag);
-        virtual int getActionTag() const;
+        virtual const int getActionTag() const;
         
     public:
         ComExtensionData();

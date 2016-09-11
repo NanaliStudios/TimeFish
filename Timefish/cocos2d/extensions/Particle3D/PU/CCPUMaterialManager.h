@@ -31,7 +31,7 @@
 
 NS_CC_BEGIN
 
-class CC_DLL PUMaterial : public Ref
+class PUMaterial : public Ref
 {
 public:
 
@@ -54,7 +54,7 @@ public:
     GLuint wrapMode;
 };
 
-class CC_DLL PUMaterialCache
+class PUMaterialCache
 {
 public:
 

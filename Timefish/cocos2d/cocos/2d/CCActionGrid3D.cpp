@@ -1,7 +1,7 @@
 /****************************************************************************
 Copyright (c) 2009      On-Core
 Copyright (c) 2010-2012 cocos2d-x.org
-Copyright (c) 2013-2016 Chukong Technologies Inc.
+Copyright (c) 2013-2014 Chukong Technologies Inc.
  
 http://www.cocos2d-x.org
 
@@ -31,16 +31,21 @@ NS_CC_BEGIN
 
 Waves3D* Waves3D::create(float duration, const Size& gridSize, unsigned int waves, float amplitude)
 {
-    Waves3D *action = new (std::nothrow) Waves3D();
+    Waves3D *pAction = new (std::nothrow) Waves3D();
 
-    if (action && action->initWithDuration(duration, gridSize, waves, amplitude))
+    if (pAction)
     {
-        action->autorelease();
-        return action;
+        if (pAction->initWithDuration(duration, gridSize, waves, amplitude))
+        {
+            pAction->autorelease();
+        }
+        else
+        {
+            CC_SAFE_RELEASE_NULL(pAction);
+        }
     }
 
-    delete action;
-    return nullptr;
+    return pAction;    
 }
 
 bool Waves3D::initWithDuration(float duration, const Size& gridSize, unsigned int waves, float amplitude)
@@ -60,7 +65,10 @@ bool Waves3D::initWithDuration(float duration, const Size& gridSize, unsigned in
 Waves3D* Waves3D::clone() const
 {
     // no copy constructor
-    return Waves3D::create(_duration, _gridSize, _waves, _amplitude);
+    auto a = new (std::nothrow) Waves3D();
+    a->initWithDuration(_duration, _gridSize, _waves, _amplitude);
+    a->autorelease();
+    return a;
 }
 
 void Waves3D::update(float time)
@@ -84,14 +92,19 @@ FlipX3D* FlipX3D::create(float duration)
 {
     FlipX3D *action = new (std::nothrow) FlipX3D();
 
-    if (action && action->initWithDuration(duration))
+    if (action)
     {
-        action->autorelease();
-        return action;
+        if (action->initWithDuration(duration))
+        {
+            action->autorelease();
+        }
+        else
+        {
+            CC_SAFE_RELEASE_NULL(action);
+        }
     }
 
-    delete action;
-    return nullptr;
+    return action;
 }
 
 bool FlipX3D::initWithDuration(float duration)
@@ -653,7 +666,7 @@ void Waves::update(float time)
 
 // implementation of Twirl
 
-Twirl* Twirl::create(float duration, const Size& gridSize, const Vec2& position, unsigned int twirls, float amplitude)
+Twirl* Twirl::create(float duration, const Size& gridSize, Vec2 position, unsigned int twirls, float amplitude)
 {
     Twirl *action = new (std::nothrow) Twirl();
 
@@ -672,7 +685,7 @@ Twirl* Twirl::create(float duration, const Size& gridSize, const Vec2& position,
     return action;
 }
 
-bool Twirl::initWithDuration(float duration, const Size& gridSize, const Vec2& position, unsigned int twirls, float amplitude)
+bool Twirl::initWithDuration(float duration, const Size& gridSize, Vec2 position, unsigned int twirls, float amplitude)
 {
     if (Grid3DAction::initWithDuration(duration, gridSize))
     {

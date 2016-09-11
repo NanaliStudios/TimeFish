@@ -11,9 +11,8 @@
 
 #include "json/document.h"
 #include "DeviceEx.h"
-#include "SimulatorExport.h"
 
-class CC_LIBSIM_DLL AppLang
+class AppLang
 {
 public:
     static AppLang* getInstance();
