@@ -47,12 +47,7 @@ bool UILayer::init()
     //
     TapjoyX::getInstance()->setDelegate(this);
     
-#if CC_TARGET_PLATFORM != CC_PLATFORM_ANDROID
     TapjoyX::getInstance()->requestPlacement("App Launch");
-#endif
-//    TapjoyX::getInstance()->requestPlacement("ReplayGame");
-    TapjoyX::getInstance()->requestPlacement("VideoRewardPlacement");
-
 
     StoreKitX::getInstance()->setDelegate(this);
 
