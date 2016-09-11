@@ -73,31 +73,31 @@ void AchievementBannerIcon::initIcons(int achievemenetIdx, Size inBoxSize, float
         return;
     }
 
+    Size clippingSize = inBoxSize;
+
     // use inbox as a background, if needed.
     if (needABackground) {
         inBox->setColor(posterBgColor[posterType - 1]);
         inBox->setScale(_scale);
         addChild(inBox, 2);
+        
+        clippingSize = clippingSize * _scale;
     }
-    
-    // scale variation
-    if (posterType == 16 || posterType == 17 || posterType == 18) {
-        _scale *= 0.7;
-    }
-    else if (posterType == 21) {
-        _scale *= 0.5;
-    }
-    else {
-        _scale *= 0.53;
-    }
-    
-    // set scale
-    posterIcon->setScale(_scale);
 
     //
-    auto clipper = ClippingRectangleNode::create();
-    clipper->setClippingRegion(Rect(-inBoxSize.width*0.5, -inBoxSize.height*0.5, inBoxSize.width, inBoxSize.height));
+    auto clipper = ClippingNode::create();
+    clipper->setAlphaThreshold(0.05);
+    clipper->setContentSize(clippingSize);
+    clipper->setInverted(false);
+    clipper->setPosition(Vec2(-clippingSize.width*0.5, -clippingSize.height*0.5));
     addChild(clipper, 3);
+    
+    
+    auto mask = Sprite::createWithSpriteFrameName("TF_timeposter_box.png");
+    mask->setScale(_scale);
+    mask->setPosition(Vec2(clippingSize) * 0.5);
+    clipper->setStencil(mask);
+    
 
     Vec2 deltaPos = posterIconPosDelta[posterType -1];
     if (posterType == 10) {
@@ -110,7 +110,20 @@ void AchievementBannerIcon::initIcons(int achievemenetIdx, Size inBoxSize, float
     else if (posterType == 13 || posterType == 14 || posterType == 15) {
         deltaPos.x -= 10;
     }
-    posterIcon->setPosition(Vec2(clipper->getContentSize()) * 0.5 + deltaPos);
+    posterIcon->setPosition(Vec2(clippingSize.width*0.5, clippingSize.height*0.5) + deltaPos);
+
+    // scale variation
+    if (posterType == 16 || posterType == 17 || posterType == 18) {
+        _scale *= 0.7;
+    }
+    else if (posterType == 21) {
+        _scale *= 0.5;
+    }
+    else {
+        _scale *= 0.53;
+    }
+    // set scale
+    posterIcon->setScale(_scale);
     clipper->addChild(posterIcon);
 }
 

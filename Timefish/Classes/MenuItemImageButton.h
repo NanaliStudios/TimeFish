@@ -37,7 +37,7 @@ CC_CONSTRUCTOR_ACCESS:
 
     virtual ~MenuItemImageButton(){}
     
-    bool init() {
+    virtual bool init() override{
         return  MenuItemImage::init();
     }
 

@@ -170,8 +170,10 @@ void PageViewlayer::updatePages()
 
             // In Box
             auto inBox = Sprite::createWithSpriteFrameName("TF_timeposter_box.png");
-            
-            // Icon
+
+            //
+            // NOTE: 업적이 언락돼있으면 Icon을 보여준다.
+            //
             if (UserInfo::getInstance()->getAchievementInfoWithType((AchievementType)(1<<(posterType-1)))) {
                 //
                 unlockAchievement(outBox, inBox, pos, (AchievementType)posterType);
@@ -290,34 +292,81 @@ void PageViewlayer::unlockAchievement(Sprite *outBox, Sprite *inBox, Vec2 pos, A
         std::string fileName = stream.str();
         posterIcon = Sprite::createWithSpriteFrameName(fileName.c_str());
     }
-    
+
+    Size clippingSize = inBoxSize;//inBox->getContentSize();
+    float _scale = 0.86;
+
     // use inbox as a background, if needed.
     if (needABackground) {
         inBox->setPosition(pos);
-        inBox->setScale(0.86);
+        inBox->setScale(_scale);
         inBox->setColor(posterBgColor[posterIdx]);
         movingLayer->addChild(inBox, 2);
+        
+        clippingSize = clippingSize * _scale;
     }
+
+    //
+    auto clipper = ClippingNode::create();
+    clipper->setAlphaThreshold(0.05);
+    clipper->setContentSize(clippingSize);
+    clipper->setInverted(false);
+    clipper->setPosition(pos + Vec2(-clippingSize.width*0.5, -clippingSize.height*0.5));
+    movingLayer->addChild(clipper, 3);
+    
+    
+    auto mask = Sprite::createWithSpriteFrameName("TF_timeposter_box.png");
+    mask->setScale(_scale);
+    mask->setPosition(Vec2(clippingSize) * 0.5);
+    clipper->setStencil(mask);
+    
+    
+    Vec2 deltaPos = posterIconPosDelta[posterType -1];
+    if (posterType == 10) {
+        deltaPos.x -= 15;
+        deltaPos.y -= 32.5;
+    }
+    else if (posterType == 11) {
+        deltaPos.y -= 20;
+    }
+    else if (posterType == 13 || posterType == 14 || posterType == 15) {
+        deltaPos.x -= 10;
+    }
+    posterIcon->setPosition(Vec2(clippingSize.width*0.5, clippingSize.height*0.5) + deltaPos);
     
     // scale variation
     if (posterType == 16 || posterType == 17 || posterType == 18) {
-        posterIcon->setScale(0.7);
+        _scale *= 0.7;
     }
     else if (posterType == 21) {
-        posterIcon->setScale(0.5);
+        _scale *= 0.5;
     }
     else {
-        posterIcon->setScale(0.53);
+        _scale *= 0.53;
     }
-    
-    //
-    auto clipper = ClippingRectangleNode::create();
-    clipper->setClippingRegion(Rect(-inBoxSize.width*0.5, -inBoxSize.height*0.5, inBoxSize.width+1, inBoxSize.height+1));
-    clipper->setPosition(pos);
-    movingLayer->addChild(clipper, 3);
-    
-    posterIcon->setPosition(Vec2(clipper->getContentSize()) * 0.5 + posterIconPosDelta[posterIdx]);
+    // set scale
+    posterIcon->setScale(_scale);
     clipper->addChild(posterIcon);
+    
+//    // scale variation
+//    if (posterType == 16 || posterType == 17 || posterType == 18) {
+//        posterIcon->setScale(0.7);
+//    }
+//    else if (posterType == 21) {
+//        posterIcon->setScale(0.5);
+//    }
+//    else {
+//        posterIcon->setScale(0.53);
+//    }
+//    
+//    //
+//    auto clipper = ClippingRectangleNode::create();
+//    clipper->setClippingRegion(Rect(-inBoxSize.width*0.5, -inBoxSize.height*0.5, inBoxSize.width+1, inBoxSize.height+1));
+//    clipper->setPosition(pos);
+//    movingLayer->addChild(clipper, 3);
+//    
+//    posterIcon->setPosition(Vec2(clipper->getContentSize()) * 0.5 + posterIconPosDelta[posterIdx]);
+//    clipper->addChild(posterIcon);
     
     if (UserInfo::getInstance()->getNewAchievement[posterIdx]) {
         auto newMark = Sprite::createWithSpriteFrameName("TF_timeposter_new.png");

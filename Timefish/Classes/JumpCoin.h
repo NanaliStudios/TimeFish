@@ -23,7 +23,7 @@ using namespace spine;
 class JumpCoin : public Sprite
 {
 public:
-    virtual bool init();
+    virtual bool init() override;
     
     CREATE_FUNC(JumpCoin);
     

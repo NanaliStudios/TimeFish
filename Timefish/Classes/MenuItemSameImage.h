@@ -52,7 +52,7 @@ CC_CONSTRUCTOR_ACCESS:
      */
     virtual ~MenuItemSameImage(){}
     
-    bool init();
+    virtual bool init() override;
     
     /** initializes a menu item with a normal, selected  and disabled image with a callable object */
     bool initWithNormalImage(const std::string& normalImage, const std::string& selectedImage, const std::string& disabledImage, const ccMenuCallback& callback);

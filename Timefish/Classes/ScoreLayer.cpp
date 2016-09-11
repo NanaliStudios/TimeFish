@@ -112,12 +112,8 @@ void ScoreLayer::updateScore(int _currScore)
         for (int i=0; i<ScoreLabelNum; i++) {
             int digit = (int)(currScore/digits);
             currScore = currScore - digit * digits;
-            
-            std::stringstream stream;
-            stream << digit;
-            std::string scoreInfo = stream.str();
-            
-            scoreLabel[i]->setString(scoreInfo.c_str());
+            scoreLabel[i]->setString(std::to_string(digit));
+
             if (zero && digit == 0) {
                 scoreLabel[i]->setVisible(false);
                 zeroCount++;
