@@ -81,6 +81,10 @@
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" />
 
+        <!-- Planet Arcade -->
+        <meta-data android:name="app_key" android:value="your app key" />
+        <meta-data android:name="app_id" android:value="your app id" />
+
         <!-- Local Notification -->
         <receiver android:name="org.cocos2dx.cpp.LocalNotificationReceiver" />
     </application>

@@ -797,6 +797,8 @@ public class AppActivity extends UtilActivity {//Cocos2dxActivity {
     
     @Override
     public void onDestroy() {
+        C2DXSocialBridge.releaseC2DXSocialBridge();
+
         super.onDestroy();
         Chartboost.onDestroy(this);
 //        FuseSDK.endSession();

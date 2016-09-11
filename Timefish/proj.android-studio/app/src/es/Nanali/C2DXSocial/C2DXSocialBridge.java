@@ -22,16 +22,62 @@ import android.app.AlertDialog;
 import android.os.SystemClock;
 import android.os.Environment;
 
+import jp.co.adways.planetarcade.sdk.OnScoreCallback;
+import jp.co.adways.planetarcade.sdk.OnValidateCallback;
+import jp.co.adways.planetarcade.sdk.PlanetArcadeSDKHelper;
+
 
 public class C2DXSocialBridge {
     private static final String TAG = "C2DXSocial";
     private static Cocos2dxActivity s_activity;
-    
+
+    private static PlanetArcadeSDKHelper mPlanetArcadeSDKHelper;
+
     public static native void onCancelCallback();
     
     // the method must be called in main thread, before any other method
     public static void initC2DXSocialBridge(Cocos2dxActivity activity){
         C2DXSocialBridge.s_activity = activity;
+
+        //
+        mPlanetArcadeSDKHelper = new PlanetArcadeSDKHelper(s_activity);
+        mPlanetArcadeSDKHelper.validate(new OnValidateCallback() {
+            @Override
+            public void onSuccess() {
+                //TODO: When validated successfully.
+                Log.i(TAG, "PlanetArcadeSDKHelper : success");
+            }
+            @Override
+            public void onFailure(int errorCode, String errorMessage) {
+                Log.i(TAG, "PlanetArcadeSDKHelper : fail[" + errorCode + "]"+errorMessage);
+            } });
+
+        mPlanetArcadeSDKHelper.setDebugMode(true);
+    }
+
+    public static void releaseC2DXSocialBridge() {
+        if (mPlanetArcadeSDKHelper != null)
+            mPlanetArcadeSDKHelper.destroy();
+    }
+
+    public static boolean isValidated() {
+        return mPlanetArcadeSDKHelper.isValidated();
+    }
+
+    public static void submitScore(final String userID, final int userScore) {
+        mPlanetArcadeSDKHelper.submitScore(userID, userScore, 0,
+                new OnScoreCallback() {
+                    @Override
+                    public void onSuccess() {
+                        // Submit Score Success
+                        Log.i(TAG, "submitScore : success");
+                    }
+                    @Override
+                    public void onFailure(int errorCode, String errorMessage) {
+                        // Submit Score Failed.
+                        Log.i(TAG, "submitScore : fail[" + errorCode + "]"+errorMessage);
+                    }
+                });
     }
 
     public static byte[] readFileToByte(File file) throws IOException {
