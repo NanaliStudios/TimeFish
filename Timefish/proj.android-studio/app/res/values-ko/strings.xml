@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">타임피쉬</string>
+    <string name="app_id">729683805542</string>
+
+    <string name="exit_title">종료 확인</string>
+    <string name="exit_message">프리쉬를 두고 떠나시나요?</string>
+    <string name="exit_confirm">또 오세요</string>
+    <string name="exit_cancel">계속</string>
+    
+
+    <string name="achievement_crossing_the_arctic_ocean">CgkI5oqtpJ4VEAIQAg</string>
+    <string name="achievement_crossing_the_antarctic_ocean">CgkI5oqtpJ4VEAIQAw</string>
+    <string name="achievement_crossing_the_indian_ocean">CgkI5oqtpJ4VEAIQBA</string>
+    <string name="achievement_crossing_the_atlantic_ocean">CgkI5oqtpJ4VEAIQBQ</string>
+    <string name="achievement_crossing_the_pacific_ocean">CgkI5oqtpJ4VEAIQBg</string>
+    <string name="achievement_swimming_around_the_world">CgkI5oqtpJ4VEAIQBw</string>
+    <string name="achievement_deep_sea_fish">CgkI5oqtpJ4VEAIQCA</string>
+    <string name="achievement_tuneup">CgkI5oqtpJ4VEAIQCQ</string>
+    <string name="achievement_combo_fish">CgkI5oqtpJ4VEAIQCg</string>
+    <string name="achievement_when_it_begins...">CgkI5oqtpJ4VEAIQCw</string>
+    <string name="achievement_timon_the_sixeyed_monster">CgkI5oqtpJ4VEAIQDA</string>
+    <string name="achievement_jumping_to_the_sky">CgkI5oqtpJ4VEAIQDQ</string>
+    <string name="achievement_hard_worker">CgkI5oqtpJ4VEAIQDg</string>
+    <string name="achievement_bright_career">CgkI5oqtpJ4VEAIQDw</string>
+    <string name="achievement_rewritten_history">CgkI5oqtpJ4VEAIQEA</string>
+    <string name="achievement_the_red_sea">CgkI5oqtpJ4VEAIQEQ</string>
+    <string name="achievement_the_yellow_sea">CgkI5oqtpJ4VEAIQEg</string>
+    <string name="achievement_the_blue_sea">CgkI5oqtpJ4VEAIQEw</string>
+    <string name="achievement_deeprooted">CgkI5oqtpJ4VEAIQFA</string>
+    <string name="achievement_die_of_hunger">CgkI5oqtpJ4VEAIQFQ</string>
+    <string name="achievement_bungee_jump">CgkI5oqtpJ4VEAIQFg</string>
+    <string name="achievement_no_fear_of_death">CgkI5oqtpJ4VEAIQFw</string>
+    <string name="achievement_excelsior">CgkI5oqtpJ4VEAIQGA</string>
+    <string name="achievement_fateful_encounter">CgkI5oqtpJ4VEAIQGQ</string>
+    <string name="achievement_clownfish">CgkI5oqtpJ4VEAIQGg</string>
+    <string name="achievement_the_sea_picnic">CgkI5oqtpJ4VEAIQGw</string>
+    <string name="achievement_pirate">CgkI5oqtpJ4VEAIQHA</string>
+
+    <string name="leaderboard_timefish_score">CgkI5oqtpJ4VEAIQHQ</string>
+    
+    <string name="gamehelper_alert">아직 작동하지 않습니다.</string>
+    <string name="gamehelper_sign_in_failed">로그인 실패. 네트워크 상태를 확인 후, 다시 시도해주세요.</string>
+    <string name="gamehelper_app_misconfigured">앱 설정 확인에 실패했습니다.</string>
+    <string name="gamehelper_license_failed">라이센스 확인에 실패했습니다.</string>
+    <string name="gamehelper_unknown_error">알 수 없는 에러 발생.</string>
+    <string name="fail_submit_score_leaderboard">순위표에 점수 등록하는데에 실패했습니다.</string>
+    <string name="fail_unlock_achievement">업적 등록에 실패했습니다.</string>
+    <string name="fail_increment_achievement">업적 등록에 실패했습니다.</string>
+    <string name="fail_show_achievements">업적표를 가져오는데 실패했습니다.</string>
+    <string name="fail_show_leaderboards">순위표를 가져오는데 실패했습니다.</string>
+    <string name="fail_show_leaderboard">순위표를 가져오는데 실패했습니다.</string>
+</resources>

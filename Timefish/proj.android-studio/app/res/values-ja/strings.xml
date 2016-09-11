@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Timefish</string>
+    <string name="app_id">729683805542</string>
+
+    <string name="exit_title">終了確認</string>
+    <string name="exit_message">フリッシュを置いて行くの?</string>
+    <string name="exit_confirm">またいらっしゃい</string>
+    <string name="exit_cancel">つづく</string>
+    
+
+    <string name="achievement_crossing_the_arctic_ocean">CgkI5oqtpJ4VEAIQAg</string>
+    <string name="achievement_crossing_the_antarctic_ocean">CgkI5oqtpJ4VEAIQAw</string>
+    <string name="achievement_crossing_the_indian_ocean">CgkI5oqtpJ4VEAIQBA</string>
+    <string name="achievement_crossing_the_atlantic_ocean">CgkI5oqtpJ4VEAIQBQ</string>
+    <string name="achievement_crossing_the_pacific_ocean">CgkI5oqtpJ4VEAIQBg</string>
+    <string name="achievement_swimming_around_the_world">CgkI5oqtpJ4VEAIQBw</string>
+    <string name="achievement_deep_sea_fish">CgkI5oqtpJ4VEAIQCA</string>
+    <string name="achievement_tuneup">CgkI5oqtpJ4VEAIQCQ</string>
+    <string name="achievement_combo_fish">CgkI5oqtpJ4VEAIQCg</string>
+    <string name="achievement_when_it_begins...">CgkI5oqtpJ4VEAIQCw</string>
+    <string name="achievement_timon_the_sixeyed_monster">CgkI5oqtpJ4VEAIQDA</string>
+    <string name="achievement_jumping_to_the_sky">CgkI5oqtpJ4VEAIQDQ</string>
+    <string name="achievement_hard_worker">CgkI5oqtpJ4VEAIQDg</string>
+    <string name="achievement_bright_career">CgkI5oqtpJ4VEAIQDw</string>
+    <string name="achievement_rewritten_history">CgkI5oqtpJ4VEAIQEA</string>
+    <string name="achievement_the_red_sea">CgkI5oqtpJ4VEAIQEQ</string>
+    <string name="achievement_the_yellow_sea">CgkI5oqtpJ4VEAIQEg</string>
+    <string name="achievement_the_blue_sea">CgkI5oqtpJ4VEAIQEw</string>
+    <string name="achievement_deeprooted">CgkI5oqtpJ4VEAIQFA</string>
+    <string name="achievement_die_of_hunger">CgkI5oqtpJ4VEAIQFQ</string>
+    <string name="achievement_bungee_jump">CgkI5oqtpJ4VEAIQFg</string>
+    <string name="achievement_no_fear_of_death">CgkI5oqtpJ4VEAIQFw</string>
+    <string name="achievement_excelsior">CgkI5oqtpJ4VEAIQGA</string>
+    <string name="achievement_fateful_encounter">CgkI5oqtpJ4VEAIQGQ</string>
+    <string name="achievement_clownfish">CgkI5oqtpJ4VEAIQGg</string>
+    <string name="achievement_the_sea_picnic">CgkI5oqtpJ4VEAIQGw</string>
+    <string name="achievement_pirate">CgkI5oqtpJ4VEAIQHA</string>
+
+    <string name="leaderboard_timefish_score">CgkI5oqtpJ4VEAIQHQ</string>
+    
+    <string name="gamehelper_alert">まだ作動しません。</string>
+    <string name="gamehelper_sign_in_failed">ログインエラー ネットワークを確認してください。</string>
+    <string name="gamehelper_app_misconfigured">もう一度お試しください。</string>
+    <string name="gamehelper_license_failed">アップ設定確認に失敗しました。</string>
+    <string name="gamehelper_unknown_error">ライセンス確認に失敗しました。</string>
+    <string name="fail_submit_score_leaderboard">エラーが発生しました。</string>
+    <string name="fail_unlock_achievement">クエスト登録に失敗しました。</string>
+    <string name="fail_increment_achievement">クエスト登録に失敗しました。</string>
+    <string name="fail_show_achievements">クエスト表が開きません。</string>
+    <string name="fail_show_leaderboards">リーダーボードが開きません。</string>
+    <string name="fail_show_leaderboard">リーダーボードが開きません。</string>
+</resources>

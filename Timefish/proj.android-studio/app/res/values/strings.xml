@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="app_name">Timefish</string>
+  <string name="app_id">729683805542</string>
+  <string name="package_name">com.Nanali.Timefish</string>
+  <string name="exit_title">Exit Confirm</string>
+  <string name="exit_message">Are you sure you want to leave me behind?</string>
+  <string name="exit_confirm">Come Back Later</string>
+  <string name="exit_cancel">Cancel</string>
+
+<string name="achievement_crossing_the_arctic_ocean">CgkI5oqtpJ4VEAIQAg</string>
+<string name="achievement_crossing_the_antarctic_ocean">CgkI5oqtpJ4VEAIQAw</string>
+<string name="achievement_crossing_the_indian_ocean">CgkI5oqtpJ4VEAIQBA</string>
+<string name="achievement_crossing_the_atlantic_ocean">CgkI5oqtpJ4VEAIQBQ</string>
+<string name="achievement_crossing_the_pacific_ocean">CgkI5oqtpJ4VEAIQBg</string>
+<string name="achievement_swimming_around_the_world">CgkI5oqtpJ4VEAIQBw</string>
+<string name="achievement_deep_sea_fish">CgkI5oqtpJ4VEAIQCA</string>
+<string name="achievement_tuneup">CgkI5oqtpJ4VEAIQCQ</string>
+<string name="achievement_combo_fish">CgkI5oqtpJ4VEAIQCg</string>
+<string name="achievement_when_it_begins...">CgkI5oqtpJ4VEAIQCw</string>
+<string name="achievement_timon_the_sixeyed_monster">CgkI5oqtpJ4VEAIQDA</string>
+<string name="achievement_jumping_to_the_sky">CgkI5oqtpJ4VEAIQDQ</string>
+<string name="achievement_hard_worker">CgkI5oqtpJ4VEAIQDg</string>
+<string name="achievement_bright_career">CgkI5oqtpJ4VEAIQDw</string>
+<string name="achievement_rewritten_history">CgkI5oqtpJ4VEAIQEA</string>
+<string name="achievement_the_red_sea">CgkI5oqtpJ4VEAIQEQ</string>
+<string name="achievement_the_yellow_sea">CgkI5oqtpJ4VEAIQEg</string>
+<string name="achievement_the_blue_sea">CgkI5oqtpJ4VEAIQEw</string>
+<string name="achievement_deeprooted">CgkI5oqtpJ4VEAIQFA</string>
+<string name="achievement_die_of_hunger">CgkI5oqtpJ4VEAIQFQ</string>
+<string name="achievement_bungee_jump">CgkI5oqtpJ4VEAIQFg</string>
+<string name="achievement_no_fear_of_death">CgkI5oqtpJ4VEAIQFw</string>
+<string name="achievement_excelsior">CgkI5oqtpJ4VEAIQGA</string>
+<string name="achievement_fateful_encounter">CgkI5oqtpJ4VEAIQGQ</string>
+<string name="achievement_clownfish">CgkI5oqtpJ4VEAIQGg</string>
+<string name="achievement_the_sea_picnic">CgkI5oqtpJ4VEAIQGw</string>
+<string name="achievement_pirate">CgkI5oqtpJ4VEAIQHA</string>
+<string name="achievement_999">CgkI5oqtpJ4VEAIQHg</string>
+<string name="achievement_stylish_freesh">CgkI5oqtpJ4VEAIQHw</string>
+<string name="achievement_fashionista">CgkI5oqtpJ4VEAIQIA</string>
+<string name="achievement_pick_whatever_you_want">CgkI5oqtpJ4VEAIQIQ</string>
+
+<string name="leaderboard_timefish_score">CgkI5oqtpJ4VEAIQHQ</string>
+
+<string name="gamehelper_alert">Not working yet, sorry.</string>
+<string name="gamehelper_sign_in_failed">Failed to sign in. Please check your network connection and try again.</string>
+<string name="gamehelper_app_misconfigured">The application is incorrectly configured.</string>
+<string name="gamehelper_license_failed">License check failed.</string>
+<string name="gamehelper_unknown_error">Unknown error.</string>
+<string name="fail_submit_score_leaderboard">Fail to submit score to leaderboard.</string>
+<string name="fail_unlock_achievement">Fail unlocking achievement.</string>
+<string name="fail_increment_achievement">Fail increment achievement.</string>
+<string name="fail_show_achievements">Fail showing achievements or need sign in.</string>
+<string name="fail_show_leaderboards">Fail showing leaderboards or need sign in.</string>
+<string name="fail_show_leaderboard">Fail showing leaderboard.</string>
+
+</resources>
