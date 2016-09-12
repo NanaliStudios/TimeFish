@@ -10,6 +10,7 @@
 #define Timefish_SocialX_h
 
 #include <ctime>
+#include <string>
 
 typedef enum {
     NoRecording_NoFlowing = 0,
@@ -48,6 +49,8 @@ public:
     void showExitPopup();
     
     void showAlert();
+    
+    std::string getDeviceUUID();
 
     DevicePerformance getDevicePerformance();
     

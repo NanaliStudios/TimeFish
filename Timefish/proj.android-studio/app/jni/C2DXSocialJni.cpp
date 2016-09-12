@@ -111,6 +111,27 @@ extern "C"
         methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID, "");
         methodInfo.env->DeleteLocalRef(methodInfo.classID);
     }
+    
+    std::string getDeviceUUIDJNI()
+    {
+        JniMethodInfo methodInfo;
+        if (! JniHelper::getStaticMethodInfo(methodInfo, CLASS_NAME, "getDeviceUUID", "()Ljava/lang/String;"))
+        {
+            return NULL;
+        }
+        jstring jStr = (jstring)methodInfo.env->CallStaticObjectMethod(methodInfo.classID, methodInfo.methodID, "");
+        
+        //
+        const char *buff = methodInfo.env->GetStringUTFChars(jStr, 0);
+        std::string ret(buff);
+        methodInfo.env->ReleaseStringUTFChars(jStr, buff);
+        
+        //
+        methodInfo.env->DeleteLocalRef(methodInfo.classID);
+        methodInfo.env->DeleteLocalRef(jStr);
+        
+        return ret;
+    }
 
     /////////////////////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////////////////////

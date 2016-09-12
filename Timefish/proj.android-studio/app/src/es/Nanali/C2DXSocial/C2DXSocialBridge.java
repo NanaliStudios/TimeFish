@@ -1,5 +1,6 @@
 package es.Nanali.C2DXSocial;
 
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -7,9 +8,13 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.IOException;
 import java.util.Calendar;
+import java.util.UUID;
 
 import org.cocos2dx.lib.Cocos2dxActivity;
 
+import android.preference.PreferenceManager;
+import android.provider.Settings;
+import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.net.Uri;
 import android.content.*;
@@ -58,6 +63,53 @@ public class C2DXSocialBridge {
     public static void releaseC2DXSocialBridge() {
         if (mPlanetArcadeSDKHelper != null)
             mPlanetArcadeSDKHelper.destroy();
+    }
+
+    //
+    // NOTE: 아래 링크 참고함
+    // http://lhh3520.tistory.com/321
+    //
+    private final static String CACHE_DEVICE_ID = "CacheDeviceID";
+    public static String getDeviceUUID()
+    {
+        UUID deviceUUID = null;
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences( s_activity );
+        String cachedDeviceID = sharedPreferences.getString(CACHE_DEVICE_ID, "");
+        if ( cachedDeviceID != "" )
+        {
+            deviceUUID = UUID.fromString( cachedDeviceID );
+        }
+        else
+        {
+            final String androidUniqueID = Settings.Secure.getString( s_activity.getContentResolver(),
+                    Settings.Secure.ANDROID_ID );
+            try
+            {
+                if ( androidUniqueID != "" )
+                {
+                    deviceUUID = UUID.nameUUIDFromBytes( androidUniqueID.getBytes("utf8") );
+                }
+                else
+                {
+                    final String anotherUniqueID = ((TelephonyManager) s_activity.getSystemService(Context.TELEPHONY_SERVICE)).getDeviceId();
+                    if ( anotherUniqueID != null )
+                    {
+                        deviceUUID = UUID.nameUUIDFromBytes( anotherUniqueID.getBytes("utf8") );
+                    }
+                    else
+                    {
+                        deviceUUID = UUID.randomUUID();
+                    }
+                }
+            }
+            catch ( UnsupportedEncodingException e )
+            {
+                throw new RuntimeException(e);
+            }
+        }
+        // save cur UUID.
+        sharedPreferences.edit().putString(CACHE_DEVICE_ID, deviceUUID.toString()).apply();
+        return deviceUUID.toString();
     }
 
     public static boolean isValidated() {

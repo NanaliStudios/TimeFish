@@ -15,6 +15,7 @@ extern "C"
     extern void openYoutubePageJNI();
     extern void openArtworkPageJNI();
     extern void showExitPopupJNI();
+    extern std::string getDeviceUUIDJNI();
 }
 
 #endif // __C2DXSOCIAL_H__

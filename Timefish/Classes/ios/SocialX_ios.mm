@@ -446,6 +446,15 @@ bool SocialX::getAudioInUse()
 //    
 //}
 
+std::string SocialX::getDeviceUUID()
+{
+    //
+    // NOTE: UUID는 현재 안드로이드만 지원하므로
+    // iOS에서는 테스트용으로 하드 코딩된 아래 코드를 리턴함
+    //
+    return "fe2e3a4d-1748-41f1-b30c-92a35bdfcbd5";
+}
+
 void SocialX::showAlert()
 {
     NSString *msg = [NSString stringWithFormat:@"showAlert"];

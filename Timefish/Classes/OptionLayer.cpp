@@ -273,6 +273,28 @@ void OptionLayer::initMainLayer()
         lbl->setPosition(Vec2(s.width * 0.5, 0));
         btnItem->addChild(lbl, 1);
     }
+
+#if CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID
+    //
+    // User ID
+    //
+    {
+        TTFConfig config(UserInfo::getInstance()->getFontPath(), 32);
+        auto *titlaLbl = Label::createWithTTF(config, "User ID", TextHAlignment::CENTER, 550);
+        titlaLbl->setColor(Color3B::WHITE);
+        titlaLbl->setPosition(Vec2(visibleSizeHalf.width, 200) + origin);
+        this->addChild(titlaLbl, 1);
+        
+        TTFConfig config2(KoreanFontPath, 30);
+        auto *idLbl = Label::createWithTTF(config2,
+                                           SocialX::getInstance()->getDeviceUUID(),
+                                           TextHAlignment::CENTER, 550);
+        idLbl->setColor(Color3B(253, 58, 3));
+        idLbl->setPosition(Vec2(visibleSizeHalf.width + origin.x,
+                                titlaLbl->getPositionY() - titlaLbl->getContentSize().height));
+        this->addChild(idLbl, 1);
+    }
+#endif
     
     //
     // Close Button

@@ -51,6 +51,11 @@ void SocialX::showExitPopup()
     showExitPopupJNI();
 }
 
+std::string SocialX::getDeviceUUID()
+{
+    return getDeviceUUIDJNI();
+}
+
 DevicePerformance SocialX::getDevicePerformance()
 {
     return NoRecording_WithFlowing;
