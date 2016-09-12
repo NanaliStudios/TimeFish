@@ -21,6 +21,7 @@
 #include "FlurryX.h"
 #include "SocialX.h"
 #include "AdColonyX.h"
+#include "UnityAdsX.h"
 
 #include "VideoShareX.h"
 
@@ -71,7 +72,7 @@ typedef enum {
 USING_NS_CC;
 using namespace cocos2d::ui;
 
-class UILayer : public Layer, public StoreKitXDelegate, public AdColonyXDelegate, public SocialXDelegate, public TapjoyXDelegate
+class UILayer : public Layer, public StoreKitXDelegate, public AdColonyXDelegate, public SocialXDelegate, public TapjoyXDelegate, public UnityAdsXDelegate
 {
 public:
     virtual bool init();
@@ -326,6 +327,12 @@ private:
     // SocialXDelegate
     //
     void onFinishLoading();
+    
+    //
+    // UnityAdsXDelegate
+    //
+    void onUnityAdsStart();
+    void onUnityAdsFinish(bool shown);
 
     //
     // AdColonyXDelegate

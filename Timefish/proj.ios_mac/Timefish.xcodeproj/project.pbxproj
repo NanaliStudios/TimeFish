@@ -160,6 +160,8 @@
 		E9F10C841D73079F00210773 /* Chartboost.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9F10C831D73079F00210773 /* Chartboost.framework */; };
 		E9F10C861D7307C600210773 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9F10C851D7307C600210773 /* Foundation.framework */; };
 		E9F10C891D73098000210773 /* libFlurry_7.6.6.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E9F10C881D73098000210773 /* libFlurry_7.6.6.a */; settings = {ASSET_TAGS = (); }; };
+		E9F449021D87173A006F08D0 /* UnityAdsX.mm in Sources */ = {isa = PBXBuildFile; fileRef = E9F449011D87173A006F08D0 /* UnityAdsX.mm */; settings = {ASSET_TAGS = (); }; };
+		E9F449031D87173A006F08D0 /* UnityAdsX.mm in Sources */ = {isa = PBXBuildFile; fileRef = E9F449011D87173A006F08D0 /* UnityAdsX.mm */; settings = {ASSET_TAGS = (); }; };
 		E9F9025C1D7BD19B009C6EBE /* Everyplay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9F9025B1D7BD19B009C6EBE /* Everyplay.framework */; };
 		E9F9025E1D7BD1B2009C6EBE /* Everyplay.bundle in Resources */ = {isa = PBXBuildFile; fileRef = E9F9025D1D7BD1B2009C6EBE /* Everyplay.bundle */; settings = {ASSET_TAGS = (); }; };
 		E9F902731D7BE35A009C6EBE /* TapjoyResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = E9F902711D7BE35A009C6EBE /* TapjoyResources.bundle */; settings = {ASSET_TAGS = (); }; };
@@ -196,13 +198,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = A07A4C241783777C0073F6A7;
 			remoteInfo = "cocos2dx iOS";
-		};
-		E92AD4A81D6F45CB00AC03B4 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 1AC6FAE5180E9839004C840B /* cocos2d_libs.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 507B40FD1C31BDD30067B53E;
-			remoteInfo = "libcocos2d tvOS";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -424,6 +419,8 @@
 		E9F10C851D7307C600210773 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		E9F10C871D73098000210773 /* Flurry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flurry.h; sourceTree = SOURCE_ROOT; };
 		E9F10C881D73098000210773 /* libFlurry_7.6.6.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurry_7.6.6.a; sourceTree = SOURCE_ROOT; };
+		E9F449001D87171D006F08D0 /* UnityAdsX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnityAdsX.h; sourceTree = "<group>"; };
+		E9F449011D87173A006F08D0 /* UnityAdsX.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = UnityAdsX.mm; path = ios/UnityAdsX.mm; sourceTree = "<group>"; };
 		E9F9025B1D7BD19B009C6EBE /* Everyplay.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Everyplay.framework; sourceTree = "<group>"; };
 		E9F9025D1D7BD1B2009C6EBE /* Everyplay.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Everyplay.bundle; sourceTree = SOURCE_ROOT; };
 		E9F902711D7BE35A009C6EBE /* TapjoyResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = TapjoyResources.bundle; sourceTree = "<group>"; };
@@ -536,7 +533,6 @@
 			children = (
 				1AC6FAF9180E9839004C840B /* libcocos2d Mac.a */,
 				1AC6FB07180E9839004C840B /* libcocos2d iOS.a */,
-				E92AD4A91D6F45CB00AC03B4 /* libcocos2d tvOS.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -721,6 +717,7 @@
 				E96B86971A7ACB1100BD633E /* StoreKitX.h */,
 				E9BAFDB61B71CCE500ADCBAC /* TapjoyX.h */,
 				E9BAFDA41B71819800ADCBAC /* VideoShareX.h */,
+				E9F449001D87171D006F08D0 /* UnityAdsX.h */,
 			);
 			name = Plugins;
 			sourceTree = "<group>";
@@ -863,6 +860,7 @@
 				E9BAFD981B70870C00ADCBAC /* VideoShareX_ios.mm */,
 				E9BAFDBA1B71CD3500ADCBAC /* TapjoyX_ios.mm */,
 				E919DAD51B77782C005BFFD6 /* NotificationX.mm */,
+				E9F449011D87173A006F08D0 /* UnityAdsX.mm */,
 			);
 			name = ios;
 			sourceTree = "<group>";
@@ -997,13 +995,6 @@
 			remoteRef = 1AC6FB06180E9839004C840B /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E92AD4A91D6F45CB00AC03B4 /* libcocos2d tvOS.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = "libcocos2d tvOS.a";
-			remoteRef = E92AD4A81D6F45CB00AC03B4 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
@@ -1090,6 +1081,7 @@
 				E9B4C6061AC2DF41004D5510 /* AchievementBannerLayer.cpp in Sources */,
 				E96B86161A7ABCB500BD633E /* Popup.cpp in Sources */,
 				E9B4C5FF1AC1490A004D5510 /* TooltipLayer.cpp in Sources */,
+				E9F449021D87173A006F08D0 /* UnityAdsX.mm in Sources */,
 				E9B9EE301B6935E500F1EB1F /* IdleFreeshLayer.cpp in Sources */,
 				E9B5B0D81AA2E661005EE17C /* LoadingScene.cpp in Sources */,
 				E9BE5B5D1B64C7C70093A06E /* MenuItemAutoGray.cpp in Sources */,
@@ -1135,6 +1127,7 @@
 			files = (
 				E9CDC1F61B588F8200973CFF /* SpriteFlow.cpp in Sources */,
 				E9BB8A521B5E28F50011B7BF /* TestScene2.cpp in Sources */,
+				E9F449031D87173A006F08D0 /* UnityAdsX.mm in Sources */,
 				E9CDC1FA1B58A1A300973CFF /* FreeshSelectionLayer.cpp in Sources */,
 				E9CDC1FE1B58AD0500973CFF /* AchievementSelectionLayer.cpp in Sources */,
 				503AE10517EB98FF00D1A890 /* main.cpp in Sources */,

@@ -11,6 +11,7 @@
 #include "TapjoyX.h"
 #include "NotificationX.h"
 #include "AdColonyX.h"
+#include "UnityAdsX.h"
 
 #include "TestScene2.h"
 

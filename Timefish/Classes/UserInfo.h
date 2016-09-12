@@ -15,6 +15,7 @@
 #include "SoundManager.h"
 #include "GameCenterX.h"
 #include "AdColonyX.h"
+#include "UnityAdsX.h"
 #include "SocialX.h"
 #include "TapjoyX.h"
 
@@ -1123,7 +1124,9 @@ public:
     }
     
     bool isVideoAvailable() {
-        return AdColonyX::getInstance()->isVideoAvailable() || TapjoyX::getInstance()->isVideoReady();
+        return UnityAdsX::getInstance()->isVideoAvailable() ||
+                AdColonyX::getInstance()->isVideoAvailable() ||
+                TapjoyX::getInstance()->isVideoReady();
     }
 
     void initHighScored() {

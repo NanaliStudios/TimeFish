@@ -40,6 +40,9 @@ bool UILayer::init()
     
     //
     SocialX::getInstance()->setDelegate(this);
+    
+    //
+    UnityAdsX::getInstance()->setDelegate(this);
 
     //
     AdColonyX::getInstance()->setDelegate(this);
@@ -824,9 +827,13 @@ void UILayer::showVideoLayer()
     UserInfo::getInstance()->setHaveSeenVideo(true);
 
     //
-    // video watching: AdColony has a priority!!!
+    // video watching: UnityAds has a priority!!!
     //
-    if (AdColonyX::getInstance()->isVideoAvailable()) {
+    if (UnityAdsX::getInstance()->isVideoAvailable()) {
+        uiStatus = MainUIStatusWatchingAd;
+        UnityAdsX::getInstance()->showVideo();
+    }
+    else if (AdColonyX::getInstance()->isVideoAvailable()) {
         uiStatus = MainUIStatusWatchingAd;
         AdColonyX::getInstance()->showVideo();
     }
@@ -2032,6 +2039,28 @@ void UILayer::afterPurchaseFreeshSkin(int skinIdx, bool restored)
 void UILayer::onFinishLoading()
 {
     resultBtnDisabled = false;
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////
+void UILayer::onUnityAdsStart()
+{
+    CCLOG("UILayer::onUnityAdsStart");
+    SoundManager::getInstance()->pauseAmbienceSound();
+    Director::getInstance()->stopAnimation();
+}
+
+void UILayer::onUnityAdsFinish(bool shown)
+{
+    CCLOG("UILayer::onUnityAdsFinish %d", shown);
+    
+    SoundManager::getInstance()->resumeAllSoundEffect();
+    Director::getInstance()->startAnimation();
+
+    if (shown) {
+        showVideoReward();
+    }
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////

@@ -35,6 +35,7 @@ import com.flurry.android.FlurryAgent;
 import com.tapjoy.Tapjoy;
 import com.jirbo.adcolony.*;
 
+import es.Nanali.C2DXUnityAds.C2DXUnityAdsBridge;
 import es.jesanchezgo.C2DXChartboost.C2DXChartboostBridge;
 import es.Nanali.C2DXTapjoy.C2DXTapjoyBridge;
 import es.Nanali.C2DXAdColony.C2DXAdColonyBridge;
@@ -68,6 +69,7 @@ import com.android.util.IabResult;
 import com.android.util.Inventory;
 import com.android.util.Purchase;
 import com.android.util.SkuDetails;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -237,8 +239,11 @@ public class AppActivity extends UtilActivity {//Cocos2dxActivity {
         //
         C2DXSocialBridge.initC2DXSocialBridge(this);
 
+        //
+        C2DXUnityAdsBridge.initC2DXUnityAdsBridge(this);
+
         sActivity = this;
-        
+
         //
 //        FuseSDK.startSession("70cc5de9-e0c8-4e10-a490-bc680ad2167b", this, this, null);
 

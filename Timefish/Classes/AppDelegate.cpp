@@ -118,6 +118,9 @@ bool AppDelegate::applicationDidFinishLaunching()
     //
     GameCenterX::getInstance()->authenticateLocalPlayer();
 #endif
+    
+    //
+    UnityAdsX::getInstance()->startSession();
 
     //
     AdColonyX::getInstance()->startSession();

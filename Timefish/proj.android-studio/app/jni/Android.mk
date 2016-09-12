@@ -65,6 +65,7 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
                    C2DXSocialJni.cpp \
                    C2DXStoreJni.cpp \
                    C2DXTapjoyJni.cpp \
+                   C2DXUnityAdsJni.cpp \
 					../../../Classes/android/AdColonyX_android.cpp \
 					../../../Classes/android/ChartboostX_android.cpp \
 					../../../Classes/android/FlurryX_android.cpp \
@@ -74,6 +75,7 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
 					../../../Classes/android/SocialX_android.cpp \
 					../../../Classes/android/StoreKitX_android.cpp \
 					../../../Classes/android/TapjoyX_android.cpp \
+					../../../Classes/android/UnityAdsX_android.cpp \
 					../../../Classes/android/VideoShareX_android.cpp
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../../Classes
 
