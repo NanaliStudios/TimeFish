@@ -62,7 +62,13 @@ public class Security {
             return false;
         }
 
-        PublicKey key = Security.generatePublicKey(base64PublicKey);
+        //
+        // Added by Allen
+        //
+        String base64EncodedPublicKey1 = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAoiC2nfpfvQC1UKUCiwwjF";
+        String base64EncodedPublicKey7 = "AB";
+
+        PublicKey key = Security.generatePublicKey(base64EncodedPublicKey1 + base64PublicKey + base64EncodedPublicKey7);
         return Security.verify(key, signedData, signature);
     }
 
