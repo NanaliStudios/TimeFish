@@ -44,29 +44,20 @@ public class C2DXSocialBridge {
     public static void initC2DXSocialBridge(Cocos2dxActivity activity){
         C2DXSocialBridge.s_activity = activity;
 
-        Log.i(TAG, "initC2DXSocialBridge0: " +
-        PlanetArcadeSDKHelper.getHashKey(s_activity.getApplicationContext()));
-
-        Log.i(TAG, "initC2DXSocialBridge1");
-
         //
         mPlanetArcadeSDKHelper = new PlanetArcadeSDKHelper(s_activity);
-
-        Log.i(TAG, "initC2DXSocialBridge2" + (mPlanetArcadeSDKHelper == null));
-
         mPlanetArcadeSDKHelper.validate(new OnValidateCallback() {
             @Override
             public void onSuccess() {
                 //TODO: When validated successfully.
-                Log.i(TAG, "PlanetArcadeSDKHelper : success");
+//                Log.i(TAG, "PlanetArcadeSDKHelper : success");
             }
             @Override
             public void onFailure(int errorCode, String errorMessage) {
-                Log.i(TAG, "PlanetArcadeSDKHelper : fail[" + errorCode + "]"+errorMessage);
+//                Log.i(TAG, "PlanetArcadeSDKHelper : fail[" + errorCode + "]"+errorMessage);
             } });
 
-        mPlanetArcadeSDKHelper.setDebugMode(true);
-        Log.i(TAG, "initC2DXSocialBridge3");
+        mPlanetArcadeSDKHelper.setDebugMode(false);
     }
 
     public static void releaseC2DXSocialBridge() {
@@ -128,7 +119,7 @@ public class C2DXSocialBridge {
     public static void submitScore(final int userScore) {
 
         String userID = getDeviceUUID();
-        Log.i(TAG, "submitScore : " + userID + "/" + userScore);
+//        Log.i(TAG, "submitScore : " + userID + "/" + userScore);
 
         if (isValidated()) {
             mPlanetArcadeSDKHelper.submitScore(userID, userScore, 0,
@@ -136,16 +127,16 @@ public class C2DXSocialBridge {
                         @Override
                         public void onSuccess() {
                             // Submit Score Success
-                            Log.i(TAG, "submitScore : success");
+//                            Log.i(TAG, "submitScore : success");
                         }
                         @Override
                         public void onFailure(int errorCode, String errorMessage) {
                             // Submit Score Failed.
-                            Log.i(TAG, "submitScore : fail[" + errorCode + "]"+errorMessage);
+//                            Log.i(TAG, "submitScore : fail[" + errorCode + "]"+errorMessage);
                         }
                     });        }
         else {
-            Log.i(TAG, "submitScore : Not Validated");
+//            Log.i(TAG, "submitScore : Not Validated");
         }
     }
 

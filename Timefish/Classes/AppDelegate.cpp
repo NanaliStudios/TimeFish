@@ -30,7 +30,7 @@ void AppDelegate::setResolutionInfo()
     auto glview = director->getOpenGLView();
     auto screenSize = glview->getFrameSize();
     
-    CCLOG("Screen Size : %f,%f", screenSize.width, screenSize.height);
+//    CCLOG("Screen Size : %f,%f", screenSize.width, screenSize.height);
 
     std::vector<std::string> resourceDirOrder;
     

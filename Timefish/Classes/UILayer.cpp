@@ -2046,14 +2046,14 @@ void UILayer::onFinishLoading()
 //////////////////////////////////////////////////////////////////////////////////////////
 void UILayer::onUnityAdsStart()
 {
-    CCLOG("UILayer::onUnityAdsStart");
+//    CCLOG("UILayer::onUnityAdsStart");
     SoundManager::getInstance()->pauseAmbienceSound();
     Director::getInstance()->stopAnimation();
 }
 
 void UILayer::onUnityAdsFinish(bool shown)
 {
-    CCLOG("UILayer::onUnityAdsFinish %d", shown);
+//    CCLOG("UILayer::onUnityAdsFinish %d", shown);
     
     SoundManager::getInstance()->resumeAllSoundEffect();
     Director::getInstance()->startAnimation();

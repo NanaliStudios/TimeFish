@@ -14,8 +14,8 @@ android {
         applicationId "com.Nanali.Timefish"
         minSdkVersion 10
         targetSdkVersion 22
-        versionCode 11
-        versionName "2.04"
+        versionCode 12
+        versionName "2.05"
     }
 
     sourceSets.main {
