@@ -1793,7 +1793,10 @@ void PlayScene::showScoreUI()
     if (GameCenterX::getInstance()->isAuthenticated(false)) {
         GameCenterX::getInstance()->reportScore(UserInfo::getInstance()->getCurrScore());
     }
+    
 #else
+    SocialX::getInstance()->submitScore();
+
     if (NativeUtils::isSignedIn()) {
         NativeUtils::submitScore(UserInfo::getInstance()->getCurrScore());
     }

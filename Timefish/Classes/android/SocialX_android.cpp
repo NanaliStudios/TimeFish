@@ -8,6 +8,7 @@
 
 #include "SocialX.h"
 #include "C2DXSocialJni.h"
+#include "UserInfo.h"
 
 static SocialX* s_pSocialX = nullptr;
 
@@ -71,6 +72,12 @@ std::time_t SocialX::getCurrentTime()
     std::time_t timeCheckIn = std::time(0);
 
     return timeCheckIn;
+}
+
+void SocialX::submitScore()
+{
+    int currScore = UserInfo::getInstance()->getCurrScore();
+    submitScoreJNI(currScore);
 }
 
 bool  SocialX::getAudioInUse()

@@ -82,8 +82,8 @@
             android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" />
 
         <!-- Planet Arcade -->
-        <meta-data android:name="app_key" android:value="your app key" />
-        <meta-data android:name="app_id" android:value="your app id" />
+        <meta-data android:name="app_key" android:value="fmvCXfxa9m3xqx-ZbBU3MQ" />
+        <meta-data android:name="app_id" android:value="bQR57wtahL3D5CaL9VL-6Q" />
 
         <!-- Local Notification -->
         <receiver android:name="org.cocos2dx.cpp.LocalNotificationReceiver" />

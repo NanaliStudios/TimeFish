@@ -132,6 +132,18 @@ extern "C"
         
         return ret;
     }
+    
+    void submitScoreJNI(int score)
+    {
+        JniMethodInfo methodInfo;
+        
+        if (! JniHelper::getStaticMethodInfo(methodInfo, CLASS_NAME, "submitScore", "(I)V"))
+        {
+            return;
+        }
+        methodInfo.env->CallStaticVoidMethod(methodInfo.classID, methodInfo.methodID, score);
+        methodInfo.env->DeleteLocalRef(methodInfo.classID);
+    }
 
     /////////////////////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////////////////////

@@ -51,6 +51,7 @@ public:
     void showAlert();
     
     std::string getDeviceUUID();
+    void submitScore();
 
     DevicePerformance getDevicePerformance();
     

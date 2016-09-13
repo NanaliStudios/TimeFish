@@ -16,6 +16,7 @@ extern "C"
     extern void openArtworkPageJNI();
     extern void showExitPopupJNI();
     extern std::string getDeviceUUIDJNI();
+    extern void submitScoreJNI(int score);
 }
 
 #endif // __C2DXSOCIAL_H__
