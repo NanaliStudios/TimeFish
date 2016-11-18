@@ -698,10 +698,12 @@ void FreeshSelectionLayer::selectionCallback(bool noSound)
                     }
                     else {
                         //
-                        // Other than Goldenfish
+                        // Other than Goldenfish:
                         //
-                        std::string price = LocalizationManager::getInstance()->getPriceTagByProductName(getNormalSkinName(skinIdx));
-                        if (price == std::string("0")) {
+                        // NOTE: At Zplay version, not able to buy.
+                        //
+//                        std::string price = LocalizationManager::getInstance()->getPriceTagByProductName(getNormalSkinName(skinIdx));
+//                        if (price == std::string("0")) {
                             //
                             // Something Wrong: Lock the button
                             //
@@ -709,28 +711,28 @@ void FreeshSelectionLayer::selectionCallback(bool noSound)
                             lockedBtn->setVisible(true);
                             btnLabel1->setVisible(false);
                             btnLabel2->setVisible(false);
-                        }
-                        else {
-                            btnMenuItem->setVisible(true);
-                            lockedBtn->setVisible(false);
-                            
-                            btnMenuItem->setTag(BuyableBtnTag);
-                            btnMenuItem->setEnabled(true);
-                            
-                            //
-                            // NOTE: Japanese font doesn't have Yen mark.
-                            //
-                            if (UserInfo::getInstance()->currLangType == LanguageType::JAPANESE) {
-                                btnLabel1->setVisible(false);
-                                btnLabel2->setString(price);
-                                btnLabel2->setVisible(true);
-                            }
-                            else {
-                                btnLabel1->setVisible(true);
-                                btnLabel1->setString(price);
-                                btnLabel2->setVisible(false);
-                            }
-                        }
+//                        }
+//                        else {
+//                            btnMenuItem->setVisible(true);
+//                            lockedBtn->setVisible(false);
+//                            
+//                            btnMenuItem->setTag(BuyableBtnTag);
+//                            btnMenuItem->setEnabled(true);
+//                            
+//                            //
+//                            // NOTE: Japanese font doesn't have Yen mark.
+//                            //
+//                            if (UserInfo::getInstance()->currLangType == LanguageType::JAPANESE) {
+//                                btnLabel1->setVisible(false);
+//                                btnLabel2->setString(price);
+//                                btnLabel2->setVisible(true);
+//                            }
+//                            else {
+//                                btnLabel1->setVisible(true);
+//                                btnLabel1->setString(price);
+//                                btnLabel2->setVisible(false);
+//                            }
+//                        }
 
                         //
                         infoIcon->setVisible(false);
