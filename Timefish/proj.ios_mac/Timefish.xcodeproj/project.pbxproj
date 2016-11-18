@@ -115,7 +115,6 @@
 		E9BAFD991B70870C00ADCBAC /* VideoShareX_ios.mm in Sources */ = {isa = PBXBuildFile; fileRef = E9BAFD981B70870C00ADCBAC /* VideoShareX_ios.mm */; };
 		E9BAFDBB1B71CD3500ADCBAC /* TapjoyX_ios.mm in Sources */ = {isa = PBXBuildFile; fileRef = E9BAFDBA1B71CD3500ADCBAC /* TapjoyX_ios.mm */; };
 		E9BB15751BA82B04006EFAE9 /* JumpCoin.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E9BB15731BA82B04006EFAE9 /* JumpCoin.cpp */; };
-		E9BB3A641BA1AFE50024DC31 /* RibbonLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E9BB3A621BA1AFE50024DC31 /* RibbonLayer.cpp */; };
 		E9BB8A511B5E28F50011B7BF /* TestScene2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E9BB8A501B5E28F50011B7BF /* TestScene2.cpp */; };
 		E9BB8A521B5E28F50011B7BF /* TestScene2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E9BB8A501B5E28F50011B7BF /* TestScene2.cpp */; };
 		E9BC559C1A81C74B0010FF58 /* ChartboostX_ios.mm in Sources */ = {isa = PBXBuildFile; fileRef = E9BC55951A81C74B0010FF58 /* ChartboostX_ios.mm */; };
@@ -363,8 +362,6 @@
 		E9BAFDBA1B71CD3500ADCBAC /* TapjoyX_ios.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = TapjoyX_ios.mm; path = ios/TapjoyX_ios.mm; sourceTree = "<group>"; };
 		E9BB15731BA82B04006EFAE9 /* JumpCoin.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = JumpCoin.cpp; sourceTree = "<group>"; };
 		E9BB15741BA82B04006EFAE9 /* JumpCoin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JumpCoin.h; sourceTree = "<group>"; };
-		E9BB3A621BA1AFE50024DC31 /* RibbonLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RibbonLayer.cpp; sourceTree = "<group>"; };
-		E9BB3A631BA1AFE50024DC31 /* RibbonLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RibbonLayer.h; sourceTree = "<group>"; };
 		E9BB8A501B5E28F50011B7BF /* TestScene2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TestScene2.cpp; sourceTree = "<group>"; };
 		E9BB8A541B5E29210011B7BF /* TestScene2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestScene2.h; sourceTree = "<group>"; };
 		E9BC55951A81C74B0010FF58 /* ChartboostX_ios.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = ChartboostX_ios.mm; path = ios/ChartboostX_ios.mm; sourceTree = "<group>"; };
@@ -831,8 +828,6 @@
 				E9B83AFF1B5B284500746949 /* ResultMainLayer.h */,
 				E9B83B071B5B795B00746949 /* ResultUIButtonLayer.cpp */,
 				E9B83B081B5B795B00746949 /* ResultUIButtonLayer.h */,
-				E9BB3A621BA1AFE50024DC31 /* RibbonLayer.cpp */,
-				E9BB3A631BA1AFE50024DC31 /* RibbonLayer.h */,
 				E9B83AFA1B5A851B00746949 /* ScoreLayer.cpp */,
 				E9B83AFB1B5A851B00746949 /* ScoreLayer.h */,
 				E9CDC2031B58D3FE00973CFF /* ScrollLayerBase.cpp */,
@@ -1065,7 +1060,6 @@
 				E9B650181B5C9D10001C52A1 /* LocalizationManager.cpp in Sources */,
 				E9BD75121BA276A70091823E /* BonusTooltipLayer.cpp in Sources */,
 				E9CDC1F91B58A1A300973CFF /* FreeshSelectionLayer.cpp in Sources */,
-				E9BB3A641BA1AFE50024DC31 /* RibbonLayer.cpp in Sources */,
 				E9BC55A11A81C74B0010FF58 /* StoreKitX_ios.mm in Sources */,
 				E9BC55B41A81C7E20010FF58 /* VerificationController.m in Sources */,
 				E96B860B1A7ABC7300BD633E /* AppDelegate.cpp in Sources */,

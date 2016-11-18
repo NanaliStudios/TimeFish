@@ -187,15 +187,6 @@ void UILayer::initMainButtons()
         //
         menuItem->setLabelChild(icon);
     }
-
-#if CC_TARGET_PLATFORM != CC_PLATFORM_ANDROID
-    // Everyplay Button
-    {
-        ribbon = RibbonLayer::create();
-        ribbon->setPosition(Vec2(60, visibleSize.height - 20) + origin);
-        addChild(ribbon, 1);
-    }
-#endif
 }
 
 void UILayer::initSubLayers()
@@ -452,9 +443,6 @@ void UILayer::hideStartUI()
     gameTitle->setVisible(false);
     fingerNode->setVisible(false);
 
-#if CC_TARGET_PLATFORM != CC_PLATFORM_ANDROID
-    ribbon->setVisible(false);
-#endif
     freeshSelectionBtn->setVisible(false);
     posterSelectionBtn->setVisible(false);
 
@@ -861,9 +849,7 @@ void UILayer::setMainUIVisible(bool flag)
 //    tapLabel->setVisible(flag);
     currCoinsLabel->setVisible(flag);
     coinIcon->setVisible(flag);
-#if CC_TARGET_PLATFORM != CC_PLATFORM_ANDROID
-    ribbon->setVisible(flag);
-#endif
+
     freeshSelectionBtn->setVisible(flag);
     posterSelectionBtn->setVisible(flag);
 }
@@ -895,10 +881,6 @@ void UILayer::showFreeshSelectionCallback(Ref *pSender)
 
     //
     showFreeshSelection();
-
-#if CC_TARGET_PLATFORM != CC_PLATFORM_ANDROID
-    ribbon->hideLayer();
-#endif
 }
 
 void UILayer::hideFreeshSelection(Ref *pSender)
@@ -920,10 +902,6 @@ void UILayer::hideFreeshSelection(Ref *pSender)
         //
         freeshSelection->destroyScrolls();
         freeshSelection->hideLayer();
-        
-#if CC_TARGET_PLATFORM != CC_PLATFORM_ANDROID
-        ribbon->showLayer();
-#endif
 
         //
         if (uiChangeCallback) {
@@ -950,10 +928,6 @@ void UILayer::showPosterSelectionCallback(Ref *pSender)
     //
     setMainUIVisible(false);
 
-#if CC_TARGET_PLATFORM != CC_PLATFORM_ANDROID
-    ribbon->hideLayer();
-#endif
-
     //
     ownsPriority = false;
     achSelection->showThis();
@@ -968,10 +942,6 @@ void UILayer::hidePosterSelection(Ref *pSender)
 {
     //
     setMainUIVisible(true);
-    
-#if CC_TARGET_PLATFORM != CC_PLATFORM_ANDROID
-    ribbon->showLayer();
-#endif
 
     //
     ownsPriority = true;

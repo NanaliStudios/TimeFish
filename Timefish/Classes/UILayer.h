@@ -46,8 +46,6 @@
 
 #include "MenuItemImageButton.h"
 
-#include "RibbonLayer.h"
-
 //
 #include "OptionLayer.h"
 
@@ -190,9 +188,6 @@ protected:
     Sprite *gameTitle, *coinIcon, *comboCountUI, *comboDots[5];
     MenuItemSameImage *pauseItem;
 
-#if CC_TARGET_PLATFORM != CC_PLATFORM_ANDROID
-    RibbonLayer *ribbon;
-#endif
     Menu *freeshSelectionBtn, *posterSelectionBtn;
     Menu *pauseBtn, *quitBtn, *resumeBtn;
 
