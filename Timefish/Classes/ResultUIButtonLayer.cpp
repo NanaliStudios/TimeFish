@@ -92,34 +92,14 @@ void ResultUIButtonLayer::initMainLayerWithCallbacks(const ccMenuCallback& callb
 //
 void ResultUIButtonLayer::btnCallback(Ref *pSender)
 {
-    MenuItemImageButton *btn = (MenuItemImageButton*)pSender;
-    int tag = btn->getTag();
-
-    SoundManager::getInstance()->playSoundEffect(SoundButton, false);
-
-    if (tag == ResultBtnTag) {
-        if (!UserInfo::getInstance()->isRecordingEnabled()) {
-            //
-            TapjoyX::getInstance()->logEventInUIFlow("ShareResultScore");
-            
-            //
-            // openActionSheetWithScore
-            //
-            if (shareCallback) {
-                shareCallback();
-            }
-        }
-    }
-    else if (tag == ResultImageShareBtnTag) {
-        //
-        TapjoyX::getInstance()->logEventInUIFlow("ShareResultScore");
-
-        //
-        // openActionSheetWithScore
-        //
-        if (shareCallback) {
-            shareCallback();
-        }
+    //
+    TapjoyX::getInstance()->logEventInUIFlow("ShareResultScore");
+    
+    //
+    // openActionSheetWithScore
+    //
+    if (shareCallback) {
+        shareCallback();
     }
 }
 

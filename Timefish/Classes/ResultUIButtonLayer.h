@@ -21,7 +21,6 @@
 USING_NS_CC;
 
 #define ResultBtnTag                0
-#define ResultImageShareBtnTag      2
 
 class ResultUIButtonLayer : public Layer
 {
@@ -42,16 +41,9 @@ public:
     void showButtons();
 
     float getPosY() { return posY; }
-    
-    void setButtonVisibleForCapture() {
-        MenuItemImageButton *btn = (MenuItemImageButton*)mainBtn[3]->getChildByTag(ResultImageShareBtnTag);
-        if (btn) {
-            btn->setTag(ResultBtnTag);
-        }
-    }
 
 private:
-    Menu *mainBtn[4];
+    Menu *mainBtn[3];
 
     float posY;
     int btnCnt;

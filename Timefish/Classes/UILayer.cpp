@@ -1221,8 +1221,6 @@ void UILayer::shareGameScore()
 
 //    //
 //    SoundManager::getInstance()->playSoundEffect(SoundButton, false);
-
-    resultButtons->setButtonVisibleForCapture();
     
     //
     utils::captureScreen(CC_CALLBACK_2(UILayer::afterCapturedResult, this), "share.png");
