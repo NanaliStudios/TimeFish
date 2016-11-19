@@ -82,30 +82,32 @@ void PageViewlayer::initMainLayer()
     //
     // GameCenter Connect for Achievements
     //
+    // NOTE: At Zplay version, hide gamecenter related buttons.
+    //
     {
-        auto menuItem = MenuItemImageButton::create();
-        menuItem->setNormalImage(Sprite::createWithSpriteFrameName("button_short_white.png"));
-        menuItem->setSelectedImage(Sprite::createWithSpriteFrameName("button_short_white_click.png"));
-        menuItem->setCallback(CC_CALLBACK_0(PageViewlayer::showGameCenterAchievement, this));
-
-        Size s = menuItem->getContentSize();
-        menuItem->setPosition(Vec2(visibleSize.width - s.width * 0.5 - 20, s.height* 0.5 + 20) + origin);
-
-        auto gcBtn = Menu::create(menuItem, NULL);
-        gcBtn->setPosition(Vec2::ZERO);
-        addChild(gcBtn, 10);
-        
-        //
-#if CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID
-        auto icon = Sprite::create("gp/icon_gamecenter_google.png");
-#else
-        auto icon = Sprite::createWithSpriteFrameName("icon_gamecenter.png");
-#endif
-        icon->setPosition(s * 0.5);
-        menuItem->addChild(icon);
-
-        //
-        menuItem->setLabelChild(icon);
+//        auto menuItem = MenuItemImageButton::create();
+//        menuItem->setNormalImage(Sprite::createWithSpriteFrameName("button_short_white.png"));
+//        menuItem->setSelectedImage(Sprite::createWithSpriteFrameName("button_short_white_click.png"));
+//        menuItem->setCallback(CC_CALLBACK_0(PageViewlayer::showGameCenterAchievement, this));
+//
+//        Size s = menuItem->getContentSize();
+//        menuItem->setPosition(Vec2(visibleSize.width - s.width * 0.5 - 20, s.height* 0.5 + 20) + origin);
+//
+//        auto gcBtn = Menu::create(menuItem, NULL);
+//        gcBtn->setPosition(Vec2::ZERO);
+//        addChild(gcBtn, 10);
+//        
+//        //
+//#if CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID
+//        auto icon = Sprite::create("gp/icon_gamecenter_google.png");
+//#else
+//        auto icon = Sprite::createWithSpriteFrameName("icon_gamecenter.png");
+//#endif
+//        icon->setPosition(s * 0.5);
+//        menuItem->addChild(icon);
+//
+//        //
+//        menuItem->setLabelChild(icon);
 
         //
         // NOTE: AchievementType27 카운팅이 잘못되는 버그가 있어서 여기서 체크해준다.
