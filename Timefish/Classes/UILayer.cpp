@@ -275,7 +275,6 @@ void UILayer::initSubLayers()
                                               CC_CALLBACK_0(UILayer::showGameCenterLeaderboard, this),
                                               CC_CALLBACK_0(UILayer::replayGame, this),
                                               CC_CALLBACK_0(UILayer::shareGameScore, this),
-                                              shareVideocallback,
                                               finishIntrocallback);
     addChild(resultButtons);
 
@@ -769,12 +768,6 @@ void UILayer::showFreeshMaker()
 
     freeshMaker->setCloseCallback(CC_CALLBACK_0(UILayer::hideFreeshMaker, this));
     freeshMaker->showLayer();
-
-    //
-    // NOTE: freeshMaker start new video recording
-    // so, resultButtons's video share button is not needed.
-    //
-    resultButtons->hideVideoShareButton();
 
     //
     if (uiChangeCallback) {

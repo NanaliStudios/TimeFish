@@ -22,7 +22,6 @@ USING_NS_CC;
 
 #define ResultBtnTag                0
 #define ResultImageShareBtnTag      2
-#define ResultVideoShareBtnTag      3
 
 class ResultUIButtonLayer : public Layer
 {
@@ -38,26 +37,13 @@ public:
                             const ccMenuCallback& callback2,
                             const ccMenuCallback& callback3,
                             const std::function<void()>& _shareCallback,
-                            const std::function<void()>& _shareVideoCallback,
                             const std::function<void()>& _finishCallback);
     
     void showButtons();
-    void hideVideoShareButton() {
-        //
-        alreadyShared = true;
-
-        // revert video button settings
-        MenuItemImageButton *btn = (MenuItemImageButton*)mainBtn[3]->getChildByTag(ResultImageShareBtnTag);
-        if (btn) {
-            btn->setTag(ResultBtnTag);
-            videoShareBtn->setVisible(false);
-        }
-    }
 
     float getPosY() { return posY; }
     
     void setButtonVisibleForCapture() {
-        videoShareBtn->setVisible(false);
         MenuItemImageButton *btn = (MenuItemImageButton*)mainBtn[3]->getChildByTag(ResultImageShareBtnTag);
         if (btn) {
             btn->setTag(ResultBtnTag);
@@ -66,15 +52,11 @@ public:
 
 private:
     Menu *mainBtn[4];
-    
-    Menu *videoShareBtn;
 
     float posY;
-    bool alreadyShared;
     int btnCnt;
 
     std::function<void()> shareCallback;
-    std::function<void()> shareVideoCallback;
     std::function<void()> finishCallback;
 
     void btnCallback(Ref *pSender);

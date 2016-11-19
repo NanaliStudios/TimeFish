@@ -23,10 +23,6 @@ bool ResultUIButtonLayer::init()
     visibleSizeHalf = visibleSize * 0.5;
     origin = Director::getInstance()->getVisibleOrigin();
     
-    //
-    alreadyShared = false;
-//    initMainLayer();
-    
     return true;
 }
 
@@ -34,48 +30,39 @@ void ResultUIButtonLayer::initMainLayerWithCallbacks(const ccMenuCallback& callb
                                 const ccMenuCallback& callback2,
                                 const ccMenuCallback& callback3,
                                 const std::function<void()>& _shareCallback,
-                                const std::function<void()>& _shareVideoCallback,
                                 const std::function<void()>& _finishCallback)
 {
-//    MenuItemImage *menuItem[4];
-    MenuItemImageButton *menuItem[4];
+    MenuItemImageButton *menuItem[3];
     menuItem[0] = MenuItemImageButton::create();
-    menuItem[0]->setNormalImage(Sprite::createWithSpriteFrameName("button_short_white.png"));
-    menuItem[0]->setSelectedImage(Sprite::createWithSpriteFrameName("button_short_white_click.png"));
+    menuItem[0]->setNormalImage(Sprite::createWithSpriteFrameName("button_middle_white.png"));
+    menuItem[0]->setSelectedImage(Sprite::createWithSpriteFrameName("button_middle_white_click.png"));
     menuItem[0]->setCallback(callback1);
-
+    
     menuItem[1] = MenuItemImageButton::create();
-    menuItem[1]->setNormalImage(Sprite::createWithSpriteFrameName("button_short_white.png"));
-    menuItem[1]->setSelectedImage(Sprite::createWithSpriteFrameName("button_short_white_click.png"));
-    menuItem[1]->setCallback(callback2);
-
+    menuItem[1]->setNormalImage(Sprite::createWithSpriteFrameName("button_long_red.png"));
+    menuItem[1]->setSelectedImage(Sprite::createWithSpriteFrameName("button_long_red_click.png"));
+    menuItem[1]->setCallback(callback3);
+    
     menuItem[2] = MenuItemImageButton::create();
-    menuItem[2]->setNormalImage(Sprite::createWithSpriteFrameName("button_long_red.png"));
-    menuItem[2]->setSelectedImage(Sprite::createWithSpriteFrameName("button_long_red_click.png"));
-    menuItem[2]->setCallback(callback3);
-
-    menuItem[3] = MenuItemImageButton::create();
-    menuItem[3]->setNormalImage(Sprite::createWithSpriteFrameName("button_short_white.png"));
-    menuItem[3]->setSelectedImage(Sprite::createWithSpriteFrameName("button_short_white_click.png"));
-    menuItem[3]->setCallback(CC_CALLBACK_1(ResultUIButtonLayer::btnCallback, this));
-
+    menuItem[2]->setNormalImage(Sprite::createWithSpriteFrameName("button_middle_white.png"));
+    menuItem[2]->setSelectedImage(Sprite::createWithSpriteFrameName("button_middle_white_click.png"));
+    menuItem[2]->setCallback(CC_CALLBACK_1(ResultUIButtonLayer::btnCallback, this));
+    
     Size s1 = menuItem[0]->getContentSize();
-    Size s2 = menuItem[2]->getContentSize();
+    Size s2 = menuItem[1]->getContentSize();
     float spaceBetween = 9;
-    float spaceSide = (visibleSize.width - (s1.width * 3 + s2.width + spaceBetween * 3)) * 0.5;
-
+    float spaceSide = (visibleSize.width - (s1.width * 2 + s2.width + spaceBetween * 2)) * 0.5;
+    
     
     const char* fileNames[] = {
         "button_icon_option.png",
-        "button_icon_leaderboard.png",
         "button_icon_retry.png",
         "button_icon_share.png"
     };
     float posX = spaceSide;
     posY = spaceSide + s1.height * 0.5;
-    for (int i=0; i<4; i++) {
+    for (int i=0; i<3; i++) {
         Size s = menuItem[i]->getContentSize();
-//        menuItem[i]->setPosition(Vec2( posX + s.width * 0.5, -posY) + origin);
         menuItem[i]->setPosition(Vec2::ZERO);
         menuItem[i]->setTag(ResultBtnTag);
         
@@ -91,40 +78,13 @@ void ResultUIButtonLayer::initMainLayerWithCallbacks(const ccMenuCallback& callb
         
         //
         menuItem[i]->setLabelChild(icon);
-
+        
         // set next positon
         posX += (s.width + spaceBetween);
     }
-
-    shareCallback = _shareCallback;
-    shareVideoCallback = _shareVideoCallback;
-    finishCallback = _finishCallback;
     
-    //
-    //
-    //
-    {
-        auto *btnItem = MenuItemImageButton::create();
-        btnItem->setNormalImage(Sprite::createWithSpriteFrameName("button_short_white.png"));
-        btnItem->setSelectedImage(Sprite::createWithSpriteFrameName("button_short_white_click.png"));
-        btnItem->setCallback(CC_CALLBACK_1(ResultUIButtonLayer::btnCallback, this));
-        btnItem->setTag(ResultVideoShareBtnTag);
-
-        videoShareBtn = Menu::create(btnItem, NULL);
-        Size s = btnItem->getContentSize();
-        videoShareBtn->setPosition(Vec2(mainBtn[3]->getPositionX(), spaceSide * 2 + s1.height * 1.5 + origin.y));
-        addChild(videoShareBtn, 1);
-
-        videoShareBtn->setVisible(false);
-
-        //
-        auto icon = Sprite::createWithSpriteFrameName("icon_sharevideo.png");
-        icon->setPosition(Vec2(s) * 0.5);
-        btnItem->addChild(icon, 1);
-
-        //
-        btnItem->setLabelChild(icon);
-    }
+    shareCallback = _shareCallback;
+    finishCallback = _finishCallback;
 }
 
 //
@@ -138,7 +98,7 @@ void ResultUIButtonLayer::btnCallback(Ref *pSender)
     SoundManager::getInstance()->playSoundEffect(SoundButton, false);
 
     if (tag == ResultBtnTag) {
-        if (alreadyShared || !UserInfo::getInstance()->isRecordingEnabled()) {
+        if (!UserInfo::getInstance()->isRecordingEnabled()) {
             //
             TapjoyX::getInstance()->logEventInUIFlow("ShareResultScore");
             
@@ -148,16 +108,6 @@ void ResultUIButtonLayer::btnCallback(Ref *pSender)
             if (shareCallback) {
                 shareCallback();
             }
-        }
-        else {
-            //
-            // show video share button
-            //
-            btn->setTag(ResultImageShareBtnTag);
-            videoShareBtn->setVisible(true);
-            
-            //
-            TapjoyX::getInstance()->logEventInUIFlow("ShareResult");
         }
     }
     else if (tag == ResultImageShareBtnTag) {
@@ -171,24 +121,13 @@ void ResultUIButtonLayer::btnCallback(Ref *pSender)
             shareCallback();
         }
     }
-    else if (tag == ResultVideoShareBtnTag) {
-        //
-        // open video share
-        //
-        if (shareVideoCallback) {
-            shareVideoCallback();
-            
-            //
-            TapjoyX::getInstance()->logEventInUIFlow("ShareResultVideo");
-        }
-    }
 }
 
 void ResultUIButtonLayer::showButtons()
 {
     btnCnt = 0;
 
-    for (int i=0; i<4; i++) {
+    for (int i=0; i<3; i++) {
         // run action
         float delayDuration = CCRANDOM_0_1() * 0.4f;
         float moveDuration = 0.4f + CCRANDOM_0_1() * 0.25f;
@@ -199,7 +138,7 @@ void ResultUIButtonLayer::showButtons()
         auto callback = CallFunc::create( [this]() {
             //
             btnCnt++;
-            if (btnCnt >= 4 && finishCallback) {
+            if (btnCnt >= 3 && finishCallback) {
                 finishCallback();
             }
         });
