@@ -310,9 +310,9 @@ void UILayer::initSubLayers()
     optionLayer->setVisible(false);
     optionLayer->setButtonCallbacks(CC_CALLBACK_1(UILayer::setSound, this),
                                     CC_CALLBACK_1(UILayer::setNotification, this),
-                                    CC_CALLBACK_1(UILayer::restorePurchasedItems, this),
+//                                    CC_CALLBACK_1(UILayer::restorePurchasedItems, this),
                                     CC_CALLBACK_1(UILayer::showTutorial, this),
-                                    CC_CALLBACK_1(UILayer::processToFacebookPage, this),
+//                                    CC_CALLBACK_1(UILayer::processToFacebookPage, this),
                                     CC_CALLBACK_1(UILayer::openCredit, this),
                                     CC_CALLBACK_1(UILayer::hideOptionLayer, this));
     addChild(optionLayer);

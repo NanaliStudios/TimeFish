@@ -50,7 +50,7 @@ void OptionLayer::initMainLayer()
     mainLayer->setPosition(Vec2::ZERO);
     addChild(mainLayer, 0);
 
-    int mult[] = { -1, 0, 1 };
+    int mult[] = { -1, 1 };
 
     //
     // up buttons
@@ -95,7 +95,7 @@ void OptionLayer::initMainLayer()
         }
 
         //
-        menuItem->setPosition(Vec2(visibleSizeHalf.width - (s.width + 14), visibleSizeHalf.height + s.height) + origin);
+        menuItem->setPosition(Vec2(visibleSizeHalf.width - (s.width * 0.5 + 14), visibleSizeHalf.height + s.height) + origin);
         
         
         auto soundBtn = Menu::create(menuItem, NULL);
@@ -155,7 +155,7 @@ void OptionLayer::initMainLayer()
         }
 
         //
-        menuItem->setPosition(Vec2(visibleSizeHalf.width, visibleSizeHalf.height + s.height) + origin);
+        menuItem->setPosition(Vec2(visibleSizeHalf.width + (s.width * 0.5 + 14), visibleSizeHalf.height + s.height) + origin);
         
         
         auto soundBtn = Menu::create(menuItem, NULL);
@@ -176,71 +176,29 @@ void OptionLayer::initMainLayer()
         lbl->setPosition(Vec2(s.width * 0.5, 0));
         menuItem->addChild(lbl, 1);
     }
-    
-    // restore button
-    {
-        auto btnItem = MenuItemImageButton::create();
-        btnItem->setNormalImage(Sprite::createWithSpriteFrameName("button_middle_white.png"));
-        btnItem->setSelectedImage(Sprite::createWithSpriteFrameName("button_middle_white_click.png"));
-        btnItem->setCallback(CC_CALLBACK_1(OptionLayer::btnCallback, this));
-
-        //
-        btnItem->setTag(2);
-
-        Size s = btnItem->getContentSize();
-        btnItem->setPosition(Vec2(visibleSizeHalf.width + (s.width + 14), visibleSizeHalf.height + s.height) + origin);
-        
-        auto btn = Menu::create(btnItem, NULL);
-        btn->setPosition(Vec2::ZERO);
-        mainLayer->addChild(btn, 1);
-        
-        // add icon
-        auto icon = Sprite::createWithSpriteFrameName("icon_restore.png");
-        icon->setPosition(Vec2(s) * 0.5);
-        btnItem->addChild(icon, 1);
-
-        //
-        btnItem->setLabelChild(icon);
-
-        //
-        std::stringstream stream;
-        stream << LocalizationManager::getInstance()->getLocalizationString("OptionRestore");
-        std::string btnInfo = stream.str();
-        
-
-        TTFConfig config(UserInfo::getInstance()->getFontPath(), 32);
-        auto *lbl = Label::createWithTTF(config, btnInfo, TextHAlignment::CENTER, 550);
-//        auto lbl = Label::createWithTTF(btnInfo, UserInfo::getInstance()->getFontPath(), 32);
-        lbl->setColor(Color3B::RED);
-        lbl->setAnchorPoint(Vec2(0.5, 1));
-        lbl->setPosition(Vec2(s.width * 0.5, 0));
-        btnItem->addChild(lbl, 1);
-    }
 
     //
     // bottom buttons
     //
     const char *labelStr[] = {
         "Tutorial",
-        "Facebook",
         "Credit"
     };
     const char *fileNames[] = {
         "icon_tutorial.png",
-        "icon_facebook.png",
         "icon_credit.png"
     };
 
-    for (int i=0; i<3; i++) {
+    for (int i=0; i<2; i++) {
         auto btnItem = MenuItemImageButton::create();
         btnItem->setNormalImage(Sprite::createWithSpriteFrameName("button_middle_white.png"));
         btnItem->setSelectedImage(Sprite::createWithSpriteFrameName("button_middle_white_click.png"));
         btnItem->setCallback(CC_CALLBACK_1(OptionLayer::btnCallback, this));
         //
-        btnItem->setTag(3 + i);
+        btnItem->setTag(2 + i);
         
         Size s = btnItem->getContentSize();
-        btnItem->setPosition(Vec2(visibleSizeHalf.width + mult[i] * (s.width + 14), visibleSizeHalf.height - s.height) + origin);
+        btnItem->setPosition(Vec2(visibleSizeHalf.width + mult[i] * (s.width * 0.5 + 14), visibleSizeHalf.height - s.height) + origin);
 
         auto btn = Menu::create(btnItem, NULL);
         btn->setPosition(Vec2::ZERO);
@@ -410,8 +368,8 @@ void OptionLayer::hideThis()
 {
     SoundManager::getInstance()->playSoundEffect(SoundButton, false);
 
-    if (btnCallbacks[6]) {
-        btnCallbacks[6](this);
+    if (btnCallbacks[4]) {
+        btnCallbacks[4](this);
     }
 
     ownsPriority = false;

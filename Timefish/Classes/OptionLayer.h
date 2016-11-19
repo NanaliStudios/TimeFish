@@ -41,19 +41,15 @@ public:
 
     void setButtonCallbacks(const std::function<void(Ref*)>& _setSoundCallback,
                             const std::function<void(Ref*)>& _setNotiCallback,
-                            const std::function<void(Ref*)>& _restoreCallback,
                             const std::function<void(Ref*)>& _showTutorialCallback,
-                            const std::function<void(Ref*)>& _openFacebookCallback,
                             const std::function<void(Ref*)>& _openCreditCallback,
                             const std::function<void(Ref*)>& _setCloseCallback) {
         
         btnCallbacks[0] = _setSoundCallback;
         btnCallbacks[1] = _setNotiCallback;
-        btnCallbacks[2] = _restoreCallback;
-        btnCallbacks[3] = _showTutorialCallback;
-        btnCallbacks[4] = _openFacebookCallback;
-        btnCallbacks[5] = _openCreditCallback;
-        btnCallbacks[6] = _setCloseCallback;
+        btnCallbacks[2] = _showTutorialCallback;
+        btnCallbacks[3] = _openCreditCallback;
+        btnCallbacks[4] = _setCloseCallback;
     }
 
 private:
@@ -63,7 +59,7 @@ private:
     
     bool ownsPriority;
 
-    std::function<void(Ref*)> btnCallbacks[7];
+    std::function<void(Ref*)> btnCallbacks[5];
 
     void btnCallback(Ref *pSender);
     void setToggleButton(Ref *pSender);
