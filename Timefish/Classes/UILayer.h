@@ -260,6 +260,7 @@ protected:
     void afterCapturedFreesh(bool succeed, const std::string& outputFile);
 
     //
+    void processGoldenFishPurchase(Ref* pSender);
     void processSkinPurchaseFromTrial();
     void processSkinPurchaseFromResult();
     void processSkinPurchase(int skinIdx);

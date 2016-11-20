@@ -22,6 +22,7 @@
 #include "MenuItemSameImage.h"
 #include "MenuItemImageButton.h"
 #include "BonusTooltipLayer.h"
+#include "MenuItemAutoGray.h"
 
 USING_NS_CC;
 
@@ -90,7 +91,7 @@ public:
     
     CREATE_FUNC(GoldenfishInfoPopup);
 
-    void setPurchaseCallback(const std::function<void(int)>& _purchaseCallback) {
+    void setPurchaseCallback(const std::function<void(Ref*)>& _purchaseCallback) {
         purchaseCallback = _purchaseCallback;
     }
     void setCloseCallback(const std::function<void()>& _closeCallback) {
@@ -103,7 +104,7 @@ protected:
     Sprite *bg;
     int goldenfishSkinIdx;
 
-    std::function<void(int)> purchaseCallback;
+    std::function<void(Ref*)> purchaseCallback;
     std::function<void()> closeCallback;
     
     void initBackground();

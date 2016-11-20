@@ -283,37 +283,58 @@ void GoldenfishInfoPopup::initBackground()
     //
     // button
     //
+    auto lockCallback = [this](Ref* pSender) {
+        //
+        SoundManager::getInstance()->playSoundEffect(SoundDisabledButton, false);
+    };
+    
     auto callback = [this](Ref* pSender) {
         //
         SoundManager::getInstance()->playSoundEffect(SoundButton, false);
         
         if (purchaseCallback) {
-            purchaseCallback(goldenfishSkinIdx);
+            purchaseCallback(pSender);
         }
-
+        
         if (closeCallback) {
             closeCallback();
         }
-
+        
         removeFromParent();
     };
 
     //
     {
-        auto menuItem = MenuItemImageButton::create();
-        menuItem->setNormalImage(Sprite::createWithSpriteFrameName("button_center_white.png"));
-        menuItem->setSelectedImage(Sprite::createWithSpriteFrameName("button_center_white_click.png"));
-        menuItem->setCallback(callback);
-
+        MenuItemImageButton *btnItem = nullptr;
+        Color4B priceColor;
+        bool buyable = UserInfo::getInstance()->hasEnoughCoinsToBuyGoldenFish();
         //
         // NOTE: 아직 코인으로 구매하는 프로세스가 없으므로
         // 버튼을 비활성화해놓는다.
         //
-        menuItem->setEnabled(false);
+        if (!buyable) {
+            auto lockBtnItem = MenuItemAutoGray::create("button_long_red.png", "button_long_red_click.png", lockCallback);
+            lockBtnItem->setGrayed();
+            lockBtnItem->setTag(0);
+            //
+            btnItem = lockBtnItem;
+            priceColor = Color4B::WHITE;
+        }
+        //
+        else {
+            auto menuItem = MenuItemImageButton::create();
+            menuItem->setNormalImage(Sprite::createWithSpriteFrameName("button_center_white.png"));
+            menuItem->setSelectedImage(Sprite::createWithSpriteFrameName("button_center_white_click.png"));
+            menuItem->setCallback(callback);
+            menuItem->setTag(1);
+            //
+            btnItem = menuItem;
+            priceColor = Color4B(255, 61, 1, 255);
+        }
         
-        Size s = menuItem->getContentSize();
+        Size s = btnItem->getContentSize();
         
-        auto mainBtn = Menu::create(menuItem, NULL);
+        auto mainBtn = Menu::create(btnItem, NULL);
         mainBtn->setPosition(Vec2(visibleSizeHalf.width, btmPosY + s.height * 0.5) + origin);
         addChild(mainBtn, 1);
 
@@ -325,31 +346,13 @@ void GoldenfishInfoPopup::initBackground()
         coinIcon->setScale(scale);
         Size coinSize = coinIcon->getContentSize() * scale;
 
-//        std::stringstream stream;
-//        std::string price = LocalizationManager::getInstance()->getPriceTagByProductName(getNormalSkinName(goldenfishSkinIdx));
-//        if (price == std::string("0")) {
-//            stream << LocalizationManager::getInstance()->getLocalizationString(btnStringKeys[3]);
-//        }
-//        else {
-//            stream << price;
-//        }
-//
-//        std::string nameInfo = stream.str();
         Label *btnLabel = NULL;
         float fontSize = (UserInfo::getInstance()->currLangType == LanguageType::JAPANESE)? 41:
         (UserInfo::getInstance()->currLangType == LanguageType::ENGLISH)?51:
         (UserInfo::getInstance()->currLangType == LanguageType::CHINESE)?52:55;
-//        //
-//        // NOTE: Japanese font doesn't have Yen mark.
-//        //
-//        if (UserInfo::getInstance()->currLangType == LanguageType::JAPANESE) {
-//            btnLabel = Label::createWithTTF(nameInfo, EnglishFontPath, 51 * 0.8);
-//        }
-//        else {
-//            btnLabel = Label::createWithTTF(nameInfo, UserInfo::getInstance()->getFontPath(), fontSize * 0.8);
-//        }
+
         btnLabel = Label::createWithTTF("2000", UserInfo::getInstance()->getFontPath(), fontSize * 0.8);
-        btnLabel->setTextColor(Color4B(255, 61, 1, 255));
+        btnLabel->setTextColor(priceColor);
         
         Size btnLabelSize = btnLabel->getContentSize();
         
@@ -360,22 +363,17 @@ void GoldenfishInfoPopup::initBackground()
         //
         coinIcon->setAnchorPoint(Vec2(0, 0.5));
         coinIcon->setPosition(Vec2(pos.x - infoWidth * 0.5, pos.y));
-        menuItem->addChild(coinIcon, 1);
+        btnItem->addChild(coinIcon, 1);
 
         //
         btnLabel->setAnchorPoint(Vec2(1, 0.5));
         btnLabel->setPosition(Vec2(pos.x + infoWidth * 0.5, pos.y));
-        menuItem->addChild(btnLabel, 1);
+        btnItem->addChild(btnLabel, 1);
         //
-        menuItem->setLabelChild(coinIcon, btnLabel);
+        btnItem->setLabelChild(coinIcon, btnLabel);
         
         //
         //
-//        auto bonus = BonusTooltipLayer::create();
-//        bonus->initWithAmount(GoldenFishBuyBonus);
-//        bonus->setPosition(Vec2(s.width, s.height));
-//        menuItem->addChild(bonus, 10);
-        
         //
         std::stringstream sstream;
         sstream << LocalizationManager::getInstance()->getLocalizationString("GoldfishDesc");

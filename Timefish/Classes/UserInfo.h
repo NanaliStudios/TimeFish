@@ -981,6 +981,18 @@ public:
         int goldenFishIdx = getGoldenFishSkinIndex();
         return !isLockedSkin(goldenFishIdx);
     }
+    bool hasEnoughCoinsToBuyGoldenFish() {
+        int tmp = dataBackup[DataTypeCoins] - 1;
+        int base = baseScore + 1999; // GoldNeededToBuyGoldenFish = 1 + 1999
+        if(tmp >= base)
+            return true;
+        else
+            return false;
+    }
+    void consumeCoinsForGoldenFish() {
+        dataBackup[DataTypeCoins] -= 1024; // // GoldNeededToBuyGoldenFish = 1024 + 976
+        dataBackup[DataTypeCoins] -= 976;
+    }
 
     //
     //

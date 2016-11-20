@@ -302,7 +302,7 @@ void UILayer::showGoldenFishInfoPopup()
 
     //
     GoldenfishInfoPopup *p = GoldenfishInfoPopup::create();
-    p->setPurchaseCallback(CC_CALLBACK_1(UILayer::processSkinPurchase, this));
+    p->setPurchaseCallback(CC_CALLBACK_1(UILayer::processGoldenFishPurchase, this));
     p->setCloseCallback(closeCallback);
     addChild(p, 1000);
 }
@@ -852,6 +852,9 @@ void UILayer::hideFreeshSelection(Ref *pSender)
     Node *sender = (Node*)pSender;
     
     int tag = sender->getTag();
+
+    //
+    updateCoinLabel();
     
     //
     // close popup
@@ -1569,6 +1572,22 @@ void UILayer::processSkinPurchaseFromResult()
     processSkinPurchase(skinIdx);
 }
 
+void UILayer::processGoldenFishPurchase(Ref* pSender)
+{
+    Node *_node = (Node*)pSender;
+    int tag = _node->getTag();
+    if (tag == 0) {
+    }
+    else if (tag == 1) {
+        //
+        if(UserInfo::getInstance()->hasEnoughCoinsToBuyGoldenFish()) {
+            UserInfo::getInstance()->consumeCoinsForGoldenFish();
+            int goldenfishSkinIdx = UserInfo::getInstance()->getGoldenFishSkinIndex();
+            afterPurchaseFreeshSkin(goldenfishSkinIdx, false);
+        }
+    }
+}
+
 void UILayer::processSkinPurchase(int skinIdx)
 {
     SoundManager::getInstance()->playSoundEffect(SoundButton, false);
@@ -1928,14 +1947,8 @@ void UILayer::afterPurchaseFreeshSkin(int skinIdx, bool restored)
         }
 
         //
-        if (!restored && skinIdx == UserInfo::getInstance()->getGoldenFishSkinIndex()) {
-            UserInfo::getInstance()->unlockGoldenFishAndGiveRewardAfterPurchase();
-            showCoins(4);
-            updateCoinLabel();
-        }
-        else {
-            UserInfo::getInstance()->unlockSkinAt(skinIdx);
-        }
+        UserInfo::getInstance()->unlockSkinAt(skinIdx);
+        updateCoinLabel();
     }
     else {
         //
