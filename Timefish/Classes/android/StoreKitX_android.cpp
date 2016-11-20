@@ -102,7 +102,7 @@ void StoreKitX::beginPurchaseFreeshSkin(const char* skinName)
     }
 
     //
-    beginPurchaseFreeshSkinJNI(skinName);
+//    beginPurchaseFreeshSkinJNI(skinName);
 }
 
 void StoreKitX::beginPurchasePackage(const char* packageID)
@@ -121,7 +121,7 @@ void StoreKitX::beginPurchasePackage(const char* packageID)
     }
     
     //
-    beginPurchasePackageJNI(packageID);
+//    beginPurchasePackageJNI(packageID);
 }
 
 void StoreKitX::beginPurchaseRemoveAds()
@@ -140,7 +140,7 @@ void StoreKitX::beginPurchaseRemoveAds()
     }
 
     //
-    beginPurchaseRemoveAdsJNI("remove_ads");
+//    beginPurchaseRemoveAdsJNI("remove_ads");
 }
 
 void StoreKitX::restorePurchasesItems()
@@ -153,9 +153,9 @@ void StoreKitX::restorePurchasesItems()
     }
 
     //
-    showRestoreAllPopupJNI(LocalizationManager::getInstance()->getLocalizationString("RestoreUI1").c_str(),
-                           LocalizationManager::getInstance()->getLocalizationString("RestoreUI2").c_str(),
-                           LocalizationManager::getInstance()->getLocalizationString("RestoreUI3").c_str());
+//    showRestoreAllPopupJNI(LocalizationManager::getInstance()->getLocalizationString("RestoreUI1").c_str(),
+//                           LocalizationManager::getInstance()->getLocalizationString("RestoreUI2").c_str(),
+//                           LocalizationManager::getInstance()->getLocalizationString("RestoreUI3").c_str());
 
     //
     if (m_delegate) {

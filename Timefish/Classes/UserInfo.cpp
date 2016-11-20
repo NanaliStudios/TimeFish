@@ -2845,19 +2845,6 @@ bool UserInfo::setAchievementInfoWithType(AchievementType type) {
     if (getSelectedPosterType() == 0) {
         setSelectedPosterType(achievementIdx + 1);
     }
-//
-//    //
-//    // If authenticated, Report to Apple Server
-//    //
-//#if CC_TARGET_PLATFORM != CC_PLATFORM_ANDROID
-//    if (GameCenterX::getInstance()->isAuthenticated(false)) {
-//        GameCenterX::getInstance()->reportAchievementIdentifier(achievementIdx+1, 100);
-//    }
-//#else
-//    if (NativeUtils::isSignedIn()) {
-//        NativeUtils::unlockAchievement(achievementIdx);
-//    }
-//#endif
 
     //
     //

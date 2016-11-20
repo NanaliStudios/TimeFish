@@ -1077,12 +1077,7 @@ void UILayer::openCredit(Ref *pSender)
 #if CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID
 void UILayer::setGoogleGameServiceLogin(Ref *pSender)
 {
-    if (!NativeUtils::isSignedIn()) {
-        NativeUtils::signIn();
-    }
-    else {
-        NativeUtils::signOut();
-    }
+    //
 }
 #endif
 
@@ -1401,12 +1396,7 @@ void UILayer::showGameCenterLeaderboard()
     SoundManager::getInstance()->playSoundEffect(SoundButton, false);
 
 #if CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID
-    if (!NativeUtils::isSignedIn()) {
-        NativeUtils::signIn();
-    }
-    else {
-        NativeUtils::showLeaderboard();
-    }
+    //
 #else
     //
     if (GameCenterX::getInstance()->isAuthenticated(true)) {

@@ -22,28 +22,21 @@ FlurryX* FlurryX::getInstance()
 
 void FlurryX::startSession()
 {
-    startSessionJNI();
 }
 
 void FlurryX::logEvent(const char *eventName)
 {
-    logEventJNI(eventName);
 }
 
 void FlurryX::logBackgroundEventWithInt(const char *eventName, int playCount)
 {
-    // Plays
-    logBackgroundEventWithIntJNI(eventName, playCount);
 }
 
 void FlurryX::logPosterSelection(const char *eventName, int type)
 {
-    logPosterSelectionJNI(eventName, type);
 }
 
 void FlurryX::logResultEvent(int score, int bestScore, int playCount, int totalCount)
 {
-    // Score, Best, Plays, TotalPlays
-    logResultEventJNI(score, bestScore, playCount, totalCount);
 }
 

@@ -18,8 +18,6 @@
 #include "MenuItemSameImage.h"
 #include "MenuItemImageButton.h"
 
-#include "android/NativeUtils.h"
-
 USING_NS_CC;
 
 class PageViewlayer : public Layer

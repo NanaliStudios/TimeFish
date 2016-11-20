@@ -685,12 +685,7 @@ void PageViewlayer::showGameCenterAchievement()
     SoundManager::getInstance()->playSoundEffect(SoundButton, false);
     
 #if CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID
-    if (!NativeUtils::isSignedIn()) {
-        NativeUtils::signIn();
-    }
-    else {
-        NativeUtils::showAchievements();
-    }
+    //
 #else
     //
     if (GameCenterX::getInstance()->isAuthenticated(true)) {

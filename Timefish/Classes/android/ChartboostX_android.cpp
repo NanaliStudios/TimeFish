@@ -31,15 +31,13 @@ void ChartboostX::purgeChartboostX()
 
 void ChartboostX::cacheInterstitial(const char* location)
 {
-    cacheInterstitialJNI(location);
 }
 
 void ChartboostX::showInterstitial(const char* location)
 {
-    showInterstitialJNI(location);
 }
 
 bool ChartboostX::hasCachedInterstitial(const char* location)
 {
-    return hasInterstitialJNI(location);
+    return false;
 }

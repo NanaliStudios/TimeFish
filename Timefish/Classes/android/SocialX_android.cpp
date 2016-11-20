@@ -27,25 +27,25 @@ void SocialX::openActionSheetWithMessage(const char* message, const char* path)
 }
 void SocialX::rateApp()
 {
-    rateAppJNI();
+//    rateAppJNI();
 }
 
 void SocialX::openFacebookPage()
 {
-    openFacebookPageJNI();
+//    openFacebookPageJNI();
 }
 void SocialX::openHomepage()
 {
-    openHomepageJNI();
+//    openHomepageJNI();
 }
 void SocialX::openArtworkPage()
 {
-    openArtworkPageJNI();
+//    openArtworkPageJNI();
 }
 
 void SocialX::openYoutubePage()
 {
-    openYoutubePageJNI();
+//    openYoutubePageJNI();
 }
 void SocialX::showExitPopup()
 {
@@ -72,12 +72,6 @@ std::time_t SocialX::getCurrentTime()
     std::time_t timeCheckIn = std::time(0);
 
     return timeCheckIn;
-}
-
-void SocialX::submitScore()
-{
-    int currScore = UserInfo::getInstance()->getCurrScore();
-    submitScoreJNI(currScore);
 }
 
 bool  SocialX::getAudioInUse()

@@ -1795,11 +1795,7 @@ void PlayScene::showScoreUI()
     }
     
 #else
-    SocialX::getInstance()->submitScore();
-
-    if (NativeUtils::isSignedIn()) {
-        NativeUtils::submitScore(UserInfo::getInstance()->getCurrScore());
-    }
+    //
 #endif
 
     //

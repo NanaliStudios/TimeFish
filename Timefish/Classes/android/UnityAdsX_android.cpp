@@ -27,10 +27,9 @@ void UnityAdsX::startSession()
 
 void UnityAdsX::showVideo()
 {
-    showUnityVideoJNI();
 }
 
 bool UnityAdsX::isVideoAvailable()
 {
-    return isUnityVideoAvailableJNI();
+    return false;
 }

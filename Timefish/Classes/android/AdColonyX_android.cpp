@@ -27,10 +27,9 @@ void AdColonyX::startSession()
 
 void AdColonyX::showVideo()
 {
-    showVideoJNI();
 }
 
 bool AdColonyX::isVideoAvailable()
 {
-    return isVideoAvailableJNI();
+    return false;
 }

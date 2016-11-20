@@ -455,13 +455,6 @@ std::string SocialX::getDeviceUUID()
     return "fe2e3a4d-1748-41f1-b30c-92a35bdfcbd5";
 }
 
-void SocialX::submitScore()
-{
-    //
-    // android 전용이므로, 여기서는 아무것도 하지 않음
-    //
-}
-
 void SocialX::showAlert()
 {
     NSString *msg = [NSString stringWithFormat:@"showAlert"];

@@ -42,7 +42,6 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
 					../../../Classes/PosterLayer.cpp \
 					../../../Classes/ResultMainLayer.cpp \
 					../../../Classes/ResultUIButtonLayer.cpp \
-					../../../Classes/RibbonLayer.cpp \
 					../../../Classes/ScoreLayer.cpp \
 					../../../Classes/ScrollLayerBase.cpp \
 					../../../Classes/ShakeAction.cpp \
@@ -69,8 +68,6 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
 					../../../Classes/android/AdColonyX_android.cpp \
 					../../../Classes/android/ChartboostX_android.cpp \
 					../../../Classes/android/FlurryX_android.cpp \
-					../../../Classes/android/JNIHelpers.cpp \
-					../../../Classes/android/NativeUtils.cpp \
 					../../../Classes/android/NotificationX_android.cpp \
 					../../../Classes/android/SocialX_android.cpp \
 					../../../Classes/android/StoreKitX_android.cpp \
