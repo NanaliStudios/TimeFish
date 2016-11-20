@@ -215,39 +215,10 @@ void UILayer::initSubLayers()
     resultMain->setLayerVisible(false);
     addChild(resultMain);
     
-    /*
-     ResultTypeGift1 = 0,
-     ResultTypeGift2,
-     //
-     ResultTypeDraw1,
-     ResultTypeDraw2,
-     //
-     ResultTypeVideo1,
-     ResultTypeVideo2,
-     //
-     ResultTypeBuy1,
-     ResultTypeBuy2,
-     //
-     ResultTypeRemoveAD1,
-     ResultTypeRemoveAD2,
-     //
-     ResultTypeTrial,
-     ResultTypeRate,
-     ResultTypeFacebook,
-     ResultTypeShare,
-     ResultTypeArtwork,
-     */
+    //
     resultMain->setButtonCallbacks(CC_CALLBACK_0(UILayer::showGiftLayer, this),
-                                    CC_CALLBACK_0(UILayer::showFreeshMaker, this),
-                                    CC_CALLBACK_0(UILayer::showVideoLayer, this),
-                                    CC_CALLBACK_0(UILayer::processSkinPurchaseFromResult, this),
-                                    CC_CALLBACK_0(UILayer::processPurchaseRemoveAds, this),
-                                    CC_CALLBACK_0(UILayer::tryFreeshSkin, this),
-                                    CC_CALLBACK_0(UILayer::rateGame, this),
-                                    CC_CALLBACK_0(UILayer::processToFacebook, this),
-                                    CC_CALLBACK_0(UILayer::shareGameToVideo, this),
-                                    CC_CALLBACK_0(UILayer::moveToArtworkPage, this),
-                                    CC_CALLBACK_0(UILayer::processPurchasePackage, this));
+                                   CC_CALLBACK_0(UILayer::showFreeshMaker, this),
+                                   CC_CALLBACK_0(UILayer::shareGameScore, this));
     //
     resultButtons = ResultUIButtonLayer::create();
     resultButtons->setVisible(false);
@@ -1352,11 +1323,11 @@ void UILayer::replayGame()
     // if user hit the replay button instead of the try button at ResultTypeTrial,
     // skip trial!
     //
-    int firstTimeResultTypeIdx = UserInfo::getInstance()->getFirstTimeResultTypeIndex();
-    int trialSkinIdx = UserInfo::getInstance()->getTrialSkinIndex();
-    if (firstTimeResultTypeIdx == 3 && trialSkinIdx==-1 && resultMain->getMainResultType() == ResultTypeTrial) {
-        UserInfo::getInstance()->increaseFirstTimeResultTypeIndex();
-    }
+//    int firstTimeResultTypeIdx = UserInfo::getInstance()->getFirstTimeResultTypeIndex();
+//    int trialSkinIdx = UserInfo::getInstance()->getTrialSkinIndex();
+//    if (firstTimeResultTypeIdx == 3 && trialSkinIdx==-1 && resultMain->getMainResultType() == ResultTypeTrial) {
+//        UserInfo::getInstance()->increaseFirstTimeResultTypeIndex();
+//    }
 
     //
     resultBtnDisabled = true;

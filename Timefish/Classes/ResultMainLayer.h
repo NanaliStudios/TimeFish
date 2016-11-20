@@ -32,17 +32,7 @@ USING_NS_CC;
 
 #define UIStatusGift            0
 #define UIStatusDraw            1
-#define UIStatusVideo           2
-#define UIStatusRemoveAd        3
-#define UIStatusRate            4
-#define UIStatusFacebook        5
-#define UIStatusShare           6
-#define UIStatusPinterest       7
-// center only
-#define UIStatusBuy             8
-#define UIStatusTry             9
-#define UIStatusBuyPackage      10
-#define UIStatusBuyGoldenFish   11
+#define UIStatusShare           2
 
 class ResultMainLayer : public Layer
 {
@@ -56,26 +46,10 @@ public:
 
     void setButtonCallbacks(const std::function<void()>& callback1,
                             const std::function<void()>& callback2,
-                            const std::function<void()>& callback3,
-                            const std::function<void()>& callback4,
-                            const std::function<void()>& callback5,
-                            const std::function<void()>& callback6,
-                            const std::function<void()>& callback7,
-                            const std::function<void()>& callback8,
-                            const std::function<void()>& callback9,
-                            const std::function<void()>& callback10,
-                            const std::function<void()>& callback11) {
+                            const std::function<void()>& callback3) {
         buttonCallbacks[0] = callback1;
         buttonCallbacks[1] = callback2;
         buttonCallbacks[2] = callback3;
-        buttonCallbacks[3] = callback4;
-        buttonCallbacks[4] = callback5;
-        buttonCallbacks[5] = callback6;
-        buttonCallbacks[6] = callback7;
-        buttonCallbacks[7] = callback8;
-        buttonCallbacks[8] = callback9;
-        buttonCallbacks[9] = callback10;
-        buttonCallbacks[10] = callback11;
     }
     
     void setWorldLayerUpdater(const std::function<void()>& callback) {
@@ -181,12 +155,10 @@ private:
     Node* actionList[6];
 
     std::function<void()> worldLayerUpdater;
-    std::function<void()> buttonCallbacks[11];
+    std::function<void()> buttonCallbacks[3];
     std::function<void(bool)> uiInitializer[ResultTypeMax];
     
     //
-//    Menu *mainBtn;
-//    MenuItemImage *mainBtn;
     MenuItemImageButton *mainBtn;
 
     Label *centerLbl1, *centerLbl2;
@@ -272,107 +244,33 @@ private:
         centerButtonStatus = 0;
         setCenterUI(UIStatusGift);
     }
-    void setAsResultTypeGift2(bool withCenter = true)
+    void setAsResultTypeGiftZPlay(bool withCenter = true)
     {
         if (withCenter) {
             setCenterUI(UIStatusGift);
         }
         setLeftUI(UIStatusDraw);
-        setRightUI(UIStatusVideo);
+        setRightUI(UIStatusShare);
     }
     void setAsResultTypeDraw1(bool withCenter = true)
     {
         setCenterUI(UIStatusDraw);
     }
-    void setAsResultTypeDraw2(bool withCenter = true)
+    void setAsResultTypeDrawZPlay(bool withCenter = true)
     {
         setCenterUI(UIStatusDraw);
         setLeftUI(UIStatusGift);
-        setRightUI(UIStatusVideo);
-    }
-    void setAsResultTypeVideo1(bool withCenter = true)
-    {
-        setCenterUI(UIStatusVideo);
-    }
-    void setAsResultTypeVideo2(bool withCenter = true)
-    {
-        if (withCenter) {
-            setCenterUI(UIStatusVideo);
-        }
-        setLeftUI(UIStatusDraw);
-        setRightUI(UIStatusGift);
-    }
-    void setAsResultTypeBuy1(bool withCenter = true)
-    {
-        setCenterUI(UIStatusBuy);
-    }
-    void setAsResultTypeBuy2(bool withCenter = true)
-    {
-        setCenterUI(UIStatusBuy);
-        setLeftUI(UIStatusDraw);
-        setRightUI(UIStatusVideo);
-    }
-    void setAsResultTypeRemoveAd1(bool withCenter = true)
-    {
-        setCenterUI(UIStatusRemoveAd);
-    }
-    void setAsResultTypeRemoveAd2(bool withCenter = true)
-    {
-        setCenterUI(UIStatusRemoveAd);
-//        setLeftUI(UIStatusGift);
-//        setRightUI(UIStatusDraw);
-        setLeftUI(UIStatusDraw);
-        setRightUI(UIStatusVideo);
-    }
-    void setAsResultTypeTry(bool withCenter = true)
-    {
-        setCenterUI(UIStatusTry);
-    }
-    void setAsResultTypeRate(bool withCenter = true)
-    {
-        setCenterUI(UIStatusRate);
-    }
-    void setAsResultTypeFacebook(bool withCenter = true)
-    {
-        setCenterUI(UIStatusFacebook);
-    }
-    void setAsResultTypeShare(bool withCenter = true)
-    {
-        setCenterUI(UIStatusShare);
-    }
-    void setAsResultTypeArtwork(bool withCenter = true)
-    {
-        setCenterUI(UIStatusPinterest);
-    }
-    void setAsResultTypeBuyPackage(bool withCenter = true)
-    {
-        setCenterUI(UIStatusBuyPackage);
-    }
-    void setAsResultTypeGoldenFish(bool withCenter = true)
-    {
-        setCenterUI(UIStatusBuyGoldenFish);
+        setRightUI(UIStatusShare);
     }
     
     //
     bool isPrevTypeGift() {
         ResultType prevResultType = UserInfo::getInstance()->getPrevResultType();
-        return ((prevResultType == ResultTypeGift1) || (prevResultType == ResultTypeGift2));
+        return (prevResultType == ResultTypeGift1);
     }
     bool isPrevTypeDraw() {
         ResultType prevResultType = UserInfo::getInstance()->getPrevResultType();
-        return ((prevResultType == ResultTypeDraw1) || (prevResultType == ResultTypeDraw2));
-    }
-    bool isPrevTypeVideo() {
-        ResultType prevResultType = UserInfo::getInstance()->getPrevResultType();
-        return ((prevResultType == ResultTypeVideo1) || (prevResultType == ResultTypeVideo2));
-    }
-    bool isPrevTypeBuy() {
-        ResultType prevResultType = UserInfo::getInstance()->getPrevResultType();
-        return ((prevResultType == ResultTypeBuy1) || (prevResultType == ResultTypeBuy2));
-    }
-    bool isPrevTypeRemove() {
-        ResultType prevResultType = UserInfo::getInstance()->getPrevResultType();
-        return ((prevResultType == ResultTypeRemoveAD1) || (prevResultType == ResultTypeRemoveAD2));
+        return (prevResultType == ResultTypeDraw1);
     }
     
     //

@@ -48,7 +48,7 @@
 //////////
 #define MaxComboCount 5
 #define PointBoostBonus 1
-#define FirstTimeResultTypeIndexMax 8
+#define FirstTimeResultTypeIndexMax 1
 #define ResultTypeGroupIndexMax     6
 
 #define NumberFontPath "fonts/kimberley bl.ttf"
@@ -90,30 +90,10 @@ typedef enum {
 } Status;
 
 typedef enum {
-    //
     ResultTypeGift1 = 0,
-    ResultTypeGift2,
-    //
+    ResultTypeGiftZPlay,
     ResultTypeDraw1,
-    ResultTypeDraw2,
-    //
-    ResultTypeVideo1,
-    ResultTypeVideo2,
-    //
-    ResultTypeBuy1,
-    ResultTypeBuy2,
-    //
-    ResultTypeRemoveAD1,
-    ResultTypeRemoveAD2,
-    //
-    ResultTypeTrial,
-    ResultTypeRate,
-    ResultTypeFacebook,
-    ResultTypeShare,
-    ResultTypeArtwork,
-    //
-    ResultTypeBuyPackage,
-    ResultTypeGoldenFish,
+    ResultTypeDrawZPlay,
     //
     ResultTypeMax
 } ResultType;
@@ -1431,12 +1411,7 @@ static float get12OclockDegreeFrom3OclockRadian(float radian)
 static const char* iconFileNames[] = {
     "icon_gift.png",
     "icon_draw.png",
-    "icon_watchads.png",
-    "icon_remove_ads.png",
-    "icon_rate.png",
-    "button_icon_facebook.png",
     "icon_share.png",
-    "icon_artwork.png"
 };
 
 inline const char* getIconFileName(int idx)
@@ -1447,12 +1422,7 @@ inline const char* getIconFileName(int idx)
 static const char* iconKeyStrings[] = {
     "ResultGiftBtn",
     "ResultDraw",
-    "ResultVideo1",
-    "ResultAD",
-    "ResultLikeNotice",
     "ResultShareBtn",
-    "ResultArtwork",
-
 };
 
 inline const char* getIconKeyStrings(int idx)
@@ -1463,14 +1433,7 @@ inline const char* getIconKeyStrings(int idx)
 static const char* btnStringKeys[] = {
     "ResultGiftBtn",
     "ResultDrawBtn",
-    "ResultVideo1",
-    "ResultPurchaseBtn",
-    "ResultRateBtn",
-    "ResultLikeBtn",
     "ResultShareBtn",
-    "ResultArtwork",
-    "ResultPurchaseBtn",
-    "ResultTryBtn"
 };
 
 //
