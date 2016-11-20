@@ -312,38 +312,38 @@ void CreditLayer::initUILayer()
 
     float posY = copyright->getPositionY() + (copyright->getContentSize().height + 50) * scaleFactor;
 
-    // Homepage button
-    {
-        auto menuItem = MenuItemSameImage::create("TF_credit_UI-nanali.png", CC_CALLBACK_0(CreditLayer::moveToHomepage, this));
-        Size s = menuItem->getContentSize() * scaleFactor;
-        
-        auto homeBtn = Menu::create(menuItem, NULL);
-//        float posX = (ratioCond)? s.width * 0.7 - visibleSizeHalf.width : 0 - s.width * 0.7;
-//        float buttonPosY = (ratioCond)? posY - s.height * 0.5: posY;
-        float posX = - s.width * 0.7;
-        float buttonPosY = posY;
-        homeBtn->setPosition(Vec2(posX + origin.x, buttonPosY));
-        uiLayer->addChild(homeBtn, 1);
-        
-        menuItem->setScale(scaleFactor);
-    }
-
-    // youtube button
-    {
-        auto menuItem = MenuItemSameImage::create("TF_credit_UI-youtube.png", CC_CALLBACK_0(CreditLayer::moveToYoutube, this));
-        Size s = menuItem->getContentSize() * scaleFactor;
-        
-        auto shareBtn = Menu::create(menuItem, NULL);
-//        float posX = (ratioCond)? -s.width * 0.7 + visibleSizeHalf.width : 0 + s.width * 0.7;
-//        float buttonPosY = (ratioCond)? posY - s.height * 0.5: posY;
-        float posX = s.width * 0.7;
-        float buttonPosY = posY;
-        shareBtn->setPosition(Vec2(posX + origin.x, buttonPosY));
-        uiLayer->addChild(shareBtn, 1);
-        
-        menuItem->setScale(scaleFactor);
-
-    }
+//    // Homepage button
+//    {
+//        auto menuItem = MenuItemSameImage::create("TF_credit_UI-nanali.png", CC_CALLBACK_0(CreditLayer::moveToHomepage, this));
+//        Size s = menuItem->getContentSize() * scaleFactor;
+//        
+//        auto homeBtn = Menu::create(menuItem, NULL);
+////        float posX = (ratioCond)? s.width * 0.7 - visibleSizeHalf.width : 0 - s.width * 0.7;
+////        float buttonPosY = (ratioCond)? posY - s.height * 0.5: posY;
+//        float posX = - s.width * 0.7;
+//        float buttonPosY = posY;
+//        homeBtn->setPosition(Vec2(posX + origin.x, buttonPosY));
+//        uiLayer->addChild(homeBtn, 1);
+//        
+//        menuItem->setScale(scaleFactor);
+//    }
+//
+//    // youtube button
+//    {
+//        auto menuItem = MenuItemSameImage::create("TF_credit_UI-youtube.png", CC_CALLBACK_0(CreditLayer::moveToYoutube, this));
+//        Size s = menuItem->getContentSize() * scaleFactor;
+//        
+//        auto shareBtn = Menu::create(menuItem, NULL);
+////        float posX = (ratioCond)? -s.width * 0.7 + visibleSizeHalf.width : 0 + s.width * 0.7;
+////        float buttonPosY = (ratioCond)? posY - s.height * 0.5: posY;
+//        float posX = s.width * 0.7;
+//        float buttonPosY = posY;
+//        shareBtn->setPosition(Vec2(posX + origin.x, buttonPosY));
+//        uiLayer->addChild(shareBtn, 1);
+//        
+//        menuItem->setScale(scaleFactor);
+//
+//    }
     
     // Nanali Studios
     stream.str("");
@@ -360,7 +360,7 @@ void CreditLayer::initUILayer()
 //        posY = posY;
 //    }
 //    else {
-        posY += 140 * scaleFactor;
+        posY += 50 * scaleFactor;
 //    }
 
     nanaliStudio->setPosition(Vec2(origin.x, posY));
