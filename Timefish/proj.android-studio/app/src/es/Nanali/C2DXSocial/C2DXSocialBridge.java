@@ -19,8 +19,7 @@ import android.util.Log;
 import android.net.Uri;
 import android.content.*;
 
-import com.Nanali.Timefish.R;
-
+import com.zplay.timefishit.R;
 
 import android.app.Activity;
 import android.app.AlertDialog;

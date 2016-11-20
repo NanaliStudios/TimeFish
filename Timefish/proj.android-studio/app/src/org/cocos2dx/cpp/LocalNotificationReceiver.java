@@ -1,6 +1,6 @@
 package org.cocos2dx.cpp;
 
-import com.Nanali.Timefish.R;
+import com.zplay.timefishit.R;
 
 import android.app.Notification;
 import android.app.NotificationManager;
