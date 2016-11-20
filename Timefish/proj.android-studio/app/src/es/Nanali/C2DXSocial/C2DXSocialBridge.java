@@ -27,42 +27,18 @@ import android.app.AlertDialog;
 import android.os.SystemClock;
 import android.os.Environment;
 
-import jp.co.adways.planetarcade.sdk.OnScoreCallback;
-import jp.co.adways.planetarcade.sdk.OnValidateCallback;
-import jp.co.adways.planetarcade.sdk.PlanetArcadeSDKHelper;
-
-
 public class C2DXSocialBridge {
     private static final String TAG = "C2DXSocial";
     private static Cocos2dxActivity s_activity;
-
-    private static PlanetArcadeSDKHelper mPlanetArcadeSDKHelper;
 
     public static native void onCancelCallback();
     
     // the method must be called in main thread, before any other method
     public static void initC2DXSocialBridge(Cocos2dxActivity activity){
         C2DXSocialBridge.s_activity = activity;
-
-        //
-        mPlanetArcadeSDKHelper = new PlanetArcadeSDKHelper(s_activity);
-        mPlanetArcadeSDKHelper.validate(new OnValidateCallback() {
-            @Override
-            public void onSuccess() {
-                //TODO: When validated successfully.
-//                Log.i(TAG, "PlanetArcadeSDKHelper : success");
-            }
-            @Override
-            public void onFailure(int errorCode, String errorMessage) {
-//                Log.i(TAG, "PlanetArcadeSDKHelper : fail[" + errorCode + "]"+errorMessage);
-            } });
-
-        mPlanetArcadeSDKHelper.setDebugMode(false);
     }
 
     public static void releaseC2DXSocialBridge() {
-        if (mPlanetArcadeSDKHelper != null)
-            mPlanetArcadeSDKHelper.destroy();
     }
 
     //
@@ -70,74 +46,33 @@ public class C2DXSocialBridge {
     // http://lhh3520.tistory.com/321
     //
     private final static String CACHE_DEVICE_ID = "CacheDeviceID";
-    public static String getDeviceUUID()
-    {
+    public static String getDeviceUUID() {
         UUID deviceUUID = null;
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences( s_activity );
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(s_activity);
         String cachedDeviceID = sharedPreferences.getString(CACHE_DEVICE_ID, "");
-        if ( cachedDeviceID != "" )
-        {
-            deviceUUID = UUID.fromString( cachedDeviceID );
-        }
-        else
-        {
-            final String androidUniqueID = Settings.Secure.getString( s_activity.getContentResolver(),
-                    Settings.Secure.ANDROID_ID );
-            try
-            {
-                if ( androidUniqueID != "" )
-                {
-                    deviceUUID = UUID.nameUUIDFromBytes( androidUniqueID.getBytes("utf8") );
-                }
-                else
-                {
+        if (cachedDeviceID != "") {
+            deviceUUID = UUID.fromString(cachedDeviceID);
+        } else {
+            final String androidUniqueID = Settings.Secure.getString(s_activity.getContentResolver(),
+                    Settings.Secure.ANDROID_ID);
+            try {
+                if (androidUniqueID != "") {
+                    deviceUUID = UUID.nameUUIDFromBytes(androidUniqueID.getBytes("utf8"));
+                } else {
                     final String anotherUniqueID = ((TelephonyManager) s_activity.getSystemService(Context.TELEPHONY_SERVICE)).getDeviceId();
-                    if ( anotherUniqueID != null )
-                    {
-                        deviceUUID = UUID.nameUUIDFromBytes( anotherUniqueID.getBytes("utf8") );
-                    }
-                    else
-                    {
+                    if (anotherUniqueID != null) {
+                        deviceUUID = UUID.nameUUIDFromBytes(anotherUniqueID.getBytes("utf8"));
+                    } else {
                         deviceUUID = UUID.randomUUID();
                     }
                 }
-            }
-            catch ( UnsupportedEncodingException e )
-            {
+            } catch (UnsupportedEncodingException e) {
                 throw new RuntimeException(e);
             }
         }
         // save cur UUID.
         sharedPreferences.edit().putString(CACHE_DEVICE_ID, deviceUUID.toString()).apply();
         return deviceUUID.toString();
-    }
-
-    public static boolean isValidated() {
-        return mPlanetArcadeSDKHelper.isValidated();
-    }
-
-    public static void submitScore(final int userScore) {
-
-        String userID = getDeviceUUID();
-//        Log.i(TAG, "submitScore : " + userID + "/" + userScore);
-
-        if (isValidated()) {
-            mPlanetArcadeSDKHelper.submitScore(userID, userScore, 0,
-                    new OnScoreCallback() {
-                        @Override
-                        public void onSuccess() {
-                            // Submit Score Success
-//                            Log.i(TAG, "submitScore : success");
-                        }
-                        @Override
-                        public void onFailure(int errorCode, String errorMessage) {
-                            // Submit Score Failed.
-//                            Log.i(TAG, "submitScore : fail[" + errorCode + "]"+errorMessage);
-                        }
-                    });        }
-        else {
-//            Log.i(TAG, "submitScore : Not Validated");
-        }
     }
 
     public static byte[] readFileToByte(File file) throws IOException {
