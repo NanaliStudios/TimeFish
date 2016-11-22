@@ -231,7 +231,6 @@ void UILayer::initSubLayers()
         int _bestScore = UserInfo::getInstance()->getBestScore();
         if (totalPlayCount>3 && _currScore == _bestScore) {
             BestScorePopup *p = BestScorePopup::create();
-            p->setShareCallback(CC_CALLBACK_0(UILayer::shareGameScore, this));
             p->setScoreInfo(_bestScore);
             p->runPopupEffect();
             addChild(p, 1000);

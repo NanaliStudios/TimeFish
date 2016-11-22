@@ -114,9 +114,6 @@ public:
     
     CREATE_FUNC(BestScorePopup);
 
-    void setShareCallback(const std::function<void()>& _shareCallback) {
-        shareCallback = _shareCallback;
-    }
     void setScoreInfo(int score);
     void runPopupEffect();
 
@@ -124,8 +121,6 @@ protected:
     void initBackground();
     
     float btnPosTopY;
-
-    std::function<void()> shareCallback;
 };
 
 #endif /* defined(__Timefish__Popup__) */
