@@ -32,9 +32,7 @@ bool ResultMainLayer::init()
 
     //
     uiInitializer[0] = (CC_CALLBACK_1(ResultMainLayer::setAsResultTypeGift1, this));
-    uiInitializer[1] = (CC_CALLBACK_1(ResultMainLayer::setAsResultTypeGiftZPlay, this));
-    uiInitializer[2] = (CC_CALLBACK_1(ResultMainLayer::setAsResultTypeDraw1, this));
-    uiInitializer[3] = (CC_CALLBACK_1(ResultMainLayer::setAsResultTypeDrawZPlay, this));
+    uiInitializer[1] = (CC_CALLBACK_1(ResultMainLayer::setAsResultTypeDraw1, this));
 
     return true;
 }
@@ -118,12 +116,12 @@ void ResultMainLayer::setMainResultType()
     //
     // Decide Result UI type: one-button or three-button
     //
-    if (resultType == ResultTypeGiftZPlay ||
-        resultType == ResultTypeDrawZPlay) {
-        resultOneOrThree = 1;
+    if (resultType == ResultTypeGift1 ||
+        resultType == ResultTypeDraw1) {
+        resultOneOrThree = 0;
     }
     else {
-        resultOneOrThree = 0;
+        resultOneOrThree = 1;
     }
     
     //
@@ -142,10 +140,10 @@ void ResultMainLayer::setMainResultTypeForExpUser()
 {
     bool isGiftAvailable = ableToGetGift();
     if (isGiftAvailable) {
-        resultType = ResultTypeGiftZPlay;
+        resultType = ResultTypeGift1;
     }
     else {
-        resultType = ResultTypeDrawZPlay;
+        resultType = ResultTypeDraw1;
     }
 }
 
@@ -154,8 +152,8 @@ void ResultMainLayer::btnCallback(Ref* pSender)
     //
     // get Callback index by ResultType
     //
-    int callbackIdx =(resultType == ResultTypeGift1 || resultType == ResultTypeGiftZPlay)? 0:
-                    (resultType == ResultTypeDraw1 || resultType == ResultTypeDrawZPlay)? 1: 2;
+    int callbackIdx =(resultType == ResultTypeGift1)? 0:
+                    (resultType == ResultTypeDraw1)? 1: 0;
 
     //
     selectedButtonIndex = 0;
@@ -195,9 +193,6 @@ void ResultMainLayer::selectedRight()
     else if (btnTag == UIStatusDraw) {
         buttonCallbacks[1]();
     }
-    else if (btnTag == UIStatusShare) {
-        buttonCallbacks[2]();
-    }
 }
 
 #pragma mark -
@@ -228,80 +223,6 @@ void ResultMainLayer::updateMainLayer(bool withoutGivingCoins)
             worldLayerUpdater();
         }
         updateMainLayer();
-    }
-    /////////////////////////////////////////
-    /////////////////////////////////////////
-    /////////////////////////////////////////
-    else if (resultType == ResultTypeGiftZPlay) {
-        //
-        // Update center button
-        //
-        int restHour = 0;
-        int restMin = 0;
-        UserInfo::getInstance()->getRestGiftTime(restHour, restMin);
-        if (restHour > 0 || restMin > 0) {
-            showRestTimeInfo(restHour, restMin);
-            
-            centerButtonStatus = 2;
-        }
-        else {
-            centerButtonStatus = 0;
-        }
-        
-        
-        //
-        // Update left button
-        //
-        if (UserInfo::getInstance()->hasEnoughCoinsToDraw()) {
-            // Able to Draw
-            leftIcon->setColored();
-            int idx = leftIcon->getTag();
-            
-            //
-            std::stringstream stream;
-            stream << LocalizationManager::getInstance()->getLocalizationString(getIconKeyStrings(idx));
-            std::string stringInfo = stream.str();
-            
-            leftBtnLabel1->setString(stringInfo);
-            leftBtnLabel1->setTextColor(Color4B(255, 61, 1, 255));
-            
-            //
-            leftButtonStatus = 1;
-        }
-        else {
-            // Unable to Draw
-            leftIcon->setGrayed();
-            showRestCoinInfoToLeft();
-            
-            //
-            leftButtonStatus = 2;
-        }
-        //
-        // Update right button
-        //
-        if (selectedButtonIndex != 2) {
-            if (!hasShownVideo && UserInfo::getInstance()->isVideoAvailable()) {
-                rightIcon->setColored();
-            }
-            else {
-                rightIcon->setGrayed();
-            }
-            
-            //
-            rightButtonStatus = 1;
-        }
-        else {
-            rightIcon->setGrayed();
-            showEarnedCoinInfoToRight();
-            
-            //
-            rightButtonStatus = 2;
-        }
-        
-        //
-        // Antion!
-        //
-        restartIntroAction();
     }
     /////////////////////////////////////////
     /////////////////////////////////////////
@@ -1169,14 +1090,7 @@ void ResultMainLayer::setRightUI(int idx)
     //
     setRightButtonLabel();
     
-    if (idx == UIStatusShare) {
-        //
-        rightIcon->setColored();
-        if (rightBtnLabel1) {
-            rightBtnLabel1->setTextColor(Color4B(3, 191, 255, 255));
-        }
-    }
-    else if (idx == UIStatusDraw || idx == UIStatusGift) {
+    if (idx == UIStatusDraw || idx == UIStatusGift) {
         //
         if (idx == UIStatusDraw) {
             if (UserInfo::getInstance()->hasEnoughCoinsToDraw()) {
@@ -1232,8 +1146,7 @@ void ResultMainLayer::setRightUI(int idx)
 
 void ResultMainLayer::startIntroAction()
 {
-    if (resultType == ResultTypeGiftZPlay ||
-        resultType == ResultTypeDrawZPlay) {
+    if (resultOneOrThree == 1) {
         //
         // run actions for 3 UIs
         //

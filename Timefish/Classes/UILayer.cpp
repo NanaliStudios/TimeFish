@@ -216,8 +216,7 @@ void UILayer::initSubLayers()
     
     //
     resultMain->setButtonCallbacks(CC_CALLBACK_0(UILayer::showGiftLayer, this),
-                                   CC_CALLBACK_0(UILayer::showFreeshMaker, this),
-                                   CC_CALLBACK_0(UILayer::shareGameScore, this));
+                                   CC_CALLBACK_0(UILayer::showFreeshMaker, this));
     //
     resultButtons = ResultUIButtonLayer::create();
     resultButtons->setVisible(false);

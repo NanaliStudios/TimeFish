@@ -91,9 +91,7 @@ typedef enum {
 
 typedef enum {
     ResultTypeGift1 = 0,
-    ResultTypeGiftZPlay,
     ResultTypeDraw1,
-    ResultTypeDrawZPlay,
     //
     ResultTypeMax
 } ResultType;

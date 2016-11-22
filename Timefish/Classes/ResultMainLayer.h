@@ -32,7 +32,6 @@ USING_NS_CC;
 
 #define UIStatusGift            0
 #define UIStatusDraw            1
-#define UIStatusShare           2
 
 class ResultMainLayer : public Layer
 {
@@ -45,11 +44,9 @@ public:
     Vec2 origin;
 
     void setButtonCallbacks(const std::function<void()>& callback1,
-                            const std::function<void()>& callback2,
-                            const std::function<void()>& callback3) {
+                            const std::function<void()>& callback2) {
         buttonCallbacks[0] = callback1;
         buttonCallbacks[1] = callback2;
-        buttonCallbacks[2] = callback3;
     }
     
     void setWorldLayerUpdater(const std::function<void()>& callback) {
@@ -155,7 +152,7 @@ private:
     Node* actionList[6];
 
     std::function<void()> worldLayerUpdater;
-    std::function<void()> buttonCallbacks[3];
+    std::function<void()> buttonCallbacks[2];
     std::function<void(bool)> uiInitializer[ResultTypeMax];
     
     //
@@ -244,23 +241,9 @@ private:
         centerButtonStatus = 0;
         setCenterUI(UIStatusGift);
     }
-    void setAsResultTypeGiftZPlay(bool withCenter = true)
-    {
-        if (withCenter) {
-            setCenterUI(UIStatusGift);
-        }
-        setLeftUI(UIStatusDraw);
-        setRightUI(UIStatusShare);
-    }
     void setAsResultTypeDraw1(bool withCenter = true)
     {
         setCenterUI(UIStatusDraw);
-    }
-    void setAsResultTypeDrawZPlay(bool withCenter = true)
-    {
-        setCenterUI(UIStatusDraw);
-        setLeftUI(UIStatusGift);
-        setRightUI(UIStatusShare);
     }
     
     //
