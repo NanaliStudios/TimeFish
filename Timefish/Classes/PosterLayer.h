@@ -66,8 +66,6 @@ private:
 
     void removeThis();
     void setTitle(Ref *pSender);
-    void setShare();
-    void afterCaptured(bool succeed, const std::string& outputFile);
 };
 
 #endif /* defined(__Timefish__PosterLayer__) */

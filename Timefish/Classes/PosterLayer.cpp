@@ -184,18 +184,9 @@ void PosterLayer::initUILayer()
     setBtnItem->setOpacity(0);
     
     setBtn = Menu::create(setBtnItem, NULL);
-    float posX = visibleSizeHalf.width - s.width * 0.7;
+    float posX = visibleSizeHalf.width;
     setBtn->setPosition(Vec2(posX, s.height*1.5));
     uiLayer->addChild(setBtn, 1);
-    
-    // share button
-    auto shareBtnItem = MenuItemSameImage::create("TF_timeposter_share.png", CC_CALLBACK_0(PosterLayer::setShare, this));
-    shareBtnItem->setOpacity(0);
-    
-    auto shareBtn = Menu::create(shareBtnItem, NULL);
-    posX = visibleSizeHalf.width + s.width * 0.7;
-    shareBtn->setPosition(Vec2(posX, s.height*1.5));
-    uiLayer->addChild(shareBtn, 1);
 
     // check mark
     checkMark = Sprite::createWithSpriteFrameName("TF_timeposter_v.png");
@@ -266,7 +257,6 @@ void PosterLayer::initUILayer()
     bottom->runAction(FadeTo::create(fadeInTime, 150));
     closeBtnItem->runAction(FadeTo::create(fadeInTime, 150));
     setBtnItem->runAction(FadeIn::create(fadeInTime));
-    shareBtnItem->runAction(FadeIn::create(fadeInTime));
 
     checkMark->runAction(FadeIn::create(fadeInTime));
     achievementName->runAction(FadeIn::create(fadeInTime));
@@ -305,38 +295,6 @@ void PosterLayer::setTitle(Ref *pSender)
         //
         TapjoyX::getInstance()->logEventInUIFlow("SharePoster", posterType);
     }
-}
-
-void PosterLayer::setShare()
-{
-    //
-    FlurryX::getInstance()->logEvent("PosterShare");
-    //
-    TapjoyX::getInstance()->logEventInUIFlow("SharePoster", posterIdx + 1);
-
-    SoundManager::getInstance()->playSoundEffect(SoundButton, false);
-
-    uiLayer->setVisible(false);
-    
-    //
-    utils::captureScreen(CC_CALLBACK_2(PosterLayer::afterCaptured, this), "share.png");
-}
-
-void PosterLayer::afterCaptured(bool succeed, const std::string& outputFile)
-{
-    if (succeed) {
-        //
-        // TODO: There should be a localization string about poster share.
-        // temp, put freesh share message
-        //
-        std::stringstream stream;
-        stream << LocalizationManager::getInstance()->getLocalizationString("Share3");
-        std::string posterShare = stream.str();
-
-        SocialX::getInstance()->openActionSheetWithMessage(posterShare.c_str(), outputFile.c_str());
-    }
-    
-    uiLayer->setVisible(true);
 }
 
 void PosterLayer::enableLayerTouch()
