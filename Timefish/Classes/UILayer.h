@@ -286,8 +286,6 @@ protected:
     void processToFacebook();
     
     void shareGameToVideo();
-//    void shareGame();
-    void shareGameScore();
 
     void hideGiftLayer();
     void hideFreeshMaker();

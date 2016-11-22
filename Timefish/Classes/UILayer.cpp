@@ -242,7 +242,6 @@ void UILayer::initSubLayers()
     resultButtons->initMainLayerWithCallbacks(CC_CALLBACK_0(UILayer::showOptionLayer, this),
                                               CC_CALLBACK_0(UILayer::showGameCenterLeaderboard, this),
                                               CC_CALLBACK_0(UILayer::replayGame, this),
-                                              CC_CALLBACK_0(UILayer::shareGameScore, this),
                                               finishIntrocallback);
     addChild(resultButtons);
 
@@ -1176,60 +1175,6 @@ void UILayer::shareGameToVideo()
     }
 
     VideoShareX::getInstance()->showView();
-}
-
-void UILayer::shareGameScore()
-{
-    if (resultBtnDisabled) {
-        return;
-    }
-
-//    //
-//    SoundManager::getInstance()->playSoundEffect(SoundButton, false);
-    
-    //
-    utils::captureScreen(CC_CALLBACK_2(UILayer::afterCapturedResult, this), "share.png");
-
-    //
-    //
-    //
-//    auto callback = [&](RenderTexture* rt, const std::string& path)
-//    {
-//        log("%s", path.c_str());
-//        auto sprite = Sprite::createWithSpriteFrameName(path);
-//        addChild(sprite);
-//        sprite->setScale(0.5f);
-//        sprite->setPosition(Vec2(visibleSizeHalf));
-//        
-//        SocialX::getInstance()->openActionSheetWithScore(currScore, path.c_str());
-//    };
-//
-//    RenderTexture *_target = RenderTexture::create((int)visibleSize.width, (int)visibleSize.height, Texture2D::PixelFormat::RGBA8888, GL_DEPTH24_STENCIL8_OES);
-//    _target->retain();
-//    _target->setPosition(Vec2(visibleSizeHalf));
-//    _target->saveToFile("test.png", Image::Format::PNG, true, callback);
-//    addChild(_target, -1);
-
-    
-
-    //
-    //
-    //
-//    RenderTexture* texture = RenderTexture::create((int)visibleSize.width, (int)visibleSize.height, Texture2D::PixelFormat::RGBA8888, GL_DEPTH24_STENCIL8_OES);
-//    texture->setPosition(Vec2(visibleSizeHalf));
-//    texture->clear(RGBValue(11), RGBValue(19), RGBValue(37), RGBValue(255));
-//    texture->begin();
-//    Director::getInstance()->getRunningScene()->visit();
-//    texture->end();
-
-//    Image *img = texture->newImage(false);
-//    unsigned char *data = img->getData();
-//    int dataSize = (int)img->getDataLen();
-
-//    SocialX::getInstance()->openActionSheetWithScore(currScore, data, dataSize);
-//
-//    
-//    delete img;
 }
 
 void UILayer::afterCapturedResult(bool succeed, const std::string& outputFile)

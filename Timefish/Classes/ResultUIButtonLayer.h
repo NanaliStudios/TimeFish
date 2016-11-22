@@ -35,7 +35,6 @@ public:
     void initMainLayerWithCallbacks(const ccMenuCallback& callback1,
                             const ccMenuCallback& callback2,
                             const ccMenuCallback& callback3,
-                            const std::function<void()>& _shareCallback,
                             const std::function<void()>& _finishCallback);
     
     void showButtons();
@@ -43,15 +42,12 @@ public:
     float getPosY() { return posY; }
 
 private:
-    Menu *mainBtn[3];
+    Menu *mainBtn[2];
 
     float posY;
     int btnCnt;
 
-    std::function<void()> shareCallback;
     std::function<void()> finishCallback;
-
-    void btnCallback(Ref *pSender);
 };
 
 #endif /* defined(__Timefish__ResultUIButtonLayer__) */

@@ -29,39 +29,32 @@ bool ResultUIButtonLayer::init()
 void ResultUIButtonLayer::initMainLayerWithCallbacks(const ccMenuCallback& callback1,
                                 const ccMenuCallback& callback2,
                                 const ccMenuCallback& callback3,
-                                const std::function<void()>& _shareCallback,
                                 const std::function<void()>& _finishCallback)
 {
-    MenuItemImageButton *menuItem[3];
+    MenuItemImageButton *menuItem[2];
     menuItem[0] = MenuItemImageButton::create();
     menuItem[0]->setNormalImage(Sprite::createWithSpriteFrameName("button_middle_white.png"));
     menuItem[0]->setSelectedImage(Sprite::createWithSpriteFrameName("button_middle_white_click.png"));
     menuItem[0]->setCallback(callback1);
     
     menuItem[1] = MenuItemImageButton::create();
-    menuItem[1]->setNormalImage(Sprite::createWithSpriteFrameName("button_long_red.png"));
-    menuItem[1]->setSelectedImage(Sprite::createWithSpriteFrameName("button_long_red_click.png"));
+    menuItem[1]->setNormalImage(Sprite::create("button_verylong_red.png"));
+    menuItem[1]->setSelectedImage(Sprite::create("button_verylong_red_click.png"));
     menuItem[1]->setCallback(callback3);
-    
-    menuItem[2] = MenuItemImageButton::create();
-    menuItem[2]->setNormalImage(Sprite::createWithSpriteFrameName("button_middle_white.png"));
-    menuItem[2]->setSelectedImage(Sprite::createWithSpriteFrameName("button_middle_white_click.png"));
-    menuItem[2]->setCallback(CC_CALLBACK_1(ResultUIButtonLayer::btnCallback, this));
     
     Size s1 = menuItem[0]->getContentSize();
     Size s2 = menuItem[1]->getContentSize();
     float spaceBetween = 9;
-    float spaceSide = (visibleSize.width - (s1.width * 2 + s2.width + spaceBetween * 2)) * 0.5;
+    float spaceSide = (visibleSize.width - (s1.width + s2.width + spaceBetween)) * 0.5;
     
     
     const char* fileNames[] = {
         "button_icon_option.png",
-        "button_icon_retry.png",
-        "button_icon_share.png"
+        "button_icon_retry.png"
     };
     float posX = spaceSide;
     posY = spaceSide + s1.height * 0.5;
-    for (int i=0; i<3; i++) {
+    for (int i=0; i<2; i++) {
         Size s = menuItem[i]->getContentSize();
         menuItem[i]->setPosition(Vec2::ZERO);
         menuItem[i]->setTag(ResultBtnTag);
@@ -82,32 +75,15 @@ void ResultUIButtonLayer::initMainLayerWithCallbacks(const ccMenuCallback& callb
         // set next positon
         posX += (s.width + spaceBetween);
     }
-    
-    shareCallback = _shareCallback;
-    finishCallback = _finishCallback;
-}
 
-//
-// shareCallback should not play button sound
-//
-void ResultUIButtonLayer::btnCallback(Ref *pSender)
-{
-    //
-    TapjoyX::getInstance()->logEventInUIFlow("ShareResultScore");
-    
-    //
-    // openActionSheetWithScore
-    //
-    if (shareCallback) {
-        shareCallback();
-    }
+    finishCallback = _finishCallback;
 }
 
 void ResultUIButtonLayer::showButtons()
 {
     btnCnt = 0;
 
-    for (int i=0; i<3; i++) {
+    for (int i=0; i<2; i++) {
         // run action
         float delayDuration = CCRANDOM_0_1() * 0.4f;
         float moveDuration = 0.4f + CCRANDOM_0_1() * 0.25f;
@@ -118,7 +94,7 @@ void ResultUIButtonLayer::showButtons()
         auto callback = CallFunc::create( [this]() {
             //
             btnCnt++;
-            if (btnCnt >= 3 && finishCallback) {
+            if (btnCnt >= 2 && finishCallback) {
                 finishCallback();
             }
         });
