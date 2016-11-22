@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="app_name">Timefish</string>
+  <string name="app_name">TimeFish</string>
   <string name="app_id">729683805542</string>
   <string name="exit_title">Exit Confirm</string>
   <string name="exit_message">Are you sure you want to leave me behind?</string>

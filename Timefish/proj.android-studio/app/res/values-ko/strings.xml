@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">타임피쉬</string>
+    <string name="app_name">TimeFish</string>
     <string name="app_id">729683805542</string>
 
     <string name="exit_title">종료 확인</string>

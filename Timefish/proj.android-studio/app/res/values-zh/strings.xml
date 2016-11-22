@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="app_name">时间鱼</string>
+  <string name="app_name">TimeFish</string>
   <string name="app_id">729683805542</string>
   <string name="exit_title">确认退出</string>
   <string name="exit_message">真的要离开吗?</string>
