@@ -50,15 +50,6 @@ public:
     void setUiChangeCallback(const std::function<void(int)>& _uiChangeCallback) {
         uiChangeCallback = _uiChangeCallback;
     }
-    void setVideoCallbacks(
-                           const std::function<void()>& _startVideoCallback,
-                           const std::function<void()>& _finishVideoCallback,
-                           const std::function<void()>& _shareVideocallback) {
-        
-        startVideoCallback = _startVideoCallback;
-        finishVideoCallback = _finishVideoCallback;
-        shareVideocallback = _shareVideocallback;
-    }
 
 //    bool onTouchBegan(Touch *touch, Event *event);
 //    void onTouchMoved(Touch *touch, Event *event);

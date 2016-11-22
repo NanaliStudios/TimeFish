@@ -235,10 +235,6 @@ void UILayer::initSubLayers()
             addChild(p, 1000);
         }
     };
-    std::function<void()> shareVideocallback = [this]() {
-        //
-        VideoShareX::getInstance()->showView();
-    };
     resultButtons->initMainLayerWithCallbacks(CC_CALLBACK_0(UILayer::showOptionLayer, this),
                                               CC_CALLBACK_0(UILayer::showGameCenterLeaderboard, this),
                                               CC_CALLBACK_0(UILayer::replayGame, this),
@@ -256,18 +252,6 @@ void UILayer::initSubLayers()
     freeshMaker = FreeshMakerLayer::create();
     freeshMaker->setReplayCallback(CC_CALLBACK_0(UILayer::replayGame, this));
     freeshMaker->setUiChangeCallback(CC_CALLBACK_1(UILayer::callUiChangeCallback, this));
-
-    std::function<void()> finishRecordingcallback = [this]() {
-        //
-        VideoShareX::getInstance()->stopRecording();
-    };
-    std::function<void()> startVideocallback = [this]() {
-        //
-        if (UserInfo::getInstance()->isRecordingEnabled()) {
-            VideoShareX::getInstance()->startRecording();
-        }
-    };
-    freeshMaker->setVideoCallbacks(startVideocallback, finishRecordingcallback, shareVideocallback);
     freeshMaker->hideLayer();
     addChild(freeshMaker);
 
