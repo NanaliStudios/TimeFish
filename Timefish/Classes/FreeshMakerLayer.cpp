@@ -64,27 +64,6 @@ void FreeshMakerLayer::initMainLayer()
     sNode->setScale(scaleFactor);
     addChild(sNode, 100);
 
-//    sNode->setCompleteListener( [this] (int trackIndex, int loopCount) {
-//        this->startMachine();
-//    });
-//    sNode->setEventListener( [this] (int trackIndex, spEvent* event) {
-//        //
-//        // Set Event Name
-//        //
-//        if (!strcmp(event->data->name, "ball_pop")) {
-//            this->showResult();
-//            
-//            //
-//            for (int i=0; i<3; i++) {
-//                partyPtcl[i]->resetSystem();
-//            }
-//
-//            //
-//            lNode->setVisible(true);
-//            lNode->setAnimation(0, "animation", false);
-//        }
-//    });
-    
     setMachineSkin();
 
     float basePosY = 0;
@@ -157,59 +136,6 @@ void FreeshMakerLayer::initMainLayer()
     }
     
     //
-    // Share Btn
-    //
-    {
-        auto shareBtnItem = MenuItemImageButton::create();
-        shareBtnItem->setNormalImage(Sprite::createWithSpriteFrameName("button_middle_white.png"));
-        shareBtnItem->setSelectedImage(Sprite::createWithSpriteFrameName("button_middle_white_click.png"));
-        shareBtnItem->setCallback(CC_CALLBACK_1(FreeshMakerLayer::btnCallback, this));
-        
-        Size s = shareBtnItem->getContentSize();
-        shareBtnItem->setTag(ShareBtnTag);
-        shareBtnItem->setPosition(Vec2(visibleSizeHalf.width - s.width * 1.05, basePosY) + origin);
-        
-        shareBtn = Menu::create(shareBtnItem, NULL);
-        shareBtn->setPosition(Vec2::ZERO);
-        shareBtn->setVisible(false);
-        addChild(shareBtn, 1);
-        
-        // add icon
-        auto icon = Sprite::createWithSpriteFrameName("button_icon_share.png");
-        icon->setPosition(Vec2(s) * 0.5);
-        shareBtnItem->addChild(icon, 1);
-
-        //
-        shareBtnItem->setLabelChild(icon);
-
-        //
-        // Video Share Btn
-        //
-        {
-            auto btnItem = MenuItemImageButton::create();
-            btnItem->setNormalImage(Sprite::createWithSpriteFrameName("button_middle_white.png"));
-            btnItem->setSelectedImage(Sprite::createWithSpriteFrameName("button_middle_white_click.png"));
-            btnItem->setCallback(CC_CALLBACK_1(FreeshMakerLayer::btnCallback, this));
-            btnItem->setTag(VideoShareBtnTag);
-            
-            videoShareBtn = Menu::create(btnItem, NULL);
-            Size s = btnItem->getContentSize();
-            videoShareBtn->setPosition(Vec2(shareBtnItem->getPositionX(), basePosY + s.height * 1.05 + 3 + origin.y));
-            addChild(videoShareBtn, 2);
-            
-//            videoShareBtn->setVisible(false);
-            
-            //
-            auto icon = Sprite::createWithSpriteFrameName("icon_sharevideo.png");
-            icon->setPosition(Vec2(s) * 0.5);
-            btnItem->addChild(icon, 1);
-            
-            //
-            btnItem->setLabelChild(icon);
-        }
-    }
-    
-    //
     // RetyBtn
     //
     {
@@ -272,26 +198,6 @@ void FreeshMakerLayer::initMainLayer()
         addChild(closeBtn, 1);
     }
 }
-
-//void FreeshMakerLayer::enableLayerTouch()
-//{
-//    // setTouchEnabled
-//    auto dispatcher = Director::getInstance()->getEventDispatcher();
-//    auto touchListener = EventListenerTouchOneByOne::create();
-//    touchListener->setSwallowTouches(true);
-//    touchListener->onTouchBegan = CC_CALLBACK_2(FreeshMakerLayer::onTouchBegan, this);
-//    touchListener->onTouchMoved = CC_CALLBACK_2(FreeshMakerLayer::onTouchMoved, this);
-//    touchListener->onTouchEnded = CC_CALLBACK_2(FreeshMakerLayer::onTouchEnded, this);
-//    touchListener->onTouchCancelled = CC_CALLBACK_2(FreeshMakerLayer::onTouchCancelled, this);
-//    dispatcher->addEventListenerWithSceneGraphPriority(touchListener, this);
-//}
-//
-//void FreeshMakerLayer::disableLayerTouch()
-//{
-//    // setTouchDisabled
-//    auto dispatcher = Director::getInstance()->getEventDispatcher();
-//    dispatcher->pauseEventListenersForTarget(this);
-//}
 
 void FreeshMakerLayer::setMachineSkin()
 {
@@ -426,19 +332,9 @@ void FreeshMakerLayer::showResultUI(int skinIdxSelected, bool onlyEarnResult, bo
         addChild(freeshSkin, 1);
         freeshSkin->release();
     }
-    
-    //
-    shareBtn->setVisible(true);
-    if (onlyEarnResult) {
-        MenuItemImage *btn = (MenuItemImage*)shareBtn->getChildByTag(ShareBtnTag);
-        if (btn) {
-            btn->setTag(ImageShareBtnTag);
-        }
-    }
+
     playBtn->setVisible(true);
-//    if (!onlyEarnResult && UserInfo::getInstance()->hasEnoughCoinsToDraw()) {
-//        retryBtn->setVisible(true);
-//    }
+
     if (!onlyEarnResult) {
         retryBtn->setVisible(true);
 
@@ -552,41 +448,6 @@ void FreeshMakerLayer::btnCallback(Ref* pSender)
     else if (tag == PlayBtnTag) {
         playThis();
     }
-    else if (tag == ShareBtnTag) {
-        if (!UserInfo::getInstance()->isRecordingEnabled()) {
-            //
-            TapjoyX::getInstance()->logEventInUIFlow("ShareSkin", skinNum);
-            
-            startCaptureAndShare(btn);
-        }
-        else {
-            if (didGacha) {
-                SoundManager::getInstance()->playSoundEffect(SoundButton, false);
-                btn->setTag(ImageShareBtnTag);
-                videoShareBtn->setVisible(true);
-            } else {
-                //
-                TapjoyX::getInstance()->logEventInUIFlow("ShareSkin", skinNum);
-                
-                startCaptureAndShare(btn);
-            }
-        }
-    }
-    else if (tag == ImageShareBtnTag) {
-        //
-        TapjoyX::getInstance()->logEventInUIFlow("ShareSkin", skinNum);
-        
-        startCaptureAndShare(btn);
-    }
-    else if (tag == VideoShareBtnTag) {
-        SoundManager::getInstance()->playSoundEffect(SoundButton, false);
-        //
-        TapjoyX::getInstance()->logEventInUIFlow("ShareDrawVideo", skinNum);
-        
-        if (shareVideocallback) {
-            shareVideocallback();
-        }
-    }
     else if (tag == RetryBtnTag) {
         
         MenuItemAutoGray *btn = (MenuItemAutoGray*)pSender;
@@ -632,25 +493,6 @@ void FreeshMakerLayer::hideThis()
         closeCallback();
     }
 }
-
-//bool FreeshMakerLayer::onTouchBegan(Touch *touch, Event *event)
-//{
-//    return true;
-//}
-//
-//void FreeshMakerLayer::onTouchMoved(Touch *touch, Event *event)
-//{
-//}
-//
-//void FreeshMakerLayer::onTouchEnded(Touch *touch, Event *event)
-//{
-//    disableLayerTouch();
-//    processToStartMachine();
-//}
-//
-//void FreeshMakerLayer::onTouchCancelled(Touch *touch, Event *event)
-//{
-//}
 
 #if CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID
 void FreeshMakerLayer::onKeyReleased( EventKeyboard::KeyCode keycode, Event *event )

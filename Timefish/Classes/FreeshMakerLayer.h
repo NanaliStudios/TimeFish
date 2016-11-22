@@ -23,11 +23,8 @@
 
 #define StartBtnTag     0
 #define PlayBtnTag      1
-#define ShareBtnTag     2
 #define RetryBtnTag     3
 #define CloseBtnTag     4
-#define ImageShareBtnTag     5
-#define VideoShareBtnTag     6
 
 #define ResultFreeshNameTag       9998
 #define ResultFreeshTag           9999
@@ -49,9 +46,6 @@ public:
     }
     void setReplayCallback(const std::function<void()>& _replayCallback) {
         replayCallback = _replayCallback;
-    }
-    void setShareCallback(const std::function<void()>& _shareCallback) {
-        shareCallback = _shareCallback;
     }
     void setUiChangeCallback(const std::function<void(int)>& _uiChangeCallback) {
         uiChangeCallback = _uiChangeCallback;
@@ -87,8 +81,6 @@ public:
 
         startBtn->setVisible(false);
         playBtn->setVisible(true);
-        shareBtn->setVisible(false);
-        videoShareBtn->setVisible(false);
         retryBtn->setVisible(false);
         closeBtn->setVisible(false);
         resultLabel->setVisible(false);
@@ -97,8 +89,6 @@ public:
         this->setVisible(true);
         
         //
-//        enableLayerTouch();
-
         sNode->setVisible(true);
         sNode->setAnimation(0, "idle", true);
         sNode->setCompleteListener( [this] (int trackIndex, int loopCount) {
@@ -139,7 +129,6 @@ private:
 
     std::function<void()> closeCallback;
     std::function<void()> replayCallback;
-    std::function<void()> shareCallback;
     std::function<void(int)> uiChangeCallback;
 
     //
@@ -151,7 +140,7 @@ private:
     
     float scaleFactor;
 
-    Menu *startBtn, *playBtn, *shareBtn, *videoShareBtn, *retryBtn, *closeBtn;
+    Menu *startBtn, *playBtn, *retryBtn, *closeBtn;
     Label *resultLabel;
 
     spine::SkeletonAnimation *sNode;
@@ -178,18 +167,9 @@ private:
 
         startBtn->setVisible(true);
         hideResultButtons();
-        
-        //
-//        enableLayerTouch();
     }
     void hideResultButtons() {
         playBtn->setVisible(false);
-        shareBtn->setVisible(false);
-        MenuItemImage *btn = (MenuItemImage*)shareBtn->getChildByTag(ImageShareBtnTag);
-        if (btn) {
-            btn->setTag(ShareBtnTag);
-        }
-        videoShareBtn->setVisible(false);
         retryBtn->setVisible(false);
         closeBtn->setVisible(false);
         resultLabel->setVisible(false);
@@ -200,21 +180,9 @@ private:
         removeChildByTag(ResultFreeshNameTag);
         removeChildByTag(ResultFreeshTag);
     }
-    
-    void startCaptureAndShare(MenuItemImage *btn) {
-        videoShareBtn->setVisible(false);
-        btn->setTag(ShareBtnTag);
-        if (shareCallback) {
-            shareCallback();
-        }
-    }
 
     void playThis();
     void hideThis();
-
-    //
-//    void enableLayerTouch();
-//    void disableLayerTouch();
 };
 
 #endif /* defined(__Timefish__FreeshMakerLayer__) */

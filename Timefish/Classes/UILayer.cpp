@@ -259,7 +259,6 @@ void UILayer::initSubLayers()
     freeshMaker = FreeshMakerLayer::create();
     freeshMaker->setReplayCallback(CC_CALLBACK_0(UILayer::replayGame, this));
     freeshMaker->setUiChangeCallback(CC_CALLBACK_1(UILayer::callUiChangeCallback, this));
-    freeshMaker->setShareCallback(CC_CALLBACK_0(UILayer::shareGameFreesh, this));
 
     std::function<void()> finishRecordingcallback = [this]() {
         //
