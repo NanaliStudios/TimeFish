@@ -196,7 +196,6 @@ void UILayer::initSubLayers()
     freeshSelection->initMainLayer();
     freeshSelection->setCloseCallback(CC_CALLBACK_1(UILayer::hideFreeshSelection, this));
     freeshSelection->setPurchaseCallback(CC_CALLBACK_1(UILayer::processSkinPurchase, this));
-    freeshSelection->setShareCallback(CC_CALLBACK_0(UILayer::shareGameFreesh, this));
     freeshSelection->setGoldenfishCallback(CC_CALLBACK_0(UILayer::showGoldenFishInfoPopup, this));
     freeshSelection->hideLayer();//setVisible(false);
     addChild(freeshSelection);

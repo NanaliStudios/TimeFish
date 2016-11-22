@@ -48,9 +48,6 @@ public:
     void setPurchaseCallback(const std::function<void(int)>& _purchaseCallback) {
         purchaseCallback = _purchaseCallback;
     }
-    void setShareCallback(const std::function<void()>& _shareCallback) {
-        shareCallback = _shareCallback;
-    }
     void setGoldenfishCallback(const std::function<void()>& _goldenfishCallback) {
         goldenfishCallback = _goldenfishCallback;
     }
@@ -112,14 +109,11 @@ private:
     IdleFreeshLayer *freesh[FreeshSize + 1]; // +1 is for random selection
     std::function<void(Ref*)> closeCallback;
     std::function<void(int)> purchaseCallback;
-    std::function<void()> shareCallback;
     std::function<void()> goldenfishCallback;
     
     Label *countLabel, *nameLabel, *hiddenDescLabel, *musicInfoLabel, *writerInfoLabel;
-    
-//    MenuItemImage *btnMenuItem;
+
     MenuItemImageButton *btnMenuItem;
-    MenuItemImageButton *shareBtnItem;
     Menu *lockedBtn;
     Label *btnLabel1, *btnLabel2;
     Sprite *infoIcon;
@@ -130,7 +124,6 @@ private:
     //
     void btnCallback(Ref *pSender);
     void hideThis();
-    void shareThis();
     
     void selectionCallback(bool noSound);
     

@@ -302,33 +302,6 @@ void FreeshSelectionLayer::initUILayers()
         closeBtn->setPosition(Vec2(closeBtnSize.width * 0.5 + 20, visibleSize.height - closeBtnSize.height* 0.5 - 20) + origin);
         addChild(closeBtn, 1);
     }
-    
-    //
-    // Share button
-    //
-    {
-        float scale = 0.8;
-        shareBtnItem = MenuItemImageButton::create();
-        shareBtnItem->setNormalImage(Sprite::createWithSpriteFrameName("button_short_white.png"));
-        shareBtnItem->setSelectedImage(Sprite::createWithSpriteFrameName("button_short_white_click.png"));
-        shareBtnItem->setCallback(CC_CALLBACK_0(FreeshSelectionLayer::shareThis, this));
-        shareBtnItem->setScale(scale);
-
-        Size s = shareBtnItem->getContentSize();
-        shareBtnItem->setPosition(Vec2(visibleSize.width - 5 - s.width * 0.5 * scale, 5 + s.height * 0.5 * scale) + origin);
-        
-        auto shareBtn = Menu::create(shareBtnItem, NULL);
-        shareBtn->setPosition(Vec2::ZERO);
-        addChild(shareBtn, 1);
-        
-        // add icon
-        auto icon = Sprite::createWithSpriteFrameName("button_icon_share.png");
-        icon->setPosition(Vec2(s) * 0.5);
-        shareBtnItem->addChild(icon, 1);
-
-        //
-        shareBtnItem->setLabelChild(icon);
-    }
 
     //
     // Shadow
@@ -585,13 +558,6 @@ void FreeshSelectionLayer::hideThis()
     }
 }
 
-void FreeshSelectionLayer::shareThis()
-{
-    if (shareCallback) {
-        shareCallback();
-    }
-}
-
 void FreeshSelectionLayer::selectionCallback(bool noSound)
 {
     //    log("%d, %d", prevSelectedIdx, selectedIdx);
@@ -741,9 +707,6 @@ void FreeshSelectionLayer::selectionCallback(bool noSound)
                     //
                     showHiddenDescLabel(false);
                 }
-
-                //
-                shareBtnItem->setVisible(false);
             }
             else {
                 btnMenuItem->setVisible(true);
@@ -765,14 +728,6 @@ void FreeshSelectionLayer::selectionCallback(bool noSound)
                 
                 //
                 infoIcon->setVisible(false);
-                
-                //
-                if (selectedIdx == 0) {
-                    shareBtnItem->setVisible(false);
-                }
-                else {
-                    shareBtnItem->setVisible(true);
-                }
             }
         }
         else {
