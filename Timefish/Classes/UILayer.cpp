@@ -1248,19 +1248,6 @@ void UILayer::afterCapturedResult(bool succeed, const std::string& outputFile)
     }
 }
 
-void UILayer::shareGameFreesh()
-{
-    if (resultBtnDisabled) {
-        return;
-    }
-
-    //
-    SoundManager::getInstance()->playSoundEffect(SoundButton, false);
-    
-    //
-    utils::captureScreen(CC_CALLBACK_2(UILayer::afterCapturedFreesh, this), "share.png");
-}
-
 void UILayer::afterCapturedFreesh(bool succeed, const std::string& outputFile)
 {
     std::stringstream stream;
@@ -1451,7 +1438,6 @@ int UILayer::checkHiddenSkin()
             
             //
             HiddenskinPopup *popup = HiddenskinPopup::create();
-            popup->setShareCallback(CC_CALLBACK_0(UILayer::shareGameFreesh, this));
             popup->setNextCallback(callback);
             popup->setSkinInfo(hiddenSkin);
 

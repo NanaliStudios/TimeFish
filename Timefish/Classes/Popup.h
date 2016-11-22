@@ -62,9 +62,6 @@ public:
     
     CREATE_FUNC(HiddenskinPopup);
 
-    void setShareCallback(const std::function<void()>& _shareCallback) {
-        shareCallback = _shareCallback;
-    }
     void setNextCallback(const std::function<void()>& _nextCallback) {
         nextCallback = _nextCallback;
     }
@@ -76,7 +73,6 @@ protected:
     Sprite *bg;
     int _skinNum;
 
-    std::function<void()> shareCallback;
     std::function<void()> nextCallback;
 
     void initBackground();

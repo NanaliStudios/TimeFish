@@ -144,24 +144,7 @@ void HiddenskinPopup::initBackground()
     //
     // buttons
     //
-    float posX[2] = {
-        -1.1,
-        1.1
-    };
-    const char* fileNames[] = {
-        "button_icon_share.png",
-        "icon_play.png"
-    };
-
-    auto callback1 = [this](Ref* pSender) {
-        //
-        SoundManager::getInstance()->playSoundEffect(SoundButton, false);
-
-        if (shareCallback) {
-            shareCallback();
-        }
-    };
-    auto callback2 = [this](Ref* pSender) {
+    auto callback = [this](Ref* pSender) {
         //
         SoundManager::getInstance()->playSoundEffect(SoundButton, false);
         
@@ -174,34 +157,27 @@ void HiddenskinPopup::initBackground()
             nextCallback();
         }
     };
-    std::function<void(Ref* pSender)> buttonCallbacks[2] = {
-        callback1,
-        callback2
-//        CC_CALLBACK_1(HiddenskinPopup::removeSelf, this)
-    };
 
+    // play button
+    auto menuItem = MenuItemImageButton::create();
+    menuItem->setNormalImage(Sprite::createWithSpriteFrameName("button_middle_white.png"));
+    menuItem->setSelectedImage(Sprite::createWithSpriteFrameName("button_middle_white_click.png"));
+    menuItem->setCallback(callback);
+
+    Size s = menuItem->getContentSize();
+    
+    auto mainBtn = Menu::create(menuItem, NULL);
+    mainBtn->setPosition(Vec2(visibleSizeHalf.width, btmPosY + s.height * 0.5) + origin);
+    addChild(mainBtn, 1);
+    
     //
-    for (int i=0; i<2; i++) {
-        auto menuItem = MenuItemImageButton::create();
-        menuItem->setNormalImage(Sprite::createWithSpriteFrameName("button_middle_white.png"));
-        menuItem->setSelectedImage(Sprite::createWithSpriteFrameName("button_middle_white_click.png"));
-        menuItem->setCallback(buttonCallbacks[i]);
-
-        Size s = menuItem->getContentSize();
-        
-        auto mainBtn = Menu::create(menuItem, NULL);
-        mainBtn->setPosition(Vec2(visibleSizeHalf.width + posX[i] * s.width * 0.5, btmPosY + s.height * 0.5) + origin);
-        addChild(mainBtn, 1);
-        
-        //
-        // add icon
-        auto icon = Sprite::createWithSpriteFrameName(fileNames[i]);
-        icon->setPosition(Vec2(s) * 0.5);
-        menuItem->addChild(icon, 1);
-
-        //
-        menuItem->setLabelChild(icon);
-    }
+    // add icon
+    auto icon = Sprite::createWithSpriteFrameName("icon_play.png");
+    icon->setPosition(Vec2(s) * 0.5);
+    menuItem->addChild(icon, 1);
+    
+    //
+    menuItem->setLabelChild(icon);
 }
 
 void HiddenskinPopup::setSkinInfo(int skinIdx)

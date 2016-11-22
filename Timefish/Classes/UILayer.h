@@ -288,8 +288,6 @@ protected:
     void shareGameToVideo();
 //    void shareGame();
     void shareGameScore();
-    void shareGameFreesh();
-
 
     void hideGiftLayer();
     void hideFreeshMaker();
