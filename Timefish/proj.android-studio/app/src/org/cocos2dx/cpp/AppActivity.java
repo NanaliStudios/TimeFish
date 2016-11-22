@@ -47,6 +47,7 @@ import android.content.Context;
 import java.util.Calendar;
 import android.content.BroadcastReceiver;
 import android.content.Intent;
+import android.os.Build;
 import android.os.SystemClock;
 import android.app.PendingIntent;
 import android.app.AlarmManager;
@@ -76,6 +77,7 @@ import java.util.List;
 import java.util.Map;
 import org.json.JSONArray;
 import org.json.JSONException;
+import android.view.View;
 
 //
 // Import this code, to check Android Device ID
@@ -243,6 +245,8 @@ public class AppActivity extends UtilActivity {//Cocos2dxActivity {
         C2DXUnityAdsBridge.initC2DXUnityAdsBridge(this);
 
         sActivity = this;
+
+        setSystemUiVisibility();
 
         //
 //        FuseSDK.startSession("70cc5de9-e0c8-4e10-a490-bc680ad2167b", this, this, null);
@@ -616,6 +620,54 @@ public class AppActivity extends UtilActivity {//Cocos2dxActivity {
 
     void complain(String message) {
         //Log.e(TAG, "**** TrivialDrive Error: " + message);
+    }
+
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        if (hasFocus) {
+            setSystemUiVisibility();
+        }
+    }
+
+    private void setSystemUiVisibility()
+    {
+        if (Build.VERSION.SDK_INT >= 19) { // Kitkat
+            final int flags = View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                    | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                    | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                    | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                    | View.SYSTEM_UI_FLAG_FULLSCREEN
+                    | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
+
+            getWindow().getDecorView().setSystemUiVisibility(flags);
+
+            // Code below is to handle presses of Volume up or Volume down.
+            // Without this, after pressing volume buttons, the navigation bar will
+            // show up and won't hide
+            final View decorView = getWindow().getDecorView();
+            decorView.setOnSystemUiVisibilityChangeListener(new View.OnSystemUiVisibilityChangeListener()
+            {
+                @Override
+                public void onSystemUiVisibilityChange(int visibility)
+                {
+                    if((visibility & View.SYSTEM_UI_FLAG_FULLSCREEN) == 0)
+                    {
+                        decorView.setSystemUiVisibility(flags);
+                    }
+                }
+            });
+        } else {
+            if (Build.VERSION.SDK_INT > 10) {
+                int mUIFlag = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                        | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                        | View.SYSTEM_UI_FLAG_LOW_PROFILE
+                        | View.SYSTEM_UI_FLAG_FULLSCREEN
+                        | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
+                getWindow().getDecorView().setSystemUiVisibility(mUIFlag);
+            }
+        }
     }
 
     public static void showRestoreAllPopup(String title, String msg, String btn) {
