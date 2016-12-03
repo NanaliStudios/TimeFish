@@ -18,8 +18,8 @@
 
 #define ReviewLink        @"https://itunes.apple.com/app/id960150767"
 #define AppStoreLink        @"http://goo.gl/6EIst4"
-#define FacebookLink        @"https://www.facebook.com/freeshtimon"
-#define FacebookDeepLink    @"fb://profile/628031447322532"
+#define FacebookLink        @"https://www.facebook.com/NanaliStudios"
+#define FacebookDeepLink    @"fb://profile/271071806318884"
 #define HomepageLink        @"https://www.facebook.com/NanaliStudios"
 #define HomepageDeepLink    @"fb://profile/271071806318884"
 #define YoutubeLink         @"https://youtu.be/8z2Y0z0zXRU"

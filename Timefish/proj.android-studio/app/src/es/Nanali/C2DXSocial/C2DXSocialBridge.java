@@ -257,7 +257,7 @@ public class C2DXSocialBridge {
     
     public static void openFacebookPage() {
         Context _context = C2DXSocialBridge.s_activity.getContext();
-        Uri uri = Uri.parse("fb://profile/628031447322532");
+        Uri uri = Uri.parse("fb://profile/271071806318884");
         Intent goToFacebook = new Intent(Intent.ACTION_VIEW, uri);
         goToFacebook.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET | Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
         try {
