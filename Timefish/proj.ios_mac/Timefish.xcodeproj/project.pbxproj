@@ -49,6 +49,8 @@
 		E92AD4B91D6F46A100AC03B4 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E92AD4B81D6F46A100AC03B4 /* Social.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		E92AD4BB1D6F46AC00AC03B4 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E92AD4BA1D6F46AC00AC03B4 /* WebKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		E93107351B76FCE0004B823C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E93107371B76FCE0004B823C /* InfoPlist.strings */; };
+		E95405651DF2F6850095482A /* UnityAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E95405641DF2F6850095482A /* UnityAds.framework */; settings = {ASSET_TAGS = (); }; };
+		E95405661DF2F6850095482A /* UnityAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E95405641DF2F6850095482A /* UnityAds.framework */; settings = {ASSET_TAGS = (); }; };
 		E959094E1B65259200F80FA1 /* GraySprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E959094C1B65259200F80FA1 /* GraySprite.cpp */; };
 		E96B85FE1A7ABAF100BD633E /* fonts in Resources */ = {isa = PBXBuildFile; fileRef = E96B85F91A7ABAF100BD633E /* fonts */; };
 		E96B85FF1A7ABAF100BD633E /* iphonehd in Resources */ = {isa = PBXBuildFile; fileRef = E96B85FA1A7ABAF100BD633E /* iphonehd */; };
@@ -255,6 +257,7 @@
 		E92AD4B81D6F46A100AC03B4 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.0.sdk/System/Library/Frameworks/Social.framework; sourceTree = DEVELOPER_DIR; };
 		E92AD4BA1D6F46AC00AC03B4 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.0.sdk/System/Library/Frameworks/WebKit.framework; sourceTree = DEVELOPER_DIR; };
 		E93107361B76FCE0004B823C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		E95405641DF2F6850095482A /* UnityAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UnityAds.framework; sourceTree = SOURCE_ROOT; };
 		E959094C1B65259200F80FA1 /* GraySprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GraySprite.cpp; sourceTree = "<group>"; };
 		E959094D1B65259200F80FA1 /* GraySprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GraySprite.h; sourceTree = "<group>"; };
 		E96B85F91A7ABAF100BD633E /* fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = fonts; sourceTree = "<group>"; };
@@ -446,6 +449,7 @@
 				E993BF1F1D730BC800193460 /* libsqlite3.tbd in Frameworks */,
 				E993BF1B1D730BAD00193460 /* libc++.tbd in Frameworks */,
 				E993BF191D730B9700193460 /* iAd.framework in Frameworks */,
+				E95405651DF2F6850095482A /* UnityAds.framework in Frameworks */,
 				E993BF171D730B8000193460 /* CoreVideo.framework in Frameworks */,
 				E993BF151D730B7400193460 /* CoreText.framework in Frameworks */,
 				E993BF131D730B6200193460 /* CoreLocation.framework in Frameworks */,
@@ -494,6 +498,7 @@
 				503AE11B17EB9C5A00D1A890 /* IOKit.framework in Frameworks */,
 				5087E78B17EB975400C73F5D /* OpenGL.framework in Frameworks */,
 				5087E76917EB910900C73F5D /* OpenAL.framework in Frameworks */,
+				E95405661DF2F6850095482A /* UnityAds.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -506,6 +511,7 @@
 				E9F9026F1D7BE35A009C6EBE /* Tapjoy.embeddedframework */,
 				E9F9025D1D7BD1B2009C6EBE /* Everyplay.bundle */,
 				E9F10C871D73098000210773 /* Flurry.h */,
+				E95405641DF2F6850095482A /* UnityAds.framework */,
 				E9F10C881D73098000210773 /* libFlurry_7.6.6.a */,
 				5087E77117EB970100C73F5D /* Icons */,
 				503AE0FA17EB989F00D1A890 /* AppController.h */,
@@ -1263,6 +1269,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Tapjoy.embeddedframework",
+					"$(PROJECT_DIR)",
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
@@ -1296,6 +1303,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Tapjoy.embeddedframework",
+					"$(PROJECT_DIR)",
 				);
 				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
