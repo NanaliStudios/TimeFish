@@ -607,16 +607,16 @@ void ContinuePopup::initBackground()
     
     //
     Label *titleLabel = Label::createWithTTF(continueString, UserInfo::getInstance()->getFontPath(), 45);
-    titleLabel->setPosition(centerPos);
+    titleLabel->setPosition(Vec2(centerPos.x, centerPos.y - titleLabel->getContentSize().height));
     blackLayer->addChild(titleLabel, 10);
     
     //
     Size s = titleLabel->getContentSize();
 
     //
-    mainIcon = Sprite::createWithSpriteFrameName("icon_watchads.png");
+    mainIcon = Sprite::create("icon_continue.png");
     
-    mainIconShowPosY = centerPos.y + s.height * 0.5 + mainIcon->getContentSize().height * 0.75;
+    mainIconShowPosY = titleLabel->getPositionY() + s.height * 0.5 + mainIcon->getContentSize().height * 0.75;
     mainIconHidePosY = visibleSize.height + mainIcon->getContentSize().height;
 
     mainIcon->setPosition(Vec2(visibleSizeHalf.width, mainIconHidePosY));
@@ -627,8 +627,8 @@ void ContinuePopup::initBackground()
     // buttons
     //
     float posX[2] = {
-        -1.2,
-        1.2
+        -1.1,
+        1.1
     };
     const char* keyNames[] = {
         "ContinueNO",
@@ -656,13 +656,13 @@ void ContinuePopup::initBackground()
         callback2
     };
 
-    float btnPosY = centerPos.y - s.height;
+    float btnPosY = titleLabel->getPositionY() - s.height;
 
     //
     for (int i=0; i<2; i++) {
         menuItem[i] = MenuItemImageButton::create();
-        menuItem[i]->setNormalImage(Sprite::createWithSpriteFrameName("button_middle_white.png"));
-        menuItem[i]->setSelectedImage(Sprite::createWithSpriteFrameName("button_middle_white_click.png"));
+        menuItem[i]->setNormalImage(Sprite::createWithSpriteFrameName("button_center_white.png"));
+        menuItem[i]->setSelectedImage(Sprite::createWithSpriteFrameName("button_center_white_click.png"));
         menuItem[i]->setCallback(buttonCallbacks[i]);
         
         Size _s = menuItem[i]->getContentSize();
