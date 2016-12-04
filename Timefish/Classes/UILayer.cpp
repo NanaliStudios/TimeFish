@@ -2118,6 +2118,7 @@ void UILayer::showContinuePopup()
         notContinueCallback();
     };
     std::function<void()> _continueCallback = [this](){
+        cPopup->runHideEffect();
         uiStatus = MainUIStatusContinueAd;
         this->showVideo();
     };
@@ -2159,7 +2160,6 @@ void UILayer::showReward(float dt)
         resultMain->updateMainLayer();
     }
     else if (uiStatus == MainUIStatusContinueAd) {
-        cPopup->runHideEffect();
         continueCallback();
     }
 }

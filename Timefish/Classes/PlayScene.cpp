@@ -2399,7 +2399,7 @@ void PlayScene::resumeScene(Ref* pSender)
 
 void PlayScene::enterBackgroundPause()
 {
-    if (status == StatusPause || status == StatusReady || status == StatusGameOver || status == StatusAdTime) {
+    if (status == StatusPause || status == StatusReady || status == StatusGameOver || status == StatusAdTime || status == StatusAskContinue) {
         return;
     }
 
