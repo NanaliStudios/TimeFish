@@ -465,6 +465,11 @@ void UILayer::hideStartUI()
     freeshSelection= NULL;
     achSelection->removeFromParentAndCleanup(true);
     achSelection = NULL;
+
+    //
+    if (UserInfo::getInstance()->getNoAdOption() != 1) {
+        FirebaseX::getInstance()->showBanner();
+    }
 }
 
 void UILayer::initInGameUI()
@@ -734,6 +739,11 @@ void UILayer::updateComboCountLabel(int cnt, bool scoreBoosted)
 
 void UILayer::showResultMain()
 {
+    if (UserInfo::getInstance()->getNoAdOption() != 1) {
+        FirebaseX::getInstance()->hideBanner();
+    }
+
+    //
     resultMain->initMainLayer(resultButtons->getPosY());
     resultMain->setLayerVisible(true);
 

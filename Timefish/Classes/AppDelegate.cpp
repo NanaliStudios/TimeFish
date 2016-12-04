@@ -120,6 +120,9 @@ bool AppDelegate::applicationDidFinishLaunching()
 #endif
     
     //
+    FirebaseX::getInstance()->startSession();
+
+    //
     UnityAdsX::getInstance()->startSession();
 
     //

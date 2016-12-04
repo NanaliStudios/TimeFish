@@ -12,6 +12,7 @@
 #include "NotificationX.h"
 #include "AdColonyX.h"
 #include "UnityAdsX.h"
+#include "FireBaseX.h"
 
 #include "TestScene2.h"
 
