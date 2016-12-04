@@ -240,6 +240,6 @@ SongWriter1|Lee Ju Gwang|Lee Ju Gwang|Lee Ju Gwang|Lee Ju Gwang
 BGMName1|Middle Age|Middle Age|Middle Age|Middle Age
 BGMName4|Banjo Wind|Banjo Wind|Banjo Wind|Banjo Wind
 BGMName7|Question Mark|Question Mark|Question Mark|Question Mark
-Continue|저런, 타이몬에게 잡혔네요\n한번 더 기회를 드릴까요?|Oh, you got caught by Timon.\nWould you like one more chance?|哦，你被泰门抓住了。\n你想再多一次机会吗？|ああ、あなたはタイモンに捕まった。\nもう一度チャンスをしたいですか？
-ContinueOK|물론!|Sure!|当然|もちろん!
-ContinueNO|아뇨...|No|没有|いいえ
+Continue|이어하시겠어요?|Continue?|继续?|持続する?
+ContinueOK|물론!|Yes|是|はい
+ContinueNO|아뇨|No|没有|いいえ
