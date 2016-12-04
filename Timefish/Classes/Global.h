@@ -85,6 +85,7 @@ typedef enum {
     StatusIntro,
     StatusReady,
     StatusPause,
+    StatusAskContinue,
     StatusGameOver,
     StatusAdTime
 } Status;
@@ -326,12 +327,13 @@ typedef enum {
 } ObjectType;
 
 typedef enum {
-    NormalStatus        = -1,
-    FeverBoosterStatus  = 0,
-    CoinBoosterStatus   = 1,
-    SlowBoosterStatus   = 2,
-    PointBoosterStatus  = 3,
-    ShieldBoosterStatus = 4,
+    NormalStatus            = -1,
+    FeverBoosterStatus      = 0,
+    CoinBoosterStatus       = 1,
+    SlowBoosterStatus       = 2,
+    PointBoosterStatus      = 3,
+    ShieldBoosterStatus     = 4,
+    ContinueBoosterStatus   = 5, // 이어하기로 부활한 상태
 } FreeshStatus;
 
 struct SoundInfo

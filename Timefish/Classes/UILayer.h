@@ -67,6 +67,7 @@ typedef enum {
     MainUIStatusCredit,
     MainUIStatusWatchingAd,
     MainUIStatusProcessPurchase,
+    MainUIStatusContinueAd,
 } MainUIStatus;
 
 USING_NS_CC;
@@ -130,6 +131,12 @@ public:
     void setStartGameCallback(const std::function<void()>& _startGameCallback) {
         startGameCallback = _startGameCallback;
     }
+    void setNotContinueCallback(const std::function<void()>& _notContinueCallback) {
+        notContinueCallback = _notContinueCallback;
+    }
+    void setContinueCallback(const std::function<void()>& _continueCallback) {
+        continueCallback = _continueCallback;
+    }
     
     void forceToPauseGame();
 
@@ -155,6 +162,8 @@ public:
     void showReward(float dt);
 
     void showVideoReward();
+    
+    void showContinuePopup();
 protected:
     MainUIStatus uiStatus;
     void setUIStatus(MainUIStatus _stat) {
@@ -197,6 +206,7 @@ protected:
     Menu *pauseBtn, *quitBtn, *resumeBtn;
 
     PopupBase *emptyPopup;
+    ContinuePopup *cPopup;
 
     OptionLayer *optionLayer;
     float iconSpace;
@@ -211,6 +221,9 @@ protected:
     std::function<void()> freeshSkinCallback;
     std::function<void(int)> uiChangeCallback;
     std::function<void()> startGameCallback;
+    std::function<void()> notContinueCallback;
+    std::function<void()> continueCallback;
+
 
     void initUILayer();
     void initSubLayers();
@@ -285,6 +298,7 @@ protected:
     void showFreeshMaker();
     void showGiftLayer();
     void showVideoLayer();
+    void showVideo();
     void rateGame();
     void processToFacebookPage(Ref *pSender);
     void processToFacebook();

@@ -116,19 +116,52 @@ public:
     virtual bool init();
     
     CREATE_FUNC(BestScorePopup);
-
+    
     void setShareCallback(const std::function<void()>& _shareCallback) {
         shareCallback = _shareCallback;
     }
     void setScoreInfo(int score);
     void runPopupEffect();
-
+    
 protected:
     void initBackground();
     
     float btnPosTopY;
-
+    
     std::function<void()> shareCallback;
+};
+
+class ContinuePopup : public PopupBase
+{
+public:
+    virtual bool init();
+    
+    CREATE_FUNC(ContinuePopup);
+
+    void setNotContinueCallback(const std::function<void()>& _notContinueCallback) {
+        notContinueCallback = _notContinueCallback;
+    }
+    void setContinueCallback(const std::function<void()>& _continueCallback) {
+        continueCallback = _continueCallback;
+    }
+    void runPopupEffect();
+    void runHideEffect();
+    
+protected:
+    LayerColor *blackLayer;
+    Sprite *mainIcon;
+    Menu *mainBtn[2];
+    MenuItemImageButton *menuItem[2];
+
+    void initBackground();
+    void setMainLabel();
+    
+    float mainIconShowPosY, mainIconHidePosY;
+    float leftBtnShowPosX, leftBtnHidePosX;
+    float rightBtnShowPosX, rightBtnHidePosX;
+    
+    std::function<void()> notContinueCallback;
+    std::function<void()> continueCallback;
 };
 
 #endif /* defined(__Timefish__Popup__) */

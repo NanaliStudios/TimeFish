@@ -572,3 +572,159 @@ void BestScorePopup::runPopupEffect()
     auto seq = Sequence::create(DelayTime::create(0.1), Show::create(), elastic, NULL);
     mainLayer->runAction(seq);
 }
+
+//////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
+bool ContinuePopup::init()
+{
+    if ( !PopupBase::init() )
+    {
+        return false;
+    }
+    
+    //
+    initBackground();
+    
+    //
+    setEnbleTouch(true);
+    
+    return true;
+}
+
+void ContinuePopup::initBackground()
+{
+    //
+    blackLayer = LayerColor::create(Color4B(0,0,0,0));
+    addChild(blackLayer, 1);
+    
+    Vec2 centerPos = Vec2(visibleSizeHalf.width, visibleSizeHalf.height) + origin;
+
+    //
+    std::stringstream stream;
+    stream << LocalizationManager::getInstance()->getLocalizationString("Continue");
+    std::string continueString = stream.str();
+    
+    //
+    Label *titleLabel = Label::createWithTTF(continueString, UserInfo::getInstance()->getFontPath(), 45);
+    titleLabel->setPosition(centerPos);
+    blackLayer->addChild(titleLabel, 10);
+    
+    //
+    Size s = titleLabel->getContentSize();
+
+    //
+    mainIcon = Sprite::createWithSpriteFrameName("icon_watchads.png");
+    
+    mainIconShowPosY = centerPos.y + s.height * 0.5 + mainIcon->getContentSize().height * 0.75;
+    mainIconHidePosY = visibleSize.height + mainIcon->getContentSize().height;
+
+    mainIcon->setPosition(Vec2(visibleSizeHalf.width, mainIconHidePosY));
+    addChild(mainIcon, 10);
+    
+    
+    //
+    // buttons
+    //
+    float posX[2] = {
+        -1.2,
+        1.2
+    };
+    const char* keyNames[] = {
+        "ContinueNO",
+        "ContinueOK",
+    };
+    
+    auto callback1 = [this](Ref* pSender) {
+        //
+        SoundManager::getInstance()->playSoundEffect(SoundButton, false);
+
+        if (notContinueCallback) {
+            notContinueCallback();
+        }
+    };
+    auto callback2 = [this](Ref* pSender) {
+        //
+        SoundManager::getInstance()->playSoundEffect(SoundButton, false);
+
+        if (continueCallback) {
+            continueCallback();
+        }
+    };
+    std::function<void(Ref* pSender)> buttonCallbacks[2] = {
+        callback1,
+        callback2
+    };
+
+    float btnPosY = centerPos.y - s.height;
+
+    //
+    for (int i=0; i<2; i++) {
+        menuItem[i] = MenuItemImageButton::create();
+        menuItem[i]->setNormalImage(Sprite::createWithSpriteFrameName("button_middle_white.png"));
+        menuItem[i]->setSelectedImage(Sprite::createWithSpriteFrameName("button_middle_white_click.png"));
+        menuItem[i]->setCallback(buttonCallbacks[i]);
+        
+        Size _s = menuItem[i]->getContentSize();
+
+        mainBtn[i] = Menu::create(menuItem[i], NULL);
+        if (i == 0) {
+            leftBtnShowPosX = visibleSizeHalf.width + posX[i] * _s.width * 0.5 + origin.x;
+            leftBtnHidePosX = -_s.width + origin.x;
+            mainBtn[i]->setPosition(Vec2(leftBtnHidePosX, btnPosY - _s.height * 0.7));
+        }
+        else {
+            rightBtnShowPosX = visibleSizeHalf.width + posX[i] * _s.width * 0.5 + origin.x;
+            rightBtnHidePosX = visibleSize.width + _s.width + origin.x;
+            mainBtn[i]->setPosition(Vec2(rightBtnHidePosX, btnPosY - _s.height * 0.7));
+        }
+        addChild(mainBtn[i], 1);
+
+        //
+        // add icon
+        std::stringstream stream;
+        stream << LocalizationManager::getInstance()->getLocalizationString(keyNames[i]);
+        std::string continueString = stream.str();
+        
+        //
+        Label *btnLabel = Label::createWithTTF(continueString, UserInfo::getInstance()->getFontPath(), 45);
+        btnLabel->setTextColor(Color4B(255, 61, 1, 255));
+        btnLabel->setPosition(Vec2(_s) * 0.5);
+        menuItem[i]->addChild(btnLabel, 1);
+        
+        //
+        menuItem[i]->setLabelChild(btnLabel);
+    }
+}
+
+void ContinuePopup::runPopupEffect()
+{
+    //
+    blackLayer->runAction(FadeTo::create(1.0, 180));
+    
+    
+    //
+    mainIcon->runAction(EaseElasticOut::create(MoveTo::create(0.5, Vec2(mainIcon->getPositionX(), mainIconShowPosY))));
+    //
+    mainBtn[0]->runAction(EaseElasticOut::create(MoveTo::create(0.5, Vec2(leftBtnShowPosX, mainBtn[0]->getPositionY()))));
+    mainBtn[1]->runAction(EaseElasticOut::create(MoveTo::create(0.5, Vec2(rightBtnShowPosX, mainBtn[1]->getPositionY()))));
+}
+
+void ContinuePopup::runHideEffect()
+{
+    auto removeCallback = CallFunc::create([this](){
+        removeFromParent();
+    });
+    //
+    auto seq = Sequence::create(FadeOut::create(1.0),
+                                removeCallback,
+                                NULL);
+    blackLayer->setCascadeOpacityEnabled(true);
+    blackLayer->runAction(seq);
+
+    //
+    mainIcon->runAction(EaseElasticOut::create(MoveTo::create(0.5, Vec2(mainIcon->getPositionX(), mainIconHidePosY))));
+    //
+    mainBtn[0]->runAction(EaseElasticOut::create(MoveTo::create(0.5, Vec2(leftBtnHidePosX, mainBtn[0]->getPositionY()))));
+    mainBtn[1]->runAction(EaseElasticOut::create(MoveTo::create(0.5, Vec2(rightBtnHidePosX, mainBtn[1]->getPositionY()))));
+}

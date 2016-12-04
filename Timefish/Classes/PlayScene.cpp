@@ -336,6 +336,8 @@ void PlayScene::startIntro(float dt)
     //
     SoundManager::getInstance()->playSoundEffect(SoundGameStart, false);
 
+    gameContinuedWithVideo = false;
+
     jumpCount = 0;
     goldenJumpCount = rand()%10 + 5;
     prevDiffLength = 0;
@@ -1061,7 +1063,8 @@ void PlayScene::setCapsule()
             //
             // Check if Booster Capsule is needed!!!
             //
-            bool needBoost = (currLap > 0 && currLap == nextCapsuleLap);
+            bool needBoost = (currLap > 0 && currLap == nextCapsuleLap
+                              && freeshStat != ContinueBoosterStatus); // 이어하기로 부스팅된 상태가 아닌어야함
             if (needBoost) {
                 int totalPlayCount = UserInfo::getInstance()->getTotalPlayCount();
                 bool firstTimeBoost = false;
@@ -1184,10 +1187,8 @@ void PlayScene::setNextCapsuleLap()
 #pragma mark Main Loop
 void PlayScene::moveCharacter(float dt)
 {
-//    setDied();
-
     //
-    if (freeshStat == FeverBoosterStatus) {
+    if (freeshStat == FeverBoosterStatus || freeshStat == ContinueBoosterStatus) {
         runVelocity = 300;//MaxVelocity * 2.0;
     }
     else {
@@ -1232,6 +1233,9 @@ void PlayScene::moveCharacter(float dt)
             if (freeshStat == FeverBoosterStatus) {
                 _timonMaxVelocity = runVelocity * 0.99f; // 99% of freesh feverBoost speed
             }
+            else if (freeshStat == ContinueBoosterStatus) {
+                _timonMaxVelocity = runVelocity * 0.70f; // 70% of freesh feverBoost speed
+            }
             else if (freeshStat == SlowBoosterStatus) {
                 _timonMaxVelocity *= 0.1;
             }
@@ -1263,12 +1267,12 @@ void PlayScene::moveCharacter(float dt)
     //
     // Set Freesh Status
     //
-    if (freeshStat == FeverBoosterStatus) {
+    if (freeshStat == FeverBoosterStatus || freeshStat == ContinueBoosterStatus) {
         boostDuration -= freeshDegreeDelta;
         if (boostDuration <= 0) {
             setFreeshToNormalStatus();
 
-            // to warn user the end of FeverBoosterStatus
+            // to warn user the end of FeverBoosterStatus/ContinueBoosterStatus
             setFreeshBlink();
         }
     }
@@ -1290,7 +1294,7 @@ void PlayScene::moveCharacter(float dt)
     
     
     float trailAngle = 0;
-    if (freeshStat == FeverBoosterStatus) {
+    if (freeshStat == FeverBoosterStatus || freeshStat == ContinueBoosterStatus) {
         trailAngle = angle - CC_DEGREES_TO_RADIANS(3.0);
     }
     else {
@@ -1454,9 +1458,91 @@ void PlayScene::moveCharacter(float dt)
     // check ending conditions
     //
     if (!freeshDied && checkEndingConditions()) {
-        UserInfo::getInstance()->saveLapInfo(character->getCurrLap());
-        setDied();
+        //
+        SoundManager::getInstance()->playSoundEffect(SoundGone, false);
+
+        //
+        // NOTE: 비디오 광고를 보고 이어할 수 있는 상황이면, 유저에게 물어본다.
+        //
+        if (!gameContinuedWithVideo && UserInfo::getInstance()->isVideoAvailable()) {
+            askToContinue();
+        }
+        else {
+            setDied();
+        }
     }
+}
+
+void PlayScene::askToContinue()
+{
+    if (status == StatusReady || status == StatusGameOver) {
+        return;
+    }
+    
+    prevStatus = status;
+    setGameStatus(StatusAskContinue);
+    
+    worldLayer->pause();
+    character->pauseAnimation();
+    bgLayer->pauseAnimation();
+
+    SoundManager::getInstance()->pauseAmbienceSound();
+
+    unschedule(CC_SCHEDULE_SELECTOR(PlayScene::moveCharacter));
+    
+    //
+    uiLayer->setNotContinueCallback(CC_CALLBACK_0(PlayScene::setNotContinue, this));
+    uiLayer->setContinueCallback(CC_CALLBACK_0(PlayScene::setContinue, this));
+    uiLayer->showContinuePopup();
+}
+
+void PlayScene::setNotContinue()
+{
+    worldLayer->resume();
+    character->resumeAnimation();
+    bgLayer->resumeAnimation();
+    
+    setGameStatus(prevStatus);
+    
+    SoundManager::getInstance()->resumeAllSoundEffect();
+    
+    schedule(CC_SCHEDULE_SELECTOR(PlayScene::moveCharacter));
+    
+    //
+    setDied();
+}
+
+void PlayScene::setContinue()
+{
+    //
+    // NOTE: 이어하기는 한번만 할 수 있다.
+    //
+    gameContinuedWithVideo = true;
+
+    worldLayer->resume();
+    character->resumeAnimation();
+    bgLayer->resumeAnimation();
+    
+    setGameStatus(prevStatus);
+    
+    SoundManager::getInstance()->resumeAllSoundEffect();
+
+    {
+        freeshStat = ContinueBoosterStatus;
+        //
+        SoundManager::getInstance()->playSoundEffect(SoundFeverBoost, false);
+        
+        boostDuration = 345;
+        
+        // Freesh's Boost Sound if have....
+        if (freeshBoostSoundIdx[colorIdx] >= 0) {
+            SoundManager::getInstance()->playFreeshBoostSoundEffect(colorIdx, false);
+        }
+    }
+
+    
+    //
+    schedule(CC_SCHEDULE_SELECTOR(PlayScene::moveCharacter));
 }
 
 void PlayScene::initParticles()
@@ -1627,6 +1713,12 @@ bool PlayScene::checkEndingConditions()
         
         // total death
         UserInfo::getInstance()->addToDeathCount(DataTypeDeathCountTotal);
+        
+        //
+        // NOTE: 캡슐을 먹지 않아서 죽는 경우는, gameContinuedWithVideo를 true로 세팅해서
+        // 이어하기가 불가능하도록 해준다.
+        //
+        gameContinuedWithVideo = true;
 
         return true;
     }
@@ -1647,11 +1739,11 @@ void PlayScene::setDied()
     freeshDied = true;
     
     //
-    UserInfo::getInstance()->incPlayCount();
-    UserInfo::getInstance()->incTotalPlayCount();
+    UserInfo::getInstance()->saveLapInfo(character->getCurrLap());
 
     //
-    SoundManager::getInstance()->playSoundEffect(SoundGone, false);
+    UserInfo::getInstance()->incPlayCount();
+    UserInfo::getInstance()->incTotalPlayCount();
 
     //
     // Here, Decide result UI type: one-button or three-button
@@ -1832,7 +1924,7 @@ void PlayScene::checkObstacles()
 
     //
     Vec2 characterPos = character->getPosition();
-    ObjectType obsType = obsLayer->checkCollisions(characterPos, crashed, (freeshStat == FeverBoosterStatus));
+    ObjectType obsType = obsLayer->checkCollisions(characterPos, crashed, (freeshStat == FeverBoosterStatus || freeshStat == ContinueBoosterStatus));
     if (obsType == ObjectTypeObstacle) {
         //
         // CRASH!!!
@@ -1925,7 +2017,7 @@ void PlayScene::setFreeshToNormalStatus()
 void PlayScene::setCrashed()
 {
     //
-    if (freeshStat == FeverBoosterStatus) {
+    if (freeshStat == FeverBoosterStatus || freeshStat == ContinueBoosterStatus) {
         //
         // Crashed but no penalties!!!
         //
@@ -2109,7 +2201,7 @@ void PlayScene::setToMaxCombo(int bonus)
 
 void PlayScene::setToJump()
 {
-    if (!freeshDied && status == StatusNone && freeshStat != FeverBoosterStatus) {
+    if (!freeshDied && status == StatusNone && freeshStat != FeverBoosterStatus && freeshStat != ContinueBoosterStatus) {
         currTime = 0;
         jumpTime = maxJumpTime; // sec
         goingUp = true;

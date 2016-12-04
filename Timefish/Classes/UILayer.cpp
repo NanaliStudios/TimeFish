@@ -30,6 +30,8 @@ bool UILayer::init()
     exitPopuped = false;
     visitFacebook = false;
     resultBtnDisabled = false;
+    
+    cPopup = nullptr;
 
     //
     setUIStatus(MainUIStatusMain);
@@ -820,25 +822,29 @@ void UILayer::showGiftLayer()
 
 void UILayer::showVideoLayer()
 {
-    showEmptyPopup(true);
-
     SoundManager::getInstance()->playSoundEffect(SoundButton, false);
 
     UserInfo::getInstance()->setHaveSeenVideo(true);
 
+    uiStatus = MainUIStatusWatchingAd;
+
+    showVideo();
+}
+
+void UILayer::showVideo()
+{
+    showEmptyPopup(true);
+    
     //
     // video watching: UnityAds has a priority!!!
     //
     if (UnityAdsX::getInstance()->isVideoAvailable()) {
-        uiStatus = MainUIStatusWatchingAd;
         UnityAdsX::getInstance()->showVideo();
     }
     else if (AdColonyX::getInstance()->isVideoAvailable()) {
-        uiStatus = MainUIStatusWatchingAd;
         AdColonyX::getInstance()->showVideo();
     }
     else if (TapjoyX::getInstance()->isVideoReady()) {
-        uiStatus = MainUIStatusWatchingAd;
         TapjoyX::getInstance()->showPlacement("VideoRewardPlacement");
     }
 }
@@ -2048,6 +2054,7 @@ void UILayer::onUnityAdsStart()
 {
 //    CCLOG("UILayer::onUnityAdsStart");
     SoundManager::getInstance()->pauseAmbienceSound();
+    SoundManager::getInstance()->pauseAllSoundEffect();
     Director::getInstance()->stopAnimation();
 }
 
@@ -2072,6 +2079,7 @@ void UILayer::onAdColonyAdStartedInZone(const char* zoneID)
 //    log("onAdColonyAdStartedInZone");
     
     SoundManager::getInstance()->pauseAmbienceSound();
+    SoundManager::getInstance()->pauseAllSoundEffect();
     Director::getInstance()->stopAnimation();
 }
 
@@ -2103,6 +2111,24 @@ void UILayer::showVideoReward()
 #endif
 }
 
+void UILayer::showContinuePopup()
+{
+    std::function<void()> _notContinueCallback = [this](){
+        cPopup->runHideEffect();
+        notContinueCallback();
+    };
+    std::function<void()> _continueCallback = [this](){
+        uiStatus = MainUIStatusContinueAd;
+        this->showVideo();
+    };
+    
+    cPopup = ContinuePopup::create();
+    cPopup->setNotContinueCallback(_notContinueCallback);
+    cPopup->setContinueCallback(_continueCallback);
+    cPopup->runPopupEffect();
+    addChild(cPopup, 1000);
+}
+
 void UILayer::updateUIAfterWatchingAd()
 {
     //
@@ -2116,10 +2142,7 @@ void UILayer::updateUIAfterWatchingAd()
     //
     // This is temporary solution. Need to fix this process later!!!
     //
-    if (uiStatus == MainUIStatusWatchingAd) {
-        uiStatus = MainUIStatusResult;
-        scheduleOnce(CC_SCHEDULE_SELECTOR(UILayer::showReward), 1);
-    }
+    scheduleOnce(CC_SCHEDULE_SELECTOR(UILayer::showReward), 1);
 }
 
 void UILayer::showReward(float dt)
@@ -2127,10 +2150,18 @@ void UILayer::showReward(float dt)
     //
     showEmptyPopup(false);
 
-    showCoins(0);
-    UserInfo::getInstance()->addEarnedCoinsForVideo();
-    updateCoinLabel();
-    resultMain->updateMainLayer();
+    if (uiStatus == MainUIStatusWatchingAd) {
+        uiStatus = MainUIStatusResult;
+        
+        showCoins(0);
+        UserInfo::getInstance()->addEarnedCoinsForVideo();
+        updateCoinLabel();
+        resultMain->updateMainLayer();
+    }
+    else if (uiStatus == MainUIStatusContinueAd) {
+        cPopup->runHideEffect();
+        continueCallback();
+    }
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////

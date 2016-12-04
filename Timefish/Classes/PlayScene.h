@@ -142,6 +142,9 @@ public:
     void setFreeshBlink();
 
     void setDied();
+    void askToContinue();
+    void setNotContinue();
+    void setContinue();
     
     void addNewBall(float dt);
 
@@ -176,6 +179,8 @@ public:
 
     void showAchievementsBanners(float dt);
 private:
+    bool gameContinuedWithVideo;
+
     time_t sTime, eTime;
     float bgVolume;
     
