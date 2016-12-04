@@ -2346,17 +2346,41 @@ void PlayScene::showPostInterstitial(Ref* pSender)
 
         return;
     }
+    
+    bool showAd = false;
 
     if (status == StatusPause || // pause -> no post ad
-        status == StatusReady ||
-        !ChartboostX::getInstance()->hasCachedInterstitial("Main Menu") ){
+        status == StatusReady){
+    } else {
+        //
+        // NOTE: AdMob 우선, 다음 Chartboost
+        //
+        if (FirebaseX::getInstance()->isInterstitialReady()) {
+            //
+            // AdMob
+            //
+            showAd = true;
+            UserInfo::getInstance()->hasShowAd = true;
+            FirebaseX::getInstance()->setDelegate(this);
+            FirebaseX::getInstance()->showInterstitial();
+        }
+        else if (ChartboostX::getInstance()->hasCachedInterstitial("Main Menu")) {
+            //
+            // CHARTBOOST
+            //
+            showAd = true;
+            UserInfo::getInstance()->hasShowAd = true;
+            ChartboostX::getInstance()->showInterstitial("Main Menu");
+        }
+        else {
+            showAd = false;
+        }
+    }
+    
+    if (!showAd) {
         //
         UserInfo::getInstance()->hasShowAd = false;
         reloadPlayScene();
-    } else {
-        // CHARTBOOST
-        UserInfo::getInstance()->hasShowAd = true;
-        ChartboostX::getInstance()->showInterstitial("Main Menu");
     }
 }
 
@@ -2366,7 +2390,8 @@ void PlayScene::reloadPlayScene()
     SoundManager::getInstance()->stopBackgroundMusic();
     bgLayer->setTimonSoundoff();
 
-    ChartboostX::getInstance()->setDelegate(NULL);
+    FirebaseX::getInstance()->setDelegate(nullptr);
+    ChartboostX::getInstance()->setDelegate(nullptr);
 
 #if CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID
     auto scene = LoadingScene::createScene();
@@ -2429,7 +2454,35 @@ void PlayScene::enterBackgroundPause()
 //////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////
 #pragma mark -
-#pragma mark Ad-related
+#pragma mark AdMob-related
+void PlayScene::admobInterstitialReady(bool success)
+{
+    
+}
+
+void PlayScene::admobInterstitialClosed()
+{
+    UserInfo::getInstance()->hasShowAd = true;
+    continueGameLogic();
+}
+
+void PlayScene::interstitialDidFailToPresentScreen()
+{
+    if (!UserInfo::getInstance()->hasShowAd && status == StatusGameOver) {
+        continueGameLogic();
+    }
+}
+
+void PlayScene::interstitialWillLeaveApplication()
+{
+    setGameStatus(StatusAdTime);
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////
+#pragma mark -
+#pragma mark Chartboost-related
 void PlayScene::continueGameLogic()
 {
     reloadPlayScene();

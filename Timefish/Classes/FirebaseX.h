@@ -19,6 +19,8 @@ public:
     virtual ~FirebaseXDelegate() {}
     virtual void admobInterstitialReady(bool success) {}
     virtual void admobInterstitialClosed() {}
+    virtual void interstitialDidFailToPresentScreen() {}
+    virtual void interstitialWillLeaveApplication() {}
 };
 
 class FirebaseX{

@@ -11,6 +11,7 @@
 
 #include "cocos2d.h"
 #include "ChartboostX.h"
+#include "FirebaseX.h"
 #include "TapjoyX.h"
 
 #include "Global.h"
@@ -45,7 +46,7 @@
 
 USING_NS_CC;
 
-class PlayScene : public cocos2d::Layer, public ChartboostXDelegate
+class PlayScene : public cocos2d::Layer, public ChartboostXDelegate, public FirebaseXDelegate
 {
 public:
     cocos2d::Size visibleSize, visibleSizeHalf;
@@ -168,6 +169,14 @@ public:
     void didClickInterstitial(const char* location);
 
     void showPostInterstitial(Ref* pSender);
+    
+    //
+    // FirebaseXDelegate methods
+    //
+    void admobInterstitialReady(bool success);
+    void admobInterstitialClosed();
+    void interstitialDidFailToPresentScreen();
+    void interstitialWillLeaveApplication();
 
     //
     void pauseScene(Ref* pSender);

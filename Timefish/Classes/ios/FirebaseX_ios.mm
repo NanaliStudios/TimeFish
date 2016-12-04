@@ -186,4 +186,18 @@ void FirebaseX::showInterstitial()
         delegate->admobInterstitialClosed();
     }
 }
+
+- (void)interstitialDidFailToPresentScreen:(GADInterstitial *)ad
+{
+    if (FirebaseXDelegate* delegate = FirebaseX::getInstance()->getDelegate()) {
+        delegate->interstitialDidFailToPresentScreen();
+    }
+}
+
+- (void)interstitialWillLeaveApplication:(GADInterstitial *)ad
+{
+    if (FirebaseXDelegate* delegate = FirebaseX::getInstance()->getDelegate()) {
+        delegate->interstitialWillLeaveApplication();
+    }
+}
 @end
