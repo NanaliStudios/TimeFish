@@ -1234,7 +1234,12 @@ void PlayScene::moveCharacter(float dt)
                 _timonMaxVelocity = runVelocity * 0.99f; // 99% of freesh feverBoost speed
             }
             else if (freeshStat == ContinueBoosterStatus) {
-                _timonMaxVelocity = runVelocity * 0.70f; // 70% of freesh feverBoost speed
+                if (boostDuration < 240) {
+                    _timonMaxVelocity = runVelocity * 0.80f; // 80% of freesh feverBoost speed
+                }
+                else {
+                    _timonMaxVelocity = 0;
+                }
             }
             else if (freeshStat == SlowBoosterStatus) {
                 _timonMaxVelocity *= 0.1;
