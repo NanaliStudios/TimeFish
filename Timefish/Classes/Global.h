@@ -336,6 +336,12 @@ typedef enum {
     ContinueBoosterStatus   = 5, // 이어하기로 부활한 상태
 } FreeshStatus;
 
+typedef enum {
+    FreeshDeathTypeNone,
+    FreeshDeathTypeByTimon,
+    FreeshDeathTypeByColor,
+} FreeshDeathType;
+
 struct SoundInfo
 {
     const char* filePath;

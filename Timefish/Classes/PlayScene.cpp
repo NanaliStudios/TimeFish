@@ -1234,11 +1234,14 @@ void PlayScene::moveCharacter(float dt)
                 _timonMaxVelocity = runVelocity * 0.99f; // 99% of freesh feverBoost speed
             }
             else if (freeshStat == ContinueBoosterStatus) {
-                if (boostDuration < 240) {
-                    _timonMaxVelocity = runVelocity * 0.80f; // 80% of freesh feverBoost speed
+                if (getByMonster(45)) {
+                    //
+                    // NOTE: 타이몬이 가까우면, 일정 거리만큼 떨어질 때까지 잠시 멈춰준다.
+                    //
+                    _timonMaxVelocity = 0;
                 }
                 else {
-                    _timonMaxVelocity = 0;
+                    _timonMaxVelocity = runVelocity * 0.70f; // 70% of freesh feverBoost speed
                 }
             }
             else if (freeshStat == SlowBoosterStatus) {
@@ -1462,7 +1465,8 @@ void PlayScene::moveCharacter(float dt)
     //
     // check ending conditions
     //
-    if (!freeshDied && checkEndingConditions()) {
+    deathType = checkEndingConditions();
+    if (!freeshDied && deathType != FreeshDeathTypeNone) {
         //
         SoundManager::getInstance()->playSoundEffect(SoundGone, false);
 
@@ -1523,7 +1527,8 @@ void PlayScene::setContinue()
     // NOTE: 이어하기는 한번만 할 수 있다.
     //
     gameContinuedWithVideo = true;
-
+    
+    //
     worldLayer->resume();
     character->resumeAnimation();
     bgLayer->resumeAnimation();
@@ -1533,6 +1538,19 @@ void PlayScene::setContinue()
     SoundManager::getInstance()->resumeAllSoundEffect();
 
     {
+        //
+        if (deathType == FreeshDeathTypeByColor) {
+            BallLayer *capsule = balls.at(balls.size() - 1);
+            character->setType(capsule->getCurrType());
+            //
+            Vec2 worldPos = character->getPosition();
+            Vec2 pos = worldLayer->convertToWorldSpace(worldPos);
+            uiLayer->showNewLapUI(pos.y, character->getCurrType(), character->getCurrLap());
+        }
+
+        //
+        //
+        //
         freeshStat = ContinueBoosterStatus;
         //
         SoundManager::getInstance()->playSoundEffect(SoundFeverBoost, false);
@@ -1622,7 +1640,7 @@ Vec2 PlayScene::setWorldLayerPos(Vec2 newPos)
     return p + diff + origin;
 }
 
-bool PlayScene::checkEndingConditions()
+FreeshDeathType PlayScene::checkEndingConditions()
 {
     //
     // 0, 1, 2 -> red, blue, yellow
@@ -1700,7 +1718,7 @@ bool PlayScene::checkEndingConditions()
         //
         UserInfo::getInstance()->addToDeathCount(DataTypeDeathCountTotal);
 
-        return true;
+        return FreeshDeathTypeByTimon;
     }
     else if (enterSameColor) {
         //
@@ -1718,14 +1736,8 @@ bool PlayScene::checkEndingConditions()
         
         // total death
         UserInfo::getInstance()->addToDeathCount(DataTypeDeathCountTotal);
-        
-        //
-        // NOTE: 캡슐을 먹지 않아서 죽는 경우는, gameContinuedWithVideo를 true로 세팅해서
-        // 이어하기가 불가능하도록 해준다.
-        //
-        gameContinuedWithVideo = true;
 
-        return true;
+        return FreeshDeathTypeByColor;
     }
 
     //
@@ -1736,7 +1748,7 @@ bool PlayScene::checkEndingConditions()
     }
     bgLayer->setTimonByDistance(posDiff, freeshLap, freeshDied);
     
-    return false;
+    return FreeshDeathTypeNone;
 }
 
 void PlayScene::setDied()

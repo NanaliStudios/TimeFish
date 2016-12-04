@@ -74,6 +74,8 @@ public:
     ObstacleLayer *obsLayer; // obstacle layer
     Layer *itemLayer;
     Vec2 center;
+    
+    FreeshDeathType deathType;
 
     float circleAlpha;
     
@@ -83,7 +85,7 @@ public:
     float jumpTime;
     float currTime;
 
-    bool checkEndingConditions();
+    FreeshDeathType checkEndingConditions();
     
     void startGameByEnablingTouchEvent();
     void setBackgroundSoundVolume(float dt);
@@ -240,6 +242,19 @@ private:
     
     float outroTime;
     int coinsEarned;
+
+    bool getByMonster(float dist) {
+        float characterPos = character->getAnglePosition();
+        float timonPos = bgLayer->getCurrDegree();
+        float posDiff = characterPos - timonPos;
+        
+        int freeshLap = character->getCurrLap();
+        int timonLap = bgLayer->getCurrLap();
+        
+        bool getByMonster = (freeshLap == timonLap &&
+                             posDiff < dist);
+        return getByMonster;
+    }
 };
 
 #endif /* defined(__Timefish__PlayScene__) */
