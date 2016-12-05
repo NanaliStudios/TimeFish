@@ -30,6 +30,8 @@ package org.cocos2dx.cpp;
 
 import com.carlospinan.utils.UtilActivity;
 
+import org.cocos2dx.lib.ResizeLayout;
+
 import com.chartboost.sdk.Chartboost;
 import com.flurry.android.FlurryAgent;
 import com.tapjoy.Tapjoy;
@@ -41,6 +43,8 @@ import es.Nanali.C2DXTapjoy.C2DXTapjoyBridge;
 import es.Nanali.C2DXAdColony.C2DXAdColonyBridge;
 import es.Nanali.C2DXFlurry.C2DXFlurryBridge;
 import es.Nanali.C2DXSocial.C2DXSocialBridge;
+import es.Nanali.C2DXFirebase.C2DXFirebaseBridge;
+import android.widget.LinearLayout;
 
 //
 import android.content.Context;
@@ -99,6 +103,8 @@ public class AppActivity extends UtilActivity {//Cocos2dxActivity {
     private static native void onFinishPurchase(String transactionID, String productId, boolean restored, boolean success);
     private static native void onFinishRestore(boolean success);
 //    private static native void onFinishRestoreAll(boolean success);
+
+    public LinearLayout linearLayout = null;
 
     //
     //
@@ -237,6 +243,10 @@ public class AppActivity extends UtilActivity {//Cocos2dxActivity {
         // init Flurry
         C2DXFlurryBridge.initC2DXFlurryBridge(this);
         C2DXFlurryBridge.startWithAppVersion(versionName);
+
+        // init Admob
+        C2DXFirebaseBridge.initC2DXFirebaseBridge(this);
+
 
         //
         C2DXSocialBridge.initC2DXSocialBridge(this);
@@ -832,7 +842,12 @@ public class AppActivity extends UtilActivity {//Cocos2dxActivity {
         AdColony.pause();
 //        FuseSDK.pauseSession();
     }
-    
+
+    public ResizeLayout getResizeLayout()
+    {
+        return mFrameLayout;
+    }
+
     @Override
     protected void onResume() {
         Chartboost.onResume(this);

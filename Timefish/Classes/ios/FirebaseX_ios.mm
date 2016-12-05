@@ -9,9 +9,11 @@
 #include "FirebaseX.h"
 #import <GoogleMobileAds/GoogleMobileAds.h>
 
+#define AdMobTest 0
+
 //
-#define BannerAdUnitID @"ca-app-pub-6269735295695961/5486843334"
-#define InterstitialAdUnitID @"ca-app-pub-6269735295695961/6963576530"
+#define BannerAdUnitID @"ca-app-pub-6269735295695961/4926074937"
+#define InterstitialAdUnitID @"ca-app-pub-6269735295695961/3449341732"
 
 //
 // FirebaseDelegateBridge

@@ -177,6 +177,7 @@ public:
     void admobInterstitialClosed();
     void interstitialDidFailToPresentScreen();
     void interstitialWillLeaveApplication();
+    void doAfterAdmobInterstitialCheck(bool isAdMobReady);
 
     //
     void pauseScene(Ref* pSender);

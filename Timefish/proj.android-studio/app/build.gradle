@@ -65,6 +65,10 @@ dependencies {
     compile 'com.google.android.gms:play-services-drive:9.4.0'
     compile 'com.google.android.gms:play-services-games:9.4.0'
     compile 'com.google.android.gms:play-services-plus:9.4.0'
+
+    compile 'com.google.firebase:firebase-core:9.4.0'
+    compile 'com.google.firebase:firebase-ads:9.4.0'
+
     compile 'com.flurry.android:analytics:6.3.1'
     compile files('libs/tapjoyconnectlibrary.jar')
     compile(name: 'PlanetArcadesdk-1.1', ext: 'aar')
@@ -81,3 +85,6 @@ task copyAssets(type: Copy) {
 
 clean.dependsOn cleanAssets
 preBuild.dependsOn copyAssets
+
+// ADD THIS AT THE BOTTOM
+apply plugin: 'com.google.gms.google-services'

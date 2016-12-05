@@ -1241,7 +1241,7 @@ void PlayScene::moveCharacter(float dt)
                     _timonMaxVelocity = 0;
                 }
                 else {
-                    _timonMaxVelocity = runVelocity * 0.70f; // 70% of freesh feverBoost speed
+                    _timonMaxVelocity = runVelocity * 0.80f; // 80% of freesh feverBoost speed
                 }
             }
             else if (freeshStat == SlowBoosterStatus) {
@@ -2334,6 +2334,10 @@ void PlayScene::onTouchCancelled(Touch *touch, Event *event)
 //////////////////////////////////////////////////////////////////////////////////////////
 void PlayScene::showPostInterstitial(Ref* pSender)
 {
+    if (UserInfo::getInstance()->getNoAdOption() != 1) {
+        FirebaseX::getInstance()->hideBanner();
+    }
+
 //    int playCount = UserInfo::getInstance()->getPlayCount();
     if (UserInfo::getInstance()->getNoAdOption() == 1 || // user hided/removed ads
         UserInfo::getInstance()->getTotalPlayCount() < 8 || // first time user
@@ -2346,35 +2350,54 @@ void PlayScene::showPostInterstitial(Ref* pSender)
 
         return;
     }
-    
-    bool showAd = false;
 
     if (status == StatusPause || // pause -> no post ad
         status == StatusReady){
+        //
+        //
+        UserInfo::getInstance()->hasShowAd = false;
+        reloadPlayScene();
     } else {
-        //
-        // NOTE: AdMob 우선, 다음 Chartboost
-        //
+#if CC_TARGET_PLATFORM != CC_PLATFORM_ANDROID
         if (FirebaseX::getInstance()->isInterstitialReady()) {
-            //
-            // AdMob
-            //
-            showAd = true;
-            UserInfo::getInstance()->hasShowAd = true;
-            FirebaseX::getInstance()->setDelegate(this);
-            FirebaseX::getInstance()->showInterstitial();
-        }
-        else if (ChartboostX::getInstance()->hasCachedInterstitial("Main Menu")) {
-            //
-            // CHARTBOOST
-            //
-            showAd = true;
-            UserInfo::getInstance()->hasShowAd = true;
-            ChartboostX::getInstance()->showInterstitial("Main Menu");
+            doAfterAdmobInterstitialCheck(true);
         }
         else {
-            showAd = false;
+            doAfterAdmobInterstitialCheck(false);
         }
+#else
+        FirebaseX::getInstance()->setDelegate(this);
+        FirebaseX::getInstance()->checkInterstitialReady();
+#endif
+    }
+}
+
+void PlayScene::doAfterAdmobInterstitialCheck(bool isAdMobReady)
+{
+    bool showAd = false;
+
+    //
+    // NOTE: AdMob 우선, 다음 Chartboost
+    //
+    if (isAdMobReady) {
+        //
+        // AdMob
+        //
+        showAd = true;
+        UserInfo::getInstance()->hasShowAd = true;
+        FirebaseX::getInstance()->setDelegate(this);
+        FirebaseX::getInstance()->showInterstitial();
+    }
+    else if (ChartboostX::getInstance()->hasCachedInterstitial("Main Menu")) {
+        //
+        // CHARTBOOST
+        //
+        showAd = true;
+        UserInfo::getInstance()->hasShowAd = true;
+        ChartboostX::getInstance()->showInterstitial("Main Menu");
+    }
+    else {
+        showAd = false;
     }
     
     if (!showAd) {
@@ -2383,6 +2406,7 @@ void PlayScene::showPostInterstitial(Ref* pSender)
         reloadPlayScene();
     }
 }
+
 
 void PlayScene::reloadPlayScene()
 {
@@ -2457,7 +2481,18 @@ void PlayScene::enterBackgroundPause()
 #pragma mark AdMob-related
 void PlayScene::admobInterstitialReady(bool success)
 {
-    
+    //
+    // NOTE: 안드로이드의 경우 1초의 딜레이를 준다.
+    // success여부에 따라 CallFunc을 다르게 설정함
+    //
+    auto callback = (success)? CallFunc::create([this](){
+        this->doAfterAdmobInterstitialCheck(true);
+    }) : CallFunc::create([this](){
+        this->doAfterAdmobInterstitialCheck(false);
+    });
+    auto seq = Sequence::create(DelayTime::create(1.0),
+                                callback, NULL);
+    this->runAction(seq);
 }
 
 void PlayScene::admobInterstitialClosed()

@@ -61,6 +61,7 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
                    C2DXAdColonyJni.cpp \
                    C2DXChartboostJni.cpp \
                    C2DXFlurryJni.cpp \
+                   C2DXFirebaseJni.cpp \
                    C2DXNotificationJni.cpp \
                    C2DXSocialJni.cpp \
                    C2DXStoreJni.cpp \
@@ -69,6 +70,7 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
 					../../../Classes/android/AdColonyX_android.cpp \
 					../../../Classes/android/ChartboostX_android.cpp \
 					../../../Classes/android/FlurryX_android.cpp \
+					../../../Classes/android/FirebaseX_android.cpp \
 					../../../Classes/android/JNIHelpers.cpp \
 					../../../Classes/android/NativeUtils.cpp \
 					../../../Classes/android/NotificationX_android.cpp \
