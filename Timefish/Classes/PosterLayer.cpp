@@ -67,6 +67,14 @@ void PosterLayer::initMainLayerWithType(int userSelectedPoster)
             poster = Sprite::createWithSpriteFrameName(fileName.c_str());
         }
         
+        //
+        // it it's null, show default poster.
+        //
+        if (poster == nullptr) {
+            userSelectedPoster = 10;
+            poster = Sprite::create("TF_gameposter_10.png");
+        }
+        
         poster->setPosition(Vec2(visibleSizeHalf) + origin);
         addChild(poster, 10);
         
