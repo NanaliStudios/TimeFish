@@ -616,10 +616,10 @@ void ContinuePopup::initBackground()
     //
     mainIcon = Sprite::create("icon_continue.png");
     
-    mainIconShowPosY = titleLabel->getPositionY() + s.height * 0.5 + mainIcon->getContentSize().height * 0.75;
-    mainIconHidePosY = visibleSize.height + mainIcon->getContentSize().height;
+    mainIconShowPosY = titleLabel->getPositionY() + s.height * 0.5 + mainIcon->getContentSize().height * 0.75 + origin.y;
+    mainIconHidePosY = visibleSize.height + mainIcon->getContentSize().height + origin.y;
 
-    mainIcon->setPosition(Vec2(visibleSizeHalf.width, mainIconHidePosY));
+    mainIcon->setPosition(Vec2(visibleSizeHalf.width + origin.x, mainIconHidePosY));
     addChild(mainIcon, 10);
     
     
