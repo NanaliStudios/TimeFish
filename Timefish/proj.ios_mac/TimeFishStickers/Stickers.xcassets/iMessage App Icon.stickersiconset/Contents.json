@@ -1,0 +1,67 @@
+{
+  "images" : [
+    {
+      "size" : "60x45",
+      "idiom" : "iphone",
+      "filename" : "Stickers_Fressh_120x90.png",
+      "scale" : "2x"
+    },
+    {
+      "size" : "60x45",
+      "idiom" : "iphone",
+      "filename" : "Stickers_Freesh_180x135.png",
+      "scale" : "3x"
+    },
+    {
+      "size" : "67x50",
+      "idiom" : "ipad",
+      "filename" : "Stickers_Freesh_134x100.png",
+      "scale" : "2x"
+    },
+    {
+      "size" : "74x55",
+      "idiom" : "ipad",
+      "filename" : "Stickers_Freesh_148x110.png",
+      "scale" : "2x"
+    },
+    {
+      "size" : "27x20",
+      "idiom" : "universal",
+      "filename" : "Stickers_Freesh_54x40.png",
+      "scale" : "2x",
+      "platform" : "ios"
+    },
+    {
+      "size" : "27x20",
+      "idiom" : "universal",
+      "filename" : "Stickers_Freesh_81x60.png",
+      "scale" : "3x",
+      "platform" : "ios"
+    },
+    {
+      "size" : "32x24",
+      "idiom" : "universal",
+      "filename" : "Stickers_Freesh_64x48.png",
+      "scale" : "2x",
+      "platform" : "ios"
+    },
+    {
+      "size" : "32x24",
+      "idiom" : "universal",
+      "filename" : "Stickers_Freesh_96x72.png",
+      "scale" : "3x",
+      "platform" : "ios"
+    },
+    {
+      "size" : "1024x768",
+      "idiom" : "ios-marketing",
+      "filename" : "Setting_Freesh_1024x768.png",
+      "scale" : "1x",
+      "platform" : "ios"
+    }
+  ],
+  "info" : {
+    "version" : 1,
+    "author" : "xcode"
+  }
+}
