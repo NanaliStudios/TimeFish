@@ -1165,6 +1165,9 @@ public:
         else if (UserInfo::getInstance()->currLangType == LanguageType::JAPANESE) {
             return JapaneseFontPath;
         }
+        else if (UserInfo::getInstance()->currLangType == LanguageType::SPANISH) {
+            return SpanishFontPath;
+        }
         else {
             return EnglishFontPath;
         }

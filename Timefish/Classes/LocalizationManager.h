@@ -21,6 +21,7 @@ struct LocalizationStat
     std::string localizationString2; // english
     std::string localizationString3; // chinese
     std::string localizationString4; // japanese
+    std::string localizationString5; // spanish
 };
 
 USING_NS_CC;
@@ -44,25 +45,35 @@ public:
         }
     }
     
+    std::string getStringWithLocalizationStat(LocalizationStat *item) {
+        std::string str;
+        
+        if (UserInfo::getInstance()->currLangType == LanguageType::KOREAN) {
+            str = std::string(item->localizationString1);
+        }
+        else if (UserInfo::getInstance()->currLangType == LanguageType::CHINESE) {
+            str = std::string(item->localizationString3);
+        }
+        else if (UserInfo::getInstance()->currLangType == LanguageType::JAPANESE) {
+            str = std::string(item->localizationString4);
+        }
+        else if (UserInfo::getInstance()->currLangType == LanguageType::SPANISH) {
+            str = std::string(item->localizationString5);
+        }
+        else {
+            str = std::string(item->localizationString2);
+        }
+        
+        return str;
+    }
+    
     std::string getLocalizationString(std::string _keyCode) {
         
         for (int i=0; i<localizationStatSize; i++) {
             LocalizationStat *item = localizationStats.at(i);
             if (item->keyCode == _keyCode) {
                 //
-                std::string str;
-                if (UserInfo::getInstance()->currLangType == LanguageType::KOREAN) {
-                    str = std::string(item->localizationString1);
-                }
-                else if (UserInfo::getInstance()->currLangType == LanguageType::CHINESE) {
-                    str = std::string(item->localizationString3);
-                }
-                else if (UserInfo::getInstance()->currLangType == LanguageType::JAPANESE) {
-                    str = std::string(item->localizationString4);
-                }
-                else {
-                    str = std::string(item->localizationString2);
-                }
+                std::string str = getStringWithLocalizationStat(item);
 
                 // line breaks 'string's
                 replaceStringInPlace(str, "\\n", "\n");
@@ -101,20 +112,7 @@ public:
             LocalizationStat *item = localizationStats.at(i);
             if (item->keyCode == _keyCode) {
                 
-                std::string str;
-                
-                if (UserInfo::getInstance()->currLangType == LanguageType::KOREAN) {
-                    str = std::string(item->localizationString1);
-                }
-                else if (UserInfo::getInstance()->currLangType == LanguageType::CHINESE) {
-                    str = std::string(item->localizationString3);
-                }
-                else if (UserInfo::getInstance()->currLangType == LanguageType::JAPANESE) {
-                    str = std::string(item->localizationString4);
-                }
-                else {
-                    str = std::string(item->localizationString2);
-                }
+                std::string str = getStringWithLocalizationStat(item);
                 
                 // line breaks 'string's
                 replaceStringInPlace(str, "\\n", "\n");
@@ -144,20 +142,7 @@ public:
             LocalizationStat *item = localizationStats.at(i);
             if (item->keyCode == _keyCode) {
                 
-                std::string str;
-                
-                if (UserInfo::getInstance()->currLangType == LanguageType::KOREAN) {
-                    str = std::string(item->localizationString1);
-                }
-                else if (UserInfo::getInstance()->currLangType == LanguageType::CHINESE) {
-                    str = std::string(item->localizationString3);
-                }
-                else if (UserInfo::getInstance()->currLangType == LanguageType::JAPANESE) {
-                    str = std::string(item->localizationString4);
-                }
-                else {
-                    str = std::string(item->localizationString2);
-                }
+                std::string str = getStringWithLocalizationStat(item);
                 
                 // line breaks 'string's
                 replaceStringInPlace(str, "\\n", "\n");

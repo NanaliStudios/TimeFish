@@ -332,6 +332,8 @@ void FreeshSelectionLayer::initUILayers()
     //
     // Name Label
     nameLabel = Label::createWithTTF("0", UserInfo::getInstance()->getFontPath(), 58);
+    nameLabel->setHorizontalAlignment(cocos2d::TextHAlignment::CENTER);
+    nameLabel->setVerticalAlignment(cocos2d::TextVAlignment::CENTER);
     nameLabel->setPosition(Vec2(visibleSizeHalf.width, visibleSize.height * 0.8) + origin);
     nameLabel->setTextColor(Color4B(255, 7, 7, 255));
     nameLabel->setVisible(false);

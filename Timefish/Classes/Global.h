@@ -56,6 +56,7 @@
 #define KoreanFontPath "fonts/BMHANNA_11yrs_ttf.ttf"
 #define JapaneseFontPath "fonts/LightNovelPOP_FONT.ttf"
 #define ChineseFontPath "fonts/DFPHaiBaoW12-GB_sma.ttf"
+#define SpanishFontPath "fonts/kimberley bl.ttf"
 
 #include "cocos2d.h"
 

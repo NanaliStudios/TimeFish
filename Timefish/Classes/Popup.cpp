@@ -355,7 +355,8 @@ void GoldenfishInfoPopup::initBackground()
         sstream << LocalizationManager::getInstance()->getLocalizationString("GoldfishDesc");
         std::string descStr = sstream.str();
         
-        TTFConfig config(UserInfo::getInstance()->getFontPath(), 32);
+        int _fontSize = (UserInfo::getInstance()->currLangType == LanguageType::SPANISH)? 28:32;
+        TTFConfig config(UserInfo::getInstance()->getFontPath(), _fontSize);
         Label *lbl = Label::createWithTTF(config, descStr, TextHAlignment::CENTER, visibleSize.width);
         Size lblSize = lbl->getContentSize();
         lbl->setTextColor(Color4B::BLACK);

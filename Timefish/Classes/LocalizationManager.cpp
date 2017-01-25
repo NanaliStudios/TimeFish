@@ -100,7 +100,7 @@ int LocalizationManager::readLocalizationTable()
         // process lines...
         int leng=(int)row.size();
         
-        if (leng < 5) {
+        if (leng < 6) {
             break;
         }
         
@@ -113,12 +113,14 @@ int LocalizationManager::readLocalizationTable()
         stat->localizationString2   = row[idx]; idx++;
         stat->localizationString3   = row[idx]; idx++;
         stat->localizationString4   = row[idx]; idx++;
+        stat->localizationString5   = row[idx]; idx++;
         
 //        log("%s, %s, %s, %s, %s", stat->keyCode.c_str(),
 //            stat->localizationString1.c_str(),
 //            stat->localizationString2.c_str(),
 //            stat->localizationString3.c_str(),
 //            stat->localizationString4.c_str());
+//            stat->localizationString5.c_str());
         
         localizationStats.push_back(stat);
     }
@@ -199,7 +201,7 @@ int LocalizationManager::readLocalizationTable()
         // process lines...
         int items=(int)row.size();
         
-        if (items < 5) {
+        if (items < 6) {
             break;
         }
         
@@ -212,12 +214,14 @@ int LocalizationManager::readLocalizationTable()
         stat->localizationString2   = row[idx]; idx++;
         stat->localizationString3   = row[idx]; idx++;
         stat->localizationString4   = row[idx]; idx++;
+        stat->localizationString5   = row[idx]; idx++;
         
 //        log("Localization: %s, %s, %s, %s, %s", stat->keyCode.c_str(),
 //            stat->localizationString1.c_str(),
 //            stat->localizationString2.c_str(),
 //            stat->localizationString3.c_str(),
 //            stat->localizationString4.c_str());
+//            stat->localizationString5.c_str());
         
         localizationStats.push_back(stat);
     }

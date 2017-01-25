@@ -142,6 +142,7 @@ void TutorialLayer::initMainLayer()
 }
 
 #define PosRate 0.47
+#define SpanishFontSize 25
 #define FontSize 30
 void TutorialLayer::setPage1()
 {
@@ -161,8 +162,9 @@ void TutorialLayer::setPage1()
     stream.clear();
     stream << LocalizationManager::getInstance()->getLocalizationString(keyCode);
     std::string nameInfo = stream.str();
-
-    TTFConfig config(UserInfo::getInstance()->getFontPath(), FontSize);
+    
+    int fontSize = (UserInfo::getInstance()->currLangType == LanguageType::SPANISH)? SpanishFontSize:FontSize;
+    TTFConfig config(UserInfo::getInstance()->getFontPath(), fontSize);
     Label *scriptLabel = Label::createWithTTF(config, nameInfo, TextHAlignment::CENTER, 550);
     scriptLabel->setAnchorPoint(Vec2(0.5, 0.5));
     scriptLabel->setPosition(Vec2(visibleSizeHalf.width, topPosY) + origin);
@@ -210,7 +212,8 @@ void TutorialLayer::setPage2()
     stream << LocalizationManager::getInstance()->getLocalizationString(keyCode);
     std::string nameInfo = stream.str();
 
-    TTFConfig config(UserInfo::getInstance()->getFontPath(), FontSize);
+    int fontSize = (UserInfo::getInstance()->currLangType == LanguageType::SPANISH)? SpanishFontSize:FontSize;
+    TTFConfig config(UserInfo::getInstance()->getFontPath(), fontSize);
     Label *scriptLabel = Label::createWithTTF(config, nameInfo, TextHAlignment::CENTER, 600);
     scriptLabel->setAnchorPoint(Vec2(0.5, 0.5));
     scriptLabel->setPosition(Vec2(visibleSizeHalf.width, topPosY) + origin);
@@ -249,7 +252,8 @@ void TutorialLayer::setPage3()
     stream << LocalizationManager::getInstance()->getLocalizationString(keyCode);
     std::string nameInfo = stream.str();
     
-    TTFConfig config(UserInfo::getInstance()->getFontPath(), FontSize);
+    int fontSize = (UserInfo::getInstance()->currLangType == LanguageType::SPANISH)? SpanishFontSize:FontSize;
+    TTFConfig config(UserInfo::getInstance()->getFontPath(), fontSize);
     Label *scriptLabel = Label::createWithTTF(config, nameInfo, TextHAlignment::CENTER, 550);
     scriptLabel->setAnchorPoint(Vec2(0.5, 0.5));
     scriptLabel->setPosition(Vec2(visibleSizeHalf.width, topPosY) + origin);
@@ -275,7 +279,8 @@ void TutorialLayer::setPage4()
     stream << LocalizationManager::getInstance()->getLocalizationString(keyCode);
     std::string nameInfo = stream.str();
 
-    TTFConfig config(UserInfo::getInstance()->getFontPath(), FontSize);
+    int fontSize = (UserInfo::getInstance()->currLangType == LanguageType::SPANISH)? SpanishFontSize:FontSize;
+    TTFConfig config(UserInfo::getInstance()->getFontPath(), fontSize);
     Label *scriptLabel = Label::createWithTTF(config, nameInfo, TextHAlignment::CENTER, 550);
     scriptLabel->setAnchorPoint(Vec2(0.5, 0.5));
     scriptLabel->setPosition(Vec2(visibleSizeHalf.width, posY) + origin);
@@ -333,7 +338,8 @@ void TutorialLayer::setPage4()
             stream << LocalizationManager::getInstance()->getLocalizationString(keyCode);
             std::string boostTitle = stream.str();
             
-            Label *titleLbl = Label::createWithTTF(boostTitle, UserInfo::getInstance()->getFontPath(), FontSize);
+            int fontSize = (UserInfo::getInstance()->currLangType == LanguageType::SPANISH)? SpanishFontSize:FontSize;
+            Label *titleLbl = Label::createWithTTF(boostTitle, UserInfo::getInstance()->getFontPath(), fontSize);
             titleLbl->setAnchorPoint(Vec2(0, 0));
             titleLbl->setTextColor(colors[i]);
             pageLayer[3]->addChild(titleLbl, 1);
@@ -402,7 +408,8 @@ void TutorialLayer::setPage5()
     stream << LocalizationManager::getInstance()->getLocalizationString(keyCode);
     std::string nameInfo = stream.str();
     
-    TTFConfig config(UserInfo::getInstance()->getFontPath(), FontSize);
+    int fontSize = (UserInfo::getInstance()->currLangType == LanguageType::SPANISH)? SpanishFontSize:FontSize;
+    TTFConfig config(UserInfo::getInstance()->getFontPath(), fontSize);
     Label *scriptLabel = Label::createWithTTF(config, nameInfo, TextHAlignment::CENTER, 550);
     scriptLabel->setAnchorPoint(Vec2(0.5, 0.5));
     scriptLabel->setPosition(Vec2(visibleSizeHalf.width, topPosY) + origin);
