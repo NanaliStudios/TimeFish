@@ -14,8 +14,8 @@ android {
         applicationId "com.zplay.timefishit"
         minSdkVersion 11
         targetSdkVersion 19
-        versionCode 15
-        versionName "2.05"
+        versionCode 16
+        versionName "2.06"
     }
 
     sourceSets.main {
